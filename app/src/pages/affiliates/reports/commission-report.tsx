@@ -7,19 +7,20 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { api } from "../../../utils/api";
 import styles from "./../../index.module.css";
+import {
+  DateRangeSelect,
+  useDateRange,
+} from "../../../components/common/DateRangeSelect";
 
 const Page: NextPage = () => {
   const router = useRouter();
+  const { from, to } = useDateRange();
   const page = parseInt(router?.query?.page as string);
   const items_per_page = parseInt(router?.query?.size as string);
   const [displayType, setDisplayType] = useState("");
-  const [selectedDates, setSelectedDates] = useState<Date[]>([
-    new Date(),
-    new Date(),
-  ]);
   const { data } = api.affiliates.getCommissionReport.useQuery({
-    from: selectedDates[0],
-    to: selectedDates[1],
+    from,
+    to,
     page: isNaN(page) ? 1 : page,
     items_per_page: isNaN(items_per_page) ? 10 : items_per_page,
   });
@@ -38,10 +39,7 @@ const Page: NextPage = () => {
       <main className={styles.main}>
         <Flex direction="column" gap={2}>
           <Flex direction="row" gap={2}>
-            <RangeDatepicker
-              selectedDates={selectedDates}
-              onDateChange={setSelectedDates}
-            />
+            <DateRangeSelect />
             <Select
               placeholder="Select option"
               onChange={(event) => setDisplayType(event.target.value)}

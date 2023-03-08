@@ -3,88 +3,88 @@ on:
     branches:
       - dev
 
-name: '[Staging] Deploy to Cloud Run'
+name: "[Staging] Deploy to Cloud Run"
 jobs:
   cloudrun:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - id: 'auth'
-      name: 'Authenticate to Google Cloud'
-      uses: 'google-github-actions/auth@v1'
-      with:
-        token_format: 'access_token'
-        credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+      - id: "auth"
+        name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v1"
+        with:
+          token_format: "access_token"
+          credentials_json: "${{ secrets.GOOGLE_CREDENTIALS }}"
 
-    - id: 'build'
-      name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
-    
-    - name: Login to GAR
-      uses: docker/login-action@v2
-      with:
-        registry: europe-docker.pkg.dev
-        username: oauth2accesstoken
-        password: ${{ steps.auth.outputs.access_token }}
+      - id: "build"
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-    - id: 'push'
-      name: Build and push
-      uses: docker/build-push-action@v4
-      with:
-        context: app
-        push: true
-        tags: europe-docker.pkg.dev/api-front-dashbord/dev/aff:latest
+      - name: Login to GAR
+        uses: docker/login-action@v2
+        with:
+          registry: europe-docker.pkg.dev
+          username: oauth2accesstoken
+          password: ${{ steps.auth.outputs.access_token }}
 
-    - id: 'deploy_gamingaffiliates'
-      name: deploy gamingaffiliates-staging
-      uses: 'google-github-actions/deploy-cloudrun@v1'
-      with:
-        service: 'gamingaffiliates-staging'
-        image: 'europe-docker.pkg.dev/api-front-dashbord/dev/aff:latest'
-        labels:
-          env=dev
-        project_id: api-front-dashbord
-        region: europe-west1
-        secrets: |
-          DATABASE_URL=DEV_GAMINGAFFILIATES_DATABASE_URL:latest
-          SHADOW_DATABASE_URL=DEV_SHADOW_DATABASE_URL:latest
-          LEGACY_PHP_ACCESS_TOKEN=DEV_LEGACY_PHP_ACCESS_TOKEN:latest
-          NEXTAUTH_SECRET=DEV_NEXTAUTH_SECRET:latest
-        env_vars: |
-          LEGACY_PHP_URL=https://go.gamingaffiliates.co
-          LEGACY_PHP_API_URL=https://affiliate-com.netlify.app/api/document-upload-just-log
-          NEXTAUTH_URL=https://gamingaffiliates.staging.affiliatets.com
-          NEXT_PUBLIC_FLAGS_ENV_KEY=flags_pub_preview_358370259303924312
-        flags: |
-          --allow-unauthenticated
-          --vpc-connector=development-serverless-vp 
-          --vpc-egress=all-traffic
-          --port=3000
+      - id: "push"
+        name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: app
+          push: true
+          tags: europe-docker.pkg.dev/api-front-dashbord/dev/aff:latest
 
-    - id: 'deploy_best-brokers-partners'
-      name: deploy best-brokers-partners-staging
-      uses: 'google-github-actions/deploy-cloudrun@v1'
-      with:
-        service: 'best-brokers-partners-staging'
-        image: 'europe-docker.pkg.dev/api-front-dashbord/dev/aff:latest'
-        labels:
-          env=dev
-        project_id: api-front-dashbord
-        region: europe-west1
-        secrets: |
-          DATABASE_URL=DEV_BESTBROKERSPARTNERS_DATABASE_URL:latest
-          SHADOW_DATABASE_URL=DEV_SHADOW_DATABASE_URL:latest
-          LEGACY_PHP_ACCESS_TOKEN=DEV_LEGACY_PHP_ACCESS_TOKEN:latest
-          NEXTAUTH_SECRET=DEV_NEXTAUTH_SECRET:latest
-        env_vars: |
-          LEGACY_PHP_URL=https://go.best-brokers-partners.com
-          LEGACY_PHP_API_URL=https://affiliate-com.netlify.app/api/document-upload-just-log
-          NEXTAUTH_URL=https://best-brokers-partners.staging.affiliatets.com
-          NEXT_PUBLIC_FLAGS_ENV_KEY=flags_pub_preview_358370259303924312
-        flags: |
-          --allow-unauthenticated
-          --vpc-connector=development-serverless-vp 
-          --vpc-egress=all-traffic
-          --port=3000
+      - id: "deploy_gamingaffiliates"
+        name: deploy gamingaffiliates-staging
+        uses: "google-github-actions/deploy-cloudrun@v1"
+        with:
+          service: "gamingaffiliates-staging"
+          image: "europe-docker.pkg.dev/api-front-dashbord/dev/aff:latest"
+          labels: env=dev
+          project_id: api-front-dashbord
+          region: europe-west1
+          secrets: |
+            DATABASE_URL=DEV_GAMINGAFFILIATES_DATABASE_URL:latest
+            SHADOW_DATABASE_URL=DEV_SHADOW_DATABASE_URL:latest
+            LEGACY_PHP_ACCESS_TOKEN=DEV_LEGACY_PHP_ACCESS_TOKEN:latest
+            NEXTAUTH_SECRET=DEV_NEXTAUTH_SECRET:latest
+          env_vars: |
+            LEGACY_PHP_URL=https://go.gamingaffiliates.co
+            LEGACY_PHP_API_URL=https://affiliate-com.netlify.app/api/document-upload-just-log
+            NEXTAUTH_URL=https://gamingaffiliates.staging.affiliatets.com
+          flags: |
+            --allow-unauthenticated
+            --vpc-connector=development-serverless-vp 
+            --vpc-egress=all-traffic
+            --port=3000
+            --max-instances=3
+            --min-instances=0
+
+      - id: "deploy_best-brokers-partners"
+        name: deploy best-brokers-partners-staging
+        uses: "google-github-actions/deploy-cloudrun@v1"
+        with:
+          service: "best-brokers-partners-staging"
+          image: "europe-docker.pkg.dev/api-front-dashbord/dev/aff:latest"
+          labels: env=dev
+          project_id: api-front-dashbord
+          region: europe-west1
+          secrets: |
+            DATABASE_URL=DEV_BESTBROKERSPARTNERS_DATABASE_URL:latest
+            SHADOW_DATABASE_URL=DEV_SHADOW_DATABASE_URL:latest
+            LEGACY_PHP_ACCESS_TOKEN=DEV_LEGACY_PHP_ACCESS_TOKEN:latest
+            NEXTAUTH_SECRET=DEV_NEXTAUTH_SECRET:latest
+          env_vars: |
+            LEGACY_PHP_URL=https://go.best-brokers-partners.com
+            LEGACY_PHP_API_URL=https://affiliate-com.netlify.app/api/document-upload-just-log
+            NEXTAUTH_URL=https://best-brokers-partners.staging.affiliatets.com
+          flags: |
+            --allow-unauthenticated
+            --vpc-connector=development-serverless-vp 
+            --vpc-egress=all-traffic
+            --port=3000
+            --max-instances=3
+            --min-instances=0

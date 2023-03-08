@@ -4,40 +4,51 @@ import { serverStoragePath } from "../../../../components/utils";
 import { publicProcedure } from "../../trpc";
 import { affiliate_id, merchant_id } from "./const";
 
-export const getDashboard = publicProcedure.query(async ({ ctx }) => {
-  const data = await ctx.prisma.dashboard.groupBy({
-    by: ["merchant_id"],
-    where: {
-      merchant_id: merchant_id ? merchant_id : 1,
-      affiliate_id,
-    },
-    _sum: {
-      Clicks: true,
-      Impressions: true,
-      Install: true,
-      Leads: true,
-      Demo: true,
-      RealAccount: true,
-      FTD: true,
-      FTDAmount: true,
-      Deposits: true,
-      DepositsAmount: true,
-      Bonus: true,
-      RawFTD: true,
-      RawFTDAmount: true,
-      Withdrawal: true,
-      ChargeBack: true,
-      NetDeposit: true,
-      PNL: true,
-      ActiveTrader: true,
-      Commission: true,
-      PendingDeposits: true,
-      PendingDepositsAmount: true,
-    },
-  });
+export const getDashboard = publicProcedure
+  .input(
+    z.object({
+      from: z.date(),
+      to: z.date(),
+    })
+  )
+  .query(async ({ ctx, input: { from, to } }) => {
+    const data = await ctx.prisma.dashboard.groupBy({
+      by: ["merchant_id"],
+      where: {
+        merchant_id: merchant_id ? merchant_id : 1,
+        affiliate_id,
+        Date: {
+          gt: from,
+          lte: to,
+        },
+      },
+      _sum: {
+        Clicks: true,
+        Impressions: true,
+        Install: true,
+        Leads: true,
+        Demo: true,
+        RealAccount: true,
+        FTD: true,
+        FTDAmount: true,
+        Deposits: true,
+        DepositsAmount: true,
+        Bonus: true,
+        RawFTD: true,
+        RawFTDAmount: true,
+        Withdrawal: true,
+        ChargeBack: true,
+        NetDeposit: true,
+        PNL: true,
+        ActiveTrader: true,
+        Commission: true,
+        PendingDeposits: true,
+        PendingDepositsAmount: true,
+      },
+    });
 
-  return data;
-});
+    return data;
+  });
 
 export const getTopMerchantCreative = publicProcedure.query(async ({ ctx }) => {
   const data = await ctx.prisma.merchants_creative.findMany({

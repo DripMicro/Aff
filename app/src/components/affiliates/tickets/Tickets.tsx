@@ -1,18 +1,20 @@
-import { Stack, Button, HStack, useToast } from "@chakra-ui/react";
-import { DataTable } from "../../common/data-table/DataTable";
-import { api } from "../../../utils/api";
-import type { AffiliateTicketType } from "../../../server/db-types";
+import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { Button, HStack, Stack, useToast } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
-import * as z from "zod";
-import { ModalForm } from "../../common/forms/ModalForm";
-import { AddIcon, CheckIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import React, { useState } from "react";
 import { format } from "date-fns";
+import { useState } from "react";
+import * as z from "zod";
+import type {
+  affiliates_ticketsModelType,
+  AffiliateTicketType,
+} from "../../../server/db-types";
+import { api } from "../../../utils/api";
+import { DataTable } from "../../common/data-table/DataTable";
+import { ModalForm } from "../../common/forms/ModalForm";
 import {
   ModalFormAction,
   ModalFormButton,
 } from "../../common/modal/ModalFormButton";
-import type { affiliates_ticketsModelType } from "../../../server/db-types";
 
 const columnHelper = createColumnHelper<AffiliateTicketType>();
 
