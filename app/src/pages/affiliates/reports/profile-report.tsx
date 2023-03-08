@@ -19,8 +19,8 @@ const Page: NextPage = () => {
     new Date(),
   ]);
   const { data } = api.affiliates.getProfileReportData.useQuery({
-    from: selectedDates[0],
-    to: selectedDates[1],
+    from: new Date(),
+    to: new Date(),
     merchant_id: merchant_id,
   });
   const { data: merchants } = api.affiliates.getAllMerchants.useQuery();

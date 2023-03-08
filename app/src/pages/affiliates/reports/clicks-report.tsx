@@ -20,8 +20,8 @@ const Page: NextPage = () => {
     new Date(),
   ]);
   const { data } = api.affiliates.getClicksReport.useQuery({
-    from: selectedDates[0],
-    to: selectedDates[1],
+    from: new Date(),
+    to: new Date(),
     merchant_id: parseInt(merchantId),
     unique_id: "",
     trader_id: "",
