@@ -1,17 +1,19 @@
-import { Stack, Button, HStack, useToast } from "@chakra-ui/react";
-import { DataTable } from "../../common/data-table/DataTable";
-import { api } from "../../../utils/api";
-import type { AffiliateProfileType } from "../../../server/db-types";
-import { createColumnHelper } from "@tanstack/react-table";
-import * as z from "zod";
-import { ModalForm } from "../../common/forms/ModalForm";
 import { AddIcon, CheckIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import React, { useState } from "react";
+import { Button, HStack, Stack, useToast } from "@chakra-ui/react";
+import { createColumnHelper } from "@tanstack/react-table";
+import { useState } from "react";
+import * as z from "zod";
+import type {
+  AffiliateProfileType,
+  affiliates_profilesModelType,
+} from "../../../server/db-types";
+import { api } from "../../../utils/api";
+import { DataTable } from "../../common/data-table/DataTable";
+import { ModalForm } from "../../common/forms/ModalForm";
 import {
   ModalFormAction,
   ModalFormButton,
 } from "../../common/modal/ModalFormButton";
-import type { affiliates_profilesModelType } from "../../../server/db-types";
 
 const columnHelper = createColumnHelper<AffiliateProfileType>();
 
@@ -164,7 +166,7 @@ export const Profiles = () => {
 
   return (
     <Stack m={12} gap={4}>
-      <DataTable data={data} columns={columns} />
+      <DataTable data={data} columns={columns} footerData={[]} />
       <HStack justifyContent="end" px={6}>
         <ModalFormButton actionName="Add" icon={<AddIcon />}>
           {modal}

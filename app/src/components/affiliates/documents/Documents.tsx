@@ -1,14 +1,14 @@
-import { Stack, Button, HStack, useToast } from "@chakra-ui/react";
-import { DataTable } from "../../common/data-table/DataTable";
-import { api } from "../../../utils/api";
-import type { AffiliateDocumentType } from "../../../server/db-types";
-import { createColumnHelper } from "@tanstack/react-table";
-import * as z from "zod";
-import axios from "axios";
-import { ModalForm } from "../../common/forms/ModalForm";
 import { AddIcon } from "@chakra-ui/icons";
-import React, { useState } from "react";
+import { HStack, Stack, useToast } from "@chakra-ui/react";
+import { createColumnHelper } from "@tanstack/react-table";
+import axios from "axios";
 import { format } from "date-fns";
+import { useState } from "react";
+import * as z from "zod";
+import type { AffiliateDocumentType } from "../../../server/db-types";
+import { api } from "../../../utils/api";
+import { DataTable } from "../../common/data-table/DataTable";
+import { ModalForm } from "../../common/forms/ModalForm";
 import {
   ModalFormAction,
   ModalFormButton,
@@ -121,8 +121,14 @@ export const Documents = () => {
               id: "Passport_Driving_Licence",
               title: "Passport/Driving Licence",
             },
-            { id: "Address_Verification", title: "Address Verification" },
-            { id: "Company_Verification", title: "Company Verification" },
+            {
+              id: "Address_Verification",
+              title: "Address Verification",
+            },
+            {
+              id: "Company_Verification",
+              title: "Company Verification",
+            },
           ],
         },
         documentFile: {
@@ -134,7 +140,7 @@ export const Documents = () => {
 
   return (
     <Stack m={12} gap={4}>
-      <DataTable data={data} columns={columns} />
+      <DataTable data={data} columns={columns} footerData={[]} />
       <HStack justifyContent="end" px={6}>
         <ModalFormButton actionName="Upload New Document" icon={<AddIcon />}>
           {modal}

@@ -32,7 +32,6 @@ import {
 } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import { AreaChart, LineChart } from "@tremor/react";
-import { SingleDatepicker } from "chakra-dayzed-datepicker";
 
 import { useEffect, useState } from "react";
 
@@ -49,13 +48,13 @@ import {
 import { DataTable } from "../../common/data-table/DataTable";
 
 import type { ChangeEvent } from "react";
+import { DateRangeSelect, useDateRange } from "../../common/DateRangeSelect";
 import {
   AcauisitionIcon,
   ClicksIcon,
   ComissionIcon,
   SignupIcon,
 } from "../../icons";
-import { DateRangeSelect, useDateRange } from "../../common/DateRangeSelect";
 
 const fields = [
   "Impressions",
@@ -307,7 +306,10 @@ export const Dashboard = () => {
                 alignItems="center"
                 columnGap="5"
                 color="#0E132B"
-                _hover={{ borderColor: "#069731", cursor: "pointer" }}
+                _hover={{
+                  borderColor: "#069731",
+                  cursor: "pointer",
+                }}
               >
                 {icon()}
                 {/* <ClicksIcon width="40" height="40" fill="#0E132B" /> */}
@@ -363,7 +365,7 @@ export const Dashboard = () => {
             <Heading as="h6" size="xs" mb="2">
               Country Report
             </Heading>
-            <DataTable data={report} columns={reportColumns} />
+            <DataTable data={report} columns={reportColumns} footerData={[]} />
           </Box>
           <Box
             width="35%"
@@ -466,7 +468,7 @@ export const Dashboard = () => {
         <Heading as="h6" size="xs" mb="2">
           Top Performing Creative
         </Heading>
-        <DataTable data={creative} columns={columns} />
+        <DataTable data={creative} columns={columns} footerData={[]} />
       </Stack>
     </Container>
   );

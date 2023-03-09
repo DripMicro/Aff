@@ -98,6 +98,28 @@ export const QuickReportSummarySchema = z.object({
   PendingDepositsAmount: z.number().nullish(),
 });
 
+export const CommissionReportSchema = z.object({
+  merchant_id: z.number().nullish(),
+  affiliate_id: z.number().nullish(),
+  traderID: z.string().nullish(),
+  transactionID: z.string().nullish(),
+  Date: z.date().nullish(),
+  Type: z.string().nullish(),
+  Amount: z.number().nullish(),
+  DealType: z.string().nullish(),
+  Commission: z.number().nullish(),
+  DealTypeCondition: z.string().nullish(),
+  level: z.string().nullish(),
+  subAffiliateID: z.number().nullish(),
+  status: z.string().nullish(),
+  updated: z.date().nullish(),
+  merchant: z.object({
+    name: z.string().nullish(),
+  }),
+  affiliate: z.object({
+    username: z.string().nullish(),
+  }),
+});
 const QuickReportSummarySchemaArray = z.array(QuickReportSummarySchema);
 
 export const getQuickReportSummary = publicProcedure
@@ -184,7 +206,7 @@ export const getQuickReportSummary = publicProcedure
           representation: "date",
         })} ${dasboardSQLwhere}  ${dasboardSQLperiod}`);
 
-      console.log("data ----->", data, dasboardSQLperiod, dasboardSQLwhere);
+      console.log("data ----->", data);
 
       return data?.map(convertPrismaResultsToNumbers) || data;
     }
@@ -198,45 +220,66 @@ export const getCommissionReport = publicProcedure
       merchant_id: z.string().optional(),
       trader_id: z.string().optional(),
       commission: z.string().optional(),
-      page: z.number().int().optional(),
-      items_per_page: z.number().int().optional(),
     })
   )
-  .query(async ({ ctx, input: { from, to, page, items_per_page } }) => {
-    let offset;
-    console.log("item per page ------>", page, items_per_page);
-    if (page && items_per_page) {
-      offset = (page - 1) * items_per_page;
+  .query(
+    async ({
+      ctx,
+      input: { from, to, merchant_id, trader_id, commission },
+    }) => {
+      // let offset;
+      // console.log("item per page ------>", page, items_per_page);
+      // if (page && items_per_page) {
+      // 	offset = (page - 1) * items_per_page;
+      // }
+      let deal_filter = {};
+      switch (commission) {
+        case "CPA":
+          deal_filter = { DealType: "CPA" };
+          break;
+
+        case "NetDeposit":
+          deal_filter = { DealType: "NetDeposit" };
+          break;
+
+        case "PNLRevShare":
+          deal_filter = { DealType: "PNL RevShare" };
+
+          break;
+      }
+
+      const data = await ctx.prisma.commissions.findMany({
+        orderBy: {
+          Date: "asc",
+        },
+        where: {
+          ...deal_filter,
+          Date: {
+            gte: from,
+            lt: to,
+          },
+          affiliate_id: affiliate_id,
+          traderID: trader_id ? trader_id : "",
+        },
+        include: {
+          merchant: {
+            select: {
+              name: true,
+            },
+          },
+          affiliate: {
+            select: {
+              username: true,
+            },
+          },
+        },
+      });
+
+      console.log("data ----->", data);
+
+      return data;
     }
-
-    const data = await ctx.prisma.commissions.findMany({
-      orderBy: {
-        Date: "asc",
-      },
-      where: {
-        Date: {
-          gte: from,
-          lt: to,
-        },
-      },
-      include: {
-        merchant: {
-          select: {
-            name: true,
-          },
-        },
-        affiliate: {
-          select: {
-            username: true,
-          },
-        },
-      },
-      take: items_per_page ? items_per_page : 10,
-      skip: offset,
-    });
-
-    return Object.keys(data).length > 0 ? data : {};
-  });
+  );
 
 export const getClicksReport = publicProcedure
   .input(
