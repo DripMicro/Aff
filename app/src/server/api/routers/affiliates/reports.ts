@@ -326,16 +326,16 @@ export const getClicksReport = publicProcedure
       });
 
       console.log("merchant id ------>", merchant_id);
-      const distinct_id = await ctx.prisma.data_reg.findMany({
-        select: {
-          uid: true,
-        },
-        where: {
-          merchant_id: merchant_id ? merchant_id : 1,
-          trader_id: trader_id ? trader_id : "",
-        },
-        take: 1,
-      });
+      // const distinct_id = await ctx.prisma.data_reg.findMany({
+      // 	select: {
+      // 		uid: true,
+      // 	},
+      // 	where: {
+      // 		merchant_id: merchant_id ? merchant_id : 1,
+      // 		trader_id: trader_id ? trader_id : "",
+      // 	},
+      // 	take: 1,
+      // });
 
       const totalRecords = await ctx.prisma.traffic.aggregate({
         where: {
@@ -359,33 +359,154 @@ export const getClicksReport = publicProcedure
         },
       });
 
-      // const clickww = await ctx.prisma.traffic.findMany({
-      //     ...type_filter,
-      //     where: {
-      //         uid:{
-      //             gt:'0'
-      //         },
-      //         merchant_id: {
-      //             gt:0
-      //         }
-      //     },
-      //     include: {
-      //         merchant: {
-      //             select: {
-      //                 name:true
-      //             }
-      //         },
-      //         affiliate: {
-      //             select: {
-      //                 username:true
-      //             }
-      //         }
-      //     }
-      // })
+      const clickww = await ctx.prisma.traffic.findMany({
+        where: {
+          unixRdate: {
+            gte: getUnixTime(from),
+            lt: getUnixTime(to),
+          },
+        },
+        include: {
+          merchant: {
+            select: {
+              name: true,
+            },
+          },
+          affiliate: {
+            select: {
+              username: true,
+            },
+          },
+          // merchant_creative: {
+          // 	select: {
+          // 		url: true,
+          // 		title: true,
+          // 	},
+          // },
+          // language: {
+          // 	select: {
+          // 		title: true,
+          // 	},
+          // },
+        },
+        take: 10,
+      });
 
-      console.log("distinct id -------->", totalRecords);
+      const regArr = [];
 
-      return totalRecords;
+      if (Object.keys(clickww).length > 0) {
+        for (let key = 0; key < Object.keys(clickww).length; key++) {
+          if (Number(clickww[key]?.uid) > 0) {
+            const regg = await ctx.prisma.data_reg.findMany({
+              where: {
+                merchant_id: {
+                  gt: 0,
+                },
+                affiliate_id: affiliate_id,
+                rdate: {
+                  gte: clickww[key]?.rdate,
+                },
+                // uid: clickww[key]?.uid,
+              },
+              take: 1,
+            });
+            let leads = 0;
+            let demo = 0;
+            let real = 0;
+
+            for (let i = 0; i < Object.keys(regg).length; i++) {
+              regArr.push({
+                id: regg[i]?.id,
+                rdate: regg[i]?.rdate,
+                affiliate_id: regg[i]?.affiliate_id,
+                trader_id: regg[i]?.trader_id,
+                merchant_id: regg[i]?.merchant_id,
+                trader_alias: regg[i]?.trader_alias,
+                sales_status: regg[i]?.saleStatus,
+              });
+
+              if (regg[i]?.type === "lead") {
+                leads += 1;
+              }
+
+              if (regg[i]?.type === "demo") {
+                demo += 1;
+              }
+
+              if (regg[i]?.type === "real") {
+                real += 1;
+              }
+            }
+            console.log(
+              "clicks id -------->",
+              clickww[key]?.uid,
+              clickww[key]?.rdate,
+              regg
+            );
+          }
+        }
+      }
+      /**
+       * uncomment the include statement below to recreate the issue.
+       */
+      const salesww = await ctx.prisma.data_sales.findMany({
+        // include: {
+        // 	data_reg: {
+        // 		select: {
+        // 			affiliate_id: true,
+        // 			initialftdtranzid: true,
+        // 			banner_id: true,
+        // 			trader_id: true,
+        // 			country: true,
+        // 			profile_id: true,
+        // 		},
+        // 	},
+        // },
+        where: {
+          affiliate_id: affiliate_id,
+        },
+      });
+      let bonus = 0;
+      let volume = 0;
+      let chargeback = 0;
+      let withdrawal = 0;
+
+      for (let i = 0; i < salesww.length; i++) {
+        if (salesww[i]?.type === "bonus") {
+          bonus += salesww[i]?.amount || 0;
+        }
+
+        if (salesww[i]?.type === "withdrawal") {
+          withdrawal += salesww[i]?.amount || 0;
+        }
+
+        if (salesww[i]?.type === "volume") {
+          volume += salesww[i]?.amount || 0;
+        }
+
+        if (salesww[i]?.type === "chargeback") {
+          chargeback += salesww[i]?.amount || 0;
+        }
+
+        regArr.push({
+          volume,
+          bonus,
+          chargeback,
+          withdrawal,
+        });
+      }
+
+      const revww = await ctx.prisma.data_stats.findMany({
+        include: {
+          merchant: {
+            select: {
+              producttype: true,
+            },
+          },
+        },
+      });
+
+      return clickww;
     }
   );
 

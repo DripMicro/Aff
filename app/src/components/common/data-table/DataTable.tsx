@@ -29,8 +29,6 @@ export function DataTable<Data extends object>({
   footerData = [],
 }: DataTableProps<Data>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [quickData, setQuickData] = React.useState([]);
-  const [impressions, setImpressions] = React.useState([]);
   const { getHeaderGroups, getRowModel } = useReactTable({
     columns,
     data: data || [],
@@ -41,6 +39,8 @@ export function DataTable<Data extends object>({
       sorting,
     },
   });
+
+  console.log("data ----->", data);
 
   return (
     <Table>

@@ -565,21 +565,21 @@ model data_reg {
   freeParam5           String        @db.VarChar(170)
   merchant_id          Int
   status               String        @db.VarChar(20)
-  lastUpdate           DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @db.Timestamp(0)
+  lastUpdate           DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @ignore @db.Timestamp(0)
   platform             String        @db.VarChar(30)
   uid                  String        @db.VarChar(35)
   saleStatus           String        @db.VarChar(50)
   lastSaleNote         String        @db.VarChar(200)
-  lastSaleNoteDate     DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @db.Timestamp(0)
-  lastTimeActive       DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @db.Timestamp(0)
-  initialftddate       DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @db.Timestamp(0)
+  lastSaleNoteDate     DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @ignore @db.Timestamp(0)
+  lastTimeActive       DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @ignore @db.Timestamp(0)
+  initialftddate       DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @ignore @db.Timestamp(0)
   initialftdtranzid    String        @db.VarChar(40)
   isSelfDeposit        Boolean       @default(false)
   ftdamount            Float         @default(0)
-  FTDqualificationDate DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @db.Timestamp(0)
+  FTDqualificationDate DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @ignore @db.Timestamp(0)
   traderVolume         Float
   traderTrades         Int
-  lastStatsRecordDate  DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @db.Timestamp(0)
+  lastStatsRecordDate  DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @ignore @db.Timestamp(0)
   traderValue          Float
   // lastDepositRecordDate DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @db.Timestamp(0)
   email                String        @db.VarChar(40)
@@ -588,9 +588,10 @@ model data_reg {
   dummySource          Int
   currentDate          DateTime      @default(now()) @db.Timestamp(0)
 
-  merchant  merchants     @relation(fields: [merchant_id], references: [id])
-  affiliate affiliates    @relation(fields: [affiliate_id], references: [id])
-  data_reg  reporttraders @relation(fields: [trader_id, affiliate_id, merchant_id], references: [TraderID, affiliate_id, merchant_id])
+  merchant   merchants     @relation(fields: [merchant_id], references: [id])
+  affiliate  affiliates    @relation(fields: [affiliate_id], references: [id])
+  data_reg   reporttraders @relation(fields: [trader_id, affiliate_id, merchant_id], references: [TraderID, affiliate_id, merchant_id])
+  data_sales data_sales[]
 
   @@index([FTDqualificationDate], map: "FTDqualificationDate")
   @@index([uid], map: "UID")
@@ -646,6 +647,7 @@ model data_sales {
 
   merchant  merchants  @relation(fields: [merchant_id], references: [id])
   affiliate affiliates @relation(fields: [affiliate_id], references: [id])
+  data_reg  data_reg   @relation(fields: [id], references: [id])
 
   @@index([affiliate_id], map: "affiliate_id")
   @@index([banner_id], map: "banner_id")
@@ -823,6 +825,7 @@ model languages {
   textDirection      String               @default("LTR") @db.VarChar(3)
   merchants_creative merchants_creative[]
   sub_banners        sub_banners[]
+  traffic            traffic[]
 
   @@index([lngCode], map: "lngCode_2")
   @@index([valid], map: "valid")
@@ -1066,6 +1069,7 @@ model merchants_creative {
   category merchants_creative_categories? @relation(fields: [category_id], references: [id])
   merchant merchants                      @relation(fields: [merchant_id], references: [id])
   language languages                      @relation(fields: [language_id], references: [id])
+  traffic  traffic[]
 
   @@index([category_id], map: "category_id")
   @@index([language_id], map: "language_id")
@@ -1725,7 +1729,7 @@ model traffic {
   profile_id     Int
   language_id    Int
   promotion_id   Int
-  last_update    DateTime           @db.DateTime(0)
+  last_update    DateTime           @default(dbgenerated("'0000-00-00 00:00:00'")) @ignore @db.DateTime(0)
   valid          Boolean            @default(true)
   title          String             @db.VarChar(254)
   bannerType     traffic_bannerType
@@ -1752,8 +1756,10 @@ model traffic {
   clicks         Int
   product_id     Int
 
-  merchant  merchants  @relation(fields: [merchant_id], references: [id])
-  affiliate affiliates @relation(fields: [affiliate_id], references: [id])
+  merchant          merchants          @relation(fields: [merchant_id], references: [id])
+  affiliate         affiliates         @relation(fields: [affiliate_id], references: [id])
+  merchant_creative merchants_creative @relation(fields: [id], references: [id])
+  language          languages          @relation(fields: [language_id], references: [id])
 
   @@index([affiliate_id], map: "affiliate_id")
   @@index([merchant_id, banner_id], map: "banner_merchant")
@@ -2057,6 +2063,7 @@ enum data_sales_type {
   chargeback
   PNL
   static
+  EMPTY_ENUM_VALUE @map("")
 }
 
 enum data_sales_pending_type {
@@ -2208,6 +2215,7 @@ enum data_sales_currency {
   RUB
   SEK
   ZAR
+  EMPTY_ENUM_VALUE @map("")
 }
 
 enum affiliates_paymentMethod {
