@@ -446,6 +446,25 @@ export const getClicksReport = publicProcedure
           }
         }
       }
+
+      /*
+        $sql = "SELECT data_reg.affiliate_id,data_reg.merchant_id,data_reg.initialftddate,tb1.rdate,data_reg.banner_id,data_reg.trader_id,data_reg.profile_id,tb1.amount, tb1.type AS data_sales_type  ,data_reg.country as country FROM data_sales as tb1 "
+
+                 . "INNER JOIN data_reg AS data_reg ON
+                 tb1.merchant_id = data_reg.merchant_id AND
+                 tb1.trader_id = data_reg.trader_id AND
+                 data_reg.type <> 'demo'  "
+                 . "WHERE  tb1.trader_id = " .  $looped_trader_id
+            //	 . ' and tb1.rdate between "' . $from . '" AND "' . $to . '"'
+                . " and tb1.rdate >= '" . $regDate . "'"
+                . " and tb1.merchant_id >0 "
+                . (empty($group_id) ? '' : ' AND tb1.group_id = ' . $group_id . ' ')
+                 . (!empty($affiliate_id) ? ' and tb1.affiliate_id = ' . $affiliate_id :' ')
+                 . (isset($banner_id) && !empty($banner_id) ? ' AND data_reg.banner_id = "'.$banner_id.'"' :' ')
+                 .(!empty($unique_id) ? ' and data_reg.uid = ' . $unique_id :' ');
+
+       */
+
       /**
        * uncomment the include statement below to recreate the issue.
        */
