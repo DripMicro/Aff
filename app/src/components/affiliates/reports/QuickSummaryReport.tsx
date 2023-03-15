@@ -40,10 +40,10 @@ export const QuickSummaryReport = () => {
     val: number | null | undefined,
     div: number | null | undefined
   ) => {
-    return val ? (
-      <span>{((val / (div || 1)) * 100).toFixed(2)}%</span>
+    return val && div ? (
+      <span>{((val / div) * 100).toFixed(2)}%</span>
     ) : (
-      <span></span>
+      <span>N/A</span>
     );
   };
 
