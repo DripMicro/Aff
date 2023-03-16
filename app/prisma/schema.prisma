@@ -588,10 +588,9 @@ model data_reg {
   dummySource          Int
   currentDate          DateTime      @default(now()) @db.Timestamp(0)
 
-  merchant   merchants     @relation(fields: [merchant_id], references: [id])
-  affiliate  affiliates    @relation(fields: [affiliate_id], references: [id])
-  data_reg   reporttraders @relation(fields: [trader_id, affiliate_id, merchant_id], references: [TraderID, affiliate_id, merchant_id])
-  data_sales data_sales[]
+  merchant  merchants     @relation(fields: [merchant_id], references: [id])
+  affiliate affiliates    @relation(fields: [affiliate_id], references: [id])
+  data_reg  reporttraders @relation(fields: [trader_id, affiliate_id, merchant_id], references: [TraderID, affiliate_id, merchant_id])
 
   @@index([FTDqualificationDate], map: "FTDqualificationDate")
   @@index([uid], map: "UID")
@@ -647,7 +646,6 @@ model data_sales {
 
   merchant  merchants  @relation(fields: [merchant_id], references: [id])
   affiliate affiliates @relation(fields: [affiliate_id], references: [id])
-  data_reg  data_reg   @relation(fields: [id], references: [id])
 
   @@index([affiliate_id], map: "affiliate_id")
   @@index([banner_id], map: "banner_id")
