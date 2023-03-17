@@ -716,12 +716,11 @@ export const getCreativeReport = publicProcedure
     z.object({
       from: z.date().optional(),
       to: z.date().optional(),
-      merchant_id: z.string().optional(),
       banner_id: z.string().optional(),
       type: z.string().optional(),
     })
   )
-  .query(async ({ ctx, input: { from, to, merchant_id, banner_id, type } }) => {
+  .query(async ({ ctx, input: { from, to, banner_id, type } }) => {
     let creatives_stats_where = Prisma.empty;
 
     if (merchant_id) {
@@ -736,10 +735,16 @@ export const getCreativeReport = publicProcedure
       z.infer<typeof CreativeReportSchema>[]
     >(
       Prisma.sql`SELECT CONCAT(Date,MerchantID,AffiliateID,BannerID) as id, MerchantID as merchant_id, AffiliateID as affiliate_id, SUM(Impressions) AS totalViews, SUM(Clicks) AS totalClicks, BannerID as banner_id 
-                        FROM merchants_creative_stats WHERE (Date BETWEEN  ${from}  AND ${to} ) ${creatives_stats_where} GROUP BY BannerID`
+                        FROM merchants_creative_stats WHERE (Date BETWEEN  ${from}  AND ${to} ) ${creatives_stats_where} GROUP BY BannerID limit 10`
     );
 
-    console.log("merchant id", ww);
+    const merchants = await ctx.prisma.merchants.findMany({
+      where: {
+        valid: 1,
+        id: Number(merchant_id),
+      },
+    });
+
     let i = 0;
     let totalLeads = 0;
     let totalDemo = 0;
@@ -776,7 +781,8 @@ export const getCreativeReport = publicProcedure
     let totalWithdrawalAmount = 0;
     const totalChargeBackAmount = 0;
     const totalPNL = 0;
-    console.log("merchant ids --------->", ww);
+    let reg = [] as any;
+    let bannerInfo = [] as any;
     while (i < Object.keys(ww).length) {
       const banner_info = await ctx.prisma.merchants_creative.findMany({
         select: {
@@ -788,6 +794,8 @@ export const getCreativeReport = publicProcedure
           id: Number(ww[i]) ? Number(ww[i]?.banner_id) : 1,
         },
       });
+
+      bannerInfo = banner_info;
 
       if (type && banner_info[0]?.type !== type) {
         continue;
@@ -802,7 +810,7 @@ export const getCreativeReport = publicProcedure
         SUM(IF(dr.type='real', 1, 0)) AS total_real 
         FROM 445094_devsite.data_reg dr 
         LEFT JOIN 445094_devsite.commissions cm ON dr.trader_id = cm.traderID AND cm.Date BETWEEN ${from} AND ${to}
-        WHERE dr.merchant_id =  ${ww[i]?.merchant_id}  AND  dr.banner_id=${banner_info[0]?.id} AND dr.rdate BETWEEN ${from} AND ${to} GROUP BY dr.banner_id`
+       GROUP BY dr.banner_id`
       );
 
       const result: ResultType[] = regww as RegType[];
@@ -817,13 +825,7 @@ export const getCreativeReport = publicProcedure
         }
       }
 
-      // console.log("regwww ----->", regww);
-      // console.log(
-      // 	"regestrations -------->",
-      // 	totalDemo,
-      // 	totalLeads,
-      // 	totalReal
-      // );
+      reg = regww;
 
       const ids: MerchantIds[] = ww as MerchantIds[];
 
@@ -848,25 +850,18 @@ export const getCreativeReport = publicProcedure
       i++;
     }
 
-    return {
-      totalImpresssions,
-      totalClicks,
-      totalDemoAccounts,
-      totalRealAccounts,
-      totalLeadAccounts,
-      totalFTD,
-      totalCPIM,
-      totalRealFTD,
-      totalRealFTDAmount,
-      totalDeposits,
-      totalFTDAmount,
-      totalSumPNL,
-      totalDepositAmount,
-      totalVolume,
-      totalBonusAmount,
-      totalWithdrawalAmount,
-      totalChargeBackAmount,
-    };
+    const merged = [];
+
+    for (let i = 0; i < ww.length; i++) {
+      merged.push({
+        ...ww[i],
+        ...merchants[0],
+        ...reg[i],
+        ...bannerInfo[0],
+      });
+    }
+
+    return merged as Array<ResultType>;
   });
 
 export const getLandingPageData = publicProcedure
