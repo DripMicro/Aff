@@ -161,7 +161,7 @@ export const Tickets = () => {
 
   return (
     <Stack m={12} gap={4}>
-      <DataTable data={data} columns={columns} footerData={[]} />
+      <DataTable data={data} columns={columns} />
       <HStack justifyContent="end" px={6}>
         <ModalFormButton actionName="Add" icon={<AddIcon />}>
           {modal}

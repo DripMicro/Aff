@@ -20,7 +20,7 @@ import * as React from "react";
 export type DataTableProps<Data extends object> = {
   data: Data[] | null | undefined;
   columns: ColumnDef<Data, any>[];
-  footerData: any;
+  footerData?: any;
 };
 
 export function DataTable<Data extends object>({

@@ -366,7 +366,7 @@ export const PixelMonitor = () => {
         <QuerySelect label="Type" choices={meta?.type} varName="type" />
         <QuerySelect label="Method" choices={meta?.method} varName="method" />
       </Flex>
-      <DataTable data={data} columns={columns} footerData={[]} />
+      <DataTable data={data} columns={columns} />
       <HStack justifyContent="end">
         <Button
           onClick={onOpen}
