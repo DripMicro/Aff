@@ -519,9 +519,19 @@ export const getClicksReport = publicProcedure
         },
         where: {
           affiliate_id: affiliate_id,
+          merchant_id: {
+            gt: 0,
+          },
         },
         take: 10,
       });
+
+      // 		const salesww = await ctx.prisma
+      // 			.$queryRaw(Prisma.sql`SELECT data_reg.affiliate_id,data_reg.merchant_id,data_reg.initialftddate,tb1.rdate,data_reg.banner_id,data_reg.trader_id,data_reg.profile_id,tb1.amount, tb1.type AS data_sales_type  ,data_reg.country as country FROM data_sales as tb1
+
+      //   INNER JOIN data_reg AS data_reg ON tb1.merchant_id = data_reg.merchant_id AND tb1.trader_id = data_reg.trader_id AND data_reg.type = 'demo'
+      //   WHERE tb1.merchant_id > 0`);
+      console.log("sales ww ------>", salesww);
       let bonus = 0;
       let volume = 0;
       let chargeback = 0;
@@ -529,8 +539,6 @@ export const getClicksReport = publicProcedure
       let depositingAccounts = 0;
       let sumDeposits = 0;
       const balance_sheet = [];
-
-      console.log("sales ---->", salesww);
 
       for (let i = 0; i < salesww.length; i++) {
         if (salesww[i]?.type === "deposit") {
