@@ -1,13 +1,20 @@
-import { ViewIcon } from "@chakra-ui/icons";
-import { Button, Flex, Stack } from "@chakra-ui/react";
-import { createColumnHelper } from "@tanstack/react-table";
-import NextLink from "next/link";
-import { useRouter } from "next/router";
-import type { PaymentsPaidType } from "../../../server/db-types";
-import { api } from "../../../utils/api";
-import { formatPrice } from "../../../utils/format";
+import { Stack, Button, HStack, useToast, Flex } from "@chakra-ui/react";
 import { DataTable } from "../../common/data-table/DataTable";
+import { api } from "../../../utils/api";
+import type { PaymentsPaidType } from "../../../server/db-types";
+import { createColumnHelper } from "@tanstack/react-table";
+import {
+  AddIcon,
+  CheckIcon,
+  DeleteIcon,
+  EditIcon,
+  ViewIcon,
+} from "@chakra-ui/icons";
+import React, { useState } from "react";
+import { useRouter } from "next/router";
 import { QueryText } from "../../common/QueryText";
+import NextLink from "next/link";
+import { formatPrice } from "../../../utils/format";
 
 const columnHelper = createColumnHelper<PaymentsPaidType>();
 
@@ -77,7 +84,7 @@ export const Billings = () => {
         <QueryText varName="search" label="Search Payment ID" />
       </Flex>
 
-      <DataTable data={data} columns={columns} footerData={[]} />
+      <DataTable data={data} columns={columns} />
     </Stack>
   );
 };
