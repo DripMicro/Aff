@@ -1,4 +1,4 @@
-import type { data_install_type } from "@prisma/client";
+import type { data_install_type, data_sales_type } from "@prisma/client";
 import { Prisma } from "@prisma/client";
 import { z } from "zod";
 
@@ -484,14 +484,14 @@ export const getClicksReport = publicProcedure
       }
 
       /*
-        $sql = "SELECT data_reg.affiliate_id,data_reg.merchant_id,data_reg.initialftddate,tb1.rdate,data_reg.banner_id,data_reg.trader_id,data_reg.profile_id,tb1.amount, tb1.type AS data_sales_type  ,data_reg.country as country FROM data_sales as tb1 "
+        $sql = "SELECT data_reg.affiliate_id,data_reg.merchant_id,data_reg.initialftddate,tb1.rdate,data_reg.banner_id,data_reg.trader_id,data_reg.profile_id,tb1.amount, tb1.type AS data_sales_type  ,data_reg.country as country
+        FROM data_sales as tb1 "
 
                  . "INNER JOIN data_reg AS data_reg ON
                  tb1.merchant_id = data_reg.merchant_id AND
                  tb1.trader_id = data_reg.trader_id AND
                  data_reg.type <> 'demo'  "
                  . "WHERE  tb1.trader_id = " .  $looped_trader_id
-            //	 . ' and tb1.rdate between "' . $from . '" AND "' . $to . '"'
                 . " and tb1.rdate >= '" . $regDate . "'"
                 . " and tb1.merchant_id >0 "
                 . (empty($group_id) ? '' : ' AND tb1.group_id = ' . $group_id . ' ')
@@ -501,30 +501,77 @@ export const getClicksReport = publicProcedure
 
        */
 
+      interface SalesWWType {
+        affiliate_id: number;
+        merchant_id: number;
+        initialftddate: string;
+        rdate: Date;
+        banner_id: number;
+        trader_id: string;
+        profile_id: number;
+        amount: number;
+        type: data_sales_type;
+        country: string;
+      }
+
+      const group_id = null;
+      const cond_group_id = group_id
+        ? Prisma.sql`AND tb1.group_id = ${group_id}`
+        : Prisma.empty;
+
+      const cond_unique_id = unique_id
+        ? Prisma.sql`AND data_reg.uid = ${unique_id}`
+        : Prisma.empty;
+
+      const salesww = await ctx.prisma.$queryRaw<SalesWWType[]>`SELECT     
+           data_reg.affiliate_id,
+           data_reg.merchant_id,
+           data_reg.initialftddate,
+           tb1.rdate,
+           data_reg.banner_id,
+           data_reg.trader_id,
+           data_reg.profile_id,
+           tb1.amount,
+           tb1.type         AS data_sales_type ,
+           data_reg.country AS country
+FROM       data_sales       AS tb1
+INNER JOIN data_reg         AS data_reg
+ON         tb1.merchant_id = data_reg.merchant_id
+AND        tb1.trader_id = data_reg.trader_id
+AND        data_reg.type <> 'demo'
+WHERE      tb1.trader_id = ${trader_id}
+AND        tb1.rdate >= ${from}
+AND        tb1.merchant_id >0
+${cond_group_id}
+${cond_unique_id}
+`;
+      // (empty($group_id) ? '' : ' AND tb1.group_id = ' . $group_id . ' ')                 . (!empty($affiliate_id) ? ' and tb1.affiliate_id = ' . $affiliate_id :' ')                 . (isset($banner_id) && !empty($banner_id) ? ' AND data_reg.banner_id = "'.$banner_id.'"' :' ')
+      // .(!empty($unique_id) ? ' and data_reg.uid = ' . $unique_id :' ');`;
+
       /**
        * uncomment the include statement below to recreate the issue.
        */
-      const salesww = await ctx.prisma.data_sales.findMany({
-        include: {
-          data_reg: {
-            select: {
-              affiliate_id: true,
-              initialftdtranzid: true,
-              banner_id: true,
-              trader_id: true,
-              country: true,
-              profile_id: true,
-            },
-          },
-        },
-        where: {
-          affiliate_id: affiliate_id,
-          merchant_id: {
-            gt: 0,
-          },
-        },
-        take: 10,
-      });
+      // const salesww = await ctx.prisma.data_sales.findMany({
+      //   include: {
+      //     data_reg: {
+      //       select: {
+      //         affiliate_id: true,
+      //         initialftdtranzid: true,
+      //         banner_id: true,
+      //         trader_id: true,
+      //         country: true,
+      //         profile_id: true,
+      //       },
+      //     },
+      //   },
+      //   where: {
+      //     affiliate_id: affiliate_id,
+      //     merchant_id: {
+      //       gt: 0,
+      //     },
+      //   },
+      //   take: 10,
+      // });
 
       // 		const salesww = await ctx.prisma
       // 			.$queryRaw(Prisma.sql`SELECT data_reg.affiliate_id,data_reg.merchant_id,data_reg.initialftddate,tb1.rdate,data_reg.banner_id,data_reg.trader_id,data_reg.profile_id,tb1.amount, tb1.type AS data_sales_type  ,data_reg.country as country FROM data_sales as tb1
