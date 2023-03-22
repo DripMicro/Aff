@@ -18,14 +18,6 @@ import { theme } from "../components/chakra-ui-theme";
 
 import { Layouts } from "../layouts/Layouts";
 
-type Page<P = {}> = NextPage<P> & {
-  getLayout?: (page: ReactNode) => ReactNode;
-};
-
-type Props = AppProps<{ session: Session | null }> & {
-  Component: Page;
-};
-
 type MyAppProps = AppProps<{ session: Session | null }> & {
   Component: NextComponentType<NextPageContext, any, any> & {
     Layout: LayoutKeys;

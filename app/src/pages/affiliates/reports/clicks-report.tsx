@@ -11,8 +11,8 @@ import {
   DateRangeSelect,
   useDateRange,
 } from "../../../components/common/DateRangeSelect";
-
-const Page: NextPage = () => {
+import type { MyPage } from "../../../components/common/types";
+const Page: MyPage = () => {
   const router = useRouter();
   const { from, to } = useDateRange();
   const [displayType, setDisplayType] = useState("");
@@ -83,3 +83,4 @@ const Page: NextPage = () => {
 };
 
 export default Page;
+Page.Layout = "Affiliates";

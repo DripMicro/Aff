@@ -4,6 +4,7 @@ import NotificationDropDown from "../../Dropdowns/NotificationDropdown";
 import UserDropdown from "../../Dropdowns/UserDropdown";
 import LanguageDropdown from "../../Dropdowns/LanguageDropdown";
 import type { Dispatch, SetStateAction } from "react";
+import { Image } from "@chakra-ui/react";
 
 interface Props {
   collapseShow: boolean;
@@ -15,7 +16,7 @@ const AffiliatesNavbar = ({ collapseShow, setCollapseShow }: Props) => {
   return (
     <>
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 w-full z-10 flex-row flex-nowrap justify-start flex items-center p-4 bg-[#F5F8FA] border-b-2 border-[#E7E7E7]">
+      <nav className="fixed top-0 left-0 w-full z-10 flex-row flex-nowrap justify-start flex items-center p-2 md:p-4 bg-[#F5F8FA] border-b-2 border-[#E7E7E7]">
         <div className="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap ">
           <div className="flex-col items-center justify-center ">
             <div className="items-center flex">
@@ -49,8 +50,8 @@ const AffiliatesNavbar = ({ collapseShow, setCollapseShow }: Props) => {
               </a>
 
               <Link href="/">
-                <span className="w-32 h-12 pl-5 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center">
-                  <img src="/img/logo.png" />
+                <span className="w-20 h-10 md:w-32 md:h-12 md:ml-5 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center">
+                  <Image src="/img/logo.png" htmlWidth="90" alt="logo" />
                 </span>
               </Link>
 

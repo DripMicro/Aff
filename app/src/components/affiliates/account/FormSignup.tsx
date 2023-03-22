@@ -17,6 +17,7 @@ export const FormSignup = () => {
     <FormSignUp
       schema={schema}
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
+      formProps={{ submitButtonText: "Sign Up", submitNotification: false }}
       onSubmit={handleSubmit}
       props={{
         mail: {

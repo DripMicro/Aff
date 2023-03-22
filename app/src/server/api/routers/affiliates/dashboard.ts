@@ -153,7 +153,7 @@ export const getPerformanceChart = publicProcedure
         return {
           date: `${item.label}, ${item.year}`,
           Accounts: data[0] ? data[0]._sum.RealAccount : 0,
-          "Active Traders": data[0] ? data[0]._sum.FTD : 0,
+          ActiveTraders: data[0] ? data[0]._sum.FTD : 0,
         };
       })
     );

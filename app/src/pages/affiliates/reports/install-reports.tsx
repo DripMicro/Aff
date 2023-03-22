@@ -7,8 +7,8 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { api } from "../../../utils/api";
 import styles from "./../../index.module.css";
-
-const Page: NextPage = () => {
+import type { MyPage } from "../../../components/common/types";
+const Page: MyPage = () => {
   const router = useRouter();
   const [displayType, setDisplayType] = useState("");
   const page = parseInt(router?.query?.page as string);
@@ -71,3 +71,4 @@ const Page: NextPage = () => {
 };
 
 export default Page;
+Page.Layout = "NoLayout";

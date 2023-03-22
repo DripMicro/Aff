@@ -5,7 +5,9 @@ const boxStyles = {
   border: "1px solid #eaeaea",
   borderRadius: "10px",
 };
-export default function Home() {
+
+import type { MyPage } from "../components/common/types";
+const Home: MyPage = () => {
   return (
     <div>
       <Head>
@@ -62,4 +64,7 @@ export default function Home() {
       </main>
     </div>
   );
-}
+};
+
+export default Home;
+Home.Layout = "NoLayout";

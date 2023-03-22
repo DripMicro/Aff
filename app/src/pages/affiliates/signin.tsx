@@ -1,6 +1,6 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { AuthenticationFooter } from "../../components/common/footer/AuthenticationFooter";
+import AuthenticationFooter from "../../components/common/footer/AuthenticationFooter";
 import { FormSignin } from "../../components/affiliates/account/FormSignin";
 import type { MyPage } from "../../components/common/types";
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
+import { Image } from "@chakra-ui/react";
 
 const UserDropdown = () => {
   // dropdown props
@@ -38,8 +39,8 @@ const UserDropdown = () => {
         }}
       >
         <div className="items-center flex">
-          <span className="w-9 h-9 text-sm text-white inline-flex items-center justify-center rounded-full">
-            <img
+          <span className="w-7 h-7 md:w-9 md:h-9 text-sm text-white inline-flex items-center justify-center rounded-full">
+            <Image
               alt="..."
               className="w-full rounded-full align-middle border-none shadow-lg"
               src="/img/icons/user.png"

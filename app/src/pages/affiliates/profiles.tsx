@@ -1,9 +1,10 @@
 import styles from "./../index.module.css";
 import { type NextPage } from "next";
 import Head from "next/head";
-
+import type { MyPage } from "../../components/common/types";
 import { Profiles } from "../../components/affiliates/profiles/Profiles";
-const Page: NextPage = () => {
+
+const ProfilePage: MyPage = () => {
   return (
     <>
       <Head>
@@ -18,4 +19,6 @@ const Page: NextPage = () => {
   );
 };
 
-export default Page;
+export default ProfilePage;
+
+ProfilePage.Layout = "Affiliates";

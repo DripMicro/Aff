@@ -22,7 +22,7 @@ const AffiliatesLayout = ({ children }: PropsWithChildren) => {
           collapseShow={collapseShow}
           setCollapseShow={setCollapseShow}
         />
-        <div className="px-4 md:px-10 pt-20 mx-auto w-full">
+        <div className="px-4 md:px-10 pt-16 md:pt-20 mx-auto w-full bg-[#F5F8FA]">
           {children}
           {/* <FooterAdmin /> */}
         </div>

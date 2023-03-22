@@ -1,5 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
 import Link from "next/link";
+import { Image } from "@chakra-ui/react";
 
 interface Props {
   activeName: string;
@@ -38,7 +39,7 @@ const SingleLink = ({
         className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-white dark:hover:bg-gray-600 text-white-600 hover:text-white-800 pl-8"
         href={"/affiliates/" + link}
       >
-        <img
+        <Image
           alt="..."
           className="w-6 align-middle border-none pt-0.5"
           src={
@@ -52,7 +53,7 @@ const SingleLink = ({
               (activeName == link ? "text-[#2262C6]" : "")
             }
           >
-            linkName
+            {linkName}
           </span>
         ) : (
           ""

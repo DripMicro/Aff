@@ -2,8 +2,8 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { QuickSummaryReport } from "../../../components/affiliates/reports/QuickSummaryReport";
 import styles from "./../../index.module.css";
-
-const Page: NextPage = () => {
+import type { MyPage } from "../../../components/common/types";
+const Page: MyPage = () => {
   return (
     <>
       <Head>
@@ -19,3 +19,4 @@ const Page: NextPage = () => {
 };
 
 export default Page;
+Page.Layout = "Affiliates";

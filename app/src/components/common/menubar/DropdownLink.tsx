@@ -1,5 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
 import Link from "next/link";
+import { Image } from "@chakra-ui/react";
 
 interface Props {
   activeName: string;
@@ -7,6 +8,8 @@ interface Props {
   dropdown: string;
   dropdownName: string;
   defaultLink: string;
+  navbarName: string;
+  parentLink: string;
   linkName: LinkName[];
   setactiveName: Dispatch<SetStateAction<string>>;
   setdropdown: Dispatch<SetStateAction<string>>;
@@ -24,7 +27,9 @@ const SingleLink = ({
   collapseShow,
   dropdown,
   linkName,
+  navbarName,
   dropdownName,
+  parentLink,
   defaultLink,
 }: Props) => {
   const activeLink = (value: string) => {
@@ -46,9 +51,13 @@ const SingleLink = ({
       >
         <Link
           className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-white dark:hover:bg-gray-600 text-white-600 hover:text-white-800 pl-8"
-          href={"/affiliates/" + defaultLink}
+          href={
+            "/affiliates/" +
+            (parentLink == "" ? "" : parentLink + "/") +
+            defaultLink
+          }
         >
-          <img
+          <Image
             alt="..."
             className="w-6 align-middle border-none pt-0.5"
             src={
@@ -65,13 +74,13 @@ const SingleLink = ({
                 (dropdown == dropdownName ? "text-[#2262C6]" : "")
               }
             >
-              Marketing Tools
+              {navbarName}
             </span>
           ) : (
             ""
           )}
           <span className="py-0.5 ml-auto mr-8 text-xs font-medium tracking-wide truncate">
-            <img
+            <Image
               alt="..."
               className={
                 "align-middle border-none" +
@@ -93,8 +102,8 @@ const SingleLink = ({
           (dropdown == dropdownName && collapseShow ? "flex" : "hidden")
         }
       >
-        {linkName.map((value) => (
-          <li>
+        {linkName.map((value, index) => (
+          <li key={index}>
             <div
               onClick={(e) => {
                 e.preventDefault();
@@ -103,7 +112,11 @@ const SingleLink = ({
             >
               <Link
                 className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-white dark:hover:bg-gray-600 text-white-600 hover:text-white-800 pl-14"
-                href={"/affiliates/" + value.link}
+                href={
+                  "/affiliates/" +
+                  (parentLink == "" ? "" : parentLink + "/") +
+                  value.link
+                }
               >
                 {collapseShow ? (
                   <span
