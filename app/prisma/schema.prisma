@@ -565,32 +565,33 @@ model data_reg {
   freeParam5           String        @db.VarChar(170)
   merchant_id          Int
   status               String        @db.VarChar(20)
-  lastUpdate           DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @ignore @db.Timestamp(0)
+  lastUpdate           DateTime      @default(now()) @ignore @db.Timestamp(0)
   platform             String        @db.VarChar(30)
   uid                  String        @db.VarChar(35)
   saleStatus           String        @db.VarChar(50)
   lastSaleNote         String        @db.VarChar(200)
-  lastSaleNoteDate     DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @ignore @db.Timestamp(0)
-  lastTimeActive       DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @ignore @db.Timestamp(0)
-  initialftddate       DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @ignore @db.Timestamp(0)
+  lastSaleNoteDate     DateTime      @default(now()) @ignore @db.Timestamp(0)
+  lastTimeActive       DateTime      @default(now()) @ignore @db.Timestamp(0)
+  initialftddate       DateTime      @default(now()) @ignore @db.Timestamp(0)
   initialftdtranzid    String        @db.VarChar(40)
   isSelfDeposit        Boolean       @default(false)
   ftdamount            Float         @default(0)
-  FTDqualificationDate DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @ignore @db.Timestamp(0)
+  FTDqualificationDate DateTime      @default(now()) @ignore @db.Timestamp(0)
   traderVolume         Float
   traderTrades         Int
-  lastStatsRecordDate  DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @ignore @db.Timestamp(0)
+  lastStatsRecordDate  DateTime      @default(now()) @ignore @db.Timestamp(0)
   traderValue          Float
   // lastDepositRecordDate DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @db.Timestamp(0)
   email                String        @db.VarChar(40)
   couponName           String        @db.VarChar(30)
   campaign_id          String?       @default("") @db.VarChar(50)
   dummySource          Int
-  currentDate          DateTime      @default(now()) @db.Timestamp(0)
+  currentDate          DateTime      @default(now()) @ignore @db.Timestamp(0)
 
-  merchant  merchants     @relation(fields: [merchant_id], references: [id])
-  affiliate affiliates    @relation(fields: [affiliate_id], references: [id])
-  data_reg  reporttraders @relation(fields: [trader_id, affiliate_id, merchant_id], references: [TraderID, affiliate_id, merchant_id])
+  merchant   merchants     @relation(fields: [merchant_id], references: [id])
+  affiliate  affiliates    @relation(fields: [affiliate_id], references: [id])
+  data_reg   reporttraders @relation(fields: [trader_id, affiliate_id, merchant_id], references: [TraderID, affiliate_id, merchant_id])
+  data_stats data_stats?
 
   @@index([FTDqualificationDate], map: "FTDqualificationDate")
   @@index([uid], map: "UID")
@@ -739,6 +740,7 @@ model data_stats {
   turnover      Float?
 
   merchant  merchants  @relation(fields: [merchant_id], references: [id])
+  data_reg  data_reg   @relation(fields: [id], references: [id])
   affiliate affiliates @relation(fields: [affiliate_id], references: [id])
 
   @@index([affiliate_id], map: "affiliate_id")

@@ -69,3 +69,6 @@ export type InstallReportType =
 
 export type CreativeReportType =
   RouterOutput["affiliates"]["getCreativeReport"][0];
+
+export type LandingPageReportType =
+  RouterOutput["affiliates"]["getLandingPageData"][0];

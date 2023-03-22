@@ -1,7 +1,7 @@
 import * as z from "zod"
 import * as imports from "../zod-add-schema"
 import { data_reg_type } from "@prisma/client"
-import { Completemerchants, RelatedmerchantsModel, Completeaffiliates, RelatedaffiliatesModel, Completereporttraders, RelatedreporttradersModel } from "./index"
+import { Completemerchants, RelatedmerchantsModel, Completeaffiliates, RelatedaffiliatesModel, Completereporttraders, RelatedreporttradersModel, Completedata_stats, Relateddata_statsModel } from "./index"
 
 export const data_regModel = z.object({
   id: z.number().int(),
@@ -39,13 +39,13 @@ export const data_regModel = z.object({
   couponName: z.string(),
   campaign_id: z.string().nullish(),
   dummySource: z.number().int(),
-  currentDate: z.date(),
 })
 
 export interface Completedata_reg extends z.infer<typeof data_regModel> {
   merchant: Completemerchants
   affiliate: Completeaffiliates
   data_reg: Completereporttraders
+  data_stats?: Completedata_stats | null
 }
 
 /**
@@ -57,4 +57,5 @@ export const Relateddata_regModel: z.ZodSchema<Completedata_reg> = z.lazy(() => 
   merchant: RelatedmerchantsModel,
   affiliate: RelatedaffiliatesModel,
   data_reg: RelatedreporttradersModel,
+  data_stats: Relateddata_statsModel.nullish(),
 }))
