@@ -12,7 +12,7 @@ const Page: MyPage = () => {
         <meta name="description" content="Affiliates Creative Materials" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex flex-col items-center min-h-screen px-5">
+      <main className="flex min-h-screen flex-col items-center px-5">
         <FormSignin />
         <AuthenticationFooter />
       </main>

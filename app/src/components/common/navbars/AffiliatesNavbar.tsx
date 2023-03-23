@@ -16,10 +16,10 @@ const AffiliatesNavbar = ({ collapseShow, setCollapseShow }: Props) => {
   return (
     <>
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 w-full z-10 flex-row flex-nowrap justify-start flex items-center p-2 md:p-4 bg-[#F5F8FA] border-b-2 border-[#E7E7E7]">
-        <div className="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap ">
+      <nav className="fixed top-0 left-0 z-10 flex w-full flex-row flex-nowrap items-center justify-start border-b-2 border-[#E7E7E7] bg-[#F5F8FA] p-2 md:p-4">
+        <div className="mx-autp flex w-full flex-wrap items-center justify-between md:flex-nowrap ">
           <div className="flex-col items-center justify-center ">
-            <div className="items-center flex">
+            <div className="flex items-center">
               <a
                 onClick={(e) => {
                   e.preventDefault();
@@ -29,7 +29,7 @@ const AffiliatesNavbar = ({ collapseShow, setCollapseShow }: Props) => {
                 <span
                   className={
                     (collapseShow ? "-rotate-90 " : "rotate-0 ") +
-                    "w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center duration-300"
+                    "bg-blueGray-200 inline-flex h-12 w-12 items-center justify-center text-sm text-white duration-300"
                   }
                 >
                   <svg
@@ -40,8 +40,8 @@ const AffiliatesNavbar = ({ collapseShow, setCollapseShow }: Props) => {
                     fill="none"
                   >
                     <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
                       d="M13 -4.37114e-08C13.5523 -1.95703e-08 14 0.447715 14 1L14 17C14 17.5523 13.5523 18 13 18C12.4477 18 12 17.5523 12 17L12 1C12 0.447715 12.4477 -6.78525e-08 13 -4.37114e-08ZM7 -3.0598e-07C7.55228 -2.81839e-07 8 0.447715 8 1L8 17C8 17.5523 7.55228 18 7 18C6.44771 18 6 17.5523 6 17L6 1C6 0.447715 6.44772 -3.30121e-07 7 -3.0598e-07ZM1 -5.68248e-07C1.55229 -5.44107e-07 2 0.447715 2 0.999999L2 8C2 8.55228 1.55228 9 1 9C0.447714 9 -3.73832e-07 8.55228 -3.49691e-07 8L-4.37114e-08 0.999999C-1.95703e-08 0.447715 0.447715 -5.92389e-07 1 -5.68248e-07Z"
                       fill="#404040"
                     />
@@ -50,13 +50,13 @@ const AffiliatesNavbar = ({ collapseShow, setCollapseShow }: Props) => {
               </a>
 
               <Link href="/">
-                <span className="w-20 h-10 md:w-32 md:h-12 md:ml-5 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center">
+                <span className="bg-blueGray-200 inline-flex h-10 w-20 items-center justify-center text-sm text-white md:ml-5 md:h-12 md:w-32">
                   <Image src="/img/logo.png" htmlWidth="90" alt="logo" />
                 </span>
               </Link>
 
-              <div className="pl-16 hidden md:block">
-                <span className="w-10 h-8 pr-2.5 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center">
+              <div className="hidden pl-16 md:block">
+                <span className="bg-blueGray-200 inline-flex h-8 w-10 items-center justify-center pr-2.5 text-sm text-white">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="31"
@@ -70,7 +70,7 @@ const AffiliatesNavbar = ({ collapseShow, setCollapseShow }: Props) => {
                     />
                   </svg>
                 </span>
-                <span className="w-10 h-8 pr-2.5 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center">
+                <span className="bg-blueGray-200 inline-flex h-8 w-10 items-center justify-center pr-2.5 text-sm text-white">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="30"
@@ -92,7 +92,7 @@ const AffiliatesNavbar = ({ collapseShow, setCollapseShow }: Props) => {
                     />
                   </svg>
                 </span>
-                <span className="w-10 h-8 pr-2.5 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center">
+                <span className="bg-blueGray-200 inline-flex h-8 w-10 items-center justify-center pr-2.5 text-sm text-white">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="30"
@@ -110,7 +110,7 @@ const AffiliatesNavbar = ({ collapseShow, setCollapseShow }: Props) => {
             </div>
           </div>
           {/* User */}
-          <ul className="flex-row list-none items-center flex">
+          <ul className="flex list-none flex-row items-center">
             <LanguageDropdown />
             <NotificationDropDown />
             <UserDropdown />

@@ -13,30 +13,43 @@ import {
   ModalFormAction,
   ModalFormButton,
 } from "../../common/modal/ModalFormButton";
+import { usePrepareSchema } from "@/components/common/forms/usePrepareSchema";
+import { useTranslation } from "next-i18next";
+import { useCRUD } from "@/components/common/forms/useCRUD";
 
 const columnHelper = createColumnHelper<AffiliateDocumentType>();
 
 const schema = z.object({
-  documentType: z.string().describe("Document Type // Select a Document Type"),
+  documentType: z
+    .string()
+    .describe("Document Type // Select a Document Type")
+    .meta({
+      choices: [
+        {
+          id: "Passport_Driving_Licence",
+          title: "Passport/Driving Licence",
+        },
+        { id: "Address_Verification", title: "Address Verification" },
+        { id: "Company_Verification", title: "Company Verification" },
+      ],
+    }),
   documentFile: z
     .any()
     // .refine((val) => val.length > 0, "File is required")
-    .describe("Document File"),
+    .describe("Document File")
+    .meta({ control: "File" }),
 });
 
 type NewRecType = z.infer<typeof schema>;
 
 export const Documents = () => {
+  const { t } = useTranslation("affiliate");
   const { data, refetch } = api.affiliates.getDocuments.useQuery();
   const [editRec, setEditRec] = useState<null>(null);
-  const toast = useToast();
+  const formContext = usePrepareSchema(t, schema);
 
-  if (!data) {
-    return null;
-  }
-
-  const handleSubmit = async (values: NewRecType) => {
-    console.log(`muly:handleSubmit`, { values });
+  const handleUpload = async (values: NewRecType) => {
+    console.log(`muly:handleUpload`, { values });
 
     const formData = new FormData();
     const strMonthYear = format(new Date(), "yyyy-MM-dd");
@@ -54,8 +67,28 @@ export const Documents = () => {
       },
     });
     console.log(`muly:handleSubmit DONE`, { answer });
-    await refetch();
+    return values;
   };
+
+  const { createDialog } = useCRUD<NewRecType>({
+    formContext,
+    schema,
+    refetch: async () => {
+      await refetch();
+    },
+    onDelete: null,
+    onUpsert: (rec: NewRecType) => handleUpload(rec),
+    text: {
+      edit: "Edit",
+      editTitle: "Edit Document",
+      addTitle: "Upload New Document",
+      add: "Upload New Document",
+    },
+  });
+
+  if (!data) {
+    return null;
+  }
 
   const columns = [
     columnHelper.accessor("id", {
@@ -105,44 +138,10 @@ export const Documents = () => {
     }),
   ];
 
-  const modal = (
-    <ModalForm
-      schema={schema}
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      onSubmit={handleSubmit}
-      formProps={{
-        title: "Upload new document",
-        actionName: "Submit Document",
-      }}
-      props={{
-        documentType: {
-          choices: [
-            {
-              id: "Passport_Driving_Licence",
-              title: "Passport/Driving Licence",
-            },
-            { id: "Address_Verification", title: "Address Verification" },
-            { id: "Company_Verification", title: "Company Verification" },
-          ],
-        },
-        documentFile: {
-          controlName: "File",
-        },
-      }}
-    />
-  );
-
   return (
     <Stack m={12} gap={4}>
       <DataTable data={data} columns={columns} />
-      <HStack justifyContent="end" px={6}>
-        <ModalFormButton actionName="Upload New Document" icon={<AddIcon />}>
-          {modal}
-        </ModalFormButton>
-      </HStack>
-      <ModalFormAction isOpen={!!editRec} onClose={() => setEditRec(null)}>
-        {modal}
-      </ModalFormAction>
+      <div className="flex flex-row justify-end px-6">{createDialog}</div>
     </Stack>
   );
 };

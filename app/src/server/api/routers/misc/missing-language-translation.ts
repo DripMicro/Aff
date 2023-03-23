@@ -22,11 +22,9 @@ let timeout: ReturnType<typeof setTimeout> | undefined;
 
 const updateMissing = () => {
   const loadNSData = (lang: string, ns: string) => {
-    // console.log(`muly:loadNSData ${`./public/locales/${lang}/${ns}.json`}`, {
-    //   pwd: process.cwd(),
-    //   file: await fsp.readFile(`./public/locales/${lang}/${ns}.json`, "utf8"),
-    //   ex: fs.existsSync(`./public/locales/${lang}/${ns}.json`),
-    // });
+    console.log(`muly:loadNSData ${`./public/locales/${lang}/${ns}.json`}`, {
+      pwd: process.cwd(),
+    });
     return JSON.parse(
       fs.readFileSync(`./public/locales/${lang}/${ns}.json`, "utf8")
     ) as TranslationData;
@@ -48,10 +46,8 @@ const updateMissing = () => {
     const path: string[] = item.key.split(".");
     let obj: TranslationData = nsData;
     // console.log(`muly:appendMissingTranslation`, {
-    //   nsData,
     //   item,
     //   path,
-    //   sli: path.slice(0, path.length - 1),
     // });
     path.slice(0, path.length - 1).forEach((key) => {
       if (typeof obj !== "string") {
@@ -86,7 +82,9 @@ const updateMissing = () => {
 
   const q = [...queue];
   queue = [];
-  const langs = ["en", "he"];
+  const langs = ["en"];
+
+  console.log(`muly:updateMissing A`, {});
 
   const pairs: { ns: string; lang: string }[] = [];
   forEach((ns) => {
@@ -94,6 +92,8 @@ const updateMissing = () => {
       pairs.push({ ns, lang });
     }, langs);
   }, uniq(map(({ ns }) => ns, q)));
+
+  console.log(`muly:updateMissing B`, { pairs });
 
   map(({ ns, lang }) => {
     let changed = false;
@@ -104,6 +104,8 @@ const updateMissing = () => {
 
     if (changed) {
       saveNSData(lang, ns, nsData);
+    } else {
+      console.log(`muly:Nothing changed, not saving ${lang} ${ns}`);
     }
   }, pairs);
 };
@@ -114,6 +116,7 @@ export const missingLanguageTranslation = publicProcedure
     if (env.NODE_ENV !== "development") {
       throw new TRPCError({ code: "FORBIDDEN" });
     }
+    console.log(`muly:missingLanguageTranslation`, { input });
     queue.push(input);
     clearTimeout(timeout);
     timeout = setTimeout(updateMissing, 5000);

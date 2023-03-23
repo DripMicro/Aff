@@ -66,14 +66,14 @@ export const RawDatePicker: React.FC<{
           {({ ref }) => (
             <div className="relative" ref={ref}>
               <input
-                className="border-2 w-full rounded-md px-3 py-4 font-normal text-[#404040] placeholder-blueGray-300 text-blueGray-600 bg-white shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
+                className="placeholder-blueGray-300 text-blueGray-600 w-full rounded-md border-2 bg-white px-3 py-4 font-normal text-[#404040] shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
                 type="text"
                 onFocus={(e) => ctxValue.showCalendar()}
                 value={formattedDate(date)}
                 readOnly
               />
               <button
-                className="absolute mt-5 right-6 cursor-pointer items-center justify-center "
+                className="absolute right-6 mt-5 cursor-pointer items-center justify-center "
                 onClick={(e) => ctxValue.toggleCalendar()}
               >
                 <div className=" ">
@@ -144,7 +144,7 @@ const Calendar: React.FC<CalendarProps> = React.forwardRef<
 
   return (
     <div
-      className="bg-white relative shadow-lg max-w-xs w-64 p-2 rounded-lg z-10 mt-1"
+      className="relative z-10 mt-1 w-64 max-w-xs rounded-lg bg-white p-2 shadow-lg"
       ref={ref}
       data-placement={props.placement}
       style={props.style}
@@ -179,7 +179,7 @@ const DateSelection: React.FC<Record<never, never>> = (props) => {
     dates.push(
       <button
         key={`day${i}`}
-        className={`hover:bg-gray-200 rounded p-1 text-sm ${
+        className={`rounded p-1 text-sm hover:bg-gray-200 ${
           isSelectedDate(i) ? "bg-gray-300 font-semibold" : ""
         }`}
         onClick={() => selectDate(i)}

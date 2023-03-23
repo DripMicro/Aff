@@ -1,5 +1,3 @@
-import { Box } from "@chakra-ui/react";
-
 export const Loading = () => {
-  return <Box>Loading...</Box>;
+  return <div>Loading...</div>;
 };

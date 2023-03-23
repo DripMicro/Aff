@@ -21,7 +21,6 @@ import {
   getCoreRowModel,
   getSortedRowModel,
 } from "@tanstack/react-table";
-import { ModalFormButton } from "../modal/ModalFormButton";
 
 export type DataTableProps<Data extends object> = {
   data: Data[] | null | undefined;

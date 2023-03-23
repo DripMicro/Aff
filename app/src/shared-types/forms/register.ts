@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { schema as accountSchema } from "./account";
-import { numericCheckbox } from "./common";
+import { imUserTypes, numericCheckbox } from "./common";
 
 const account = accountSchema.innerType().shape;
 
@@ -16,7 +16,8 @@ export const schema = z
     IMUserType: z
       .string()
       .describe("Instant Message Type // Choose IM Type")
-      .default(""),
+      .default("")
+      .meta({ choices: imUserTypes }),
     IMUser: z.string().describe("IM Account").default(""),
     lang: z.string().describe("Language"),
     company: z.string().describe("Company Name").default(""),

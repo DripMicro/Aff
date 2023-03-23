@@ -5,36 +5,33 @@ import type { FormEvent } from "react";
 import React from "react";
 import { Button, Stack, Link } from "@chakra-ui/react";
 import type { GridProps } from "@chakra-ui/layout/dist/grid";
-import { FormLayout } from "./FormLayout";
 import { useSubmitAction } from "./useSubmitAction";
 import NextLink from "next/link";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/material.css";
 import { FormControl, HStack } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
+import type { CommonFormProps } from "@/components/common/forms/Form";
 // import Select from "react-tailwindcss-select";
 // import { Select, Option } from "@material-tailwind/react";
-
-export interface CommonFormProps {
-  onSubmit: (values: unknown) => Promise<void>;
-  children: React.ReactNode;
-
-  grid?: GridProps;
-
-  submitButtonText?: string;
-  submitNotification?: boolean;
-}
 
 const CommonForm = ({
   onSubmit,
   children,
-  grid,
-  submitButtonText,
-  submitNotification = true,
+  submit,
+  className,
 }: CommonFormProps) => {
+  const {
+    text,
+    notification,
+    className: buttonClassName,
+  } = submit || {
+    text: "Save",
+    notification: false,
+  };
   const { handleSubmit, isLoading } = useSubmitAction({
     onSubmit,
-    submitNotification,
+    notification,
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -87,7 +84,7 @@ const CommonForm = ({
           {submitButtonText ? submitButtonText : "SAVE"}
         </Button> */}
 
-        <div className="text-4xl text-black flex flex-col items-center mt-20 mb-16 md:mt-28 md:mb-24">
+        <div className="mt-20 mb-16 flex flex-col items-center text-4xl text-black md:mt-28 md:mb-24">
           Register to Your
           <div className="flex items-center">
             <Image className="mt-2" src="/img/logo.png" width="28" alt="Logo" />
@@ -96,11 +93,11 @@ const CommonForm = ({
         </div>
 
         <div className="p-2">
-          <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+          <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
             Username
           </label>
           <input
-            className="border px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base"
+            className="placeholder-blueGray-300 text-blueGray-700 w-full rounded border bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
             id="username"
             type="text"
             placeholder="Type Here..."
@@ -109,11 +106,11 @@ const CommonForm = ({
 
         <div className="md:flex">
           <div className="flex-1 p-2">
-            <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               First Name
             </label>
             <input
-              className="border px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base"
+              className="placeholder-blueGray-300 text-blueGray-700 w-full rounded border bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
               id="username"
               type="text"
               placeholder="Type Here..."
@@ -121,11 +118,11 @@ const CommonForm = ({
           </div>
 
           <div className="flex-1 p-2">
-            <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               Last Name
             </label>
             <input
-              className="border px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base"
+              className="placeholder-blueGray-300 text-blueGray-700 w-full rounded border bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
               id="username"
               type="text"
               placeholder="Type Here..."
@@ -135,11 +132,11 @@ const CommonForm = ({
 
         <div className="md:flex">
           <div className="flex-1 p-2">
-            <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               Email
             </label>
             <input
-              className="border px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base"
+              className="placeholder-blueGray-300 text-blueGray-700 w-full rounded border bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
               id="username"
               type="text"
               placeholder="Type Here..."
@@ -147,11 +144,11 @@ const CommonForm = ({
           </div>
 
           <div className="flex-1 p-2">
-            <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               Confirm Email
             </label>
             <input
-              className="border px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base"
+              className="placeholder-blueGray-300 text-blueGray-700 w-full rounded border bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
               id="username"
               type="text"
               placeholder="Type Here..."
@@ -160,24 +157,24 @@ const CommonForm = ({
         </div>
 
         <div className="md:flex">
-          <div className="flex-1 p-2 relative">
-            <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+          <div className="relative flex-1 p-2">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               Password
             </label>
             <input
-              className="border px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base"
+              className="placeholder-blueGray-300 text-blueGray-700 w-full rounded border bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
               id="username"
               type={showPassword ? "text" : "password"}
               placeholder="Type Here..."
             />
             <label
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute mt-4 right-4 cursor-pointer "
+              className="absolute right-4 mt-4 cursor-pointer "
               htmlFor="toggle"
             >
               {showPassword ? (
                 <svg
-                  className="w-6 h-6"
+                  className="h-6 w-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -198,7 +195,7 @@ const CommonForm = ({
                 </svg>
               ) : (
                 <svg
-                  className="w-6 h-6 opacity-60"
+                  className="h-6 w-6 opacity-60"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -214,24 +211,24 @@ const CommonForm = ({
               )}
             </label>
           </div>
-          <div className="flex-1 p-2 relative">
-            <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+          <div className="relative flex-1 p-2">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               Confirm Password
             </label>
             <input
-              className="border px-3 py-4 placeholder-blueGray-300 text-blueGray-2000 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base"
+              className="placeholder-blueGray-300 text-blueGray-2000 w-full rounded border bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
               id="username"
               type={showPassword ? "text" : "password"}
               placeholder="Type Here..."
             />
             <label
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute mt-4 right-4 cursor-pointer "
+              className="absolute right-4 mt-4 cursor-pointer "
               htmlFor="toggle"
             >
               {showPassword ? (
                 <svg
-                  className="w-6 h-6"
+                  className="h-6 w-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -252,7 +249,7 @@ const CommonForm = ({
                 </svg>
               ) : (
                 <svg
-                  className="w-6 h-6 opacity-60"
+                  className="h-6 w-6 opacity-60"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -272,7 +269,7 @@ const CommonForm = ({
 
         <div className="md:flex">
           <div className="flex-1 p-2">
-            <label className="block  mb-1.5 ml-2.5 text-base  font-medium">
+            <label className="mb-1.5  ml-2.5 block text-base  font-medium">
               Phone
             </label>
             <div className="shadow">
@@ -295,14 +292,14 @@ const CommonForm = ({
             </div>
           </div>
           <div className="flex-1 p-2">
-            <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               Account Type
             </label>
 
             <div className="flex">
               <div className="relative w-full">
                 <select
-                  className="pl-6 py-4 w-full flex space-x-2 items-center border rounded shadow border-[##e2e8f0] bg-white appearance-none cursor-pointer text-base"
+                  className="flex w-full cursor-pointer appearance-none items-center space-x-2 rounded border border-[##e2e8f0] bg-white py-4 pl-6 text-base shadow"
                   placeholder="Select date range"
                   onClick={showAccount}
                   onChange={(event) => {
@@ -317,7 +314,7 @@ const CommonForm = ({
                   <option value="account 4">Account 4</option>
                 </select>
 
-                <div className="absolute -mt-8 right-2 md:right-6 cursor-pointer ">
+                <div className="absolute right-2 -mt-8 cursor-pointer md:right-6 ">
                   <div className={`${showaccount && "rotate-180"}`}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -340,11 +337,11 @@ const CommonForm = ({
 
         <div className="md:flex">
           <div className="flex-1 p-2">
-            <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               Skype username
             </label>
             <input
-              className="border px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base"
+              className="placeholder-blueGray-300 text-blueGray-700 w-full rounded border bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
               id="skype"
               type="text"
               placeholder="Type Here..."
@@ -352,11 +349,11 @@ const CommonForm = ({
           </div>
 
           <div className="flex-1 p-2">
-            <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               Telegram username
             </label>
             <input
-              className="border px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base"
+              className="placeholder-blueGray-300 text-blueGray-700 w-full rounded border bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
               id="telegram"
               type="text"
               placeholder="Type Here..."
@@ -366,11 +363,11 @@ const CommonForm = ({
 
         <div className="md:flex">
           <div className="flex-1 p-2">
-            <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               Website(Optional)
             </label>
             <input
-              className="border px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base"
+              className="placeholder-blueGray-300 text-blueGray-700 w-full rounded border bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
               id="website"
               type="text"
               placeholder="Type Here..."
@@ -378,11 +375,11 @@ const CommonForm = ({
           </div>
 
           <div className="flex-1 p-2">
-            <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               Other Traffic Sources(Optional)
             </label>
             <input
-              className="border px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base"
+              className="placeholder-blueGray-300 text-blueGray-700 w-full rounded border bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
               id="traffic"
               type="text"
               placeholder="Type Here..."
@@ -390,16 +387,16 @@ const CommonForm = ({
           </div>
         </div>
         <div>
-          <label className="inline-flex items-center cursor-pointer">
+          <label className="inline-flex cursor-pointer items-center">
             <input
               id="customCheckLogin"
               type="checkbox"
-              className="form-checkbox border rounded text-blueGray-700 ml-2 w-5 h-5 ease-linear transition-all duration-150"
+              className="form-checkbox text-blueGray-700 ml-2 h-5 w-5 rounded border transition-all duration-150 ease-linear"
             />
-            <span className="ml-2 text-sm font-semibold text-blueGray-600">
+            <span className="text-blueGray-600 ml-2 text-sm font-semibold">
               I agree with the{" "}
               <Link as={NextLink} href="/affiliates/signin">
-                <span className="text-[#2262C6] text-sm ">
+                <span className="text-sm text-[#2262C6] ">
                   Terms & Condition
                 </span>
               </Link>
@@ -407,16 +404,16 @@ const CommonForm = ({
           </label>
         </div>
 
-        <div className="text-center pt-3 md:pt-10">
-          <button className="w-full md:w-6/12 bg-[#2262C6] text-white py-3 font-semibold rounded-md">
-            {submitButtonText ? submitButtonText : "SAVE"}
+        <div className="pt-3 text-center md:pt-10">
+          <button className="w-full rounded-md bg-[#2262C6] py-3 font-semibold text-white md:w-6/12">
+            {text || "SAVE"}
           </button>
         </div>
 
-        <div className="text-center pt-6 md:pt-14 text-sm md:text-xl">
+        <div className="pt-6 text-center text-sm md:pt-14 md:text-xl">
           Do you have an account?
           <Link as={NextLink} href="/affiliates/signin">
-            <span className="text-[#2262C6] text-sm md:text-xl font-bold pl-2">
+            <span className="pl-2 text-sm font-bold text-[#2262C6] md:text-xl">
               Sign In
             </span>
           </Link>

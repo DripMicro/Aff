@@ -1,6 +1,8 @@
 import { scratchPad } from "./scratch-pad";
 import { getFeaturesFlags } from "./get-features-flags";
+import { addSystemEvent } from "./system-events";
 import { castError } from "../../utils/errors";
+import { extractRuntimeTranslation } from "./extract-runtime-translation";
 import { affiliate_id, merchant_id } from "../api/routers/affiliates/const";
 
 export interface AdminCommandAnswer {
@@ -33,6 +35,9 @@ export const executeAdminCommand = async (
     }
   } else if (cmd === "flags") {
     return await getFeaturesFlags();
+  } else if (cmd === "simulateErrorEvent") {
+    await addSystemEvent("admin command simulateErrorEvent", {}, true);
+    return { message: "done" };
   } else if (cmd === "ping") {
     return Promise.resolve({ message: "pong" });
   } else {

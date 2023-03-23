@@ -35,15 +35,25 @@ import { MethodForm } from "./MethodForm";
 import { PixelCodeForm } from "./PixelCodeForm";
 import { PixelTypeForm } from "./PixelTypeForm";
 import { TriggerForm } from "./TriggerForm";
+import { useTranslation } from "next-i18next";
+import { usePrepareSchema } from "@/components/common/forms/usePrepareSchema";
 
 const columnHelper = createColumnHelper<PixelMonitorType>();
 
 const schema = z.object({
   merchant_id: z.any().describe("Select Merchants"),
   type: z.enum(["lead", "account", "sale", "qftd"]).describe("Type"),
-  pixelCode: z.string().describe("Pixel Code"),
+  pixelCode: z.string().describe("Pixel Code").meta({
+    control: "Textarea",
+  }),
   method: z.enum(["post", "get", "client"]).describe("Method"),
-  valid: z.coerce.number().describe("Status"),
+  valid: z.coerce
+    .number()
+    .describe("Status")
+    .meta({
+      choices: ["0", "1"],
+      control: "Switch",
+    }),
 });
 
 type NewRecType = z.infer<typeof schema>;
@@ -58,6 +68,9 @@ const newRecValues: NewRecType = {
 };
 
 export const PixelMonitor = () => {
+  const { t } = useTranslation("affiliate");
+  const formContext = usePrepareSchema(t, schema);
+
   const router = useRouter();
   const { pixel_type, merchant, pixel_code, type, method } = router.query;
 
@@ -301,6 +314,7 @@ export const PixelMonitor = () => {
 
   const modal = (
     <ModalForm
+      formContext={formContext}
       schema={schema}
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onSubmit={handleUpdate}
@@ -335,15 +349,8 @@ export const PixelMonitor = () => {
         type: {
           choices: meta?.type,
         },
-        pixelCode: {
-          controlName: "Textarea",
-        },
         method: {
           choices: meta?.method,
-        },
-        valid: {
-          choices: ["0", "1"],
-          controlName: "Switch",
         },
       }}
     />

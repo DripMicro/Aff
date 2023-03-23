@@ -94,20 +94,20 @@ const Terms = () => {
 
   return (
     <div className="pt-5 pb-4">
-      <div className="px-6 mb-5 block font-medium text-base">
+      <div className="mb-5 block px-6 text-base font-medium">
         <span className="text-[#2262C6]">Dashboard</span> - Terms & Condition
       </div>
 
-      <div className="pt-4 md:pt-7 pl-3 md:pl-4 rounded-[5px] md:rounded-[15px] bg-white shadow-md pb-20 md:mb-20">
-        <ul className="mx-4 md:ml-8 md:mr-40 list-disc list-outside px-1 md:px-8">
+      <div className="rounded-[5px] bg-white pt-4 pl-3 pb-20 shadow-md md:mb-20 md:rounded-[15px] md:pt-7 md:pl-4">
+        <ul className="mx-4 list-outside list-disc px-1 md:ml-8 md:mr-40 md:px-8">
           {terms.map((terms, index) => {
             return (
               <li
-                className="pt-3 pb-2 md:pt-0 text-lg md:text-3xl font-bold"
+                className="pt-3 pb-2 text-lg font-bold md:pt-0 md:text-3xl"
                 key={index}
               >
                 {terms.headline}
-                <ul className="list-outside pt-2 text-sm md:text-xl font-normal pb-2 md:pb-7">
+                <ul className="list-outside pt-2 pb-2 text-sm font-normal md:pb-7 md:text-xl">
                   {terms.content}
                 </ul>
               </li>

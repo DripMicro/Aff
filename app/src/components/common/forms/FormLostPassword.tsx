@@ -4,59 +4,35 @@ import { mapping } from "./mapping";
 import type { FormEvent } from "react";
 import React from "react";
 import { Button, Stack, Link } from "@chakra-ui/react";
-import type { GridProps } from "@chakra-ui/layout/dist/grid";
-import { FormLayout } from "./FormLayout";
 import { useSubmitAction } from "./useSubmitAction";
 import { Image } from "@chakra-ui/react";
-import NextLink from "next/link";
-
-export interface CommonFormProps {
-  onSubmit: (values: unknown) => Promise<void>;
-  children: React.ReactNode;
-
-  grid?: GridProps;
-
-  submitButtonText?: string;
-  submitNotification?: boolean;
-}
+import type { CommonFormProps } from "@/components/common/forms/Form";
 
 const CommonForm = ({
   onSubmit,
   children,
-  grid,
-  submitButtonText,
-  submitNotification = true,
+  submit,
+  className,
 }: CommonFormProps) => {
+  const {
+    text,
+    notification,
+    className: buttonClassName,
+  } = submit || {
+    text: "Save",
+    notification: false,
+  };
   const { handleSubmit, isLoading } = useSubmitAction({
     onSubmit,
-    submitNotification,
+    notification,
   });
 
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <form
-      onSubmit={(e: FormEvent) => {
-        e.preventDefault();
-        void handleSubmit(e);
-      }}
-      noValidate
-      className="w-full md:w-[33rem]"
-    >
+    <form onSubmit={handleSubmit} noValidate className="w-full md:w-[33rem]">
       <Stack>
-        {/* <FormLayout grid={grid}>{children}</FormLayout> */}
-        {/* <Button
-          className="w-full bg-[#2262C6]"
-          minW={36}
-          type="submit"
-          variant="solid"
-          isLoading={isLoading}
-          alignSelf="start"
-        >
-          {submitButtonText ? submitButtonText : "SAVE"}
-        </Button> */}
-
-        <div className="text-4xl text-black flex flex-col items-center mt-20 mb-16 md:mt-28 md:mb-24">
+        <div className="mt-20 mb-16 flex flex-col items-center text-4xl text-black md:mt-28 md:mb-24">
           Reset to Your
           <div className="flex items-center">
             <Image className="mt-2" src="/img/logo.png" width="28" alt="logo" />
@@ -65,35 +41,35 @@ const CommonForm = ({
         </div>
 
         <div className="pb-4">
-          <label className="block text-gray-600 text-base mb-1.5 ml-2.5 font-medium">
+          <label className="mb-1.5 ml-2.5 block text-base font-medium text-gray-600">
             Username
           </label>
           <input
-            className="border rounded-md w-full py-4 px-3 text-gray-700 font-normal text-base"
+            className="w-full rounded-md border py-4 px-3 text-base font-normal text-gray-700"
             id="username"
             type="text"
             placeholder="Type Here..."
           />
         </div>
 
-        <div className="pb-14 relative">
-          <label className="block text-gray-600 text-base mb-1.5 ml-2.5 font-medium">
+        <div className="relative pb-14">
+          <label className="mb-1.5 ml-2.5 block text-base font-medium text-gray-600">
             Password
           </label>
           <input
-            className="border rounded-md w-full py-4 px-3 text-gray-700 font-normal text-base"
+            className="w-full rounded-md border py-4 px-3 text-base font-normal text-gray-700"
             id="username"
             type={showPassword ? "text" : "password"}
             placeholder="Type Here..."
           />
           <label
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute mt-4 right-4 cursor-pointer "
+            className="absolute right-4 mt-4 cursor-pointer "
             htmlFor="toggle"
           >
             {showPassword ? (
               <svg
-                className="w-6 h-6"
+                className="h-6 w-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -114,7 +90,7 @@ const CommonForm = ({
               </svg>
             ) : (
               <svg
-                className="w-6 h-6 opacity-60"
+                className="h-6 w-6 opacity-60"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -131,8 +107,9 @@ const CommonForm = ({
           </label>
         </div>
 
-        <button className="w-full bg-[#2262C6] text-white py-3 font-semibold rounded-md">
-          {submitButtonText ? submitButtonText : "SAVE"}
+        {/* TODO:MAX use Button control */}
+        <button className="w-full rounded-md bg-[#2262C6] py-3 font-semibold text-white">
+          {text || "SAVE"}
         </button>
       </Stack>
     </form>

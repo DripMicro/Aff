@@ -1,0 +1,84 @@
+{
+  "name": {
+    "label": "Profile Name"
+  },
+  "url": {
+    "label": "URL"
+  },
+  "description": {
+    "label": "Description"
+  },
+  "source_traffic": {
+    "label": "Traffic Source"
+  },
+  "valid": {
+    "label": "Available"
+  },
+  "username": {
+    "label": "Username"
+  },
+  "password": {
+    "label": "Password"
+  },
+  "passwordRepeat": {
+    "label": "Repeat Password"
+  },
+  "newsletter": {
+    "label": "Yes, I would like to receive the Affiliate newsletter"
+  },
+  "company": {
+    "label": "Company Name"
+  },
+  "first_name": {
+    "label": "First Name"
+  },
+  "last_name": {
+    "label": "Last Name"
+  },
+  "mail": {
+    "label": "Email"
+  },
+  "phone": {
+    "label": "Phone Number"
+  },
+  "IMUserType": {
+    "label": "Instant Message Type",
+    "placeholder": "Choose IM Type"
+  },
+  "IMUser": {
+    "label": "Instant Message Account"
+  },
+  "street": {
+    "label": "Street"
+  },
+  "postalCode": {
+    "label": "Postal / Zip Code"
+  },
+  "city": {
+    "label": "City"
+  },
+  "country": {
+    "label": "Country"
+  },
+  "website": {
+    "label": "WebSite 1"
+  },
+  "website2": {
+    "label": "WebSite 2"
+  },
+  "website3": {
+    "label": "WebSite 3"
+  },
+  "Invalid email": "Invalid email",
+  "gender": {
+    "label": "Salutation",
+    "choices": {
+      "male": "Mr.",
+      "female": "Ms."
+    }
+  },
+  "Invalid url": "Invalid url",
+  "Required": "Required",
+  "Expected number, received nan": "Expected number, received nan",
+  "Expected string, received null": "Expected string, received null"
+}

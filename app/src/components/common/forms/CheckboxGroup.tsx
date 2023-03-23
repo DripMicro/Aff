@@ -8,7 +8,7 @@ import {
   CheckboxGroup as ChakraCheckboxGroup,
 } from "@chakra-ui/react";
 import React from "react";
-import type { ChoiceType } from "./TextField";
+import type { ChoiceType } from "@/utils/zod-meta";
 
 interface Props extends CheckboxGroupProps {
   choices: ChoiceType[];

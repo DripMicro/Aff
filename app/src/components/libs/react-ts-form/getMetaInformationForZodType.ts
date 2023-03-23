@@ -1,23 +1,17 @@
 import { z } from "zod";
 import type { RTFSupportedZodTypes } from "./supportedZodTypes";
 import { unwrap } from "./unwrap";
-
+import { getZodMetaInfo } from "../../../utils/zod-meta";
 export const SPLIT_DESCRIPTION_SYMBOL = " // ";
 
-export function parseDescription(description?: string) {
-  if (!description) return;
-  const [label, ...rest] = description
-    .split(SPLIT_DESCRIPTION_SYMBOL)
-    .map((e) => e.trim());
-  const placeholder = rest.join(SPLIT_DESCRIPTION_SYMBOL);
-  return {
-    label: label!,
-    placeholder: placeholder ? placeholder : undefined,
-  };
-}
-
 export function getEnumValues(type: RTFSupportedZodTypes) {
-  if (!(type._def.typeName === z.ZodFirstPartyTypeKind.ZodEnum)) return;
+  if (
+    !(
+      type._def.typeName === z.ZodFirstPartyTypeKind.ZodEnum ||
+      type._def.typeName === z.ZodFirstPartyTypeKind.ZodNativeEnum
+    )
+  )
+    return;
   return type._def.values as readonly string[];
 }
 
@@ -42,7 +36,7 @@ export function getMetaInformationForZodType(type: RTFSupportedZodTypes) {
   const unwrapped = unwrap(type);
   const description = recursivelyGetDescription(type);
   return {
-    description: parseDescription(description),
+    meta: getZodMetaInfo(type),
     enumValues: getEnumValues(unwrapped.type),
   };
 }

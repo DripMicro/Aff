@@ -4,8 +4,17 @@ import { affiliates_paymentMethod } from "@prisma/client";
 export const schema = z.object({
   paymentMethod: z
     .nativeEnum(affiliates_paymentMethod)
-    .describe("Payment Method"),
-
+    .describe("Payment Method")
+    .meta({
+      choices: [
+        { id: "bank", title: "Wire Transfer" },
+        { id: "skrill", title: "Skrill" },
+        { id: "paypal", title: "Paypal" },
+        { id: "neteller", title: "Neteller" },
+        { id: "webmoney", title: "WebMoney" },
+        { id: "chinaunionpay", title: "China Union Pay" },
+      ],
+    }),
   // Basic Information
   pay_firstname: z.string().optional().describe("First Name"),
   pay_lastname: z.string().optional().describe("Last Name"),
@@ -19,7 +28,11 @@ export const schema = z.object({
 
   // availableCurrencies
   preferredCurrency: z.string().optional().describe("Preferred Currency"),
-  pay_info: z.string().optional().describe("More Information"),
+  pay_info: z
+    .string()
+    .optional()
+    .describe("More Information")
+    .meta({ control: "Textarea" }),
   pay_email: z.string().email().optional().describe("Payment Email"),
   pay_account: z.string().optional().describe("Account"),
 });
