@@ -8,13 +8,11 @@ const Page: MyPage = () => {
   return (
     <>
       <Head>
-        <title>Affiliates Creative Materials</title>
+        <title>Affiliates My Account</title>
         <meta name="description" content="Affiliates Creative Materials" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <AccountDetails />
-      </main>
+      <AccountDetails />
     </>
   );
 };
