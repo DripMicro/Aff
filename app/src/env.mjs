@@ -68,7 +68,7 @@ const merged = server.merge(client);
  *  @ts-ignore - can't type this properly in jsdoc */
 let env = process.env;
 
-if (!process.env.SKIP_ENV_VALIDATION == false) {
+if (!!process.env.SKIP_ENV_VALIDATION == false) {
   const isServer = typeof window === "undefined";
 
   const parsed = isServer
