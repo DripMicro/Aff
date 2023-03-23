@@ -46,12 +46,11 @@ export const TriggerForm = ({
           onPrevious: onPrevious,
           submit: { notification: false },
         }}
-        // TODO:muly dynamic
-        // props={{
-        //   type: {
-        //     choices: type,
-        //   },
-        // }}
+        props={{
+          type: {
+            choices: type,
+          },
+        }}
         defaultValues={values}
       ></StepperForm>
     </Stack>

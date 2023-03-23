@@ -20,7 +20,6 @@ export const RecoverLostPassword = () => {
       schema={schema}
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onSubmit={handleSubmit}
-      // TODO:MULY solve meta/translation
       formProps={{
         submit: { text: "Reset Password", notification: false },
       }}

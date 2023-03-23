@@ -52,7 +52,6 @@ export const FormSignin = () => {
         schema={schema}
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onSubmit={handleSubmit}
-        // TODO:muly move to meta
         formProps={{ submit: { text: "Sign In", notification: false } }}
       ></Form>
 

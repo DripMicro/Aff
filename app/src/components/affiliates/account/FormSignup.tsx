@@ -8,7 +8,6 @@ import { usePrepareSchema } from "@/components/common/forms/usePrepareSchema";
 export const FormSignup = () => {
   const { t } = useTranslation("affiliate");
   const formContext = usePrepareSchema(t, schema);
-  // TODO:MULY solve dynamic select
   const { data: languages } = api.misc.getLanguages.useQuery();
 
   const registerAccount = api.affiliates.registerAccount.useMutation();
