@@ -4,6 +4,8 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "react-feather";
+
+// TODO remove react-popper?
 import { Manager, Reference, Popper } from "react-popper";
 import { DatepickerCtx, useDatepickerCtx } from "./DatepickerContext";
 

@@ -110,5 +110,11 @@
   "creative": {
     "label": "What creative you would like to relate this pixel to",
     "placeholder": "All Creatives"
+  },
+  "lang": {
+    "label": "Language"
+  },
+  "approvedTerms": {
+    "label": "I have read and accepted theTerms & Conditions"
   }
 }
