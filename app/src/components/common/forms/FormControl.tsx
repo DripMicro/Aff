@@ -18,7 +18,7 @@ export const FormControl = ({ children, showLabel }: Props) => {
   };
 
   return (
-    <div className={clsx(["w-full max-w-xs", className])}>
+    <div className={clsx([{ "w-full max-w-xs": !className }, className])}>
       {showLabel !== false && (
         <Label htmlFor={field.name}>{maybeConvertChild(label)}</Label>
       )}
