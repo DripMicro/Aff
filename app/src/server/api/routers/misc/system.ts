@@ -3,7 +3,6 @@ import { publicProcedure } from "../../trpc";
 import { TRPCError } from "@trpc/server";
 import { castError } from "../../../../utils/errors";
 import * as Sentry from "@sentry/nextjs";
-
 import { executeAdminCommand } from "../../../process/admin-commands";
 
 export const runAdminCommand = publicProcedure

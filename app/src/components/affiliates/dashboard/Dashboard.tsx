@@ -253,26 +253,26 @@ export const Dashboard = () => {
 
   return (
     <div className="pt-3.5">
-      <div className="block lg:flex md:justify-between font-medium text-base">
-        <div className="flex items-center mb-2.5 md:mb-5 lg:mb-5 ">
+      <div className="block text-base font-medium md:justify-between lg:flex">
+        <div className="mb-2.5 flex items-center md:mb-5 lg:mb-5 ">
           <span className="text-[#2262C6]">Affliate Program</span>
           &nbsp;-&nbsp;Dashboard
         </div>
-        <div className="flex mb-2.5">
+        <div className="mb-2.5 flex">
           <DateRangeSelect />
-          <button className="ml-5 bg-[#2262C6] text-white px-8 py-2 rounded-md hidden lg:block justify-self-end">
+          <button className="ml-5 hidden justify-self-end rounded-md bg-[#2262C6] px-8 py-2 text-white lg:block">
             Update
           </button>
 
           <button
-            className="ml-2 md:ml-5 bg-white px-2 md:px-3 md:pt-1.5 md:pb-2 rounded-md drop-shadow"
+            className="ml-2 rounded-md bg-white px-2 drop-shadow md:ml-5 md:px-3 md:pt-1.5 md:pb-2"
             onClick={onOpen}
           >
             <SettingsIcon />
           </button>
         </div>
-        <div className="lg:hidden grid justify-items-stretch">
-          <button className="ml-5 bg-[#2262C6] text-white px-2 md:px-8 py-1 md:py-2 rounded-md justify-self-end ">
+        <div className="grid justify-items-stretch lg:hidden">
+          <button className="ml-5 justify-self-end rounded-md bg-[#2262C6] px-2 py-1 text-white md:px-8 md:py-2 ">
             Update
           </button>
         </div>
@@ -281,18 +281,18 @@ export const Dashboard = () => {
       <Modal isOpen={isOpen} size="3xl" onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent ml={4} mr={4}>
-          <div className="flex pl-6 md:pl-8 pt-4 justify-between items-end">
-            <div className="text-[#282560] font-medium">
+          <div className="flex items-end justify-between pl-6 pt-4 md:pl-8">
+            <div className="font-medium text-[#282560]">
               Manage Field On Report - Quick Summary
             </div>
             <Image
               alt="..."
-              className="mr-4 w-10 h-10 rounded-full align-middle "
+              className="mr-4 h-10 w-10 rounded-full align-middle "
               src="/img/icons/close.png"
               onClick={onClose}
             />
           </div>
-          <div className="text-[#717171] pl-6 md:pl-8 pt-2 text-sm md:w-full w-64 md:mb-16 mb-6">
+          <div className="mb-6 w-64 pl-6 pt-2 text-sm text-[#717171] md:mb-16 md:w-full md:pl-8">
             Please activate the fields you want to display on the report:
           </div>
 
@@ -309,7 +309,7 @@ export const Dashboard = () => {
                           checked={field.isChecked}
                           value={field.id}
                           onChange={(e) => void handleReportField(e)}
-                          className="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
+                          className="form-checkbox text-blueGray-700 ml-1 h-5 w-5 rounded border-0 transition-all duration-150 ease-linear"
                         />
                         <FormLabel
                           htmlFor={`report-field-${field.id}`}
@@ -329,23 +329,23 @@ export const Dashboard = () => {
             </div>
           </ModalBody>
 
-          <div className="flex justify-between p-6 md:p-8 md:pt-20 font-medium">
+          <div className="flex justify-between p-6 font-medium md:p-8 md:pt-20">
             <div className="flex">
               <button
-                className="bg-[#2262C6] text-white px-3 md:px-14 py-3 rounded-md mr-3"
+                className="mr-3 rounded-md bg-[#2262C6] px-3 py-3 text-white md:px-14"
                 onClick={handleSelectAll}
               >
                 Select All
               </button>
               <button
-                className="bg-[#EFEEFF] px-3 md:px-12 py-3 rounded-md text-[#1B48BB] border border-[#1B48BB]"
+                className="rounded-md border border-[#1B48BB] bg-[#EFEEFF] px-3 py-3 text-[#1B48BB] md:px-12"
                 onClick={handleUnSelectAll}
               >
                 Unselect All
               </button>
             </div>
             <button
-              className="bg-[#2262C6] text-white px-6 md:px-14 py-3 rounded-md"
+              className="rounded-md bg-[#2262C6] px-6 py-3 text-white md:px-14"
               onClick={onClose}
             >
               Save
@@ -354,7 +354,7 @@ export const Dashboard = () => {
         </ModalContent>
       </Modal>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
         {reportFields
           .filter((item) => item.isChecked === true)
           .map((item) => {
@@ -367,17 +367,17 @@ export const Dashboard = () => {
 
             return (
               <>
-                <div className="rounded-2xl bg-white shadow-sm px-2 md:px-6 pt-3 pb-2">
-                  <div className="text-[#2262C6] text-sm md:text-base font-semibold">
+                <div className="rounded-2xl bg-white px-2 pt-3 pb-2 shadow-sm md:px-6">
+                  <div className="text-sm font-semibold text-[#2262C6] md:text-base">
                     {item.title}{" "}
-                    <span className="text-[#B9B9B9] text-xs md:text-sm font-normal hidden md:inline-flex">
+                    <span className="hidden text-xs font-normal text-[#B9B9B9] md:inline-flex md:text-sm">
                       ( Last 6 Month )
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <div className="flex-1">
-                      <div className="flex items-center h-12">
-                        <div className="items-center flex">
+                      <div className="flex h-12 items-center">
+                        <div className="flex items-center">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="12"
@@ -391,12 +391,12 @@ export const Dashboard = () => {
                             />
                           </svg>
                         </div>
-                        <span className="text-xl font-bold ml-1 md:ml-3">
+                        <span className="ml-1 text-xl font-bold md:ml-3">
                           {value}
                         </span>
                       </div>
                     </div>
-                    <div className="flex-1 flex justify-end">
+                    <div className="flex flex-1 justify-end">
                       <DashboardChart />
                     </div>
                   </div>

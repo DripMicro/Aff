@@ -4,8 +4,8 @@ interface ContentProp {
 
 const Content = (props: ContentProp) => {
   return (
-    <ul className="list-disc list-outside">
-      <li className="pb-3 md:pb-5 list-none">{props.content}</li>
+    <ul className="list-outside list-disc">
+      <li className="list-none pb-3 md:pb-5">{props.content}</li>
     </ul>
   );
 };

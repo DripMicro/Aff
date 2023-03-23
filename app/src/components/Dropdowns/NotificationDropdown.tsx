@@ -25,7 +25,7 @@ const NotificationDropDown = () => {
   };
   return (
     <>
-      <div className="h-10 mx-1 border border-solid border-blueGray-100" />
+      <div className="border-blueGray-100 mx-1 h-10 border border-solid" />
       <a
         className="text-blueGray-500 block px-2 md:px-4"
         href="#pablo"
@@ -35,8 +35,8 @@ const NotificationDropDown = () => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        <div className="items-center flex">
-          <span className="w-9 h-9 text-sm text-white inline-flex items-center justify-center rounded-full">
+        <div className="flex items-center">
+          <span className="inline-flex h-9 w-9 items-center justify-center rounded-full text-sm text-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="18"
@@ -56,22 +56,22 @@ const NotificationDropDown = () => {
         ref={popoverDropdownRef}
         className={
           (dropdownPopoverShow ? "block " : "hidden ") +
-          "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-56"
+          "min-w-56 z-50 float-left list-none rounded bg-white py-2 text-left text-base shadow-lg"
         }
       >
-        <div className="text-sm py-2 px-4 font-normal w-60">
+        <div className="w-60 py-2 px-4 text-sm font-normal">
           <p className="text-black">
             You got comission{" "}
             <span className="font-medium text-[#2262C6]">$ 1,521</span>
           </p>
-          <p className="text-[#757575] mt-1">22 Feb 2023</p>
+          <p className="mt-1 text-[#757575]">22 Feb 2023</p>
         </div>
-        <div className="text-sm py-2 px-4 font-normal w-60">
+        <div className="w-60 py-2 px-4 text-sm font-normal">
           <p className="text-black">
             You got comission{" "}
             <span className="font-medium text-[#2262C6]">$ 1,521</span>
           </p>
-          <p className="text-[#757575] mt-1">22 Feb 2023</p>
+          <p className="mt-1 text-[#757575]">22 Feb 2023</p>
         </div>
       </div>
     </>

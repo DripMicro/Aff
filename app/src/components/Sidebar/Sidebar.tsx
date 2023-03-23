@@ -30,12 +30,12 @@ export default function Sidebar({ collapseShow }: Props) {
         className={
           (collapseShow
             ? "w-64 rounded-tr-[50px] md:rounded-none "
-            : "md:w-32 w-0 ") +
-          "fixed flex flex-col top-16 md:top-20 left-0 bg-white dark:bg-gray-900 h-full text-white transition-all duration-300 z-10 sidebar"
+            : "w-0 md:w-32 ") +
+          "sidebar fixed top-16 left-0 z-10 flex h-full flex-col bg-white text-white transition-all duration-300 dark:bg-gray-900 md:top-20"
         }
       >
-        <div className="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow">
-          <ul className="relative min-h-full py-5 md:py-16 space-y-1 cursor-pointer ">
+        <div className="flex flex-grow flex-col justify-between overflow-y-auto overflow-x-hidden">
+          <ul className="relative min-h-full cursor-pointer space-y-1 py-5 md:py-16 ">
             <li>
               <SingleLink
                 setactiveName={setactiveName}

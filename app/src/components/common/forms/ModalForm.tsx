@@ -1,6 +1,5 @@
 import { createTsForm } from "../../libs/react-ts-form";
 import { mapping } from "./mapping";
-import type { FormEvent } from "react";
 import React, { useContext } from "react";
 import {
   Button,
@@ -15,11 +14,11 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import type { GridProps } from "@chakra-ui/react";
-import { FormLayout } from "./FormLayout";
 import { useSubmitAction } from "./useSubmitAction";
 import { ModalFormActionContext } from "../modal/ModalFormActionContext";
 import { useFormContext } from "react-hook-form";
 import { DeleteIcon } from "@chakra-ui/icons";
+import { cn } from "@/lib/utils";
 
 interface CommonFormProps {
   // onClose: () => void;
@@ -29,7 +28,7 @@ interface CommonFormProps {
   children: React.ReactNode;
   actions?: React.ReactNode;
 
-  grid?: GridProps;
+  className?: string;
 }
 
 const CommonForm = ({
@@ -37,8 +36,8 @@ const CommonForm = ({
   title,
   onSubmit,
   children,
-  grid,
   actions,
+  className,
 }: CommonFormProps) => {
   const onClose = useContext(ModalFormActionContext);
   const { reset } = useFormContext();
@@ -51,18 +50,12 @@ const CommonForm = ({
   });
 
   return (
-    <form
-      onSubmit={(e: FormEvent) => {
-        e.preventDefault();
-        void handleSubmit(e);
-      }}
-      noValidate
-    >
+    <form onSubmit={handleSubmit} noValidate>
       <ModalContent>
         <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <FormLayout grid={grid}>{children}</FormLayout>
+          <div className={cn("flex flex-col gap-4", className)}>{children}</div>
         </ModalBody>
 
         <ModalFooter gap={4} justifyContent={actions ? "space-between" : "end"}>

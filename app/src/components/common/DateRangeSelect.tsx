@@ -194,7 +194,7 @@ export const DateRangeSelect = ({ range: defaultRange }: Props) => {
           <div className="flex">
             <div className="relative">
               <select
-                className="pl-2 pr-8 md:pl-6 md:pr-14 py-2 flex space-x-2 items-center border rounded border-[#D7D7D7] bg-white appearance-none cursor-pointer text-xs md:text-base"
+                className="flex cursor-pointer appearance-none items-center space-x-2 rounded border border-[#D7D7D7] bg-white py-2 pl-2 pr-8 text-xs md:pl-6 md:pr-14 md:text-base"
                 placeholder="Select date range"
                 value={name}
                 onChange={(event) => {
@@ -214,7 +214,7 @@ export const DateRangeSelect = ({ range: defaultRange }: Props) => {
                 <option value="custom">Custom</option>
               </select>
 
-              <div className="absolute -mt-7 md:-mt-8 right-2 md:right-6 cursor-pointer ">
+              <div className="absolute right-2 -mt-7 cursor-pointer md:right-6 md:-mt-8 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -235,7 +235,7 @@ export const DateRangeSelect = ({ range: defaultRange }: Props) => {
             </div>
 
             <div
-              className="px-2 md:px-4 py-2 ml-2 border rounded border-[#D7D7D7] bg-white cursor-pointer text-xs md:text-base"
+              className="ml-2 cursor-pointer rounded border border-[#D7D7D7] bg-white px-2 py-2 text-xs md:px-4 md:text-base"
               onClick={onOpen}
             >
               {from.getDate()} {month[from.getMonth()]} {from.getFullYear()}{" "}
@@ -257,22 +257,22 @@ export const DateRangeSelect = ({ range: defaultRange }: Props) => {
       <Modal isOpen={isOpen} size="3xl" onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent ml={4} mr={4}>
-          <div className="flex pl-6 md:pl-8 pt-4 justify-between items-end">
-            <div className="text-[#282560] font-medium">Add Date</div>
+          <div className="flex items-end justify-between pl-6 pt-4 md:pl-8">
+            <div className="font-medium text-[#282560]">Add Date</div>
             <Image
               alt="..."
-              className="mr-4 w-10 h-10 rounded-full align-middle "
+              className="mr-4 h-10 w-10 rounded-full align-middle "
               src="/img/icons/close.png"
               onClick={onClose}
             />
           </div>
 
           <ModalBody>
-            <div className="max-w-lg mt-2 md:mt-7">
-              <label className="text-[#525252] px-0 md:px-4 font-medium text-sm">
+            <div className="mt-2 max-w-lg md:mt-7">
+              <label className="px-0 text-sm font-medium text-[#525252] md:px-4">
                 Start Date
               </label>
-              <div className="px-0 md:px-2 pt-2">
+              <div className="px-0 pt-2 md:px-2">
                 <DatePicker
                   date={fromDate}
                   onChange={setFromDate}
@@ -281,11 +281,11 @@ export const DateRangeSelect = ({ range: defaultRange }: Props) => {
               </div>
             </div>
 
-            <div className="max-w-lg mt-2 md:mt-7 pb-10 md:pb-80">
-              <label className="text-[#525252] px-0 md:px-4 font-medium text-sm">
+            <div className="mt-2 max-w-lg pb-10 md:mt-7 md:pb-80">
+              <label className="px-0 text-sm font-medium text-[#525252] md:px-4">
                 End Date
               </label>
-              <div className="px-0 md:px-2 pt-2">
+              <div className="px-0 pt-2 md:px-2">
                 <DatePicker
                   date={toDate}
                   onChange={setToDate}

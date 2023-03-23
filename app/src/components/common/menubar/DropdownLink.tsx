@@ -50,7 +50,7 @@ const SingleLink = ({
         }}
       >
         <Link
-          className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-white dark:hover:bg-gray-600 text-white-600 hover:text-white-800 pl-8"
+          className="text-white-600 hover:text-white-800 relative flex h-11 flex-row items-center pl-8 hover:bg-white focus:outline-none dark:hover:bg-gray-600"
           href={
             "/affiliates/" +
             (parentLink == "" ? "" : parentLink + "/") +
@@ -59,7 +59,7 @@ const SingleLink = ({
         >
           <Image
             alt="..."
-            className="w-6 align-middle border-none pt-0.5"
+            className="w-6 border-none pt-0.5 align-middle"
             src={
               "/img/icons/" +
               dropdownName +
@@ -70,7 +70,7 @@ const SingleLink = ({
           {collapseShow ? (
             <span
               className={
-                "ml-4 text-base font-medium tracking-wide truncate " +
+                "ml-4 truncate text-base font-medium tracking-wide " +
                 (dropdown == dropdownName ? "text-[#2262C6]" : "")
               }
             >
@@ -79,11 +79,11 @@ const SingleLink = ({
           ) : (
             ""
           )}
-          <span className="py-0.5 ml-auto mr-8 text-xs font-medium tracking-wide truncate">
+          <span className="ml-auto mr-8 truncate py-0.5 text-xs font-medium tracking-wide">
             <Image
               alt="..."
               className={
-                "align-middle border-none" +
+                "border-none align-middle" +
                 (dropdown == dropdownName ? " w-3" : " w-2 ")
               }
               src={
@@ -111,7 +111,7 @@ const SingleLink = ({
               }}
             >
               <Link
-                className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-white dark:hover:bg-gray-600 text-white-600 hover:text-white-800 pl-14"
+                className="text-white-600 hover:text-white-800 relative flex h-11 flex-row items-center pl-14 hover:bg-white focus:outline-none dark:hover:bg-gray-600"
                 href={
                   "/affiliates/" +
                   (parentLink == "" ? "" : parentLink + "/") +
@@ -121,7 +121,7 @@ const SingleLink = ({
                 {collapseShow ? (
                   <span
                     className={
-                      "ml-4 text-base font-medium tracking-wide truncate " +
+                      "ml-4 truncate text-base font-medium tracking-wide " +
                       (activeName == value.link ? "text-[#2262C6]" : "")
                     }
                   >

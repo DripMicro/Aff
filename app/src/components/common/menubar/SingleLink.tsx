@@ -36,12 +36,12 @@ const SingleLink = ({
       }}
     >
       <Link
-        className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-white dark:hover:bg-gray-600 text-white-600 hover:text-white-800 pl-8"
+        className="text-white-600 hover:text-white-800 relative flex h-11 flex-row items-center pl-8 hover:bg-white focus:outline-none dark:hover:bg-gray-600"
         href={"/affiliates/" + link}
       >
         <Image
           alt="..."
-          className="w-6 align-middle border-none pt-0.5"
+          className="w-6 border-none pt-0.5 align-middle"
           src={
             "/img/icons/" + link + (activeName == link ? "Active" : "") + ".png"
           }
@@ -49,7 +49,7 @@ const SingleLink = ({
         {collapseShow ? (
           <span
             className={
-              "ml-4 text-base font-medium tracking-wide truncate " +
+              "ml-4 truncate text-base font-medium tracking-wide " +
               (activeName == link ? "text-[#2262C6]" : "")
             }
           >

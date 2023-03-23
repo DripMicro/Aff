@@ -6,8 +6,6 @@ import { FormContact } from "./FormContact";
 import { FormInvoice } from "./FormInvoice";
 import { FormWebSites } from "./FormWebSites";
 import type { AffiliateAccountUpdateType } from "../../../server/db-types";
-import { AffiliateAccountType } from "../../../server/db-types";
-import { FormMarketInfo } from "./FormMarketInfo";
 
 export const AccountDetails = () => {
   const { data: account, refetch } = api.affiliates.getAccount.useQuery();

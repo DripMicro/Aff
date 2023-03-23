@@ -3,48 +3,43 @@ import { mapping } from "./mapping";
 import type { FormEvent } from "react";
 import React from "react";
 import { Button, Stack, Flex } from "@chakra-ui/react";
-import type { GridProps } from "@chakra-ui/react";
-import { FormLayout } from "./FormLayout";
 import { useSubmitAction } from "./useSubmitAction";
+import type { CommonFormProps } from "@/components/common/forms/Form";
+import { cn } from "@/lib/utils";
 
-export interface CommonFormProps {
-  onSubmit: (values: unknown) => Promise<void>;
-  children: React.ReactNode;
-
+export interface FormProps extends CommonFormProps {
   onPrevious?: () => void;
-  grid?: GridProps;
   stepCount?: number;
   activeStep?: number;
-  submitButtonText?: string;
-  submitNotification?: boolean;
 }
 
 const CommonForm = ({
   onSubmit,
   children,
   onPrevious,
-  grid,
   stepCount,
   activeStep,
-  submitButtonText,
-  submitNotification = true,
-}: CommonFormProps) => {
+  submit,
+  className,
+}: FormProps) => {
+  const {
+    text,
+    notification,
+    className: buttonClassName,
+  } = submit || {
+    text: "Save",
+    notification: false,
+  };
   const { handleSubmit, isLoading } = useSubmitAction({
     onSubmit,
-    submitNotification,
+    notification,
   });
   console.log("stepCount:", stepCount);
   console.log("activeStep:", activeStep);
   return (
-    <form
-      onSubmit={(e: FormEvent) => {
-        e.preventDefault();
-        void handleSubmit(e);
-      }}
-      noValidate
-    >
+    <form onSubmit={handleSubmit} noValidate>
       <Stack>
-        <FormLayout grid={grid}>{children}</FormLayout>
+        <div className={cn("flex flex-col gap-4", className)}>{children}</div>
         {activeStep === stepCount ? (
           <Flex p={4}>
             <Button mx="auto" size="sm">

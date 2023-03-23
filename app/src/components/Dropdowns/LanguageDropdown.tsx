@@ -35,21 +35,21 @@ const LanguageDropdown = () => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        <div className="items-center flex">
-          <span className="w-6 h-6 md:w-9 md:h-9 text-sm text-white inline-flex items-center justify-center rounded-full">
+        <div className="flex items-center">
+          <span className="inline-flex h-6 w-6 items-center justify-center rounded-full text-sm text-white md:h-9 md:w-9">
             <Image
               alt="..."
-              className="w-full rounded-full align-middle border-none shadow-lg"
+              className="w-full rounded-full border-none align-middle shadow-lg"
               src="/img/icons/united-states.png"
             />
           </span>
-          <span className="h-9 text-base text-[#303134] hidden md:inline-flex items-center justify-center font-semibold pl-2">
+          <span className="hidden h-9 items-center justify-center pl-2 text-base font-semibold text-[#303134] md:inline-flex">
             English
           </span>
           <span
             className={
               (dropdownPopoverShow ? "rotate-180 " : "rotate-0 ") +
-              "w-8 h-12 text-sm text-white inline-flex items-center justify-center rounded-full"
+              "inline-flex h-12 w-8 items-center justify-center rounded-full text-sm text-white"
             }
           >
             <svg
@@ -68,42 +68,42 @@ const LanguageDropdown = () => {
         ref={popoverDropdownRef}
         className={
           (dropdownPopoverShow ? "block " : "hidden ") +
-          "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg w-48"
+          "z-50 float-left w-48 list-none rounded bg-white py-2 text-left text-base shadow-lg"
         }
       >
-        <div className="text-sm py-3 pl-6 font-normal w-full whitespace-nowrap bg-transparent flex">
-          <span className="w-6 md:w-9 h-9 text-sm text-white inline-flex items-center justify-center rounded-full">
+        <div className="flex w-full whitespace-nowrap bg-transparent py-3 pl-6 text-sm font-normal">
+          <span className="inline-flex h-9 w-6 items-center justify-center rounded-full text-sm text-white md:w-9">
             <Image
               alt="..."
-              className="w-full rounded-full align-middle border-none shadow-lg"
+              className="w-full rounded-full border-none align-middle shadow-lg"
               src="/img/icons/united-states.png"
             />
           </span>
-          <span className="h-9 text-base text-[#303134] inline-flex items-center justify-center font-semibold pl-2">
+          <span className="inline-flex h-9 items-center justify-center pl-2 text-base font-semibold text-[#303134]">
             English
           </span>
         </div>
-        <div className="text-sm py-3 pl-6 font-normal w-full whitespace-nowrap bg-transparent flex">
-          <span className="w-6 md:w-9 h-9 text-sm text-white inline-flex items-center justify-center rounded-full">
+        <div className="flex w-full whitespace-nowrap bg-transparent py-3 pl-6 text-sm font-normal">
+          <span className="inline-flex h-9 w-6 items-center justify-center rounded-full text-sm text-white md:w-9">
             <Image
               alt="..."
-              className="w-full rounded-full align-middle border-none shadow-lg"
+              className="w-full rounded-full border-none align-middle shadow-lg"
               src="/img/icons/spain.png"
             />
           </span>
-          <span className="h-9 text-base text-[#303134] inline-flex items-center justify-center font-semibold pl-2">
+          <span className="inline-flex h-9 items-center justify-center pl-2 text-base font-semibold text-[#303134]">
             Spain
           </span>
         </div>
-        <div className="text-sm py-3 pl-6 font-normal w-full whitespace-nowrap bg-transparent flex">
-          <span className="w-6 md:w-9 h-9 text-sm text-white inline-flex items-center justify-center rounded-full">
+        <div className="flex w-full whitespace-nowrap bg-transparent py-3 pl-6 text-sm font-normal">
+          <span className="inline-flex h-9 w-6 items-center justify-center rounded-full text-sm text-white md:w-9">
             <Image
               alt="..."
-              className="w-full rounded-full align-middle border-none shadow-lg"
+              className="w-full rounded-full border-none align-middle shadow-lg"
               src="/img/icons/france.png"
             />
           </span>
-          <span className="h-9 text-base text-[#303134] inline-flex items-center justify-center font-semibold pl-2">
+          <span className="inline-flex h-9 items-center justify-center pl-2 text-base font-semibold text-[#303134]">
             French
           </span>
         </div>

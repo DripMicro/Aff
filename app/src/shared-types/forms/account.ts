@@ -9,7 +9,8 @@ export const schema = z
       .number()
       .min(0)
       .max(1)
-      .describe("Yes, I would like to receive the Affiliate newsletter"),
+      .describe("Yes, I would like to receive the Affiliate newsletter")
+      .meta({ control: "Checkbox", choices: ["0", "1"] }),
   })
   .refine(
     ({ passwordRepeat, password }) => {

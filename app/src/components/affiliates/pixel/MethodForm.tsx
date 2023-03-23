@@ -1,6 +1,8 @@
 import { Heading, Stack } from "@chakra-ui/react";
 import { z } from "zod";
 import { StepperForm } from "../../common/forms/StepperForm";
+import { useTranslation } from "next-i18next";
+import { usePrepareSchema } from "@/components/common/forms/usePrepareSchema";
 
 const schema = z.object({
   method: z
@@ -25,12 +27,16 @@ export const MethodForm = ({
   onNext,
   onPrevious,
 }: Props) => {
+  const { t } = useTranslation("affiliate");
+  const formContext = usePrepareSchema(t, schema);
+
   return (
     <Stack m={12} gap={2}>
       <Heading as="h6" size="xs">
         Step 4: Select Method
       </Heading>
       <StepperForm
+        formContext={formContext}
         schema={schema}
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onSubmit={onNext}
@@ -38,11 +44,10 @@ export const MethodForm = ({
           stepCount,
           activeStep,
           onPrevious,
-          submitNotification: false,
+          submit: { notification: false },
         }}
         props={{
           method: {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             choices: method,
           },
         }}

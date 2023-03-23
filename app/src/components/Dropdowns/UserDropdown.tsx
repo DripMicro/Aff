@@ -26,7 +26,7 @@ const UserDropdown = () => {
   };
   return (
     <>
-      <span className="h-9 text-base text-[#303134] hidden md:inline-flex items-center justify-center font-semibold pr-2">
+      <span className="hidden h-9 items-center justify-center pr-2 text-base font-semibold text-[#303134] md:inline-flex">
         James Blunt
       </span>
       <a
@@ -38,18 +38,18 @@ const UserDropdown = () => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        <div className="items-center flex">
-          <span className="w-7 h-7 md:w-9 md:h-9 text-sm text-white inline-flex items-center justify-center rounded-full">
+        <div className="flex items-center">
+          <span className="inline-flex h-7 w-7 items-center justify-center rounded-full text-sm text-white md:h-9 md:w-9">
             <Image
               alt="..."
-              className="w-full rounded-full align-middle border-none shadow-lg"
+              className="w-full rounded-full border-none align-middle shadow-lg"
               src="/img/icons/user.png"
             />
           </span>
           <span
             className={
               (dropdownPopoverShow ? "rotate-180 " : "rotate-0 ") +
-              "w-10 h-12 text-sm text-white inline-flex items-center justify-center rounded-full"
+              "inline-flex h-12 w-10 items-center justify-center rounded-full text-sm text-white"
             }
           >
             <svg
@@ -68,11 +68,11 @@ const UserDropdown = () => {
         ref={popoverDropdownRef}
         className={
           (dropdownPopoverShow ? "block " : "hidden ") +
-          "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg w-32"
+          "z-50 float-left w-32 list-none rounded bg-white py-2 text-left text-base shadow-lg"
         }
       >
-        <div className="text-sm py-2 px-4 font-normal w-full whitespace-nowrap bg-transparent flex">
-          <span className="items-center justify-center inline-flex">
+        <div className="flex w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal">
+          <span className="inline-flex items-center justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="14"
@@ -86,12 +86,12 @@ const UserDropdown = () => {
               />
             </svg>
           </span>
-          <span className="pl-2 items-center justify-center inline-flex">
+          <span className="inline-flex items-center justify-center pl-2">
             Profile
           </span>
         </div>
-        <div className="text-sm py-2 px-4 font-normal w-full whitespace-nowrap bg-transparent flex">
-          <span className="items-center justify-center inline-flex">
+        <div className="flex w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal">
+          <span className="inline-flex items-center justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
