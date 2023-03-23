@@ -1,3 +1,13 @@
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
 import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import {
   Button,
@@ -23,11 +33,8 @@ import type {
   PixelMonitorType,
   pixel_monitorModelType,
 } from "../../../server/db-types";
-// import type { schema as schemaPixelMonitor } from "../../../shared-types/forms/pixel-monitor";
 import { api } from "../../../utils/api";
 import { DataTable } from "../../common/data-table/DataTable";
-import { ModalForm } from "../../common/forms/ModalForm";
-import { ModalFormAction } from "../../common/modal/ModalFormButton";
 import { QuerySelect } from "../../common/QuerySelect";
 import { QueryText } from "../../common/QueryText";
 import { FinishForm } from "./FinishForm";
@@ -37,11 +44,13 @@ import { PixelTypeForm } from "./PixelTypeForm";
 import { TriggerForm } from "./TriggerForm";
 import { useTranslation } from "next-i18next";
 import { usePrepareSchema } from "@/components/common/forms/usePrepareSchema";
+import * as React from "react";
+import { useCRUD } from "@/components/common/forms/useCRUD";
 
 const columnHelper = createColumnHelper<PixelMonitorType>();
 
 const schema = z.object({
-  merchant_id: z.any().describe("Select Merchants"),
+  merchant_id: z.number().describe("Select Merchants"),
   type: z.enum(["lead", "account", "sale", "qftd"]).describe("Type"),
   pixelCode: z.string().describe("Pixel Code").meta({
     control: "Textarea",
@@ -60,7 +69,7 @@ type NewRecType = z.infer<typeof schema>;
 type RecType = pixel_monitorModelType;
 
 const newRecValues: NewRecType = {
-  merchant_id: "",
+  merchant_id: 0,
   type: "account",
   pixelCode: "",
   method: "get",
@@ -75,15 +84,16 @@ export const PixelMonitor = () => {
   const { pixel_type, merchant, pixel_code, type, method } = router.query;
 
   const [editRec, setEditRec] = useState<RecType | null>(null);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isOpen, setIsOpen] = useState(false);
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
-  const toast = useToast();
 
   const [formState, setFormState] = useState<NewRecType>(newRecValues);
 
   const { data: meta } = api.affiliates.getPixelMonitorMeta.useQuery();
+
+  console.log(`muly:PixelMonitor`, { formState, meta });
 
   const { data, refetch } = api.affiliates.getPixelMonitor.useQuery(
     {
@@ -98,54 +108,25 @@ export const PixelMonitor = () => {
   const upsertPixelMonitor = api.affiliates.upsertPixelMonitor.useMutation();
   const deletePixelMonitor = api.affiliates.deletePixelMonitor.useMutation();
 
+  const { editDialog } = useCRUD<RecType>({
+    formContext,
+    schema,
+    refetch: async () => {
+      await refetch();
+    },
+    onDelete: (rec: RecType) => deletePixelMonitor.mutateAsync({ id: rec.id }),
+    onUpsert: (rec: RecType) => upsertPixelMonitor.mutateAsync(rec),
+    text: {
+      edit: "Edit",
+      editTitle: "Edit Pixel Monitor",
+      add: "Add",
+      addTitle: "New Pixel Monitor",
+    },
+  });
+
   if (!data) {
     return null;
   }
-
-  const handleDelete = () => {
-    if (editRec?.id) {
-      deletePixelMonitor.mutate(
-        { id: editRec.id },
-        {
-          onSuccess: () => {
-            setEditRec(null);
-            toast({
-              title: "Pixel Monitor deleted",
-              status: "success",
-              duration: 5000,
-              isClosable: true,
-            });
-            void refetch();
-          },
-          onError: (error) => {
-            toast({
-              title: "Failed to delete pixel monitor",
-              description: `Error: ${error.message}`,
-              status: "error",
-              duration: 10000,
-              isClosable: true,
-            });
-          },
-        }
-      );
-    }
-  };
-
-  const handleUpdate = async (values: NewRecType) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    const merchant_id = parseInt(values.merchant_id);
-
-    if (!merchant_id) {
-      throw new Error("Missing merchant_id");
-    }
-
-    await upsertPixelMonitor.mutateAsync({
-      ...(editRec || {}),
-      ...values,
-      merchant_id,
-    });
-    await refetch();
-  };
 
   const handleNext = (values: object) => {
     const keys = Object.keys(values);
@@ -162,8 +143,8 @@ export const PixelMonitor = () => {
 
   const handleSubmit = async () => {
     const values = formState;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    const merchant_id = parseInt(values.merchant_id);
+    console.log(`muly:handleSubmit`, { values });
+    const merchant_id = values.merchant_id;
 
     if (!merchant_id) {
       throw new Error("Missing merchant_id");
@@ -177,7 +158,7 @@ export const PixelMonitor = () => {
 
     await upsertPixelMonitor.mutateAsync(rec);
 
-    onClose();
+    setIsOpen(false);
     reset();
     setFormState(newRecValues);
     await refetch();
@@ -298,63 +279,10 @@ export const PixelMonitor = () => {
       header: "Status",
     }),
     columnHelper.accessor("edit-button" as any, {
-      cell: (info) => {
-        return (
-          <Button
-            leftIcon={<EditIcon />}
-            onClick={() => setEditRec(info.row.original)}
-          >
-            Edit
-          </Button>
-        );
-      },
+      cell: (info) => editDialog(info.row.original),
       header: "Action",
     }),
   ];
-
-  const modal = (
-    <ModalForm
-      formContext={formContext}
-      schema={schema}
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      onSubmit={handleUpdate}
-      formProps={
-        editRec
-          ? {
-              title: "Edit Pixel Monitor",
-              actionName: "Update",
-              actions: (
-                <Button
-                  onClick={handleDelete}
-                  variant="outline"
-                  colorScheme="red"
-                  leftIcon={<DeleteIcon />}
-                  isLoading={deletePixelMonitor.isLoading}
-                >
-                  Delete
-                </Button>
-              ),
-            }
-          : {
-              title: "Add Pixel Monitor",
-              actionName: "Add",
-            }
-      }
-      // @ts-ignore
-      defaultValues={editRec ? editRec : { valid: 1 }}
-      props={{
-        merchant_id: {
-          choices: meta?.merchants,
-        },
-        type: {
-          choices: meta?.type,
-        },
-        method: {
-          choices: meta?.method,
-        },
-      }}
-    />
-  );
 
   return (
     <Stack m={12} gap={2}>
@@ -376,61 +304,31 @@ export const PixelMonitor = () => {
       <DataTable data={data} columns={columns} />
       <HStack justifyContent="end">
         <Button
-          onClick={onOpen}
+          onClick={() => setIsOpen(true)}
           variant="outline"
           colorScheme="blue"
           leftIcon={<AddIcon />}
         >
           New Pixel Monitor
         </Button>
-        <Modal isOpen={isOpen} onClose={onClose} size="2xl">
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>New Pixel Monitor</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <Flex flexDir="column" width="100%">
-                <Steps activeStep={activeStep} size="sm">
-                  {steps.map(({ id, label, content }) => {
-                    return (
-                      <Step key={id} label={label}>
-                        {content}
-                      </Step>
-                    );
-                  })}
-                </Steps>
-              </Flex>
-            </ModalBody>
-
-            {/* <ModalFooter>
-              {activeStep === steps.length ? (
-                <Flex p={4}>
-                  <Button mx="auto" size="sm" onClick={reset}>
-                    Reset
-                  </Button>
-                </Flex>
-              ) : (
-                <Flex width="100%" justify="flex-end">
-                  <Button
-                    isDisabled={activeStep === 0}
-                    mr={4}
-                    onClick={prevStep}
-                    size="md"
-                    variant="ghost"
-                  >
-                    Prev
-                  </Button>
-                  <Button size="md" onClick={nextStep}>
-                    {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                  </Button>
-                </Flex>
-              )}
-            </ModalFooter> */}
-          </ModalContent>
-        </Modal>
-        <ModalFormAction isOpen={!!editRec} onClose={() => setEditRec(null)}>
-          {modal}
-        </ModalFormAction>
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>New Pixel Monitor</DialogTitle>
+            </DialogHeader>
+            <Flex flexDir="column" width="100%">
+              <Steps activeStep={activeStep} size="sm">
+                {steps.map(({ id, label, content }) => {
+                  return (
+                    <Step key={id} label={label}>
+                      {content}
+                    </Step>
+                  );
+                })}
+              </Steps>
+            </Flex>
+          </DialogContent>
+        </Dialog>
       </HStack>
     </Stack>
   );

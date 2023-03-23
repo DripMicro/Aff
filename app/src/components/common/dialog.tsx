@@ -14,8 +14,6 @@ export interface DialogProps {
   title?: string;
   description?: string;
   children: React.ReactNode;
-  actions?: React.ReactNode;
-
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
 }
@@ -25,7 +23,6 @@ export const Dialog = ({
   title,
   description,
   children,
-  actions,
   setIsOpen,
   isOpen,
 }: DialogProps) => {

@@ -1,25 +1,18 @@
-import { Stack, Button, HStack, useToast } from "@chakra-ui/react";
 import { DataTable } from "../../common/data-table/DataTable";
 import { api } from "../../../utils/api";
 import type { AffiliateDocumentType } from "../../../server/db-types";
 import { createColumnHelper } from "@tanstack/react-table";
 import * as z from "zod";
 import axios from "axios";
-import { ModalForm } from "../../common/forms/ModalForm";
-import { AddIcon } from "@chakra-ui/icons";
 import React, { useState } from "react";
 import { format } from "date-fns";
-import {
-  ModalFormAction,
-  ModalFormButton,
-} from "../../common/modal/ModalFormButton";
 import { usePrepareSchema } from "@/components/common/forms/usePrepareSchema";
 import { useTranslation } from "next-i18next";
 import { useCRUD } from "@/components/common/forms/useCRUD";
 
 const columnHelper = createColumnHelper<AffiliateDocumentType>();
 
-const schema = z.object({
+export const schema = z.object({
   documentType: z
     .string()
     .describe("Document Type // Select a Document Type")
@@ -139,9 +132,9 @@ export const Documents = () => {
   ];
 
   return (
-    <Stack m={12} gap={4}>
+    <div className="m-12 gap-4">
       <DataTable data={data} columns={columns} />
       <div className="flex flex-row justify-end px-6">{createDialog}</div>
-    </Stack>
+    </div>
   );
 };

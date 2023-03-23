@@ -80,5 +80,35 @@
   "Invalid url": "Invalid url",
   "Required": "Required",
   "Expected number, received nan": "Expected number, received nan",
-  "Expected string, received null": "Expected string, received null"
+  "Expected string, received null": "Expected string, received null",
+  "merchant_id": {
+    "label": "Select Merchants",
+    "placeholder": "Select Merchants"
+  },
+  "type": {
+    "choices": {
+      "0": "lead",
+      "1": "account",
+      "2": "sale",
+      "3": "qftd"
+    },
+    "label": "Type",
+    "placeholder": "Select Trigger"
+  },
+  "pixelCode": {
+    "label": "Pixel Code"
+  },
+  "method": {
+    "choices": {
+      "0": "post",
+      "1": "get",
+      "2": "client"
+    },
+    "label": "Method",
+    "placeholder": "Select Method"
+  },
+  "creative": {
+    "label": "What creative you would like to relate this pixel to",
+    "placeholder": "All Creatives"
+  }
 }

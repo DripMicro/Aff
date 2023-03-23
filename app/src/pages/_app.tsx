@@ -45,6 +45,7 @@ const MyApp = ({
         <ChakraProvider theme={theme}>
           <Layout>
             <Component {...pageProps} />
+            <Toaster />
           </Layout>
         </ChakraProvider>
       </SessionProvider>

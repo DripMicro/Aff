@@ -14,7 +14,7 @@ import { useCRUD } from "@/components/common/forms/useCRUD";
 
 const columnHelper = createColumnHelper<AffiliateTicketType>();
 
-const schema = z.object({
+export const schema = z.object({
   subject: z.string().describe("Ticket Subject"),
   reply_email: z.string().email().describe("Your Email"),
   text: z.string().describe("Ticket Content"),

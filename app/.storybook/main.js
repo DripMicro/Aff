@@ -11,7 +11,8 @@ module.exports = {
         postCss: true,
       },
     },
-    "@storybook/addon-mdx-gfm",
+    // "@storybook/addon-mdx-gfm",
+    "@tomfreudenberg/next-auth-mock/storybook",
   ],
   framework: {
     name: "@storybook/nextjs",
@@ -37,4 +38,5 @@ module.exports = {
     autodocs: true,
   },
   staticDirs: ["../public"],
+  typescript: { reactDocgen: "react-docgen" },
 };
