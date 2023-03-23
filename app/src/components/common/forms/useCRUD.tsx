@@ -1,12 +1,12 @@
 import { DialogForm } from "@/components/common/forms/dialog-form";
 import { Button } from "@/components/ui/button";
-import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import React, { useState } from "react";
 import type { FormContext } from "@/components/libs/react-ts-form/FieldContext";
-import { ZodTypeAny } from "zod/lib/types";
 import type { AnyZodObject, ZodEffects } from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { castError } from "@/utils/errors";
+
+import { EditIcon, PlusIcon, Trash2Icon } from "lucide-react";
 
 interface Props<T> {
   formContext: FormContext;
@@ -95,7 +95,7 @@ export const useCRUD = <T,>({
             variant="outline"
             isLoading={isLoading}
           >
-            <DeleteIcon className="mr-2 h-4 w-4" />
+            <Trash2Icon className="mr-2 h-4 w-4" />
             Delete
           </Button>
         ) : undefined,
@@ -113,7 +113,7 @@ export const useCRUD = <T,>({
       formProps={{
         trigger: (
           <Button>
-            <AddIcon className="mr-2 h-4 w-4" />
+            <PlusIcon className="mr-2 h-4 w-4" />
             {text?.add}
           </Button>
         ),

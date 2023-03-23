@@ -1,6 +1,5 @@
 import { Box, Flex, Image, Link, Stack, Text } from "@chakra-ui/react";
 import { api } from "../../../utils/api";
-import { FormLostPassword } from "../../common/forms/FormLostPassword";
 import type { z } from "zod";
 import { schema } from "../../../shared-types/forms/lost-password";
 import { useTranslation } from "next-i18next";
