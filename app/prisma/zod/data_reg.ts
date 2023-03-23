@@ -25,6 +25,7 @@ export const data_regModel = z.object({
   freeParam5: z.string(),
   merchant_id: z.number().int(),
   status: z.string(),
+  lastUpdate: z.date(),
   platform: z.string(),
   uid: z.string(),
   saleStatus: z.string(),

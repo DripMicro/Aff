@@ -13,6 +13,7 @@ import { map } from "rambda";
 interface Props extends Omit<DialogProps, "isOpen" | "setIsOpen"> {
   onSubmit: (values: unknown) => Promise<void>;
   actionName: string;
+  actions?: React.ReactNode;
 }
 
 export const DialogFormControl = ({
@@ -21,7 +22,6 @@ export const DialogFormControl = ({
   description,
   children,
   actions,
-
   actionName,
   onSubmit,
 }: Props) => {
@@ -46,7 +46,6 @@ export const DialogFormControl = ({
       trigger={trigger}
       title={title}
       description={description}
-      actions={actions}
       isOpen={isOpen}
       setIsOpen={setIsOpen}
     >

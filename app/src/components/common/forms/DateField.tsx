@@ -61,7 +61,7 @@ export const DateField = (
     control = (
       <DatePicker
         name={field.name}
-        onChange={(date: Date | null) => field.onChange}
+        onChange={(date: Date | null) => field.onChange(date || undefined)}
         selected={field.value}
       />
     );

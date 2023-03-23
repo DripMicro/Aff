@@ -12,7 +12,7 @@ import { useCRUD } from "@/components/common/forms/useCRUD";
 
 const columnHelper = createColumnHelper<AffiliateProfileType>();
 
-const schema = z.object({
+export const schema = z.object({
   name: z.string().describe("Profile Name"),
   url: z.string().url().describe("URL"),
   description: z.string().optional().describe("Description"),
