@@ -951,7 +951,6 @@ export const getLandingPageData = publicProcedure
         take: 5,
       });
 
-      const creativeArray = [];
       //clicks and impressions
       const trafficRow = await ctx.prisma.traffic.groupBy({
         by: ["banner_id", "id"],
@@ -1047,31 +1046,32 @@ export const getLandingPageData = publicProcedure
       let withdrawal = 0;
       let chargeback = 0;
       let volume = 0;
+      const SalesArray = [];
       for (let i = 0; i < salesww.length; i++) {
         if (salesww[i]?.type === "bonus") {
           bonus = salesww[i]?.amount ?? 0;
-          creativeArray.push({
-            bonus: salesww[i]?.amount,
+          SalesArray.push({
+            bonus: salesww[i]?.amount ?? 0,
           });
         }
         if (salesww[i]?.type === "withdrawal") {
           withdrawal = salesww[i]?.amount ?? 0;
-          creativeArray.push({
-            withdrawal: salesww[i]?.amount,
+          SalesArray.push({
+            withdrawal: salesww[i]?.amount ?? 0,
           });
         }
 
         if (salesww[i]?.type === "chargeback") {
           chargeback = salesww[i]?.amount ?? 0;
-          creativeArray.push({
-            chargeback: salesww[i]?.amount,
+          SalesArray.push({
+            chargeback: salesww[i]?.amount ?? 0,
           });
         }
 
         if (salesww[i]?.type === "volume") {
           volume = salesww[i]?.amount ?? 0;
-          creativeArray.push({
-            volume: salesww[i]?.amount,
+          SalesArray.push({
+            volume: salesww[i]?.amount ?? 0,
           });
         }
       }
@@ -1084,13 +1084,14 @@ export const getLandingPageData = publicProcedure
           merchant: {
             select: {
               producttype: true,
+              name: true,
             },
           },
-          data_reg: {
-            select: {
-              country: true,
-            },
-          },
+          // data_reg: {
+          // 	select: {
+          // 		country: true,
+          // 	},
+          // },
         },
         where: {
           rdate: {
@@ -1104,18 +1105,53 @@ export const getLandingPageData = publicProcedure
         },
       });
 
-      console.log("traffic row", salesww);
+      const merchantww = await ctx.prisma.merchants.findMany({
+        where: {
+          producttype: "Forex",
+          valid: 1,
+        },
+      });
+
+      let traderStats: any[] = [];
+
+      for (let i = 0; i < merchantww.length; i++) {
+        const ts = await ctx.prisma.data_stats.groupBy({
+          by: ["banner_id"],
+          _sum: {
+            spread: true,
+            pnl: true,
+            turnover: true,
+          },
+          where: {
+            affiliate_id: affiliate_id,
+            merchant_id: merchantww[i]?.id ? merchantww[i]?.id : 1,
+            // banner_id: banner_id ? banner_id : 0,
+            // group_id: group_id ? group_id : 0,
+            rdate: {
+              gt: from,
+              lt: to,
+            },
+          },
+        });
+        traderStats = ts;
+      }
+
+      const creativeArray = [];
       const traffic: any = Object.values(trafficRow);
       for (let i = 0; i < bannersww.length; i++) {
         creativeArray.push({
           ...bannersww[i],
           ...traffic[i],
           ...regww[i],
+          ...revww[i],
+          ...SalesArray[i],
+          volume: traderStats[i]?._sum?.turnover ?? 0,
           cpi: 0,
         });
       }
 
-      // console.log("get landing page data ----->", creativeArray);
+      console.log("creative array ---->", creativeArray);
+
       return creativeArray as ResultType;
     }
   );

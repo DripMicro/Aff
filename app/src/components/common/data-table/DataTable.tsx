@@ -40,8 +40,6 @@ export function DataTable<Data extends object>({
     },
   });
 
-  console.log("data ----->", data);
-
   return (
     <Table>
       <Thead>
