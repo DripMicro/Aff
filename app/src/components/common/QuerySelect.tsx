@@ -18,7 +18,9 @@ export const QuerySelect = ({ varName, label, choices, emptyTitle }: Props) => {
 
   return (
     <FormControl>
-      <FormLabel className="ml-2 text-sm font-medium text-[#525252]">{label}</FormLabel>
+      <FormLabel className="ml-2 text-sm font-medium text-[#525252]">
+        {label}
+      </FormLabel>
       <CSelect
         placeholder={emptyTitle || "All"}
         value={value || ""}

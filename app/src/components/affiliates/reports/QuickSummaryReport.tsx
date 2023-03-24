@@ -1,6 +1,16 @@
 import {
-  Grid, GridItem, useDisclosure, ModalContent, Modal,
-  ModalBody, ModalOverlay, Image, SimpleGrid, Box, FormLabel, FormControl
+  Grid,
+  GridItem,
+  useDisclosure,
+  ModalContent,
+  Modal,
+  ModalBody,
+  ModalOverlay,
+  Image,
+  SimpleGrid,
+  Box,
+  FormLabel,
+  FormControl,
 } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import { useRouter } from "next/router";
@@ -117,7 +127,6 @@ export const QuickSummaryReport = () => {
       remove_fields,
     });
   };
-
 
   console.log("QuickSummaryReport render", {
     data,
@@ -241,7 +250,7 @@ export const QuickSummaryReport = () => {
     <>
       <div className="pt-3.5">
         <div className="block text-base font-medium md:justify-between lg:flex">
-          <div className="mb-2.5 flex justify-between items-center md:mb-5 lg:mb-5 ">
+          <div className="mb-2.5 flex items-center justify-between md:mb-5 lg:mb-5 ">
             <div>
               <span className="text-[#2262C6]">Affliate Program</span>
               &nbsp;-&nbsp;Quick Summary Report
@@ -268,15 +277,15 @@ export const QuickSummaryReport = () => {
         </div>
 
         <div>
-          <div className="flex justify-between items-center">
+          <div className="flex items-center justify-between">
             <div className="flex">
               <button
-                className="rounded-md bg-white drop-shadow px-2 pt-0.5 pb-1 lg:px-3 lg:pt-1.5 lg:pb-2 "
+                className="rounded-md bg-white px-2 pt-0.5 pb-1 drop-shadow lg:px-3 lg:pt-1.5 lg:pb-2 "
                 onClick={onOpen}
               >
                 <SettingsIcon />
               </button>
-              <span className="hidden ml-3 lg:flex justify-between items-center font-medium font-sm">
+              <span className="font-sm ml-3 hidden items-center justify-between font-medium lg:flex">
                 Report Display
               </span>
             </div>
@@ -287,19 +296,31 @@ export const QuickSummaryReport = () => {
               <button className="rounded-md bg-[#2262C6] px-4 py-1 text-white">
                 Show Reports
               </button>
-              <button className="py-1 px-4 rounded-md text-[#2262C6] text-base font-semibold border border-[#2262C6]">
+              <button className="rounded-md border border-[#2262C6] py-1 px-4 text-base font-semibold text-[#2262C6]">
                 Open a Ticket
               </button>
               <button className="rounded-md bg-[#2262C6] px-1 py-1 text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="24" viewBox="0 0 28 24" fill="none">
-                  <path d="M13.5701 16L18.0933 11H14.7009V4H12.4393V11H9.04688L13.5701 16Z" fill="white" />
-                  <path d="M22.6161 18H4.52332V11H2.26172V18C2.26172 19.103 3.27605 20 4.52332 20H22.6161C23.8634 20 24.8778 19.103 24.8778 18V11H22.6161V18Z" fill="white" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="28"
+                  height="24"
+                  viewBox="0 0 28 24"
+                  fill="none"
+                >
+                  <path
+                    d="M13.5701 16L18.0933 11H14.7009V4H12.4393V11H9.04688L13.5701 16Z"
+                    fill="white"
+                  />
+                  <path
+                    d="M22.6161 18H4.52332V11H2.26172V18C2.26172 19.103 3.27605 20 4.52332 20H22.6161C23.8634 20 24.8778 19.103 24.8778 18V11H22.6161V18Z"
+                    fill="white"
+                  />
                 </svg>
               </button>
             </div>
           </div>
         </div>
-        <div className="lg:flex justify-between items-end mt-2">
+        <div className="mt-2 items-end justify-between lg:flex">
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
             <QuerySelect
               label="Search Type"
@@ -331,18 +352,29 @@ export const QuickSummaryReport = () => {
             <button className="hidden rounded-md bg-[#2262C6] px-8 py-2 text-white lg:block">
               Show Reports
             </button>
-            <button className="hidden py-2 px-8 rounded-md text-[#2262C6] text-base font-semibold border border-[#2262C6] lg:block">
+            <button className="hidden rounded-md border border-[#2262C6] py-2 px-8 text-base font-semibold text-[#2262C6] lg:block">
               Open a Ticket
             </button>
             <button className="hidden rounded-md bg-[#2262C6] px-2 py-2 text-white lg:block">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="24" viewBox="0 0 28 24" fill="none">
-                <path d="M13.5701 16L18.0933 11H14.7009V4H12.4393V11H9.04688L13.5701 16Z" fill="white" />
-                <path d="M22.6161 18H4.52332V11H2.26172V18C2.26172 19.103 3.27605 20 4.52332 20H22.6161C23.8634 20 24.8778 19.103 24.8778 18V11H22.6161V18Z" fill="white" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="24"
+                viewBox="0 0 28 24"
+                fill="none"
+              >
+                <path
+                  d="M13.5701 16L18.0933 11H14.7009V4H12.4393V11H9.04688L13.5701 16Z"
+                  fill="white"
+                />
+                <path
+                  d="M22.6161 18H4.52332V11H2.26172V18C2.26172 19.103 3.27605 20 4.52332 20H22.6161C23.8634 20 24.8778 19.103 24.8778 18V11H22.6161V18Z"
+                  fill="white"
+                />
               </svg>
             </button>
           </div>
         </div>
-
 
         <Modal isOpen={isOpen} size="3xl" onClose={onClose} isCentered>
           <ModalOverlay />
@@ -419,7 +451,7 @@ export const QuickSummaryReport = () => {
             </div>
           </ModalContent>
         </Modal>
-        <div className="rounded bg-white px-2 py-4 shadow-sm mb-5 mt-4">
+        <div className="mb-5 mt-4 rounded bg-white px-2 py-4 shadow-sm">
           <Grid
             alignContent={"center"}
             alignItems={"center"}

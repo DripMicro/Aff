@@ -1,12 +1,12 @@
-import React from 'react';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
+import React from "react";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Pie } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export const options = {
   responsive: true,
-  maintainAspectRatio : false,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       display: false,
@@ -19,21 +19,13 @@ export const options = {
 };
 
 export const data = {
-  labels: ['Red', 'Blue', 'Yellow'],
+  labels: ["Red", "Blue", "Yellow"],
   datasets: [
     {
-      label: '# of Votes',
+      label: "# of Votes",
       data: [12, 19, 3],
-      backgroundColor: [
-        '#2262C6',
-        '#F76F2C',
-        '#FF001B',
-      ],
-      borderColor: [
-        '#2262C6',
-        '#F76F2C',
-        '#FF001B',
-      ],
+      backgroundColor: ["#2262C6", "#F76F2C", "#FF001B"],
+      borderColor: ["#2262C6", "#F76F2C", "#FF001B"],
       borderWidth: 1,
     },
   ],
@@ -41,6 +33,6 @@ export const data = {
 
 const DeviceReportChart = () => {
   return <Pie options={options} data={data} />;
-}
+};
 
 export default DeviceReportChart;

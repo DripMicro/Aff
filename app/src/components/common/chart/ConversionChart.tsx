@@ -25,7 +25,7 @@ ChartJS.register(
 
 export const options = {
   responsive: true,
-  maintainAspectRatio : false,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       display: false,
@@ -45,11 +45,11 @@ export const options = {
       grid: {
         display: true,
       },
-      ticks: { color: 'black'},
+      ticks: { color: "black" },
       font: {
         size: 14,
-      }
-    }
+      },
+    },
   },
 };
 
@@ -60,13 +60,12 @@ interface Props {
 }
 
 interface conversionChartDataType {
-  Conversions: number|null;
-  date: string ;
+  Conversions: number | null;
+  date: string;
   // [index: number]: { Accounts: number; date: string; ActiveTraders: number };
 }
 
 const ConversionChartData = ({ conversionChartData }: Props) => {
-
   const Conversions: (number | null)[] = conversionChartData.map((field, i) => {
     return field.Conversions;
   });
@@ -83,18 +82,17 @@ const ConversionChartData = ({ conversionChartData }: Props) => {
         data: Conversions,
         backgroundColor: "#FF8549",
         borderRadius: 10,
-        yAxisID: 'y',
+        yAxisID: "y",
         // maxBarThickness: 30,
-        
-      }
+      },
     ],
   };
   return (
     <>
-    <div className="flex justify-between pb-4">
-      <div className="text-sm">Conversion</div>
-    </div>
-    <Line width={"100%"} options={options} data={data} />
+      <div className="flex justify-between pb-4">
+        <div className="text-sm">Conversion</div>
+      </div>
+      <Line width={"100%"} options={options} data={data} />
     </>
   );
 };

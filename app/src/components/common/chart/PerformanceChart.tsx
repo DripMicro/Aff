@@ -23,7 +23,7 @@ ChartJS.register(
 
 export const options = {
   responsive: true,
-  maintainAspectRatio : false,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       display: false,
@@ -43,21 +43,21 @@ export const options = {
       grid: {
         display: true,
       },
-      ticks: { color: 'black'},
+      ticks: { color: "black" },
       font: {
         size: 14,
-      }
+      },
     },
     y1: {
-      position: 'right' as const,
+      position: "right" as const,
       grid: {
         display: false, // only want the grid lines for one axis to show up
       },
-      ticks: { color: '#F37A20'},
+      ticks: { color: "#F37A20" },
       font: {
         size: 14,
-      }
-    }
+      },
+    },
   },
 };
 
@@ -68,21 +68,22 @@ interface Props {
 }
 
 interface performanceChartDataType {
-  Accounts: number|null;
+  Accounts: number | null;
   ActiveTraders: number | null;
   date: string;
   // [index: number]: { Accounts: number; date: string; ActiveTraders: number };
 }
 
 const PerformanceChart = ({ performanceChartData }: Props) => {
-
   const Accounts: (number | null)[] = performanceChartData.map((field, i) => {
     return field.Accounts;
   });
 
-  const ActiveTraders: (number | null)[] = performanceChartData.map((field, i) => {
-    return field.ActiveTraders;
-  });
+  const ActiveTraders: (number | null)[] = performanceChartData.map(
+    (field, i) => {
+      return field.ActiveTraders;
+    }
+  );
 
   const labels: string[] = performanceChartData.map((field, i) => {
     return field.date;
@@ -96,26 +97,26 @@ const PerformanceChart = ({ performanceChartData }: Props) => {
         data: ActiveTraders,
         backgroundColor: "#FF8549",
         borderRadius: 10,
-        yAxisID: 'y1',
-        // maxBarThickness: 30 
+        yAxisID: "y1",
+        // maxBarThickness: 30
       },
       {
         label: "Account",
         data: Accounts,
         backgroundColor: "#2262C6",
         borderRadius: 10,
-        yAxisID: 'y',
+        yAxisID: "y",
         // maxBarThickness: 30,
       },
     ],
   };
   return (
     <>
-    <div className="flex justify-between pb-4">
-      <div className="text-sm">Account</div>
-      <div className="text-sm text-[#FF8549]">FTD</div>
-    </div>
-    <Bar width={"100%"} options={options} data={data} />
+      <div className="flex justify-between pb-4">
+        <div className="text-sm">Account</div>
+        <div className="text-sm text-[#FF8549]">FTD</div>
+      </div>
+      <Bar width={"100%"} options={options} data={data} />
     </>
   );
 };

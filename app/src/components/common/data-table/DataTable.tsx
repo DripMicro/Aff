@@ -44,7 +44,7 @@ export function DataTable<Data extends object>({
   });
 
   return (
-    <div className=" scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-100 overflow-x-scroll  scrollbar-thumb-rounded-full scrollbar-track-rounded-full xl:overflow-x-hidden lg:overflow-y-hidden mt-4 ">
+    <div className=" scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-100 scrollbar-thumb-rounded-full  scrollbar-track-rounded-full mt-4 overflow-x-scroll lg:overflow-y-hidden xl:overflow-x-hidden ">
       <Table border="1px solid #F0F0F0">
         <Thead bg="#F2F5F7">
           {table.getHeaderGroups().map((headerGroup) => (
@@ -85,7 +85,7 @@ export function DataTable<Data extends object>({
         </Thead>
         <Tbody>
           {table.getRowModel().rows.map((row, index) => (
-            <Tr key={row.id} className={(index % 2 == 0 ? "" : " bg-[#F9FAFF]")}>
+            <Tr key={row.id} className={index % 2 == 0 ? "" : " bg-[#F9FAFF]"}>
               {row.getVisibleCells().map((cell) => {
                 // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
                 const meta = cell.column.columnDef.meta;
