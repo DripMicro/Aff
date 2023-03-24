@@ -1,54 +1,55 @@
 import { createTsForm } from "../../libs/react-ts-form";
 import { mapping } from "./mapping";
-import type { FormEvent } from "react";
 import React from "react";
-import { Button, Stack } from "@chakra-ui/react";
-import type { GridProps } from "@chakra-ui/react";
-import { FormLayout } from "./FormLayout";
 import { useSubmitAction } from "./useSubmitAction";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export interface CommonFormProps {
   onSubmit: (values: unknown) => Promise<void>;
   children: React.ReactNode;
 
-  grid?: GridProps;
+  submit?: {
+    className?: string;
+    text?: string;
+    notification?: boolean;
+  };
 
-  submitButtonText?: string;
-  submitNotification?: boolean;
+  className?: string;
 }
 
 const CommonForm = ({
   onSubmit,
   children,
-  grid,
-  submitButtonText,
-  submitNotification = true,
+  submit,
+  className,
 }: CommonFormProps) => {
+  const {
+    text,
+    notification,
+    className: buttonClassName,
+  } = submit || {
+    text: "Save",
+    notification: false,
+  };
   const { handleSubmit, isLoading } = useSubmitAction({
     onSubmit,
-    submitNotification,
+    notification,
   });
 
   return (
-    <form
-      onSubmit={(e: FormEvent) => {
-        e.preventDefault();
-        void handleSubmit(e);
-      }}
-      noValidate
-    >
-      <Stack>
-        <FormLayout grid={grid}>{children}</FormLayout>
+    <form onSubmit={handleSubmit} noValidate>
+      <div className="flex flex-col items-center">
+        <div className={cn("flex flex-col gap-4", className)}>{children}</div>
         <Button
-          minW={36}
-          type="submit"
-          variant="solid"
+          variant="primary"
+          className={buttonClassName}
           isLoading={isLoading}
-          alignSelf="start"
+          type="submit"
         >
-          {submitButtonText ? submitButtonText : "SAVE"}
+          {text}
         </Button>
-      </Stack>
+      </div>
     </form>
   );
 };

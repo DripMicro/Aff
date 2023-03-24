@@ -17,6 +17,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import * as React from "react";
+
 export type DataTableProps<Data extends object> = {
   data: Data[] | null | undefined;
   columns: ColumnDef<Data, any>[];

@@ -45,3 +45,7 @@ yarn-error.log*
 .env.production
 # Sentry
 .sentryclirc
+
+
+# Contentlayer
+.contentlayer

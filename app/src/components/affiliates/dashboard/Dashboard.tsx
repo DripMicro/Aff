@@ -22,6 +22,7 @@ import {
   SimpleGrid,
   Stack,
   Switch,
+  Checkbox,
   Tab,
   TabList,
   TabPanel,
@@ -33,8 +34,12 @@ import {
 import { createColumnHelper } from "@tanstack/react-table";
 import { AreaChart, LineChart } from "@tremor/react";
 import { SingleDatepicker } from "chakra-dayzed-datepicker";
+import DashboardChart from "../../common/chart/DashboardChart";
+import PerformanceChart from "../../common/chart/PerformanceChart";
+import ConversionChart from "../../common/chart/ConversionChart";
 
-import { useEffect, useState } from "react";
+import { useRef, useLayoutEffect, useEffect, useState } from "react";
+import { useElementSize } from "usehooks-ts";
 
 import type {
   CountryReportType,
@@ -56,6 +61,8 @@ import {
   SignupIcon,
 } from "../../icons";
 import { DateRangeSelect, useDateRange } from "../../common/DateRangeSelect";
+
+import Affiliates from "../../../layouts/AffiliatesLayout";
 
 const fields = [
   "Impressions",
@@ -87,16 +94,37 @@ export const Dashboard = () => {
   });
   const { data: performanceChart } =
     api.affiliates.getPerformanceChart.useQuery({ from, to });
+  console.log("performanceChart");
+  console.log(performanceChart);
   const { data: conversionChart } = api.affiliates.getConversionChart.useQuery({
     from,
     to,
   });
+  console.log("conversionChart");
+  console.log(conversionChart);
   const { data: creative } = api.affiliates.getTopMerchantCreative.useQuery();
   const { data: report } = api.affiliates.getCountryReport.useQuery();
   const { data: reportsHiddenCols } =
     api.affiliates.getReportsHiddenCols.useQuery();
   const { data: account, refetch } = api.affiliates.getAccount.useQuery();
   const upsertReportsField = api.affiliates.upsertReportsField.useMutation();
+  const refChart = useRef<null | HTMLDivElement>(null);
+  // const [width, setWidth] = useState<number | undefined>(0);
+
+  // useLayoutEffect(() => {
+  //   console.log("refChart.current?.offsetWidth");
+  //   console.log(refChart.current?.offsetWidth);
+
+  //   const getwidth = () => {
+  //     setWidth(refChart.current?.offsetWidth);
+  //   };
+
+  //   window.addEventListener("resize", getwidth);
+
+  //   return () => window.removeEventListener("resize", getwidth);
+  // });
+
+  const [squareRef, { width, height }] = useElementSize();
 
   useEffect(() => {
     const fieldsArray = fields.map((field, i) => {
@@ -167,6 +195,42 @@ export const Dashboard = () => {
     }),
   ];
 
+  const handleSelectAll = async () => {
+    const value = reportFields.map((item) => {
+      const temp = Object.assign({}, item);
+      temp.isChecked = true;
+      return temp;
+    });
+    setReportFields(value);
+    const hiddenCols = value.filter((item) => item.isChecked === false);
+    const remove_fields = hiddenCols
+      .map((item) => {
+        return item.value;
+      })
+      .join("|");
+    await upsertReportsField.mutateAsync({
+      remove_fields,
+    });
+  };
+
+  const handleUnSelectAll = async () => {
+    const value = reportFields.map((item) => {
+      const temp = Object.assign({}, item);
+      temp.isChecked = false;
+      return temp;
+    });
+    setReportFields(value);
+    const hiddenCols = value.filter((item) => item.isChecked === false);
+    const remove_fields = hiddenCols
+      .map((item) => {
+        return item.value;
+      })
+      .join("|");
+    await upsertReportsField.mutateAsync({
+      remove_fields,
+    });
+  };
+
   const handleReportField = async (event: ChangeEvent<HTMLInputElement>) => {
     const value = reportFields.map((item) => {
       const temp = Object.assign({}, item);
@@ -188,74 +252,109 @@ export const Dashboard = () => {
   };
 
   return (
-    <Container maxW="container.lg" py="4">
-      <Heading as="h4" size="md">
-        Affiliate Program Dashboard
-      </Heading>
-      <Flex
-        display="flex"
-        justifyContent="flex-end"
-        columnGap="10px"
-        marginTop="20px"
-      >
-        <DateRangeSelect />
-      </Flex>
-      <Flex justifyContent="space-between" alignItems="center" mt="3">
-        <Heading as="h5" size="sm">
-          Merchants Performance
-        </Heading>
-        <IconButton
-          variant="outline"
-          colorScheme="#0E132B"
-          size="sm"
-          aria-label="Setting"
-          icon={<SettingsIcon />}
-          onClick={onOpen}
-        />
-        <Modal isOpen={isOpen} onClose={onClose} size="2xl">
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>
-              <Text fontSize="md">Manage Field On Report - Data</Text>
-            </ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <Grid templateColumns="repeat(3, 1fr)" gap={6} mt="3">
+    <div className="pt-3.5">
+      <div className="block text-base font-medium md:justify-between lg:flex">
+        <div className="mb-2.5 flex items-center md:mb-5 lg:mb-5 ">
+          <span className="text-[#2262C6]">Affliate Program</span>
+          &nbsp;-&nbsp;Dashboard
+        </div>
+        <div className="mb-2.5 flex">
+          <DateRangeSelect />
+          <button className="ml-5 hidden justify-self-end rounded-md bg-[#2262C6] px-8 py-2 text-white lg:block">
+            Update
+          </button>
+
+          <button
+            className="ml-2 rounded-md bg-white px-2 drop-shadow md:ml-5 md:px-3 md:pt-1.5 md:pb-2"
+            onClick={onOpen}
+          >
+            <SettingsIcon />
+          </button>
+        </div>
+        <div className="grid justify-items-stretch lg:hidden">
+          <button className="ml-5 justify-self-end rounded-md bg-[#2262C6] px-2 py-1 text-white md:px-8 md:py-2 ">
+            Update
+          </button>
+        </div>
+      </div>
+
+      <Modal isOpen={isOpen} size="3xl" onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent ml={4} mr={4}>
+          <div className="flex items-end justify-between pl-6 pt-4 md:pl-8">
+            <div className="font-medium text-[#282560]">
+              Manage Field On Report - Quick Summary
+            </div>
+            <Image
+              alt="..."
+              className="mr-4 h-10 w-10 rounded-full align-middle "
+              src="/img/icons/close.png"
+              onClick={onClose}
+            />
+          </div>
+          <div className="mb-6 w-64 pl-6 pt-2 text-sm text-[#717171] md:mb-16 md:w-full md:pl-8">
+            Please activate the fields you want to display on the report:
+          </div>
+
+          <ModalBody>
+            <div className="px-0 md:px-2">
+              <SimpleGrid minChildWidth="300px" spacing="35px">
                 {reportFields.map((field) => {
                   return (
-                    <GridItem w="100%" key={field.id}>
+                    <Box key={field.id}>
                       <FormControl display="flex" alignItems="center">
-                        <Switch
+                        <input
+                          type="checkbox"
                           id={`report-field-${field.id}`}
-                          isChecked={field.isChecked}
+                          checked={field.isChecked}
                           value={field.id}
                           onChange={(e) => void handleReportField(e)}
+                          className="form-checkbox text-blueGray-700 ml-1 h-5 w-5 rounded border-0 transition-all duration-150 ease-linear"
                         />
                         <FormLabel
                           htmlFor={`report-field-${field.id}`}
                           mb="0"
                           mr="0"
-                          ml="2"
-                          fontSize="sm"
+                          ml="4"
+                          color="black"
+                          fontSize="md"
                         >
                           {field.title}
                         </FormLabel>
                       </FormControl>
-                    </GridItem>
+                    </Box>
                   );
                 })}
-              </Grid>
-            </ModalBody>
+              </SimpleGrid>
+            </div>
+          </ModalBody>
 
-            <ModalFooter>
-              <Button colorScheme="blue" size="sm" onClick={onClose}>
-                Close
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-      </Flex>
-      <SimpleGrid minChildWidth="200px" spacing="15px" mt="3">
+          <div className="flex justify-between p-6 font-medium md:p-8 md:pt-20">
+            <div className="flex">
+              <button
+                className="mr-3 rounded-md bg-[#2262C6] px-3 py-3 text-white md:px-14"
+                onClick={handleSelectAll}
+              >
+                Select All
+              </button>
+              <button
+                className="rounded-md border border-[#1B48BB] bg-[#EFEEFF] px-3 py-3 text-[#1B48BB] md:px-12"
+                onClick={handleUnSelectAll}
+              >
+                Unselect All
+              </button>
+            </div>
+            <button
+              className="rounded-md bg-[#2262C6] px-6 py-3 text-white md:px-14"
+              onClick={onClose}
+            >
+              Save
+            </button>
+          </div>
+        </ModalContent>
+      </Modal>
+
+      <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
         {reportFields
           .filter((item) => item.isChecked === true)
           .map((item) => {
@@ -266,98 +365,121 @@ export const Dashboard = () => {
             console.log(sumObject);
             const value = sumObject ? sumObject[item.value] : 0;
 
-            const icon = () => {
-              let result;
-              switch (item.title) {
-                case "Clicks":
-                  result = <ClicksIcon width="40" height="40" fill="#0E132B" />;
-                  break;
-
-                case "Real Account":
-                  result = <SignupIcon width="40" height="40" fill="#0E132B" />;
-                  break;
-
-                case "Active Trader":
-                  result = (
-                    <AcauisitionIcon width="40" height="40" fill="#0E132B" />
-                  );
-                  break;
-
-                case "Commission":
-                  result = (
-                    <ComissionIcon width="40" height="40" fill="#0E132B" />
-                  );
-                  break;
-
-                default:
-                  result = <SignupIcon width="40" height="40" fill="#0E132B" />;
-                  break;
-              }
-              return result;
-            };
             return (
-              <Box
-                key={item.id}
-                width="100%"
-                border="1px solid gray"
-                borderRadius="5"
-                bg="white"
-                p="4"
-                display="flex"
-                alignItems="center"
-                columnGap="5"
-                color="#0E132B"
-                _hover={{ borderColor: "#069731", cursor: "pointer" }}
-              >
-                {icon()}
-                {/* <ClicksIcon width="40" height="40" fill="#0E132B" /> */}
-                <Box>
-                  <Text fontSize="md" fontWeight="normal" color="#0E132B">
-                    {item.title}
-                  </Text>
-                  <Text fontSize="lg" fontWeight="bold">
-                    {value}
-                  </Text>
-                </Box>
-              </Box>
+              <>
+                <div className="rounded-2xl bg-white px-2 pt-3 pb-2 shadow-sm md:px-6">
+                  <div className="text-sm font-semibold text-[#2262C6] md:text-base">
+                    {item.title}{" "}
+                    <span className="hidden text-xs font-normal text-[#B9B9B9] md:inline-flex md:text-sm">
+                      ( Last 6 Month )
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <div className="flex-1">
+                      <div className="flex h-12 items-center">
+                        <div className="flex items-center">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="12"
+                            height="13"
+                            viewBox="0 0 12 13"
+                            fill="none"
+                          >
+                            <path
+                              d="M6.66685 13.0001L6.66685 3.27612L10.1955 6.80479L11.1382 5.86212L6.00018 0.724121L0.862183 5.86212L1.80485 6.80479L5.33352 3.27612L5.33352 13.0001L6.66685 13.0001Z"
+                              fill="#50B8B6"
+                            />
+                          </svg>
+                        </div>
+                        <span className="ml-1 text-xl font-bold md:ml-3">
+                          {value}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex flex-1 justify-end">
+                      <DashboardChart />
+                    </div>
+                  </div>
+                  <div className="flex justify-between pt-5 md:pt-3">
+                    <div className="text-center">
+                      <div className="text-sm">Last Month</div>
+                      <div className="text-base font-bold">643</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-sm">This Month</div>
+                      <div className="text-base font-bold">432</div>
+                    </div>
+                  </div>
+                </div>
+                {/* <Box
+                  key={item.id}
+                  width="100%"
+                  border="1px solid gray"
+                  borderRadius="5"
+                  bg="white"
+                  p="4"
+                  display="flex"
+                  alignItems="center"
+                  columnGap="5"
+                  color="#0E132B"
+                  _hover={{ borderColor: "#069731", cursor: "pointer" }}
+                >
+                  <Box>
+                    <Text fontSize="md" fontWeight="normal" color="#0E132B">
+                      {item.title}
+                    </Text>
+                    <Text fontSize="lg" fontWeight="bold">
+                      {value}
+                    </Text>
+                  </Box>
+                </Box> */}
+              </>
             );
           })}
-      </SimpleGrid>
-      <Stack mt="8">
-        <Tabs>
-          <Flex direction="row" alignItems="center">
-            <TabList>
-              <Tab>Performace Chart</Tab>
-              <Tab>Conversion Chart</Tab>
-            </TabList>
-          </Flex>
-          <TabPanels>
-            <TabPanel>
-              <AreaChart
-                data={performanceChart}
-                categories={["Accounts", "Active Traders"]}
-                dataKey="date"
-                height="h-72"
-                colors={["indigo", "cyan"]}
-                valueFormatter={performanceFormatter}
-                marginTop="mt-4"
-              />
-            </TabPanel>
-            <TabPanel>
-              <LineChart
-                data={conversionChart}
-                dataKey="date"
-                categories={["Conversions"]}
-                colors={["blue"]}
-                valueFormatter={conversionFormatter}
-                marginTop="mt-6"
-                yAxisWidth="w-10"
-              />
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
-      </Stack>
-      <Stack mt="5">
+      </div>
+
+      {/* <div
+        className="mt-6 rounded-2xl bg-white shadow-sm px-2 md:px-6 pt-5 pb-2 "
+        id="myID"
+        ref={refChart}
+      >
+        <Stack>
+          <Tabs>
+            <Flex direction="row" alignItems="center">
+              <TabList>
+                <Tab>Performace Chart</Tab>
+                <Tab>Conversion Chart</Tab>
+              </TabList>
+            </Flex>
+            <TabPanels>
+              <TabPanel>
+                <div className="mt-5">
+                  <PerformanceChart performanceChartData={performanceChart} />
+                  <div className="w-full h-96" ref={squareRef}>
+                    <p>{`The square width is ${width}px and height ${height}px`}</p>
+                    <ConversionChart />
+                  </div>
+                </div>
+              </TabPanel>
+              <TabPanel>
+                <div className="w-full h-96">
+                  <ConversionChart />
+                </div>
+                <LineChart
+                  data={conversionChart}
+                  dataKey="date"
+                  categories={["Conversions"]}
+                  colors={["blue"]}
+                  valueFormatter={conversionFormatter}
+                  marginTop="mt-6"
+                  yAxisWidth="w-10"
+                />
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+        </Stack>
+      </div> */}
+      {/* <Stack mt="5">
         <Flex direction="row" columnGap="10px">
           <Box flex="1" bg="white" border="1px solid gray" padding="20px 16px">
             <Heading as="h6" size="xs" mb="2">
@@ -461,13 +583,15 @@ export const Dashboard = () => {
             </Box>
           </Box>
         </Flex>
-      </Stack>
-      <Stack mt="5">
+      </Stack> */}
+      {/* <Stack mt="5">
         <Heading as="h6" size="xs" mb="2">
           Top Performing Creative
         </Heading>
         <DataTable data={creative} columns={columns} />
-      </Stack>
-    </Container>
+      </Stack> */}
+    </div>
   );
 };
+
+Dashboard.getLayout = Affiliates;

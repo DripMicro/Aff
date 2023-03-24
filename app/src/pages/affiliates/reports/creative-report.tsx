@@ -19,3 +19,4 @@ const Page: NextPage = () => {
 };
 
 export default Page;
+Page.Layout = "NoLayout";

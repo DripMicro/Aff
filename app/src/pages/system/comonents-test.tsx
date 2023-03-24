@@ -13,7 +13,8 @@ import { DateRangeSelect } from "../../components/common/DateRangeSelect";
 import { Select } from "@chakra-ui/react";
 import { startOfMonth, startOfWeek, startOfYear, sub } from "date-fns";
 
-const ComponentTest = () => {
+import type { MyPage } from "../../components/common/types";
+const ComponentTest: MyPage = () => {
   return (
     <VStack
       direction="column"
@@ -31,3 +32,4 @@ const ComponentTest = () => {
 };
 
 export default ComponentTest;
+ComponentTest.Layout = "NoLayout";

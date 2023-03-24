@@ -11,12 +11,16 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import NextLink from "next/link";
+import { useTranslation } from "next-i18next";
+import { usePrepareSchema } from "@/components/common/forms/usePrepareSchema";
 
 // Sample user
 // user001
 // password user1
 
 export const FormSignin = () => {
+  const { t } = useTranslation("affiliate");
+  const formContext = usePrepareSchema(t, schema);
   const [loginError, setLoginError] = useState<string | null>(null);
   const { data: session } = useSession();
 
@@ -42,17 +46,14 @@ export const FormSignin = () => {
   console.log(`muly:FormSignin`, { session });
 
   return (
-    <Stack gap={8} maxW="md">
+    <>
       <Form
+        formContext={formContext}
         schema={schema}
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onSubmit={handleSubmit}
-        formProps={{ submitButtonText: "LOGIN", submitNotification: false }}
+        formProps={{ submit: { text: "Sign In", notification: false } }}
       ></Form>
-
-      <Link as={NextLink} href="/affiliates/lost-password">
-        <Text>Forgot your Username or Password?</Text>
-      </Link>
 
       {!!loginError && (
         <Alert status="error">
@@ -60,6 +61,6 @@ export const FormSignin = () => {
           {loginError}
         </Alert>
       )}
-    </Stack>
+    </>
   );
 };

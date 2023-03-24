@@ -6,27 +6,8 @@ import { ClicksReport } from "../../../components/affiliates/reports/ClicksRepor
 import { useDateRange } from "../../../components/common/DateRangeSelect";
 import { api } from "../../../utils/api";
 import styles from "./../../index.module.css";
+
 const Page: NextPage = () => {
-  const router = useRouter();
-  const { from, to } = useDateRange();
-  const [displayType, setDisplayType] = useState("");
-  const [type, setType] = useState("");
-  const page = parseInt(router?.query?.page as string);
-  const items_per_page = parseInt(router?.query?.size as string);
-  const [merchantId, setMerchantId] = useState("");
-  const { data } = api.affiliates.getClicksReport.useQuery({
-    from,
-    to,
-    merchant_id: Number(merchantId),
-    unique_id: "",
-    trader_id: "",
-    type,
-  });
-  const { data: merchants } = api.affiliates.getAllMerchants.useQuery();
-
-  console.log("data ----->", data);
-  console.log("merchants ----->", merchantId);
-
   return (
     <>
       <Head>
@@ -42,3 +23,4 @@ const Page: NextPage = () => {
 };
 
 export default Page;
+Page.Layout = "Affiliates";

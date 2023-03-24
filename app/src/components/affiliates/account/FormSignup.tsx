@@ -1,11 +1,15 @@
-import { Flex } from "@chakra-ui/react";
 import { api } from "../../../utils/api";
-import { Form } from "../../common/forms/Form";
 import type { z } from "zod";
 import { schema } from "../../../shared-types/forms/register";
-import { imUserTypes } from "../../../shared-types/forms/common";
+import { useTranslation } from "next-i18next";
+import { usePrepareSchema } from "@/components/common/forms/usePrepareSchema";
+import { Form } from "@/components/common/forms/Form";
+import { Image } from "@chakra-ui/react";
+import React from "react";
 
 export const FormSignup = () => {
+  const { t } = useTranslation("affiliate");
+  const formContext = usePrepareSchema(t, schema);
   const { data: languages } = api.misc.getLanguages.useQuery();
 
   const registerAccount = api.affiliates.registerAccount.useMutation();
@@ -14,21 +18,27 @@ export const FormSignup = () => {
   };
 
   return (
-    <Form
-      schema={schema}
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      onSubmit={handleSubmit}
-      props={{
-        mail: {
-          type: "email",
-        },
-        IMUserType: {
-          choices: imUserTypes,
-        },
-        lang: {
-          choices: languages,
-        },
-      }}
-    ></Form>
+    <div>
+      <div className="mt-20 mb-16 flex flex-col items-center text-4xl text-black md:mt-28 md:mb-24">
+        Register to Your
+        <div className="flex items-center">
+          <Image className="mt-2" src="/img/logo.png" width="28" alt="Logo" />
+          <span className="ml-3 text-black">account</span>
+        </div>
+      </div>
+
+      <Form
+        formContext={formContext}
+        schema={schema}
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+        formProps={{ submit: { text: "Sign Up", notification: false } }}
+        onSubmit={handleSubmit}
+        props={{
+          lang: {
+            choices: languages,
+          },
+        }}
+      />
+    </div>
   );
 };

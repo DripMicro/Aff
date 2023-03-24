@@ -1,5 +1,7 @@
 import { z } from "zod";
 import { TextField } from "./TextField";
+import { CheckboxField } from "./CheckboxField";
+import { DateField } from "./DateField";
 
 const enum_like = {
   sample: "sample",
@@ -7,6 +9,8 @@ const enum_like = {
 
 export const mapping = [
   [z.string(), TextField],
+  [z.boolean(), CheckboxField],
+  [z.date(), DateField],
   [z.enum([""]), TextField],
   [z.number(), TextField],
   [z.any(), TextField],

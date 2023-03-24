@@ -43,6 +43,7 @@ import {
   getSubAffiliateReport,
   getTraderReport,
 } from "./reports";
+import { badQuerySample } from "@/server/api/routers/affiliates/bad-query-sample";
 
 export const affiliatesRouter = createTRPCRouter({
   getDashboard,
@@ -99,4 +100,6 @@ export const affiliatesRouter = createTRPCRouter({
   getMerchants,
   upsertPixelMonitor,
   deletePixelMonitor,
+
+  badQuerySample,
 });

@@ -9,12 +9,25 @@ import type {
 import { useController } from "react-hook-form";
 import { printUseEnumWarning } from "./logging";
 import { errorFromRhfErrorObject } from "./zodObjectErrors";
+import { MetaInfo, ZodMetaDataItem } from "../../../utils/zod-meta";
+import { TranslationFn } from "../../../utils/i18n-utils";
+import { WizardControlProps } from "@/components/common/wizard/useWizardFlow";
+
+export interface FormContext {
+  t: TranslationFn;
+
+  formMeta: MetaInfo;
+
+  flowContext?: WizardControlProps;
+}
 
 export const FieldContext = createContext<null | {
   control: Control<any>;
   name: string;
-  label?: string;
-  placeholder?: string;
+  // label?: string;
+  // placeholder?: string;
+  formContext: FormContext;
+  meta: ZodMetaDataItem;
   enumValues?: string[];
   addToCoerceUndefined: (v: string) => void;
   removeFromCoerceUndefined: (v: string) => void;
@@ -24,16 +37,20 @@ export function FieldContextProvider({
   name,
   control,
   children,
-  label,
-  placeholder,
+  formContext,
+  meta,
+  // label,
+  // placeholder,
   enumValues,
   addToCoerceUndefined,
   removeFromCoerceUndefined,
 }: {
   name: string;
   control: Control<any>;
-  label?: string;
-  placeholder?: string;
+  formContext: FormContext;
+  meta: ZodMetaDataItem;
+  // label?: string;
+  // placeholder?: string;
   enumValues?: string[];
   children: ReactNode;
   addToCoerceUndefined: (v: string) => void;
@@ -44,8 +61,10 @@ export function FieldContextProvider({
       value={{
         control,
         name,
-        label,
-        placeholder,
+        // label,
+        // placeholder,
+        formContext,
+        meta,
         enumValues,
         addToCoerceUndefined,
         removeFromCoerceUndefined,
@@ -98,6 +117,9 @@ export function useTsController<FieldType extends any>() {
       onChange: (value: OnChangeValue) => void;
     };
   };
+
+  // console.log(`muly:useTsController`, { controller });
+
   const {
     fieldState,
     field: { onChange },
@@ -115,6 +137,7 @@ export function useTsController<FieldType extends any>() {
     }
   }
   return {
+    formContext: context.formContext,
     ...controller,
     error: errorFromRhfErrorObject<FieldType>(fieldState.error),
     field: {
@@ -152,12 +175,9 @@ export function requiredDescriptionDataNotPassedError(
  * ```
  * @returns `{label: string, placeholder: string}`
  */
-export function useDescription() {
-  const { label, placeholder } = useContextProt("useReqDescription");
-  return {
-    label,
-    placeholder,
-  };
+export function useMeta(): ZodMetaDataItem {
+  const { meta } = useContextProt("useReqDescription");
+  return meta;
 }
 
 /**
@@ -181,21 +201,18 @@ export function useDescription() {
  * @returns `{label: string, placeholder: string}`
  */
 export function useReqDescription() {
-  const { label, placeholder } = useContextProt("useReqDescription");
-  if (!label) {
+  const { meta } = useContextProt("useReqDescription");
+  if (!meta) {
     throw new Error(
       requiredDescriptionDataNotPassedError("label", "useReqDescription")
     );
   }
-  if (!placeholder) {
-    throw new Error(
-      requiredDescriptionDataNotPassedError("placeholder", "useReqDescription")
-    );
-  }
-  return {
-    label,
-    placeholder,
-  };
+  // if (!placeholder) {
+  //   throw new Error(
+  //     requiredDescriptionDataNotPassedError("placeholder", "useReqDescription")
+  //   );
+  // }
+  return meta;
 }
 
 export function enumValuesNotPassedError() {
