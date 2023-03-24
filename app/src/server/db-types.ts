@@ -58,3 +58,17 @@ export type pixel_monitorModelType = z.infer<typeof pixel_monitorModel>;
 
 export type QuickReportSummary =
   RouterOutput["affiliates"]["getQuickReportSummary"][0];
+
+export type CommissionReportType =
+  RouterOutput["affiliates"]["getCommissionReport"][0];
+
+export type ClicksReportType = RouterOutput["affiliates"]["getClicksReport"][0];
+
+export type InstallReportType =
+  RouterOutput["affiliates"]["getInstallReport"][0];
+
+export type CreativeReportType =
+  RouterOutput["affiliates"]["getCreativeReport"][0];
+
+export type LandingPageReportType =
+  RouterOutput["affiliates"]["getLandingPageData"][0];
