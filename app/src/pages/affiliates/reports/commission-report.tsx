@@ -3,7 +3,9 @@ import Head from "next/head";
 import { CommissionReport } from "../../../components/affiliates/reports/CommissionReport";
 import styles from "./../../index.module.css";
 
-const Page: NextPage = () => {
+import type { MyPage } from "../../../components/common/types";
+
+const Page: MyPage = () => {
   return (
     <>
       <Head>

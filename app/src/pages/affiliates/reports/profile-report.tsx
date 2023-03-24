@@ -11,7 +11,9 @@ import {
 import { api } from "../../../utils/api";
 import styles from "./../../index.module.css";
 
-const Page: NextPage = () => {
+import type { MyPage } from "../../../components/common/types";
+
+const Page: MyPage = () => {
   const router = useRouter();
   const { from, to } = useDateRange();
   const page = parseInt(router?.query?.page as string);

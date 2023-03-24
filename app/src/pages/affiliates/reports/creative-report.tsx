@@ -3,7 +3,9 @@ import Head from "next/head";
 import { CreativeReport } from "../../../components/affiliates/reports/CreativeReport";
 import styles from "./../../index.module.css";
 
-const Page: NextPage = () => {
+import type { MyPage } from "../../../components/common/types";
+
+const Page: MyPage = () => {
   return (
     <>
       <Head>

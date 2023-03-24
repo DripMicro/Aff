@@ -1,13 +1,10 @@
-import { type NextPage } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { useState } from "react";
 import { ClicksReport } from "../../../components/affiliates/reports/ClicksReport";
-import { useDateRange } from "../../../components/common/DateRangeSelect";
-import { api } from "../../../utils/api";
 import styles from "./../../index.module.css";
 
-const Page: NextPage = () => {
+import type { MyPage } from "../../../components/common/types";
+
+const Page: MyPage = () => {
   return (
     <>
       <Head>
