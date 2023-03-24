@@ -44,6 +44,8 @@ const DialogContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <DialogPortal>
     <DialogOverlay />
+    {/*TBD, give wierd i18n error, see https://github.com/i18next/react-i18next/issues/1543*/}
+    {/* @ts-ignore */}
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
