@@ -37,7 +37,8 @@ const AccordionTrigger = React.forwardRef<
       {...props}
     >
       {children}
-      <ChevronDown className="h-4 w-4 transition-transform duration-200" />
+      {/*TBD, Muly to hold this for now as give wierd i18n error, see https://github.com/i18next/react-i18next/issues/1543*/}
+      {/*<ChevronDown className="h-4 w-4 transition-transform duration-200" />*/}
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 ));
