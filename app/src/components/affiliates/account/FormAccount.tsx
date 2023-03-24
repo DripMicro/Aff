@@ -19,35 +19,35 @@ export const FormAccount = ({ account, onSubmit }: Props) => {
   return (
     <>
       <div className="w-full">
-        <div className="pb-4 mt-6 w-full md:w-1/2 text-base md:text-sm">
-          <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+        <div className="mt-6 w-full pb-4 text-base md:w-1/2 md:text-sm">
+          <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
             Username
           </label>
           <input
-            className="border-1 px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base"
+            className="border-1 placeholder-blueGray-300 text-blueGray-700 w-full rounded bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
             id="username"
             type="text"
             placeholder="Type Here..."
           />
         </div>
-        <div className="pb-2.5 pt-5 w-full md:w-1/2  relative text-base md:text-sm">
-          <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+        <div className="relative w-full pb-2.5 pt-5  text-base md:w-1/2 md:text-sm">
+          <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
             Password
           </label>
           <input
-            className="border-1 px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base"
+            className="border-1 placeholder-blueGray-300 text-blueGray-700 w-full rounded bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
             id="username"
             type={showPassword ? "text" : "password"}
             placeholder="Type Here..."
           />
           <label
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute mt-4 right-4 cursor-pointer "
+            className="absolute right-4 mt-4 cursor-pointer "
             htmlFor="toggle"
           >
             {showPassword ? (
               <svg
-                className="w-6 h-6"
+                className="h-6 w-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -68,7 +68,7 @@ export const FormAccount = ({ account, onSubmit }: Props) => {
               </svg>
             ) : (
               <svg
-                className="w-6 h-6 opacity-60"
+                className="h-6 w-6 opacity-60"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -85,24 +85,24 @@ export const FormAccount = ({ account, onSubmit }: Props) => {
           </label>
         </div>
 
-        <div className="pb-2.5 pt-5  w-full md:w-1/2 relative text-base md:text-sm">
-          <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+        <div className="relative w-full  pb-2.5 pt-5 text-base md:w-1/2 md:text-sm">
+          <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
             Repeat Password
           </label>
           <input
-            className="border-1 px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base"
+            className="border-1 placeholder-blueGray-300 text-blueGray-700 w-full rounded bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
             id="username"
             type={showPassword ? "text" : "password"}
             placeholder="Type Here..."
           />
           <label
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute mt-4 right-4 cursor-pointer "
+            className="absolute right-4 mt-4 cursor-pointer "
             htmlFor="toggle"
           >
             {showPassword ? (
               <svg
-                className="w-6 h-6"
+                className="h-6 w-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -123,7 +123,7 @@ export const FormAccount = ({ account, onSubmit }: Props) => {
               </svg>
             ) : (
               <svg
-                className="w-6 h-6 opacity-60"
+                className="h-6 w-6 opacity-60"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -140,19 +140,16 @@ export const FormAccount = ({ account, onSubmit }: Props) => {
           </label>
         </div>
 
-        <div className="flex text-sm items-start space-x-2 py-6">
-          <input
-            type="checkbox"
-            className="border-gray-300 rounded h-5 w-5"
-          />
-          <label className="text-gray-700 font-medium leading-none mt-1">
+        <div className="flex items-start space-x-2 py-6 text-sm">
+          <input type="checkbox" className="h-5 w-5 rounded border-gray-300" />
+          <label className="mt-1 font-medium leading-none text-gray-700">
             Yes, I would like to receive the Affiliate newsletter
           </label>
         </div>
 
-        <div className="flex flex-wrap -mx-3 mb-6">
+        <div className="-mx-3 mb-6 flex flex-wrap">
           <div className="w-full px-3">
-            <button className="md:w-36 w-full bg-[#1B48BB] mt-8 text-base  text-white font-medium  py-4 px-12 rounded-md">
+            <button className="mt-8 w-full rounded-md bg-[#1B48BB] py-4  px-12 text-base  font-medium text-white md:w-36">
               Save
             </button>
           </div>

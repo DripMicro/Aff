@@ -23,42 +23,42 @@ export const FormWebSites = ({ account, onSubmit }: Props) => {
   return (
     <>
       <div className="w-full">
-        <div className="pb-4 mt-6 w-full md:w-1/2 text-base md:text-sm">
-          <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+        <div className="mt-6 w-full pb-4 text-base md:w-1/2 md:text-sm">
+          <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
             Website1
           </label>
           <input
-            className="border-1 px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base"
+            className="border-1 placeholder-blueGray-300 text-blueGray-700 w-full rounded bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
             id="username"
             type="text"
             placeholder="Link..."
           />
         </div>
-        <div className="pb-4 mt-6 w-full md:w-1/2 text-base md:text-sm">
-          <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+        <div className="mt-6 w-full pb-4 text-base md:w-1/2 md:text-sm">
+          <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
             Website2
           </label>
           <input
-            className="border-1 px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base"
+            className="border-1 placeholder-blueGray-300 text-blueGray-700 w-full rounded bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
             id="username"
             type="text"
             placeholder="Link..."
           />
         </div>
-        <div className="pb-4 mt-6 w-full md:w-1/2 text-base md:text-sm">
-          <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+        <div className="mt-6 w-full pb-4 text-base md:w-1/2 md:text-sm">
+          <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
             Website3
           </label>
           <input
-            className="border-1 px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base"
+            className="border-1 placeholder-blueGray-300 text-blueGray-700 w-full rounded bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
             id="username"
             type="text"
             placeholder="Link..."
           />
         </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
+        <div className="-mx-3 mb-6 flex flex-wrap">
           <div className="w-full px-3">
-            <button className="md:w-36 w-full bg-[#1B48BB] mt-8 text-base  text-white font-medium  py-3 px-12 rounded-md">
+            <button className="mt-8 w-full rounded-md bg-[#1B48BB] py-3  px-12 text-base  font-medium text-white md:w-36">
               Save
             </button>
           </div>

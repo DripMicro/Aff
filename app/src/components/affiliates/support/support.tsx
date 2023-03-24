@@ -31,7 +31,6 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import SupportComponent from "./supportComponent";
 
 const Support = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -59,23 +58,23 @@ const Support = () => {
 
   return (
     <div className="pt-5 pb-4">
-      <div className=" mb-5 block font-medium text-base">
+      <div className=" mb-5 block text-base font-medium">
         <span className="text-[#2262C6]">Dashboard</span> - Support - FAQ
         <div className="container mt-3">
-          <div className="text-white md:flex justify-between items-center text-center md:text-left">
-            <div className="mb-4 md:mb-0 flex items-center flex-wrap justify-center md:justify-start">
+          <div className="items-center justify-between text-center text-white md:flex md:text-left">
+            <div className="mb-4 flex flex-wrap items-center justify-center md:mb-0 md:justify-start">
               <div className="relative flex">
                 <input
                   type="search"
                   id="search"
-                  className=" md:w-80 h-10 placeholder:text-[#666666] placeholder:font-medium placeholder:text-xs
-                                  pl-4 text-sm rounded"
+                  className=" h-10 rounded pl-4 text-sm placeholder:text-xs
+                                  placeholder:font-medium placeholder:text-[#666666] md:w-80"
                   placeholder="Search Merchant.."
                   required
                 />
                 <svg
                   aria-hidden="true"
-                  className="w-5 h-5 mt-4 -ml-10 text-[#B3B3B3] dark:text-gray-400 "
+                  className="mt-4 -ml-10 h-5 w-5 text-[#B3B3B3] dark:text-gray-400 "
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -96,20 +95,20 @@ const Support = () => {
                             <strong className="mr-1">Limited offer!</strong> Get it now before it's to late */}
             </div>
             {/* <div className="flex items-center justify-center"> */}
-            <div className="flex items-center justify-center text-gray-700 font-medium text-xs transition duration-150 ease-in-out">
+            <div className="flex items-center justify-center text-xs font-medium text-gray-700 transition duration-150 ease-in-out">
               <button
                 type="submit"
-                className="h-10 text-white bg-[#2262C6] hover:bg-blue-800 focus:ring-4 focus:outline-none
-                             focus:ring-blue-300
-                             font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="h-10 rounded-lg bg-[#2262C6] px-4 py-2 text-sm
+                             font-medium
+                             text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 FAQ
               </button>
 
               <button
                 type="submit"
-                className=" h-10 ml-2 text-white bg-[#2262C6] hover:bg-blue-800 focus:ring-4 focus:outline-none
-                             focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700
+                className=" ml-2 h-10 rounded-lg bg-[#2262C6] px-4 py-2 text-sm
+                             font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700
                               dark:focus:ring-blue-800 "
                 onClick={onOpen}
               >
@@ -119,70 +118,70 @@ const Support = () => {
               <Modal isOpen={isOpen} size="3xl" onClose={onClose} isCentered>
                 <ModalOverlay />
                 <ModalContent>
-                  <div className="flex pl-5  md:pl-6 pt-4 justify-between items-end">
-                    <div className=" text-[#282560] font-medium">
+                  <div className="flex items-end  justify-between pl-5 pt-4 md:pl-6">
+                    <div className=" font-medium text-[#282560]">
                       Open New Ticket
                     </div>
                     <Image
                       alt="..."
-                      className="mr-4 w-10 h-10 rounded-full align-middle "
+                      className="mr-4 h-10 w-10 rounded-full align-middle "
                       src="/img/icons/close.png"
                       onClick={onClose}
                     />
                   </div>
                   <ModalBody>
                     <form className="w-full pt-5">
-                      <div className="flex flex-wrap -mx-3 mb-6">
-                        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                      <div className="-mx-3 mb-6 flex flex-wrap">
+                        <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
                           <label
-                            className="pl-4 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                            for="grid-first-name"
+                            className="mb-2 block pl-4 text-xs font-bold uppercase tracking-wide text-gray-700"
+                            htmlFor="grid-first-name"
                           >
                             Ticket Subject
                           </label>
                           <input
-                            className=" w-full placeholder:text-[#D7D7D7] text-gray-700 border border-#D7D7D7 rounded-md py-3 px-4 mb-3 "
+                            className=" border-#D7D7D7 mb-3 w-full rounded-md border py-3 px-4 text-gray-700 placeholder:text-[#D7D7D7] "
                             id="grid-first-name"
                             type="text"
                             placeholder="Type here.."
                           />
                         </div>
-                        <div className="w-full md:w-1/2 px-3">
+                        <div className="w-full px-3 md:w-1/2">
                           <label
-                            className="block pl-4 uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                            for="grid-last-name"
+                            className="mb-2 block pl-4 text-xs font-bold uppercase tracking-wide text-gray-700"
+                            htmlFor="grid-last-name"
                           >
                             Your Email
                           </label>
                           <input
-                            className="w-full  placeholder:text-[#D7D7D7] text-gray-700 border border-#D7D7D7 rounded-md py-3 px-4 mb-3 "
+                            className="border-#D7D7D7  mb-3 w-full rounded-md border py-3 px-4 text-gray-700 placeholder:text-[#D7D7D7] "
                             id="grid-last-name"
                             type="text"
                             placeholder="Type here.."
                           />
                         </div>
                       </div>
-                      <div className="flex flex-wrap -mx-3 mb-6">
+                      <div className="-mx-3 mb-6 flex flex-wrap">
                         <div className="w-full px-3">
                           <label
-                            className="block pl-4 uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                            for="grid-password"
+                            className="mb-2 block pl-4 text-xs font-bold uppercase tracking-wide text-gray-700"
+                            htmlFor="grid-password"
                           >
                             Ticket Subject
                           </label>
                           <textarea
-                            className="w-full text-gray-700 border border-#D7D7D7 rounded-md py-3 px-4 mb-3 "
+                            className="border-#D7D7D7 mb-3 w-full rounded-md border py-3 px-4 text-gray-700 "
                             id="grid-textarea"
                           />
                         </div>
                       </div>
                     </form>
                   </ModalBody>
-                  <div className="flex flex-wrap pl-5 mb-6 md:px-80  font-medium">
+                  <div className="mb-6 flex flex-wrap pl-5 font-medium  md:px-80">
                     <button
                       type="submit"
-                      className="px-5  h-12  text-white bg-[#1B48BB] hover:bg-blue-800 focus:ring-4 focus:outline-none
-                             focus:ring-blue-300 font-medium rounded text-sm dark:bg-blue-600 dark:hover:bg-blue-700
+                      className="h-12  rounded  bg-[#1B48BB] px-5 text-sm font-medium text-white
+                             hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700
                               dark:focus:ring-blue-800 "
                       onClick={onClose}
                     >
@@ -195,11 +194,11 @@ const Support = () => {
           </div>
         </div>
       </div>
-      <div className="pt-5 px-2 rounded-md h-auto md:rounded-2xl bg-white shadow-md pb-4 md:mb-10">
+      {/* <div className="pt-5 px-2 rounded-md h-auto md:rounded-2xl bg-white shadow-md pb-4 md:mb-10">
         {data.map((data, i) => {
           return <SupportComponent propsdata={data} key={i} />;
         })}
-      </div>
+      </div> */}
     </div>
   );
 };

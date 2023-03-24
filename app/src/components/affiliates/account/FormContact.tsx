@@ -35,25 +35,25 @@ export const FormContact = ({ account, onSubmit }: Props) => {
   return (
     <>
       <div className="w-full pt-5">
-        <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+        <div className="-mx-3 mb-6 flex flex-wrap">
+          <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               Username
             </label>
             <input
-              className=" border-1 px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base "
+              className=" border-1 placeholder-blueGray-300 text-blueGray-700 w-full rounded bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring "
               id="grid-first-name"
               type="text"
               placeholder="Type here.."
             />
           </div>
-          <div className="w-full md:w-1/2 px-3">
-            <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+          <div className="w-full px-3 md:w-1/2">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               Salutation
             </label>
             <div className="relative w-full">
               <select
-                className="border-1 px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base appearance-none"
+                className="border-1 placeholder-blueGray-300 text-blueGray-700 w-full appearance-none rounded bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
                 placeholder="Select "
                 onClick={showAccount}
                 onChange={(event) => {
@@ -68,7 +68,7 @@ export const FormContact = ({ account, onSubmit }: Props) => {
                 <option value="account 4">Account 4</option>
               </select>
 
-              <div className="absolute -mt-8 right-2 md:right-6 cursor-pointer ">
+              <div className="absolute right-2 -mt-8 cursor-pointer md:right-6 ">
                 <div className={" " + (showaccount ? " " : "rotate-180")}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -87,62 +87,62 @@ export const FormContact = ({ account, onSubmit }: Props) => {
             </div>
           </div>
         </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+        <div className="-mx-3 mb-6 flex flex-wrap">
+          <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               First Name
             </label>
             <input
-              className=" border-1 px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base "
+              className=" border-1 placeholder-blueGray-300 text-blueGray-700 w-full rounded bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring "
               id="grid-first-name"
               type="text"
               placeholder="Type here.."
             />
           </div>
-          <div className="w-full md:w-1/2 px-3">
-            <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+          <div className="w-full px-3 md:w-1/2">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               Last Name
             </label>
             <input
-              className="border-1 px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base "
+              className="border-1 placeholder-blueGray-300 text-blueGray-700 w-full rounded bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring "
               id="grid-last-name"
               type="text"
               placeholder="Type here.."
             />
           </div>
         </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+        <div className="-mx-3 mb-6 flex flex-wrap">
+          <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               Email
             </label>
             <input
-              className=" border-1 px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base "
+              className=" border-1 placeholder-blueGray-300 text-blueGray-700 w-full rounded bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring "
               id="grid-first-name"
               type="text"
               placeholder="Type here.."
             />
           </div>
-          <div className="w-full md:w-1/2 px-3">
-            <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+          <div className="w-full px-3 md:w-1/2">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               Phone #
             </label>
             <input
-              className=" border-1 px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base "
+              className=" border-1 placeholder-blueGray-300 text-blueGray-700 w-full rounded bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring "
               id="grid-first-name"
               type="text"
               placeholder="Type here.."
             />
           </div>
         </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+        <div className="-mx-3 mb-6 flex flex-wrap">
+          <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               Instant Messaging
             </label>
             <div className="relative w-full">
               <select
-                className="border-1 px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base appearance-none"
+                className="border-1 placeholder-blueGray-300 text-blueGray-700 w-full appearance-none rounded bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
                 placeholder="Select "
                 onClick={showAccount}
                 onChange={(event) => {
@@ -157,7 +157,7 @@ export const FormContact = ({ account, onSubmit }: Props) => {
                 <option value="account 4">Account 4</option>
               </select>
 
-              <div className="absolute -mt-8 right-2 md:right-6 cursor-pointer ">
+              <div className="absolute right-2 -mt-8 cursor-pointer md:right-6 ">
                 <div className={" " + (showaccount ? " " : "rotate-180")}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -175,21 +175,21 @@ export const FormContact = ({ account, onSubmit }: Props) => {
               </div>
             </div>
           </div>
-          <div className="w-full md:w-1/2 px-3">
-            <label className="block text-gray-600 mb-1.5 ml-2.5 text-base  font-medium">
+          <div className="w-full px-3 md:w-1/2">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               Instant Messaging Account
             </label>
             <input
-              className="border-1 px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-base "
+              className="border-1 placeholder-blueGray-300 text-blueGray-700 w-full rounded bg-white px-3 py-4 text-base shadow transition-all duration-150 ease-linear focus:outline-none focus:ring "
               id="grid-last-name"
               type="text"
               placeholder="Type here.."
             />
           </div>
         </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
+        <div className="-mx-3 mb-6 flex flex-wrap">
           <div className="w-full px-3">
-            <button className="md:w-36 w-full bg-[#1B48BB] mt-8 text-base  text-white font-medium  py-4 px-12 rounded-md">
+            <button className="mt-8 w-full rounded-md bg-[#1B48BB] py-4  px-12 text-base  font-medium text-white md:w-36">
               Save
             </button>
           </div>

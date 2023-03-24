@@ -1,4 +1,12 @@
-import { Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+} from "@chakra-ui/react";
 import type { AffiliateAccountUpdateType } from "../../../server/db-types";
 import { api } from "../../../utils/api";
 import { FormAccount } from "./FormAccount";
@@ -21,12 +29,12 @@ export const AccountDetails = () => {
   };
 
   return (
-    <div className="pt-5 pb-4 w-full ">
-      <div className="px-6 mb-5 block font-medium text-base">
+    <div className="w-full pt-5 pb-4 ">
+      <div className="mb-5 block px-6 text-base font-medium">
         <span className="text-[#2262C6]">Dashboard</span> - My Account - Account
         Details
       </div>
-      <div className="pt-4 mt-6 px-4 h-auto rounded-2xl bg-white shadow-[4px_3px_33px_0_rgba(0,0,0,0.05)] pb-20 md:mb-10">
+      <div className="mt-6 h-auto rounded-2xl bg-white px-4 pt-4 pb-20 shadow-[4px_3px_33px_0_rgba(0,0,0,0.05)] md:mb-10">
         <Flex direction="column" gap={2} maxW="4xl" width="100%">
           <Tabs>
             <TabList>

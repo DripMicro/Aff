@@ -2,32 +2,38 @@ import Affiliates from "../../../layouts/AffiliatesLayout";
 
 import { useState } from "react";
 
-interface Data {
-  propsdata: object;
+interface PropsType {
+  propsdata: DataType;
 }
 
-const AnnouncementsComponent = (props: Data) => {
+interface DataType {
+  title: string;
+  time: string;
+  content: string;
+}
+
+const AnnouncementsComponent = ({ propsdata }: PropsType) => {
   const [expanded1, setExpanded1] = useState(true);
 
   return (
-    <div className="h-auto px-4 mt-4 md:px-5 pt-3 bg-[#F5F8FA] rounded-md  py-4 flex flex-col justify-between transition-all duration-500 cursor-pointer">
-      <div className="text-base md:text-xl font-medium ">
-        {props.propsdata.title}
-        <div className="font-medium mt-2 md:mt-2.5 text-xs md:text-sm text-[#636363]">
-          {props.propsdata.time}
+    <div className="mt-4 flex h-auto cursor-pointer flex-col justify-between rounded-md  bg-[#F5F8FA] px-4 py-4 pt-3 transition-all duration-500 md:px-5">
+      <div className="text-base font-medium md:text-xl ">
+        {propsdata.title}
+        <div className="mt-2 text-xs font-medium text-[#636363] md:mt-2.5 md:text-sm">
+          {propsdata.time}
         </div>
         <div
           className={
-            "text-xs p-3 md:text-sm  md:pr-56  mt-3.5 md:mt-4 font-medium  transition duration-150 ease-in-out" +
+            "mt-3.5 p-3 text-xs  font-medium  transition duration-150 ease-in-out  md:mt-4 md:pr-56 md:text-sm" +
             (expanded1 ? " max-h-9 truncate " : "")
           }
         >
-          {props.propsdata.content}
+          {propsdata.content}
         </div>
       </div>
-      <div className="flex mt-5 md:mt-6">
+      <div className="mt-5 flex md:mt-6">
         <button
-          className="text-blue-500 text-left  font-medium text-sm"
+          className="text-left text-sm  font-medium text-blue-500"
           onClick={() => setExpanded1(!expanded1)}
         >
           {expanded1 ? "More" : "Less"}

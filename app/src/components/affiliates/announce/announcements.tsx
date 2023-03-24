@@ -26,10 +26,10 @@ const Announcements = () => {
 
   return (
     <div className="pt-5 pb-4">
-      <div className="px-6 mb-5 block font-medium text-base">
+      <div className="mb-5 block px-6 text-base font-medium">
         <span className="text-[#2262C6]">Dashboard</span> - Announcements
       </div>
-      <div className="pt-4 mt-7 px-4 rounded-md h-auto md:rounded-2xl bg-white shadow-md pb-20 md:mb-10">
+      <div className="mt-7 h-auto rounded-md bg-white px-4 pt-4 pb-20 shadow-md md:mb-10 md:rounded-2xl">
         {data.map((data, i) => {
           return <AnnouncementsComponent propsdata={data} key={i} />;
         })}
