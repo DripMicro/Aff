@@ -457,7 +457,7 @@ export const Dashboard = () => {
             </Flex>
             <TabPanels>
               <TabPanel>
-                <div className="mt-5 h-80">
+                <div className="mt-5 h-80 pb-5">
                   <PerformanceChart performanceChartData={performanceChart} />
                   {/* <div className="w-full h-96" ref={squareRef}>
                     <p>{`The square width is ${width}px and height ${height}px`}</p>
@@ -467,7 +467,7 @@ export const Dashboard = () => {
                 </div>
               </TabPanel>
               <TabPanel>
-                <div className="mt-5 h-80">
+                <div className="mt-5 h-80  pb-5">
                   <ConversionChart conversionChartData={conversionChart} />
                 </div>
                 {/* <LineChart

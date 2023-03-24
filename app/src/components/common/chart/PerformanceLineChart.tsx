@@ -4,18 +4,20 @@ import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  BarElement,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
   Legend,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import { CategoryBar } from "@tremor/react";
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  BarElement,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
   Legend
@@ -23,7 +25,7 @@ ChartJS.register(
 
 export const options = {
   responsive: true,
-  maintainAspectRatio : false,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       display: false,
@@ -43,7 +45,7 @@ export const options = {
       grid: {
         display: true,
       },
-      ticks: { color: 'black'},
+      ticks: { color: 'black' },
       font: {
         size: 14,
       }
@@ -53,7 +55,7 @@ export const options = {
       grid: {
         display: false, // only want the grid lines for one axis to show up
       },
-      ticks: { color: '#F37A20'},
+      ticks: { color: '#F37A20' },
       font: {
         size: 14,
       }
@@ -68,13 +70,13 @@ interface Props {
 }
 
 interface performanceChartDataType {
-  Accounts: number|null;
+  Accounts: number | null;
   ActiveTraders: number | null;
   date: string;
   // [index: number]: { Accounts: number; date: string; ActiveTraders: number };
 }
 
-const PerformanceChart = ({ performanceChartData }: Props) => {
+const PerformanceLineChart = ({ performanceChartData }: Props) => {
 
   const Accounts: (number | null)[] = performanceChartData.map((field, i) => {
     return field.Accounts;
@@ -111,13 +113,13 @@ const PerformanceChart = ({ performanceChartData }: Props) => {
   };
   return (
     <>
-    <div className="flex justify-between pb-4">
-      <div className="text-sm">Account</div>
-      <div className="text-sm text-[#FF8549]">FTD</div>
-    </div>
-    <Bar width={"100%"} options={options} data={data} />
+      <div className="flex justify-between pb-4">
+        <div className="text-sm">Account</div>
+        <div className="text-sm text-[#FF8549]">FTD</div>
+      </div>
+      <Line width={"100%"} options={options} data={data} />
     </>
   );
 };
 
-export default PerformanceChart;
+export default PerformanceLineChart;
