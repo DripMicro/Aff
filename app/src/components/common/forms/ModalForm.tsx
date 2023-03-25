@@ -28,7 +28,6 @@ interface CommonFormProps {
   onSubmit: (values: unknown) => Promise<void>;
   children: React.ReactNode;
   actions?: React.ReactNode;
-
   grid?: GridProps;
 }
 
