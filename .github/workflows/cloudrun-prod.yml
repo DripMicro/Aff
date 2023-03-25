@@ -36,6 +36,8 @@ jobs:
           context: app
           push: true
           tags: europe-docker.pkg.dev/api-front-dashbord/production/aff:latest
+        env:
+          NEXT_PUBLIC_FLAGS_ENV_KEY=flags_pub_358370259303924312
 
       - id: "deploy_gamingaffiliates"
         name: deploy gamingaffiliates
