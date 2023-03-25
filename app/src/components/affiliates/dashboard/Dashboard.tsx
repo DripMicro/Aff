@@ -107,6 +107,8 @@ export const Dashboard = () => {
   console.log(conversionChart);
 
   const { data: creative } = api.affiliates.getTopMerchantCreative.useQuery();
+  console.log("creative");
+  console.log(creative);
   const { data: report } = api.affiliates.getCountryReport.useQuery();
   const { data: reportsHiddenCols } =
     api.affiliates.getReportsHiddenCols.useQuery();

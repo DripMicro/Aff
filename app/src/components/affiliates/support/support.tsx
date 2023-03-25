@@ -1,40 +1,22 @@
 import Affiliates from "../../../layouts/AffiliatesLayout";
 import {
-  Box,
-  Button,
-  Container,
-  Flex,
-  FormControl,
-  FormLabel,
-  Grid,
-  GridItem,
-  Heading,
-  IconButton,
   Image,
-  Link,
   Modal,
   ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  SimpleGrid,
-  Stack,
-  Switch,
-  Checkbox,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  Text,
   useDisclosure,
 } from "@chakra-ui/react";
+import SupportComponent from "./supportComponent";
+import SupportTableComponent from "./supportTableComponent";
+import { useState } from "react";
 
 const Support = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const [flag, setFlag] = useState(false);
+  console.log(flag);
   const data = [
     {
       title: "New minimum withdrawal amount for stablecoins",
@@ -63,7 +45,7 @@ const Support = () => {
         <div className="container mt-3">
           <div className="items-center justify-between text-center text-white md:flex md:text-left">
             <div className="mb-4 flex flex-wrap items-center justify-center md:mb-0 md:justify-start">
-              <div className="relative flex">
+              <div className="relative flex items-center justify-between">
                 <input
                   type="search"
                   id="search"
@@ -74,7 +56,7 @@ const Support = () => {
                 />
                 <svg
                   aria-hidden="true"
-                  className="mt-4 -ml-10 h-5 w-5 text-[#B3B3B3] dark:text-gray-400 "
+                  className="-ml-10 h-5  w-5 text-[#B3B3B3] dark:text-gray-400 "
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -88,28 +70,19 @@ const Support = () => {
                   ></path>
                 </svg>
               </div>
-              {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" className="w-4 h-4 mr-2">
-                                <path fill="currentColor"
-                                    d="M216 23.86c0-23.8-30.65-32.77-44.15-13.04C48 191.85 224 200 224 288c0 35.63-29.11 64.46-64.85 63.99-35.17-.45-63.15-29.77-63.15-64.94v-85.51c0-21.7-26.47-32.23-41.43-16.5C27.8 213.16 0 261.33 0 320c0 105.87 86.13 192 192 192s192-86.13 192-192c0-170.29-168-193-168-296.14z" />
-                            </svg>
-                            <strong className="mr-1">Limited offer!</strong> Get it now before it's to late */}
             </div>
-            {/* <div className="flex items-center justify-center"> */}
             <div className="flex items-center justify-center text-xs font-medium text-gray-700 transition duration-150 ease-in-out">
               <button
                 type="submit"
-                className="h-10 rounded-lg bg-[#2262C6] px-4 py-2 text-sm
-                             font-medium
-                             text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                onClick={() => setFlag(!flag)}
+                className="h-10 rounded-lg bg-[#2262C6] px-4 py-2 text-sm font-medium  text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 FAQ
               </button>
 
               <button
                 type="submit"
-                className=" ml-2 h-10 rounded-lg bg-[#2262C6] px-4 py-2 text-sm
-                             font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700
-                              dark:focus:ring-blue-800 "
+                className=" ml-2 h-10 rounded-lg bg-[#2262C6] px-4 py-2 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={onOpen}
               >
                 Add new Ticket
@@ -117,9 +90,9 @@ const Support = () => {
 
               <Modal isOpen={isOpen} size="3xl" onClose={onClose} isCentered>
                 <ModalOverlay />
-                <ModalContent>
+                <ModalContent ml={4} mr={4}>
                   <div className="flex items-end  justify-between pl-5 pt-4 md:pl-6">
-                    <div className=" font-medium text-[#282560]">
+                    <div className=" text-sm font-medium text-[#282560] md:text-xl">
                       Open New Ticket
                     </div>
                     <Image
@@ -134,50 +107,47 @@ const Support = () => {
                       <div className="-mx-3 mb-6 flex flex-wrap">
                         <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
                           <label
-                            className="mb-2 block pl-4 text-xs font-bold uppercase tracking-wide text-gray-700"
+                            className="mb-2 block  pl-4 text-sm font-medium tracking-wide text-[#525252] md:text-base"
                             htmlFor="grid-first-name"
                           >
                             Ticket Subject
                           </label>
                           <input
-                            className=" border-#D7D7D7 mb-3 w-full rounded-md border py-3 px-4 text-gray-700 placeholder:text-[#D7D7D7] "
+                            className=" border-#D7D7D7 mb-3 w-full rounded-md border py-3 px-4 text-[#525252] placeholder:text-[#D7D7D7] "
                             id="grid-first-name"
                             type="text"
                             placeholder="Type here.."
                           />
                         </div>
-                        <div className="w-full px-3 md:w-1/2">
+                        <div className="-mt-5 w-full px-3 md:mt-0 md:w-1/2">
                           <label
-                            className="mb-2 block pl-4 text-xs font-bold uppercase tracking-wide text-gray-700"
+                            className="mb-2 block  pl-4 text-sm font-medium tracking-wide text-[#525252] md:text-base"
                             htmlFor="grid-last-name"
                           >
                             Your Email
                           </label>
                           <input
-                            className="border-#D7D7D7  mb-3 w-full rounded-md border py-3 px-4 text-gray-700 placeholder:text-[#D7D7D7] "
+                            className="border-#D7D7D7  mb-3 w-full rounded-md border py-3 px-4 text-[#525252] placeholder:text-[#D7D7D7] "
                             id="grid-last-name"
                             type="text"
                             placeholder="Type here.."
                           />
                         </div>
                       </div>
-                      <div className="-mx-3 mb-6 flex flex-wrap">
+                      <div className="-mx-3 -mt-4 mb-3 flex flex-wrap md:-mt-5 ">
                         <div className="w-full px-3">
                           <label
-                            className="mb-2 block pl-4 text-xs font-bold uppercase tracking-wide text-gray-700"
+                            className="mb-2 block  pl-4 text-sm font-medium tracking-wide text-[#525252] md:text-base"
                             htmlFor="grid-password"
                           >
                             Ticket Subject
                           </label>
-                          <textarea
-                            className="border-#D7D7D7 mb-3 w-full rounded-md border py-3 px-4 text-gray-700 "
-                            id="grid-textarea"
-                          />
+                          <textarea className="border-#D7D7D7 mb-3 h-32 w-full rounded-md border py-2 px-4 text-[#525252] md:h-40 " />
                         </div>
                       </div>
                     </form>
                   </ModalBody>
-                  <div className="mb-6 flex flex-wrap pl-5 font-medium  md:px-80">
+                  <div className="mb-12 flex flex-wrap pl-5 font-medium  md:px-80">
                     <button
                       type="submit"
                       className="h-12  rounded  bg-[#1B48BB] px-5 text-sm font-medium text-white
@@ -194,11 +164,17 @@ const Support = () => {
           </div>
         </div>
       </div>
-      {/* <div className="pt-5 px-2 rounded-md h-auto md:rounded-2xl bg-white shadow-md pb-4 md:mb-10">
-        {data.map((data, i) => {
-          return <SupportComponent propsdata={data} key={i} />;
-        })}
-      </div> */}
+      {flag ? (
+        <div className="h-auto rounded-md bg-white  px-2 pt-5 pb-4 shadow-md md:mb-10 md:rounded-2xl">
+          {data.map((data, i) => {
+            return <SupportComponent propsdata={data} key={i} />;
+          })}
+        </div>
+      ) : (
+        <div className=" rounded-2xl bg-[#FFFFFF] px-3 py-3 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.05)]">
+          <SupportTableComponent />
+        </div>
+      )}
     </div>
   );
 };

@@ -15,6 +15,8 @@ interface Props {
   activeStep: number;
   values: object;
   method: any;
+  count: number;
+  setCount: any;
   onNext: (values: z.infer<typeof schema>) => void;
   onPrevious: () => void;
 }
@@ -24,6 +26,8 @@ export const MethodForm = ({
   activeStep,
   values,
   method,
+  count,
+  setCount,
   onNext,
   onPrevious,
 }: Props) => {
@@ -31,7 +35,7 @@ export const MethodForm = ({
   const formContext = usePrepareSchema(t, schema);
 
   return (
-    <Stack m={12} gap={2}>
+    <Stack mt={12} gap={2}>
       <Heading as="h6" size="xs">
         Step 4: Select Method
       </Heading>
@@ -45,6 +49,8 @@ export const MethodForm = ({
           activeStep,
           onPrevious,
           submit: { notification: false },
+          count: count,
+          setCount: setCount,
         }}
         props={{
           method: {

@@ -1,32 +1,59 @@
 import { Button, Flex, Heading, Stack, Text } from "@chakra-ui/react";
+import type { Dispatch, SetStateAction } from "react";
 
 interface Props {
+  count: number;
+  setCount: Dispatch<SetStateAction<number>>;
   onSubmit: () => Promise<void>;
   onPrevious: () => void;
 }
 
-export const FinishForm = ({ onSubmit, onPrevious }: Props) => {
+export const FinishForm = ({
+  count,
+  setCount,
+  onSubmit,
+  onPrevious,
+}: Props) => {
+  const handlePreviousChange = () => {
+    if (count > 1) {
+      setCount(count - 1);
+    }
+  };
+
   return (
-    <Stack m={12} gap={2}>
-      <Heading as="h6" size="xs">
+    <div className="mt-11 h-96">
+      <div className="font-xl font-normal text-[#000000]">
         Step 1: Finish Pixel
-      </Heading>
-      <Text fontSize="sm">
+      </div>
+      <Text fontSize="sm" mb={263}>
         The pixel will be idle until the Affiliate Manager will approve it.
       </Text>
-      <Flex width="100%" justify="flex-start">
-        <Button minW={36} onClick={onPrevious} mr={4} size="md" variant="ghost">
+      <Flex width="100%" justify="flex-start" marginTop="20">
+        <Button
+          minW={36}
+          onClick={handlePreviousChange}
+          mr={4}
+          size="md"
+          variant="ghost"
+          width="48"
+          height="10"
+          bgColor="blue.100"
+        >
           Prev
         </Button>
         <Button
           size="md"
+          textColor="white"
           minW={36}
           variant="solid"
+          width="48"
+          height="10"
+          bgColor="blue.600"
           onClick={() => void onSubmit()}
         >
           Finish
         </Button>
       </Flex>
-    </Stack>
+    </div>
   );
 };
