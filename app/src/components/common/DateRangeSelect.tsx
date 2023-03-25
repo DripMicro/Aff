@@ -194,7 +194,7 @@ export const DateRangeSelect = ({ range: defaultRange }: Props) => {
           <div className="flex">
             <div className="relative">
               <select
-                className="flex cursor-pointer appearance-none items-center space-x-2 rounded border border-[#D7D7D7] bg-white py-2 pl-2 pr-8 text-xs md:pl-6 md:pr-14 md:text-base"
+                className="flex cursor-pointer appearance-none items-center space-x-2 rounded border border-[#D7D7D7] bg-white py-2 pl-2 pr-8 text-xs md:pl-6 md:pr-14 md:text-base h-full"
                 placeholder="Select date range"
                 value={name}
                 onChange={(event) => {

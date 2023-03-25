@@ -271,14 +271,14 @@ export const Dashboard = () => {
           </button>
 
           <button
-            className="ml-2 rounded-md bg-white px-2 drop-shadow md:ml-5 md:px-3 md:pt-1.5 md:pb-2"
+            className="ml-3 rounded-md bg-white px-2 drop-shadow md:ml-5 md:px-3 md:pt-1.5 md:pb-2"
             onClick={onOpen}
           >
             <SettingsIcon />
           </button>
         </div>
         <div className="grid justify-items-stretch lg:hidden">
-          <button className="ml-5 justify-self-end rounded-md bg-[#2262C6] px-2 py-1 text-white md:px-8 md:py-2 ">
+          <button className="ml-5 mb-2 justify-self-end rounded-md bg-[#2262C6] px-2 py-1 text-white md:px-8 md:py-2 ">
             Update
           </button>
         </div>
