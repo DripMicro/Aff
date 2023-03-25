@@ -17,6 +17,7 @@ import type {
   ZodTuple,
   ZodEffects,
 } from "zod";
+import { ZodNativeEnum } from "zod";
 
 /**
  * Reducing this helps with TS performance
@@ -35,6 +36,7 @@ export type RTFBaseZodType =
   | ZodMap<any>
   | ZodSet<any>
   | ZodEnum<any>
+  | ZodNativeEnum<any>
   | ZodBranded<any, any>
   | ZodEffects<any, any>;
 

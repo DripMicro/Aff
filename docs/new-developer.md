@@ -1,0 +1,2 @@
+## Notes
+- use only `yarn`

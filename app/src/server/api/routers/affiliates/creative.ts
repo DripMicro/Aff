@@ -1,14 +1,15 @@
 import { z } from "zod";
 
-import { publicProcedure } from "../../trpc";
-import { countBy, map, sortBy, uniq, uniqBy, uniqWith } from "rambda";
 import type { merchants_creative_type, Prisma } from "@prisma/client";
-import { affiliate_id, merchant_id } from "./const";
-import { SelectSchema } from "../../../db-schema-utils";
+import { countBy, map, sortBy, uniq, uniqBy } from "rambda";
 import {
   addFreeTextSearchJSFilter,
   addFreeTextSearchWhere,
 } from "../../../../../prisma/prisma-utils";
+import { SelectSchema } from "../../../db-schema-utils";
+import { publicProcedure } from "../../trpc";
+import { affiliate_id, merchant_id } from "./const";
+import { serverStoragePath } from "../../../../components/utils";
 
 export const getMerchantCreativeMeta = publicProcedure
   .output(
@@ -148,19 +149,24 @@ export const getMerchantCreative = publicProcedure
         },
       });
 
-      return addFreeTextSearchJSFilter(
-        await ctx.prisma.merchants_creative.findMany({
-          where,
-          include: {
-            language: {
-              select: { title: true },
+      const answer = map(
+        ({ file, ...data }) => ({ ...data, file: serverStoragePath(file) }),
+        addFreeTextSearchJSFilter(
+          await ctx.prisma.merchants_creative.findMany({
+            where,
+            include: {
+              language: {
+                select: { title: true },
+              },
+              category: { select: { categoryname: true } },
             },
-            category: { select: { categoryname: true } },
-          },
-        }),
-        "title",
-        search
+          }),
+          "title",
+          search
+        )
       );
+
+      return answer;
     }
   );
 //

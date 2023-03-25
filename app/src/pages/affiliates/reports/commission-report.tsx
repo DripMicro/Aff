@@ -1,31 +1,11 @@
-import styles from "./../../index.module.css";
-import { api } from "../../../utils/api";
-import { Flex } from "@chakra-ui/react";
-import '@etchteam/next-pagination/dist/index.css'
 import { type NextPage } from "next";
-import Head  from "next/head";
-import {useRouter} from "next/router";
-import {useState} from 'react'
-import { RangeDatepicker } from "chakra-dayzed-datepicker";
-import { Select, Container } from '@chakra-ui/react'
-import Pagination from "@etchteam/next-pagination";
+import Head from "next/head";
+import { CommissionReport } from "../../../components/affiliates/reports/CommissionReport";
+import styles from "./../../index.module.css";
 
-const Page: NextPage = () => {
-    const router = useRouter();
-    const page = parseInt(router?.query?.page);
-    const items_per_page =parseInt(router?.query?.size);
-    const [displayType, setDisplayType] = useState("");
-    const [selectedDates, setSelectedDates] = useState<Date[]>([new Date(), new Date()]);
-    const { data } = api.affiliates.getCommissionReport.useQuery({from:selectedDates[0],to:selectedDates[1],page:page,items_per_page:items_per_page})
-    const {data: merchants} = api.affiliates.getAllMerchants.useQuery();
+import type { MyPage } from "../../../components/common/types";
 
-
-  
-  console.log("data ----->", data)
-  console.log("merchants ----->",merchants);
-  console.log("route params", router.query)
-  
-
+const Page: MyPage = () => {
   return (
     <>
       <Head>
@@ -34,35 +14,11 @@ const Page: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-      <Flex direction="column" gap={2}>
-      <Flex direction="row" gap={2}>
-      <RangeDatepicker
-        selectedDates={selectedDates}
-        onDateChange={setSelectedDates}
-      />
-      <Select placeholder='Select option' onChange={(event) => setDisplayType(event.target.value)}>
-      <option value='monthly'>monthly</option>
-      <option value='weekly'>weekly</option>
-      <option value='daily'>daily</option>
-    </Select>
-        <Select placeholder='Select option' onChange={(event) => setDisplayType(event.target.value)}>
-        {merchants?.map(merchant => {
-            return <option value={merchant.name}>{merchant.name}</option>
-
-        })}
-        </Select>
-
-      </Flex>
-      </Flex>
-      <Container marginTop={'90%'}>
-        
-        <Pagination total={100}  />
-
-      </Container>
-
+        <CommissionReport />
       </main>
     </>
   );
 };
 
 export default Page;
+Page.Layout = "NoLayout";

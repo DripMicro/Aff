@@ -1,7 +1,7 @@
 import * as z from "zod"
 import * as imports from "../zod-add-schema"
 import { traffic_bannerType, traffic_type, traffic_platform } from "@prisma/client"
-import { Completemerchants, RelatedmerchantsModel, Completeaffiliates, RelatedaffiliatesModel } from "./index"
+import { Completemerchants, RelatedmerchantsModel, Completeaffiliates, RelatedaffiliatesModel, Completemerchants_creative, Relatedmerchants_creativeModel, Completelanguages, RelatedlanguagesModel } from "./index"
 
 export const trafficModel = z.object({
   id: z.number().int(),
@@ -18,7 +18,6 @@ export const trafficModel = z.object({
   profile_id: z.number().int(),
   language_id: z.number().int(),
   promotion_id: z.number().int(),
-  last_update: z.date(),
   valid: z.boolean(),
   title: z.string(),
   bannerType: z.nativeEnum(traffic_bannerType),
@@ -49,6 +48,8 @@ export const trafficModel = z.object({
 export interface Completetraffic extends z.infer<typeof trafficModel> {
   merchant: Completemerchants
   affiliate: Completeaffiliates
+  merchant_creative: Completemerchants_creative
+  language: Completelanguages
 }
 
 /**
@@ -59,4 +60,6 @@ export interface Completetraffic extends z.infer<typeof trafficModel> {
 export const RelatedtrafficModel: z.ZodSchema<Completetraffic> = z.lazy(() => trafficModel.extend({
   merchant: RelatedmerchantsModel,
   affiliate: RelatedaffiliatesModel,
+  merchant_creative: Relatedmerchants_creativeModel,
+  language: RelatedlanguagesModel,
 }))

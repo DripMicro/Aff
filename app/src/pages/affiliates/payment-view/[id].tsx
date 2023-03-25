@@ -6,8 +6,8 @@ import { SubCreativeMaterial } from "../../../components/affiliates/sub/SubCreat
 import { Billings } from "../../../components/affiliates/billing/Billings";
 import { PaymentView } from "../../../components/affiliates/billing/PaymentView";
 import { useRouter } from "next/router";
-
-const Page: NextPage = () => {
+import type { MyPage } from "../../../components/common/types";
+const Page: MyPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
@@ -26,3 +26,4 @@ const Page: NextPage = () => {
 };
 
 export default Page;
+Page.Layout = "NoLayout";

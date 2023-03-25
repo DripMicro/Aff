@@ -1,3 +1,9 @@
 {
-  "nuxt.isNuxtApp": false
+  "nuxt.isNuxtApp": false,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true,
+    
+  },
+  "editor.formatOnSave": true
+  
 }

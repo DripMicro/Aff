@@ -1,5 +1,7 @@
 ```
 
+cd FocusOption 
+
 FocusOption/FocusOption-main/site/func/func_debug.php
 edit to connect to external database
 

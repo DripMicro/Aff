@@ -4,7 +4,8 @@ import Head from "next/head";
 
 import { AccountDetails } from "../../components/affiliates/account/AccountDetails";
 import { AccountPaymentDetails } from "../../components/affiliates/account/AccountPaymentDetails";
-const Page: NextPage = () => {
+import type { MyPage } from "../../components/common/types";
+const Page: MyPage = () => {
   return (
     <>
       <Head>
@@ -20,3 +21,5 @@ const Page: NextPage = () => {
 };
 
 export default Page;
+
+Page.Layout = "Affiliates";

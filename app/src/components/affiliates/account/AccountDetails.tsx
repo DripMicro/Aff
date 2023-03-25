@@ -5,12 +5,7 @@ import { FormAccount } from "./FormAccount";
 import { FormContact } from "./FormContact";
 import { FormInvoice } from "./FormInvoice";
 import { FormWebSites } from "./FormWebSites";
-import type {
-  AffiliateAccountUpdateType} from "../../../server/db-types";
-import {
-  AffiliateAccountType
-} from "../../../server/db-types";
-import { FormMarketInfo } from "./FormMarketInfo";
+import type { AffiliateAccountUpdateType } from "../../../server/db-types";
 
 export const AccountDetails = () => {
   const { data: account, refetch } = api.affiliates.getAccount.useQuery();
@@ -34,7 +29,7 @@ export const AccountDetails = () => {
           <Tab>Contact</Tab>
           <Tab>Invoice</Tab>
           <Tab>Website</Tab>
-          <Tab>Market</Tab>
+          {/*<Tab>Market</Tab>*/}
         </TabList>
 
         <TabPanels>
@@ -54,9 +49,9 @@ export const AccountDetails = () => {
           <TabPanel>
             <FormWebSites account={account} onSubmit={handleSubmit} />
           </TabPanel>
-          <TabPanel>
-            <FormMarketInfo account={account} onSubmit={handleSubmit} />
-          </TabPanel>
+          {/*<TabPanel>*/}
+          {/*  <FormMarketInfo account={account} onSubmit={handleSubmit} />*/}
+          {/*</TabPanel>*/}
         </TabPanels>
       </Tabs>
       <Box maxW="100%">

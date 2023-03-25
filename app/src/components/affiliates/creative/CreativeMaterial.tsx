@@ -92,7 +92,7 @@ export const CreativeMaterial = () => {
             <CreativeMaterialRow
               key={item.id}
               values={values}
-              file={item.file}
+              file={item.file || undefined}
               alt={item.alt}
               url={item.url}
             />

@@ -1,7 +1,7 @@
 import * as z from "zod"
 import * as imports from "../zod-add-schema"
 import { affiliates_gender, affiliates_paymentMethod, affiliates_qualify_type, affiliates_type } from "@prisma/client"
-import { Completeaffiliates_deals, Relatedaffiliates_dealsModel, Completeaffiliates_msgs, Relatedaffiliates_msgsModel, Completeaffiliates_notes, Relatedaffiliates_notesModel, Completeaffiliates_profiles, Relatedaffiliates_profilesModel, Completeaffiliates_static_data, Relatedaffiliates_static_dataModel, Completeaffiliates_tickets, Relatedaffiliates_ticketsModel, Completeaffiliates_traffic, Relatedaffiliates_trafficModel, Completedashboard, RelateddashboardModel, Completedata_install, Relateddata_installModel, Completedata_reg, Relateddata_regModel, Completedata_sales, Relateddata_salesModel, Completedata_sales_pending, Relateddata_sales_pendingModel, Completedata_stats, Relateddata_statsModel, Completemerchants_affiliate_level, Relatedmerchants_affiliate_levelModel, Completepayments_details, Relatedpayments_detailsModel, Completepayments_paid, Relatedpayments_paidModel, Completeproducts_affiliates_deals, Relatedproducts_affiliates_dealsModel, Completereporttraders, RelatedreporttradersModel, Completestats_banners, Relatedstats_bannersModel, Completesub_stats, Relatedsub_statsModel, Completetrackerconversion, RelatedtrackerconversionModel, Completetraffic, RelatedtrafficModel, Completecommissions, RelatedcommissionsModel } from "./index"
+import { Completeaffiliates_deals, Relatedaffiliates_dealsModel, Completeaffiliates_msgs, Relatedaffiliates_msgsModel, Completeaffiliates_notes, Relatedaffiliates_notesModel, Completeaffiliates_profiles, Relatedaffiliates_profilesModel, Completeaffiliates_static_data, Relatedaffiliates_static_dataModel, Completeaffiliates_tickets, Relatedaffiliates_ticketsModel, Completeaffiliates_traffic, Relatedaffiliates_trafficModel, Completedashboard, RelateddashboardModel, Completedata_install, Relateddata_installModel, Completedata_reg, Relateddata_regModel, Completedata_sales, Relateddata_salesModel, Completedata_sales_pending, Relateddata_sales_pendingModel, Completedata_stats, Relateddata_statsModel, Completemerchants_affiliate_level, Relatedmerchants_affiliate_levelModel, Completepayments_details, Relatedpayments_detailsModel, Completepayments_paid, Relatedpayments_paidModel, Completeproducts_affiliates_deals, Relatedproducts_affiliates_dealsModel, Completereporttraders, RelatedreporttradersModel, Completestats_banners, Relatedstats_bannersModel, Completesub_stats, Relatedsub_statsModel, Completetrackerconversion, RelatedtrackerconversionModel, Completetraffic, RelatedtrafficModel, Completecommissions, RelatedcommissionsModel, Completepixel_monitor, Relatedpixel_monitorModel } from "./index"
 
 export const affiliatesModel = z.object({
   id: z.number().int(),
@@ -106,6 +106,7 @@ export interface Completeaffiliates extends z.infer<typeof affiliatesModel> {
   trackerconversion: Completetrackerconversion[]
   traffic: Completetraffic[]
   commission: Completecommissions[]
+  pixel_monitor: Completepixel_monitor[]
 }
 
 /**
@@ -137,4 +138,5 @@ export const RelatedaffiliatesModel: z.ZodSchema<Completeaffiliates> = z.lazy(()
   trackerconversion: RelatedtrackerconversionModel.array(),
   traffic: RelatedtrafficModel.array(),
   commission: RelatedcommissionsModel.array(),
+  pixel_monitor: Relatedpixel_monitorModel.array(),
 }))

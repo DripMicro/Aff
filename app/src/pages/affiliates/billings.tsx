@@ -4,7 +4,8 @@ import Head from "next/head";
 
 import { SubCreativeMaterial } from "../../components/affiliates/sub/SubCreativeMaterial";
 import { Billings } from "../../components/affiliates/billing/Billings";
-const Page: NextPage = () => {
+import type { MyPage } from "../../components/common/types";
+const Page: MyPage = () => {
   return (
     <>
       <Head>
@@ -20,3 +21,4 @@ const Page: NextPage = () => {
 };
 
 export default Page;
+Page.Layout = "Affiliates";

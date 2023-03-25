@@ -7,12 +7,12 @@ import {
   HStack,
   Tr,
   Td,
+  Box,
 } from "@chakra-ui/react";
-import { serverStoragePath } from "../../utils";
 
 interface Props {
   values: { title: string; value?: string }[];
-  file: string;
+  file?: string;
   alt: string;
   url: string;
 }
@@ -21,12 +21,14 @@ export const CreativeMaterialRow = ({ values, file, alt, url }: Props) => {
   return (
     <Tr p={4} gap={4}>
       <Td>
-        <Image
-          objectFit="cover"
-          maxW={{ base: "100%", sm: "173px" }}
-          src={serverStoragePath(file)}
-          alt={alt}
-        />
+        {!!file && (
+          <Image
+            objectFit="cover"
+            maxW={{ base: "100%", sm: "173px" }}
+            src={file}
+            alt={alt}
+          />
+        )}
       </Td>
 
       <Td>

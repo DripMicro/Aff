@@ -1,7 +1,7 @@
 import * as z from "zod"
 import * as imports from "../zod-add-schema"
 import { data_stats_type, data_stats_currency } from "@prisma/client"
-import { Completemerchants, RelatedmerchantsModel, Completeaffiliates, RelatedaffiliatesModel } from "./index"
+import { Completemerchants, RelatedmerchantsModel, Completedata_reg, Relateddata_regModel, Completeaffiliates, RelatedaffiliatesModel } from "./index"
 
 export const data_statsModel = z.object({
   id: z.number().int(),
@@ -35,6 +35,7 @@ export const data_statsModel = z.object({
 
 export interface Completedata_stats extends z.infer<typeof data_statsModel> {
   merchant: Completemerchants
+  data_reg: Completedata_reg
   affiliate: Completeaffiliates
 }
 
@@ -45,5 +46,6 @@ export interface Completedata_stats extends z.infer<typeof data_statsModel> {
  */
 export const Relateddata_statsModel: z.ZodSchema<Completedata_stats> = z.lazy(() => data_statsModel.extend({
   merchant: RelatedmerchantsModel,
+  data_reg: Relateddata_regModel,
   affiliate: RelatedaffiliatesModel,
 }))

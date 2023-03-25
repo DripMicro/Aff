@@ -1,26 +1,25 @@
 import type { AffiliateAccountType } from "../../../server/db-types";
-import { Flex } from "@chakra-ui/react";
-import { z } from "zod";
+import type { z } from "zod";
 import { Form } from "../../common/forms/Form";
-import type { ChoiceType } from "../../common/forms/TextField";
-
-const Schema = z.object({
-  street: z.string().optional().describe("Street"),
-  postalCode: z.string().optional().describe("Postal / Zip Code"),
-  city: z.string().optional().describe("City"),
-  country: z.string().optional().describe("Country"),
-});
+import { schema } from "../../../shared-types/forms/invoice";
+import { useTranslation } from "next-i18next";
+import { usePrepareSchema } from "@/components/common/forms/usePrepareSchema";
+import type { ChoiceType } from "@/utils/zod-meta";
 
 interface Props {
-  onSubmit: (values: z.infer<typeof Schema>) => Promise<void>;
+  onSubmit: (values: z.infer<typeof schema>) => Promise<void>;
   account: AffiliateAccountType;
   countries: ChoiceType[];
 }
 
 export const FormInvoice = ({ account, onSubmit, countries }: Props) => {
+  const { t } = useTranslation("affiliate");
+  const formContext = usePrepareSchema(t, schema);
+
   return (
     <Form
-      schema={Schema}
+      formContext={formContext}
+      schema={schema}
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onSubmit={onSubmit}
       props={{

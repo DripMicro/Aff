@@ -1,22 +1,11 @@
-# aff
+## Install
 
-## import to planetscale
-
-Connect
+```bash
 
 ```
-see .secret
-
-"/C/Program Files/MySQL/MySQL Shell 8.0/bin/mysqlsh.exe" mysql://root:715FSumC93MC@localhost:3306/aff-shadow
-```
-
-mysql root password
-
-cd c:\aff\db
-"C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqld.exe" --init-file=iden.txt
 
 
-## Run PHP
-
-copy code to 
-C:\misc\xampp\htdocs
+## Notes
+- use only `yarn`
+- use prettier, configure IDE to reformat on save for best DX 
+- before committing use `yarn confirm` to lint and make sure no errors
