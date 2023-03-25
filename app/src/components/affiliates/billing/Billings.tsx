@@ -84,10 +84,10 @@ export const Billings = () => {
   );
 
   const columns = [
-    // columnHelper.accessor("id", {
-    //   cell: (info) => info.getValue(),
-    //   header: "#",
-    // }),
+    columnHelper.accessor("id", {
+      cell: (info) => info.getValue(),
+      header: "#",
+    }),
     columnHelper.accessor("paymentID", {
       cell: (info) => info.getValue(),
       header: "Payment ID",
@@ -158,7 +158,7 @@ export const Billings = () => {
       </div>
 
       <div className="md:block hidden pt-3 pl-3 rounded-[5px] md:rounded-[15px] bg-white shadow-md pb-20 md:mb-10">
-        <DataTable data={data} columns={columns} editRec="-123213" state={false}  />
+        <DataTable data={data} columns={columns} />
       </div>
       <div className="">
         <PaymentView />

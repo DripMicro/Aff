@@ -12,9 +12,9 @@ const ProfilePage: MyPage = () => {
         <meta name="description" content="Affiliates Profiles" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      {/* <main className={styles.main}> */}
         <Profiles />
-      </main>
+      {/* </main> */}
     </>
   );
 };

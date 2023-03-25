@@ -28,7 +28,7 @@ interface CommonFormProps {
   onSubmit: (values: unknown) => Promise<void>;
   children: React.ReactNode;
   actions?: React.ReactNode;
-  grid?: GridProps;
+  // grid?: GridProps;
 }
 
 const CommonForm = ({
@@ -36,7 +36,7 @@ const CommonForm = ({
   title,
   onSubmit,
   children,
-  grid,
+  // grid,
   actions,
 }: CommonFormProps) => {
   const onClose = useContext(ModalFormActionContext);
@@ -61,7 +61,7 @@ const CommonForm = ({
         <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <FormLayout grid={grid}>{children}</FormLayout>
+          <FormLayout>{children}</FormLayout>
         </ModalBody>
 
         <ModalFooter gap={4} justifyContent={actions ? "space-between" : "end"}>

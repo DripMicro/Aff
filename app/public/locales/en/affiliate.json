@@ -116,5 +116,17 @@
   },
   "approvedTerms": {
     "label": "I have read and accepted theTerms & Conditions"
+  },
+  "documentType": {
+    "choices": {
+      "Passport_Driving_Licence": "Passport/Driving Licence",
+      "Address_Verification": "Address Verification",
+      "Company_Verification": "Company Verification"
+    },
+    "label": "Document Type",
+    "placeholder": "Select a Document Type"
+  },
+  "documentFile": {
+    "label": "Document File"
   }
 }

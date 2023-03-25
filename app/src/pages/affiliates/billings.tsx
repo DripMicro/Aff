@@ -13,9 +13,9 @@ const Page: MyPage = () => {
         <meta name="description" content="Billing" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      {/* <main className={styles.main}> */}
         <Billings />
-      </main>
+      {/* </main> */}
     </>
   );
 };
