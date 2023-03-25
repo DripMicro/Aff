@@ -1,17 +1,18 @@
 import { Container, Flex, Input, Select } from "@chakra-ui/react";
 import Pagination from "@etchteam/next-pagination";
-import { RangeDatepicker } from "chakra-dayzed-datepicker";
 import { type NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { api } from "../../../utils/api";
-import styles from "./../../index.module.css";
 import {
   DateRangeSelect,
   useDateRange,
 } from "../../../components/common/DateRangeSelect";
+import { api } from "../../../utils/api";
+import styles from "./../../index.module.css";
+
 import type { MyPage } from "../../../components/common/types";
+
 const Page: MyPage = () => {
   const router = useRouter();
   const { from, to } = useDateRange();

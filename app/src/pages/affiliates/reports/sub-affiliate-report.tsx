@@ -18,8 +18,8 @@ const Page: MyPage = () => {
     new Date(),
   ]);
   const { data } = api.affiliates.getSubAffiliateReport.useQuery({
-    from: selectedDates[0],
-    to: selectedDates[1],
+    from: new Date(),
+    to: new Date(),
   });
   const { data: merchants } = api.affiliates.getAllMerchants.useQuery();
 

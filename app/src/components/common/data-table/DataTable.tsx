@@ -1,38 +1,36 @@
-import * as React from "react";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  chakra,
-  Button,
-  Box,
-  Stack,
-  HStack,
-  useDisclosure,
-} from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
+import {
+  chakra,
+  Table,
+  Tbody,
+  Td,
+  Tfoot,
+  Th,
+  Thead,
+  Tr,
+} from "@chakra-ui/react";
 import type { ColumnDef, SortingState } from "@tanstack/react-table";
 import {
-  useReactTable,
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
+  useReactTable,
 } from "@tanstack/react-table";
+import * as React from "react";
 
 export type DataTableProps<Data extends object> = {
   data: Data[] | null | undefined;
   columns: ColumnDef<Data, any>[];
+  footerData?: any;
 };
 
 export function DataTable<Data extends object>({
   data,
   columns,
+  footerData = [],
 }: DataTableProps<Data>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const table = useReactTable({
+  const { getHeaderGroups, getRowModel } = useReactTable({
     columns,
     data: data || [],
     getCoreRowModel: getCoreRowModel(),
@@ -47,7 +45,7 @@ export function DataTable<Data extends object>({
     <div className=" scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-100 scrollbar-thumb-rounded-full  scrollbar-track-rounded-full mt-4 overflow-x-scroll lg:overflow-y-hidden xl:overflow-x-hidden ">
       <Table border="1px solid #F0F0F0">
         <Thead bg="#F2F5F7">
-          {table.getHeaderGroups().map((headerGroup) => (
+          {getHeaderGroups().map((headerGroup) => (
             <Tr
               key={headerGroup.id}
               border="1px solid #F0F0F0"
@@ -84,7 +82,7 @@ export function DataTable<Data extends object>({
           ))}
         </Thead>
         <Tbody>
-          {table.getRowModel().rows.map((row, index) => (
+          {getRowModel().rows.map((row, index) => (
             <Tr key={row.id} className={index % 2 == 0 ? "" : " bg-[#F9FAFF]"}>
               {row.getVisibleCells().map((cell) => {
                 // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly

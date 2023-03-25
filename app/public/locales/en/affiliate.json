@@ -128,5 +128,49 @@
   },
   "documentFile": {
     "label": "Document File"
+  },
+  "paymentMethod": {
+    "choices": {
+      "bank": "Wire Transfer",
+      "skrill": "Skrill",
+      "paypal": "Paypal",
+      "neteller": "Neteller",
+      "webmoney": "WebMoney",
+      "chinaunionpay": "China Union Pay"
+    },
+    "label": "Payment Method"
+  },
+  "pay_firstname": {
+    "label": "First Name"
+  },
+  "pay_lastname": {
+    "label": "Last Name"
+  },
+  "pay_address1": {
+    "label": "Address 1"
+  },
+  "pay_address2": {
+    "label": "Address 2"
+  },
+  "pay_city": {
+    "label": "City"
+  },
+  "pay_zip": {
+    "label": "Zip Code"
+  },
+  "pay_country": {
+    "label": "Country"
+  },
+  "preferredCurrency": {
+    "label": "Preferred Currency"
+  },
+  "pay_info": {
+    "label": "More Information"
+  },
+  "pay_email": {
+    "label": "Payment Email"
+  },
+  "pay_account": {
+    "label": "Account"
   }
 }

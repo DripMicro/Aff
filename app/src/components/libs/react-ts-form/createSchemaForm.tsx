@@ -406,7 +406,8 @@ export function createTsForm<
     // @ts-ignore
     const shape: Record<string, RTFSupportedZodTypes> = _schema._def.shape();
 
-    const propsDesc = getZodMetaInfo(_schema).meta;
+    // const propsDesc = getZodMetaInfo(_schema).meta;
+    const propsDesc = formContext.formMeta.meta;
     // console.log(`muly:Component:createSchemaForm`, {
     //   _schema,
     //   shape,

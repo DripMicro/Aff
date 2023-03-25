@@ -183,9 +183,13 @@ export const QuickSummaryReport = () => {
         divCol(row?.original?.RealAccount, row.original.Clicks),
       header: "Click to Account",
     }),
-    columnHelper.accessor("Leads", {
+    columnHelper.accessor("click-to-sale" as any, {
       cell: ({ row }) => divCol(row?.original?.FTD, row.original.Clicks),
       header: "Click to Sale",
+    }),
+    columnHelper.accessor("Leads", {
+      cell: (info) => info.getValue(),
+      header: "Leads",
     }),
     columnHelper.accessor("Demo", {
       cell: (info) => info.getValue(),
@@ -245,6 +249,69 @@ export const QuickSummaryReport = () => {
       title: "daily",
     },
   ];
+
+  let totalImpressions = 0;
+  let totalClicks = 0;
+  let totalCPIM = 0;
+  let totalLeadsAccounts = 0;
+  let totalDemoAccounts = 0;
+  let totalRealAccounts = 0;
+  let totalFTD = 0;
+  let totalFTDAmount = 0;
+  let totalRealFtd = 0;
+  let totalRealFtdAmount = 0;
+  let totalDeposits = 0;
+  let totalDepositAmount = 0;
+  let totalVolume = 0;
+  let totalBonus = 0;
+  let totalWithdrawal = 0;
+  let totalChargeback = 0;
+  let totalNetRevenue = 0;
+  let totalFooterPNL = 0;
+  let totalActiveTraders = 0;
+  let totalComs = 0;
+
+  data?.forEach((row: any) => {
+    totalImpressions += row?.Impressions;
+    totalClicks += Number(row?.Clicks);
+    totalCPIM += Number(row?.Install);
+    totalLeadsAccounts += Number(row?.Leads);
+    totalDemoAccounts += Number(row?.Demo);
+    totalRealAccounts += Number(row?.RealAccount);
+    totalFTD += Number(row?.FTD);
+    totalFTDAmount += Number(row?.FTDAmount);
+    totalRealFtd += Number(row?.RawFTD);
+    totalRealFtdAmount += Number(row?.RawFTDAmount);
+    totalDeposits += Number(row?.Deposits);
+    totalDepositAmount += Number(row?.DepositsAmount);
+    totalVolume += Number(row?.Volume);
+    totalBonus += Number(row?.Bonus);
+    totalWithdrawal += Number(row?.Withdrawal);
+    totalChargeback += Number(row?.ChargeBack);
+    totalNetRevenue += Number(row?.NetDeposit);
+    totalFooterPNL += Number(row?.PNL);
+    totalActiveTraders += Number(row?.ActiveTrader);
+    totalComs += row?.Commission;
+  });
+
+  const totalObj = [];
+  totalObj.push({
+    totalImpressions,
+    totalClicks,
+    totalCPIM,
+    totalCTR: `${((totalClicks / totalImpressions) * 100).toFixed(2)}%`,
+    totalCTA: `${((totalRealAccounts / totalClicks) * 100).toFixed(2)}%`,
+    totalCTS: `${((totalFTD / totalClicks) * 100).toFixed(2)}%`,
+    totalLeadsAccounts,
+    totalDemoAccounts,
+    totalRealAccounts,
+    totalFTD,
+    totalVolume,
+    totalWithdrawal,
+    totalChargeback,
+    totalActiveTraders,
+    totalComs,
+  });
 
   return (
     <>

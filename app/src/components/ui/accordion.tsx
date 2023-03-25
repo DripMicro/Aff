@@ -28,6 +28,8 @@ const AccordionTrigger = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
 >(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Header className="flex">
+    {/*TBD, give wierd i18n error, see https://github.com/i18next/react-i18next/issues/1543*/}
+    {/* @ts-ignore */}
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(

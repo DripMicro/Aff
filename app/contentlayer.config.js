@@ -35,7 +35,7 @@ export const Post = defineDocumentType(() => ({
     url: {
       type: "string",
       resolve: (blog) => {
-        console.log(`muly:resolve:blog`, { blog });
+        // console.log(`muly:resolve:blog`, { blog });
         return `/blog/${blog._raw.flattenedPath}`;
       },
     },

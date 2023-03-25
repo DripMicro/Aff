@@ -18,8 +18,8 @@ const Page: MyPage = () => {
     new Date(),
   ]);
   const { data } = api.affiliates.getTraderReport.useQuery({
-    from: selectedDates[0]?.toString(),
-    to: selectedDates[1]?.toString(),
+    from: new Date().toISOString(),
+    to: new Date().toISOString(),
   });
   const { data: merchants } = api.affiliates.getAllMerchants.useQuery();
   const { data: countries } = api.affiliates.getLongCountries.useQuery({
