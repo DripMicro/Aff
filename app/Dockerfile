@@ -28,7 +28,7 @@ RUN \
 
 FROM base AS builder
 ARG DATABASE_URL
-ARG NEXT_PUBLIC_CLIENTVAR
+ARG NEXT_PUBLIC_FLAGS_ENV_KEY
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
