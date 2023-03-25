@@ -5,7 +5,7 @@ import { Flex } from "@chakra-ui/react";
 import { QueryText } from "../../common/QueryText";
 import { CreativeMaterialTable } from "../creative/CreativeMaterialTable";
 import { CreativeMaterialRow } from "../creative/CreativeMaterialRow";
-import { CreativeMaterialComponent } from '../creative/CreativeMaterialComponent';
+import { CreativeMaterialComponent } from "../creative/CreativeMaterialComponent";
 
 export const SubCreativeMaterial = () => {
   const router = useRouter();
@@ -22,19 +22,20 @@ export const SubCreativeMaterial = () => {
   );
 
   return (
-    <div className="pt-5 pb-4 w-full -ml-5">
-      <div className=" mb-5 block font-medium text-base">
-        <span className="text-[#2262C6]">Marketing Tools</span> / Sub Creative Materials
+    <div className="-ml-5 w-full pt-5 pb-4">
+      <div className=" mb-5 block text-base font-medium">
+        <span className="text-[#2262C6]">Marketing Tools</span> / Sub Creative
+        Materials
       </div>
-      <div className="flex justify-between items-center">
-        <div className=" font-medium text-sm">
+      <div className="flex items-center justify-between">
+        <div className=" text-sm font-medium">
           <QuerySelect
             label="Creative Type"
             choices={meta?.type}
             varName="type"
           />
         </div>
-        <div className="md:mt-3 font-medium md:text-sm text-lg">
+        <div className="text-lg font-medium md:mt-3 md:text-sm">
           <QueryText varName="search" label="Search Creative" />
         </div>
       </div>

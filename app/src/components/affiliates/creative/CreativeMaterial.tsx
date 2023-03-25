@@ -6,7 +6,7 @@ import { CreativeMaterialTable } from "./CreativeMaterialTable";
 import { QueryText } from "../../common/QueryText";
 import type { merchants_creative_type } from "@prisma/client";
 import { CreativeMaterialRow } from "./CreativeMaterialRow";
-import { CreativeMaterialComponent } from "./CreativeMaterialComponent"
+import { CreativeMaterialComponent } from "./CreativeMaterialComponent";
 import { title } from "process";
 
 export const CreativeMaterialTypeMap: {
@@ -46,11 +46,12 @@ export const CreativeMaterial = () => {
   );
 
   return (
-    <div className="pt-5 pb-4 w-full -ml-5">
-      <div className=" mb-5 block font-medium text-base">
-        <span className="text-[#2262C6]">Marketing Tools</span> / Creative Materials
+    <div className="-ml-5 w-full pt-5 pb-4">
+      <div className=" mb-5 block text-base font-medium">
+        <span className="text-[#2262C6]">Marketing Tools</span> / Creative
+        Materials
       </div>
-      <div className="mb-5 md:mb-28 grid grid-cols-2 lg:grid-cols-6 gap-5">
+      <div className="mb-5 grid grid-cols-2 gap-5 md:mb-28 lg:grid-cols-6">
         <QuerySelect
           label="Creative Type"
           choices={meta?.type}
@@ -75,27 +76,30 @@ export const CreativeMaterial = () => {
         />
         <QueryText varName="search" label="Search Creative" />
       </div>
-      <div className="md:-mt-28 grid grid-cols-2 md:grid-cols-4 gap-2 items-center">
+      <div className="grid grid-cols-2 items-center gap-2 md:-mt-28 md:grid-cols-4">
         <div className="col-span-2 rounded p-2 md:p-5 ">
-          <div className="bg-[#F9F9FF]  py-2 px-3 w-full ">
-          </div>
+          <div className="w-full  bg-[#F9F9FF] py-2 px-3 "></div>
         </div>
         <div className="rounded p-2 md:p-5">
           <div className="">
-            <div className=' text-[10px] '></div>
+            <div className=" text-[10px] "></div>
             <QuerySelect
               choices={meta?.merchants_promotions}
               emptyTitle="General"
-              varName="promotion" label={""}            />
+              varName="promotion"
+              label={""}
+            />
           </div>
         </div>
         <div className=" rounded p-2 md:p-4">
           <div className="">
-            <div className='text-[10px] mb-1'></div>
+            <div className="mb-1 text-[10px]"></div>
             <QuerySelect
               choices={meta?.merchants_promotions}
               emptyTitle="General"
-              varName="promotion" label={""}            />
+              varName="promotion"
+              label={""}
+            />
           </div>
         </div>
       </div>
@@ -118,11 +122,13 @@ export const CreativeMaterial = () => {
           { title: "Language", value: item.language?.title },
         ];
         return (
-          <CreativeMaterialComponent key={item.id}
+          <CreativeMaterialComponent
+            key={item.id}
             values={values}
             file={item.file || undefined}
             alt={item.alt}
-            url={item.url} />
+            url={item.url}
+          />
           // <CreativeMaterialRow
           //   key={item.id}
           //   values={values}
@@ -130,7 +136,6 @@ export const CreativeMaterial = () => {
           //   alt={item.alt}
           //   url={item.url}
           // />
-
         );
       })}
       {/* </CreativeMaterialTable> */}

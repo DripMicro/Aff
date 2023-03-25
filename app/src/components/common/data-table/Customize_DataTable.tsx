@@ -52,9 +52,8 @@ export function CustomizeDataTable<Data extends object>({
     },
   });
 
-
   return (
-    <div className=" scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-100 overflow-x-scroll  scrollbar-thumb-rounded-full scrollbar-track-rounded-full 3xl:overflow-x-hidden  mt-3 ">
+    <div className=" scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-100 scrollbar-thumb-rounded-full  scrollbar-track-rounded-full 3xl:overflow-x-hidden mt-3  overflow-x-scroll ">
       <Table border="1px solid #F0F0F0">
         <Thead bg="#F2F5F7">
           {table.getHeaderGroups().map((headerGroup) => (
@@ -98,7 +97,7 @@ export function CustomizeDataTable<Data extends object>({
             <Tr key={row.id} maxHeight="6">
               {row.getVisibleCells().map((cell, index) => {
                 // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
-                
+
                 const meta = cell.column.id;
                 if (state) {
                   return (
@@ -110,22 +109,16 @@ export function CustomizeDataTable<Data extends object>({
                       border="1px solid #F0F0F0 "
                       fontStyle="mormal"
                     >
-                      
-                      {
-                      editRec == +row.id ? (
+                      {editRec == +row.id ? (
                         meta == "merchant" ||
                         meta == "type" ||
                         meta == "method" ? (
-                          <select className="w-32 h-8 border border-[#D7D7D7] rounded-md ">
-                            <option value="volvo">
-                              {
-                              meta}
-                            </option>
+                          <select className="h-8 w-32 rounded-md border border-[#D7D7D7] ">
+                            <option value="volvo">{meta}</option>
                           </select>
-                        ) : 
-                        // @ts-ignore
+                        ) : // @ts-ignore
                         meta == "pixelCode" ? (
-                          <input className="w-32 h-8 border border-[#D7D7D7] rounded-md" />
+                          <input className="h-8 w-32 rounded-md border border-[#D7D7D7]" />
                         ) : (
                           flexRender(
                             cell.column.columnDef.cell,

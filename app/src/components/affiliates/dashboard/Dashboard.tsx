@@ -844,7 +844,7 @@ export const Dashboard = () => {
         <div className="text-xl font-bold text-[#2262C6] ">
           Top Performing Creative
         </div>
-        <DataTable data={creative} columns={columns}  />
+        <DataTable data={creative} columns={columns} />
       </div>
     </div>
   );

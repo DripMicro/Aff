@@ -1,5 +1,9 @@
 import React from "react";
 
+interface Props {
+  id: string;
+}
+
 interface payment_data {
   id: number;
   paid: boolean;
@@ -9,8 +13,8 @@ interface payment_data {
   total: string;
 }
 
-interface Pyament_array <Array> {
-  array: payment_data
+interface Pyament_array<Array> {
+  array: payment_data;
 }
 
 interface PaymentViewProps<Data extends object> {
@@ -60,17 +64,16 @@ const data = [
   },
 ];
 
-export function PaymentView<Data extends object>() {
+export const PaymentView = ({ id }: Props) => {
   // const { data } = api.affiliates.getPaymentDetails.useQuery({ paymentId: id });
 
-
   const paid_payment = (
-    <button className="w-16 h-6 bg-green-200  text-green-800 rounded-md ">
+    <button className="h-6 w-16 rounded-md  bg-green-200 text-green-800 ">
       Paid
     </button>
   );
   const pending_payment = (
-    <button className="w-16 h-6 bg-red-200  text-red-800 rounded-md ">
+    <button className="h-6 w-16 rounded-md  bg-red-200 text-red-800 ">
       Pending
     </button>
   );
@@ -82,14 +85,16 @@ export function PaymentView<Data extends object>() {
             return (
               <div
                 key={index}
-                className="w-full border bg-white shadow-lg rounded-xl mb-3"
+                className="mb-3 w-full rounded-xl border bg-white shadow-lg"
               >
                 <div className=" h-20 ">
                   <div className="flex h-12 justify-between pt-6">
-                    <div className="text-base font-normal ml-6">#0{data.id}</div>
+                    <div className="ml-6 text-base font-normal">
+                      #0{data.id}
+                    </div>
                     <div className="mr-6">
                       {data.paid ? paid_payment : pending_payment}
-                    </div> 
+                    </div>
                   </div>
                   <div className="flex"></div>
                 </div>
@@ -117,4 +122,4 @@ export function PaymentView<Data extends object>() {
         : null}
     </div>
   );
-}
+};

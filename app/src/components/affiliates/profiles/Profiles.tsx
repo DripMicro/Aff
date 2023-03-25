@@ -34,7 +34,7 @@ import { CustomizeDataTable } from "../../common/data-table/Customize_DataTable"
 
 const columnHelper = createColumnHelper<AffiliateProfileType>();
 
-const schema = z.object({
+export const schema = z.object({
   name: z.string().describe("Profile Name"),
   description: z.string().optional().describe("Description"),
   source_traffic: z.string().optional().describe("Traffic Source"),
@@ -145,15 +145,35 @@ export const Profiles = () => {
       // cell: (info) => info.getValue(),
       cell: (info) => {
         return info.getValue() ? (
-          <div className="text-center flex justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10" viewBox="0 0 12 10" fill="none">
-              <path d="M0.951172 5.85409L4.28451 8.97909L10.9512 0.645752" stroke="#50B8B6" stroke-width="2" stroke-linejoin="round" />
+          <div className="flex justify-center text-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="10"
+              viewBox="0 0 12 10"
+              fill="none"
+            >
+              <path
+                d="M0.951172 5.85409L4.28451 8.97909L10.9512 0.645752"
+                stroke="#50B8B6"
+                stroke-width="2"
+                stroke-linejoin="round"
+              />
             </svg>
           </div>
         ) : (
-          <div className="text-center flex justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" fill="none">
-              <path d="M1.52576 8L4 5.52576L6.47424 8L8 6.47424L5.52576 4L8 1.52576L6.47424 0L4 2.47424L1.52576 0L0 1.52576L2.47424 4L0 6.47424L1.52576 8Z" fill="#FE6969" />
+          <div className="flex justify-center text-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="8"
+              height="8"
+              viewBox="0 0 8 8"
+              fill="none"
+            >
+              <path
+                d="M1.52576 8L4 5.52576L6.47424 8L8 6.47424L5.52576 4L8 1.52576L6.47424 0L4 2.47424L1.52576 0L0 1.52576L2.47424 4L0 6.47424L1.52576 8Z"
+                fill="#FE6969"
+              />
             </svg>
           </div>
         );
@@ -187,14 +207,19 @@ export const Profiles = () => {
         </div>
       </div>
 
-      <div className="pt-3 pl-3 rounded-[5px] md:rounded-[15px] bg-white shadow-md pb-10 md:mb-10">
-        <CustomizeDataTable data={data} columns={columns} editRec={-11} state={false} />
+      <div className="rounded-[5px] bg-white pt-3 pl-3 pb-10 shadow-md md:mb-10 md:rounded-[15px]">
+        <CustomizeDataTable
+          data={data}
+          columns={columns}
+          editRec={-11}
+          state={false}
+        />
         <HStack justifyContent="end" px={6} pt={6}>
           <button
             onClick={onOpen}
-            className="flex bg-[#1B48BB] text-white px-8 py-2 rounded-md justify-center font-medium text-base"
+            className="flex justify-center rounded-md bg-[#1B48BB] px-8 py-2 text-base font-medium text-white"
           >
-            <div className="text-white mr-2 h-6 inline-flex justify-center items-center">
+            <div className="mr-2 inline-flex h-6 items-center justify-center text-white">
               <AddIcon />
             </div>
             Add
@@ -209,11 +234,11 @@ export const Profiles = () => {
       >
         <ModalOverlay />
         <ModalContent ml={4} mr={4}>
-          <div className="flex pl-6 md:pl-8 pt-4 justify-between items-end  ">
-            <div className="text-[#27263d] font-xl">Add Profile</div>
+          <div className="flex items-end justify-between pl-6 pt-4 md:pl-8  ">
+            <div className="font-xl text-[#27263d]">Add Profile</div>
             <Image
               alt="..."
-              className="mr-4 w-10 h-10 rounded-full align-middle "
+              className="mr-4 h-10 w-10 rounded-full align-middle "
               src="/img/icons/close.png"
               onClick={onCloseAddModal}
             />
@@ -224,11 +249,11 @@ export const Profiles = () => {
               <SimpleGrid minChildWidth="100px" spacing="35px">
                 <div className="md:flex">
                   <div className="flex-1 p-2">
-                    <label className="block text-gray-600 mb-1.5 ml-2.5  font-medium">
+                    <label className="mb-1.5 ml-2.5 block font-medium  text-gray-600">
                       Profile Name
                     </label>
                     <input
-                      className="border px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-sm"
+                      className="placeholder-blueGray-300 text-blueGray-700 w-full rounded border bg-white px-3 py-4 text-sm shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
                       id="profile"
                       type="text"
                       placeholder="Type Here..."
@@ -236,11 +261,11 @@ export const Profiles = () => {
                   </div>
 
                   <div className="flex-1 p-2">
-                    <label className="block text-gray-600 mb-1.5 ml-2.5  font-medium">
+                    <label className="mb-1.5 ml-2.5 block font-medium  text-gray-600">
                       URL
                     </label>
                     <input
-                      className="border px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-sm"
+                      className="placeholder-blueGray-300 text-blueGray-700 w-full rounded border bg-white px-3 py-4 text-sm shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
                       id="url"
                       type="text"
                       placeholder="https://"
@@ -251,11 +276,11 @@ export const Profiles = () => {
               <SimpleGrid minChildWidth="100px" spacing="35px">
                 <div className="md:flex">
                   <div className="flex-1 p-2">
-                    <label className="block text-gray-600 mb-1.5 ml-2.5  font-medium">
+                    <label className="mb-1.5 ml-2.5 block font-medium  text-gray-600">
                       Description
                     </label>
                     <input
-                      className="border px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-sm"
+                      className="placeholder-blueGray-300 text-blueGray-700 w-full rounded border bg-white px-3 py-4 text-sm shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
                       id="description"
                       type="text"
                       placeholder="Type Here..."
@@ -263,11 +288,11 @@ export const Profiles = () => {
                   </div>
 
                   <div className="flex-1 p-2">
-                    <label className="block text-gray-600 mb-1.5 ml-2.5  font-medium">
+                    <label className="mb-1.5 ml-2.5 block font-medium  text-gray-600">
                       Traffic Source
                     </label>
                     <input
-                      className="border px-3 py-4 placeholder-blueGray-300 text-blueGray-700 bg-white rounded shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 text-sm"
+                      className="placeholder-blueGray-300 text-blueGray-700 w-full rounded border bg-white px-3 py-4 text-sm shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
                       id="traffic"
                       type="text"
                       placeholder="Type Here...."
@@ -278,9 +303,9 @@ export const Profiles = () => {
             </div>
           </ModalBody>
 
-          <div className=" self-center  p-6 md:p-8 md:pt-10 font-medium">
+          <div className=" self-center  p-6 font-medium md:p-8 md:pt-10">
             <button
-              className="bg-[#2262C6] text-white md:mx-40 	 px-6 md:px-14 py-3 rounded-md w-44 md:w-96 mb-4 "
+              className="mb-4 w-44 rounded-md 	 bg-[#2262C6] px-6 py-3 text-white md:mx-40 md:w-96 md:px-14 "
               onClick={onClose}
             >
               Save

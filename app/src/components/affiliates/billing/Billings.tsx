@@ -17,7 +17,6 @@ import {
   EditIcon,
   ViewIcon,
   SearchIcon,
-  
 } from "@chakra-ui/icons";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
@@ -42,7 +41,7 @@ const ex_data = [
     transaction_id: "string",
     notes: "string",
     extras: "string",
-    total: 50
+    total: 50,
   },
   {
     totalFTD: 60,
@@ -55,7 +54,7 @@ const ex_data = [
     transaction_id: "string",
     notes: "string",
     extras: "string",
-    total: 50
+    total: 50,
   },
 ];
 
@@ -70,15 +69,15 @@ export const Billings = () => {
     { keepPreviousData: true }
   );
 
-  console.log("UserQuery data: ",data);
-    console.log("Example Data: ", ex_data)
+  console.log("UserQuery data: ", data);
+  console.log("Example Data: ", ex_data);
   const paid_payment = (
-    <button className="w-16 h-5 bg-green-200 text-green-800 rounded-md  ">
+    <button className="h-5 w-16 rounded-md bg-green-200 text-green-800  ">
       Paid
     </button>
   );
   const pending_payment = (
-    <button className="w-16 h-5 bg-red-200 text-red-800 rounded-md ">
+    <button className="h-5 w-16 rounded-md bg-red-200 text-red-800 ">
       Pending
     </button>
   );
@@ -122,32 +121,32 @@ export const Billings = () => {
 
   return (
     <div className="pt-5 pb-4 ">
-      <div className=" lg:flex md:justify-between font-medium text-base md:flex">
-        <div className="md:flex items-center mb-2.5 hidden ">
+      <div className=" text-base font-medium md:flex md:justify-between lg:flex">
+        <div className="mb-2.5 hidden items-center md:flex ">
           <span className="text-[#2262C6]">Dashboard</span>
           &nbsp;-&nbsp;Billings
         </div>
         <div className="md:flex">
-          <div className="flex-1 p-2 relative  md:ml-5 px-2 md:px-3 md:pt-1.5 md:pb-2 rounded-md drop-shadow md:block hidden">
+          <div className="relative hidden flex-1  rounded-md p-2 px-2 drop-shadow md:ml-5 md:block md:px-3 md:pt-1.5 md:pb-2">
             <input
-              className="border px-3 py-3 w-40 md:w-96  placeholder-blueGray-300 text-blueGray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150  mr-5"
+              className="placeholder-blueGray-300 text-blueGray-700 mr-5 w-40 rounded  border bg-white px-3 py-3 text-sm shadow transition-all duration-150 ease-linear focus:outline-none focus:ring  md:w-96"
               placeholder="Search Merchant.."
             />
-            <label className="md:absolute right-8  mt-2 pr-4">
+            <label className="right-8 mt-2  pr-4 md:absolute">
               <SearchIcon color="#B3B3B3" />
             </label>
           </div>
         </div>
       </div>
       <div className="flex justify-between font-medium">
-        <div className="flex items-center mb-2.5 md:hidden">
+        <div className="mb-2.5 flex items-center md:hidden">
           <span className="text-[#2262C6]">Dashboard</span>
           &nbsp;-&nbsp;Billings
         </div>
-        <div className="md:hidden flex">
-          <div className=" flex-1 p-2 relative ml-5 px-3 md:pt-1.5 md:pb-2 rounded-md drop-shadow">
+        <div className="flex md:hidden">
+          <div className=" relative ml-5 flex-1 rounded-md p-2 px-3 drop-shadow md:pt-1.5 md:pb-2">
             <input
-              className="border px-3 py-3   placeholder-blueGray-300 text-blueGray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150  mr-5"
+              className="placeholder-blueGray-300 text-blueGray-700 mr-5   rounded border bg-white px-3 py-3 text-sm shadow transition-all duration-150 ease-linear focus:outline-none  focus:ring"
               placeholder="Search Merchant.."
             />
             <label className="absolute left-44 pt-2">
@@ -157,14 +156,14 @@ export const Billings = () => {
         </div>
       </div>
 
-      <div className="md:block hidden pt-3 pl-3 rounded-[5px] md:rounded-[15px] bg-white shadow-md pb-20 md:mb-10">
+      <div className="hidden rounded-[5px] bg-white pt-3 pl-3 pb-20 shadow-md md:mb-10 md:block md:rounded-[15px]">
         <DataTable data={data} columns={columns} />
       </div>
       <div className="">
-        <PaymentView />
+        <PaymentView id={""} />
       </div>
       <div className="md:hidden">
-        <div className="bg-white shadow-md rounded-lg ">
+        <div className="rounded-lg bg-white shadow-md ">
           {/* {
             ex_data.map((ex, index)) => {
               return <div key={index}>
@@ -176,7 +175,6 @@ export const Billings = () => {
           }
              */}
         </div>
-
       </div>
     </div>
   );
