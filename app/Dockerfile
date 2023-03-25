@@ -35,7 +35,7 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN yarn x_postinstall
+# RUN yarn x_postinstall
 
 RUN \
  if [ -f yarn.lock ]; then SKIP_ENV_VALIDATION=1 yarn build; \
