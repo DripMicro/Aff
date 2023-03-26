@@ -144,9 +144,9 @@ export const Billings = () => {
           &nbsp;-&nbsp;Billings
         </div>
         <div className="flex md:hidden">
-          <div className=" relative ml-5 flex-1 rounded-md p-2 px-3 drop-shadow md:pt-1.5 md:pb-2">
+          <div className="relative flex-1 rounded-md p-2 drop-shadow md:ml-5 md:px-3 md:pt-1.5 md:pb-2">
             <input
-              className="placeholder-blueGray-300 text-blueGray-700 mr-5   rounded border bg-white px-3 py-3 text-sm shadow transition-all duration-150 ease-linear focus:outline-none  focus:ring"
+              className="placeholder-blueGray-300 text-blueGray-700 dm:mr-5 rounded border bg-white px-3 py-3 text-sm shadow transition-all duration-150 ease-linear focus:outline-none  focus:ring"
               placeholder="Search Merchant.."
             />
             <label className="absolute left-44 pt-2">

@@ -85,13 +85,14 @@ const CommonForm = ({
               type="submit"
               size="md"
               variant="ghost"
-              bgColor="blue.100"
+              bgColor="#C0D1FD"
+              textColor="white"
               width="48"
               height="10"
               mt={margin}
               onClick={handleMinusChange}
             >
-              Prev
+              Previous
             </Button>
             <Button
               size="md"

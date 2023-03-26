@@ -106,9 +106,15 @@ export function PixelMonitorDataTable({
                       {editRec == +row.id ? (
                         meta == "merchant" ||
                         meta == "type" ||
+                        meta == "creative" ||
                         meta == "method" ? (
-                          <select className="h-8 w-32 rounded-md border border-[#D7D7D7] ">
-                            <option value="volvo">{meta}</option>
+                          <select className="w-32 rounded-md border border-[#D7D7D7] py-2 px-2 ">
+                            <option value="volvo">
+                              {flexRender(
+                                cell.column.columnDef.cell,
+                                cell.getContext()
+                              )}
+                            </option>
                           </select>
                         ) : // @ts-ignore
                         meta == "pixelCode" ? (

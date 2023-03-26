@@ -34,6 +34,7 @@ import {
 import { createColumnHelper } from "@tanstack/react-table";
 import { AreaChart, LineChart } from "@tremor/react";
 import { SingleDatepicker } from "chakra-dayzed-datepicker";
+import { queryTypes, useQueryState } from "next-usequerystate";
 import DashboardChart from "../../common/chart/DashboardChart";
 import PerformanceChart from "../../common/chart/PerformanceChart";
 import ConversionChart from "../../common/chart/ConversionChart";
@@ -63,7 +64,8 @@ import {
   ComissionIcon,
   SignupIcon,
 } from "../../icons";
-import { DateRangeSelect, useDateRange } from "../../common/DateRangeSelect";
+import { DateRangeSelect, useDateRange, useDateRangeDefault } from "../../common/DateRangeSelect";
+// import }DateRange} from '../../common/ddDa'
 
 import Affiliates from "../../../layouts/AffiliatesLayout";
 
@@ -89,32 +91,47 @@ export const Dashboard = () => {
   const [reportFields, setReportFields] = useState<
     { id: number; title: string; value: string; isChecked: boolean }[]
   >([]);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { data } = api.affiliates.getDashboard.useQuery({
     from,
     to,
   });
+
+  const { data: lastMonthData } = api.affiliates.getDashboard.useQuery(useDateRangeDefault('last-month'));
+
+  const { data: thisMonthData } = api.affiliates.getDashboard.useQuery(useDateRangeDefault('month-to-date'));
+
+  // const {thisFrom, thisTo} = useDateRange('month-to-date');
+
+  // const { data: thisMonthData } = api.affiliates.getDashboard.useQuery({
+  //   thisFrom,
+  //   thisTo,
+  // });
+
+  console.log("data");
+  console.log(data);
+
   const { data: performanceChart } =
     api.affiliates.getPerformanceChart.useQuery({ from, to });
+
+  const { data: perAllformanceChart } =
+    api.affiliates.getAllPerformanceChart.useQuery({ from, to });
 
   const { data: conversionChart } = api.affiliates.getConversionChart.useQuery({
     from,
     to,
   });
 
-  console.log("conversionChart");
-  console.log(conversionChart);
-
   const { data: creative } = api.affiliates.getTopMerchantCreative.useQuery();
-  console.log("creative");
-  console.log(creative);
   const { data: report } = api.affiliates.getCountryReport.useQuery();
   const { data: reportsHiddenCols } =
     api.affiliates.getReportsHiddenCols.useQuery();
   const { data: account, refetch } = api.affiliates.getAccount.useQuery();
   const upsertReportsField = api.affiliates.upsertReportsField.useMutation();
   const refChart = useRef<null | HTMLDivElement>(null);
+
   // const [width, setWidth] = useState<number | undefined>(0);
 
   // useLayoutEffect(() => {
@@ -144,7 +161,7 @@ export const Dashboard = () => {
     setReportFields(fieldsArray);
   }, [reportsHiddenCols]);
 
-  if (!data || !creative || !report || !performanceChart || !conversionChart) {
+  if (!data || !creative || !report || !performanceChart || !perAllformanceChart || !conversionChart || !lastMonthData || !thisMonthData) {
     return null;
   }
 
@@ -350,12 +367,12 @@ export const Dashboard = () => {
                 Unselect All
               </button>
             </div>
-            <button
+            {/* <button
               className="rounded-md bg-[#2262C6] px-6 py-3 text-white md:px-14"
               onClick={onClose}
             >
               Save
-            </button>
+            </button> */}
           </div>
         </ModalContent>
       </Modal>
@@ -368,8 +385,11 @@ export const Dashboard = () => {
               [index: string]: number;
             }
             const sumObject = data[0]?._sum as Sum;
-            console.log(sumObject);
             const value = sumObject ? sumObject[item.value] : 0;
+            const lastMonthObject = lastMonthData[0]?._sum as Sum;
+            const lastMonth = lastMonthObject ? lastMonthObject[item.value] : 0;
+            const thisMonthObject = thisMonthData[0]?._sum as Sum;
+            const thisMonth = thisMonthObject ? thisMonthObject[item.value] : 0;
 
             return (
               <>
@@ -403,17 +423,17 @@ export const Dashboard = () => {
                       </div>
                     </div>
                     <div className="flex flex-1 justify-end">
-                      <DashboardChart />
+                      <DashboardChart performanceChartData={perAllformanceChart} value={item.value} />
                     </div>
                   </div>
                   <div className="flex justify-between pt-5 md:pt-3">
                     <div className="text-center">
                       <div className="text-sm">Last Month</div>
-                      <div className="text-base font-bold">643</div>
+                      <div className="text-base font-bold">{lastMonth}</div>
                     </div>
                     <div className="text-center">
                       <div className="text-sm">This Month</div>
-                      <div className="text-base font-bold">432</div>
+                      <div className="text-base font-bold">{thisMonth}</div>
                     </div>
                   </div>
                 </div>
@@ -497,11 +517,11 @@ export const Dashboard = () => {
             <div className="flex items-center justify-center text-xs font-light">
               <select className="pr-2 text-xs font-light text-black">
                 <option>Last 90 Days</option>
-                <option>Signup</option>
-                <option>Signup</option>
-                <option>Signup</option>
-                <option>Signup</option>
-                <option>Signup</option>
+                <option>last 6 Month</option>
+                <option>Today</option>
+                <option>Yesterday</option>
+                <option>Last Year</option>
+                <option>Year to Date</option>
               </select>
             </div>
           </div>
@@ -608,11 +628,11 @@ export const Dashboard = () => {
             <div className="flex items-center justify-center text-xs font-light">
               <select className="pr-2 text-xs font-light text-black">
                 <option>Last 90 Days</option>
-                <option>Signup</option>
-                <option>Signup</option>
-                <option>Signup</option>
-                <option>Signup</option>
-                <option>Signup</option>
+                <option>last 6 Month</option>
+                <option>Today</option>
+                <option>Yesterday</option>
+                <option>Last Year</option>
+                <option>Year to Date</option>
               </select>
             </div>
           </div>

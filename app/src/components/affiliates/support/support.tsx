@@ -41,10 +41,10 @@ const Support = () => {
   return (
     <div className="pt-5 pb-4">
       <div className=" mb-5 block text-base font-medium">
-        <span className="text-[#2262C6]">Dashboard</span> - Support - FAQ
+        <span className="text-[#2262C6]">Dashboard</span> - Support
         <div className="container mt-3">
           <div className="items-center justify-between text-center text-white md:flex md:text-left">
-            <div className="mb-4 flex flex-wrap items-center justify-center md:mb-0 md:justify-start">
+            <div className="mb-4 flex flex-wrap items-center justify-start md:mb-0 md:justify-start">
               <div className="relative flex items-center justify-between">
                 <input
                   type="search"
@@ -71,7 +71,7 @@ const Support = () => {
                 </svg>
               </div>
             </div>
-            <div className="flex items-center justify-center text-xs font-medium text-gray-700 transition duration-150 ease-in-out">
+            <div className="flex items-center justify-end text-xs font-medium text-gray-700 transition duration-150 ease-in-out">
               <button
                 type="submit"
                 onClick={() => setFlag(!flag)}

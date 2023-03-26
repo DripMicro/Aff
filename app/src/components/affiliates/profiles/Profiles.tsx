@@ -187,8 +187,8 @@ export const Profiles = () => {
             leftIcon={<EditIcon />}
             onClick={() => setEditRec(info.row.original)}
             fontSize="text-xs"
-            width="14"
-            height="7"
+            px={2}
+            height={8}
           >
             Edit
           </Button>

@@ -70,7 +70,7 @@ export function CustomersupportTable<Data extends object>({
             </Tr>
           ))}
         </Thead>
-        <Tbody className=" text-xs font-normal text-[#606060] md:font-light md:text-[#404040]">
+        <Tbody className="text-sm font-normal">
           {table.getRowModel().rows.map((row) => (
             <Tr key={row.id} maxHeight="6">
               {row.getVisibleCells().map((cell) => {

@@ -431,24 +431,37 @@ const PixelMonitor = () => {
                   {steps.map(({ id, label, content }) => {
                     return (
                       <>
-                        <div key={id} className="flex w-40 md:w-56 ">
-                          {count >= id ? (
-                            count > id ? (
-                              <div className="pt- h-10 w-10 rounded-full  border-2 border-dashed   border-[#2262C6] bg-gray-200  text-center text-xs text-[#2262C6] md:h-14 md:w-14 md:pt-3 md:text-base">
-                                <CheckIcon className="mt-3 md:mt-0" />
-                              </div>
+                        <div key={id} className="flex-1">
+                          <div className="flex items-center">
+                            {count >= id ? (
+                              count > id ? (
+                                <div className="flex h-5 w-5 items-center justify-center rounded-full border-2 border-dashed border-[#2262C6] bg-[#F4F4F4] text-center text-xs text-[#2262C6] md:h-12 md:w-12 md:text-base">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="18"
+                                    height="14"
+                                    viewBox="0 0 18 14"
+                                    fill="none"
+                                  >
+                                    <path
+                                      d="M6.00039 11.2L1.80039 7L0.400391 8.4L6.00039 14L18.0004 2L16.6004 0.599998L6.00039 11.2Z"
+                                      fill="#2262C6"
+                                    />
+                                  </svg>
+                                </div>
+                              ) : (
+                                <div className="flex h-5 w-5 items-center justify-center rounded-full border-2 border-dashed border-[#2262C6] bg-[#F4F4F4] text-center text-[8px] font-medium text-[#2262C6] md:h-12 md:w-12 md:text-base">
+                                  0{id}
+                                </div>
+                              )
                             ) : (
-                              <div className="h-10 w-10 rounded-full border-2 border-dashed border-[#2262C6] bg-gray-200   pt-2.5  text-center text-xs text-[#000000] md:h-14 md:w-14 md:pt-3.5 md:text-base">
+                              <div className="flex h-5 w-5 items-center justify-center rounded-full border-2 border-dashed border-[#727272] bg-[#F4F4F4] text-center text-[8px] font-medium text-black md:h-12 md:w-12 md:text-base">
                                 0{id}
                               </div>
-                            )
-                          ) : (
-                            <div className="h-10 w-10 rounded-full border-2 border-dashed border-[#F4F4F4] bg-gray-200   pt-2  text-center text-xs text-[#000000] md:h-14 md:w-14 md:pt-3 md:text-base">
-                              0{id}
+                            )}
+                            <div className=" ml-1 text-[8px] text-[#000000] md:ml-2 md:text-base">
+                              {label}
                             </div>
-                          )}
-                          <div className="pl-2 pt-2 text-xs text-[#000000] md:pl-5 md:pt-3 md:text-base">
-                            {label}
                           </div>
                         </div>
                       </>
@@ -476,7 +489,7 @@ const PixelMonitor = () => {
         <div className="flex  justify-end ">
           <button
             onClick={onOpen}
-            className="mb-7 mt-6 h-10 w-44 rounded-md bg-blue-600 text-sm text-stone-50 outline md:hidden"
+            className="mb-7 mr-3 mt-6 h-10 w-44 rounded-md bg-blue-600 text-sm text-stone-50 outline md:hidden"
           >
             New Pixel Monitor
           </button>

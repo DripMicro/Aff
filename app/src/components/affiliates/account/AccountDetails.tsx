@@ -38,10 +38,18 @@ export const AccountDetails = () => {
         <Flex direction="column" gap={2} maxW="4xl" width="100%">
           <Tabs>
             <TabList>
-              <Tab>Account</Tab>
-              <Tab>Contact</Tab>
-              <Tab>Invoice</Tab>
-              <Tab>Website</Tab>
+              <Tab px={3} className="font-medium text-[#2262C6]">
+                Account
+              </Tab>
+              <Tab px={3} className="font-medium text-[#2262C6]">
+                Contact
+              </Tab>
+              <Tab px={3} className="font-medium text-[#2262C6]">
+                Invoice
+              </Tab>
+              <Tab px={3} className="font-medium text-[#2262C6]">
+                Website
+              </Tab>
               {/*<Tab>Market</Tab>*/}
             </TabList>
 

@@ -35,10 +35,10 @@ export const TriggerForm = ({
   const formContext = usePrepareSchema(t, schema);
 
   return (
-    <Stack mt={12} gap={2}>
-      <Heading as="h6" size="xs">
-        Step 2: Trigger
-      </Heading>
+    <Stack gap={2}>
+      <div className="mt-5 font-medium text-black md:mt-12 md:text-lg">
+        Step 2: Select Trigger
+      </div>
       <StepperForm
         formContext={formContext}
         schema={schema}

@@ -21,9 +21,9 @@ export const FinishForm = ({
   };
 
   return (
-    <div className="mt-11 h-96">
-      <div className="font-xl font-normal text-[#000000]">
-        Step 1: Finish Pixel
+    <div className="h-96">
+      <div className="mt-5 font-medium text-black md:mt-12 md:text-lg">
+        Step 5: Finish Pixel
       </div>
       <Text fontSize="sm" mb={263}>
         The pixel will be idle until the Affiliate Manager will approve it.

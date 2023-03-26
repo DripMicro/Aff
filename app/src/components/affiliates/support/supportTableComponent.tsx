@@ -2,8 +2,8 @@ import * as React from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import { CustomersupportTable } from "./CustomersupportTable";
-
-import { SupportDropdown } from "./supportDropdown";
+import SupportDropDown from "../../Dropdowns/SupportDropdown";
+// import { SupportDropdown } from "./supportDropdown";
 
 type UnitConversion = {
   id: string;
@@ -197,7 +197,8 @@ const columns = [
     cell: (info) => {
       return (
         <>
-          <svg
+          <SupportDropDown />
+          {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             width="4"
             height="18"
@@ -207,7 +208,7 @@ const columns = [
             <circle cx="2" cy="2" r="2" fill="#B8B8B8" />
             <circle cx="2" cy="9" r="2" fill="#B8B8B8" />
             <circle cx="2" cy="16" r="2" fill="#B8B8B8" />
-          </svg>
+          </svg> */}
         </>
         // <SupportDropdown />
       );
