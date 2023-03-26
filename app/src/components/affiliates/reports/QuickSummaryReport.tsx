@@ -390,12 +390,17 @@ export const QuickSummaryReport = () => {
         <div className="mt-2 items-end justify-between lg:flex">
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
             <QuerySelect
-              label="Search Type"
+              label="Period"
               choices={displayOptions}
               varName="display"
             />
             <QuerySelect
-              label="Merchant"
+              label="From"
+              choices={merchant_options}
+              varName="merchant_id"
+            />
+            <QuerySelect
+              label="To"
               choices={merchant_options}
               varName="merchant_id"
             />
@@ -405,14 +410,9 @@ export const QuickSummaryReport = () => {
               varName="merchant_id"
             />
             <QuerySelect
-              label="Merchant"
-              choices={merchant_options}
-              varName="merchant_id"
-            />
-            <QuerySelect
-              label="Merchant"
-              choices={merchant_options}
-              varName="merchant_id"
+              label="Search Type"
+              choices={displayOptions}
+              varName="display"
             />
           </div>
           <div className="flex space-x-2">

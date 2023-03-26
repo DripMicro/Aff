@@ -172,5 +172,14 @@
   },
   "pay_account": {
     "label": "Account"
+  },
+  "subject": {
+    "label": "Ticket Subject"
+  },
+  "reply_email": {
+    "label": "Your Email"
+  },
+  "text": {
+    "label": "Ticket Content"
   }
 }

@@ -226,12 +226,7 @@ export const Profiles = () => {
           </button>
         </HStack>
       </div>
-      <Modal
-        isOpen={isOpenAddModal}
-        size="3xl"
-        onClose={onCloseAddModal}
-        isCentered
-      >
+      <Modal isOpen={isOpen} size="3xl" onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent ml={4} mr={4}>
           <div className="flex items-end justify-between pl-6 pt-4 md:pl-8  ">
@@ -240,7 +235,7 @@ export const Profiles = () => {
               alt="..."
               className="mr-4 h-10 w-10 rounded-full align-middle "
               src="/img/icons/close.png"
-              onClick={onCloseAddModal}
+              onClick={onClose}
             />
           </div>
 

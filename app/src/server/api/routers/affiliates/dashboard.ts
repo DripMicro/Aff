@@ -229,7 +229,9 @@ export const getAllPerformanceChart = publicProcedure
           ActiveTrader: data[0] ? data[0]._sum.ActiveTrader : 0,
           Commission: data[0] ? data[0]._sum.Commission : 0,
           PendingDeposits: data[0] ? data[0]._sum.PendingDeposits : 0,
-          PendingDepositsAmount: data[0] ? data[0]._sum.PendingDepositsAmount : 0
+          PendingDepositsAmount: data[0]
+            ? data[0]._sum.PendingDepositsAmount
+            : 0,
         };
       })
     );
@@ -339,20 +341,20 @@ export const upsertReportsField = publicProcedure
 
     return await (exists
       ? ctx.prisma.reports_fields.update({
-        where: {
-          id: exists.id,
-        },
-        data: {
-          removed_fields: remove_fields,
-        },
-      })
+          where: {
+            id: exists.id,
+          },
+          data: {
+            removed_fields: remove_fields,
+          },
+        })
       : ctx.prisma.reports_fields.create({
-        data: {
-          userlevel: level,
-          user_id: affiliate_id,
-          rdate: new Date(),
-          location: location,
-          removed_fields: remove_fields,
-        },
-      }));
+          data: {
+            userlevel: level,
+            user_id: affiliate_id,
+            rdate: new Date(),
+            location: location,
+            removed_fields: remove_fields,
+          },
+        }));
   });

@@ -70,33 +70,32 @@ interface Props {
 }
 
 interface performanceChartDataType {
-  Clicks: number | null,
-  Impressions: number | null,
-  Install: number | null,
-  Leads: number | null,
-  Demo: number | null,
-  RealAccount: number | null,
-  FTD: number | null,
-  FTDAmount: number | null,
-  Deposits: number | null,
-  DepositsAmount: number | null,
-  Bonus: number | null,
-  RawFTD: number | null,
-  RawFTDAmount: number | null,
-  Withdrawal: number | null,
-  ChargeBack: number | null,
-  NetDeposit: number | null,
-  PNL: number | null,
-  ActiveTrader: number | null,
-  Commission: number | null,
-  PendingDeposits: number | null,
-  PendingDepositsAmount: number | null,
+  Clicks: number | null;
+  Impressions: number | null;
+  Install: number | null;
+  Leads: number | null;
+  Demo: number | null;
+  RealAccount: number | null;
+  FTD: number | null;
+  FTDAmount: number | null;
+  Deposits: number | null;
+  DepositsAmount: number | null;
+  Bonus: number | null;
+  RawFTD: number | null;
+  RawFTDAmount: number | null;
+  Withdrawal: number | null;
+  ChargeBack: number | null;
+  NetDeposit: number | null;
+  PNL: number | null;
+  ActiveTrader: number | null;
+  Commission: number | null;
+  PendingDeposits: number | null;
+  PendingDepositsAmount: number | null;
   date: string;
 }
 
 const DashboardChart = ({ performanceChartData, value }: Props) => {
-  const dataValue: (number | null)[] = performanceChartData.map((field, i) => {
-
+  const dataValue = performanceChartData.map((field, i) => {
     interface Sum {
       [index: string]: number;
     }
@@ -104,7 +103,7 @@ const DashboardChart = ({ performanceChartData, value }: Props) => {
     const fieldObject = field as unknown as Sum;
     const fieldValue = fieldObject ? fieldObject[value] : 0;
 
-    return field.RealAccount;
+    return fieldValue;
   });
 
   const data = {
@@ -118,7 +117,6 @@ const DashboardChart = ({ performanceChartData, value }: Props) => {
     ],
   };
 
-  
   return <Bar width={"100%"} height={"50px"} options={options} data={data} />;
 };
 

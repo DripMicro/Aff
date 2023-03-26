@@ -45,14 +45,14 @@ export const options = {
   },
 };
 
-const labels = ["January", "February", "March", "April", "May"];
+const labels = ["Israel", "Brazil", "Canada", "USA", "Somalia"];
 
 export const data = {
   labels,
   datasets: [
     {
       label: "Dataset 1",
-      data: [10, 20, 30, 50, 70],
+      data: [60, 10, 40, 30, 70],
       backgroundColor: "#3B5EC2",
       maxBarThickness: 17,
       borderRadius: 3,

@@ -64,7 +64,11 @@ import {
   ComissionIcon,
   SignupIcon,
 } from "../../icons";
-import { DateRangeSelect, useDateRange, useDateRangeDefault } from "../../common/DateRangeSelect";
+import {
+  DateRangeSelect,
+  useDateRange,
+  useDateRangeDefault,
+} from "../../common/DateRangeSelect";
 // import }DateRange} from '../../common/ddDa'
 
 import Affiliates from "../../../layouts/AffiliatesLayout";
@@ -99,9 +103,13 @@ export const Dashboard = () => {
     to,
   });
 
-  const { data: lastMonthData } = api.affiliates.getDashboard.useQuery(useDateRangeDefault('last-month'));
+  const { data: lastMonthData } = api.affiliates.getDashboard.useQuery(
+    useDateRangeDefault("last-month")
+  );
 
-  const { data: thisMonthData } = api.affiliates.getDashboard.useQuery(useDateRangeDefault('month-to-date'));
+  const { data: thisMonthData } = api.affiliates.getDashboard.useQuery(
+    useDateRangeDefault("month-to-date")
+  );
 
   // const {thisFrom, thisTo} = useDateRange('month-to-date');
 
@@ -161,7 +169,16 @@ export const Dashboard = () => {
     setReportFields(fieldsArray);
   }, [reportsHiddenCols]);
 
-  if (!data || !creative || !report || !performanceChart || !perAllformanceChart || !conversionChart || !lastMonthData || !thisMonthData) {
+  if (
+    !data ||
+    !creative ||
+    !report ||
+    !performanceChart ||
+    !perAllformanceChart ||
+    !conversionChart ||
+    !lastMonthData ||
+    !thisMonthData
+  ) {
     return null;
   }
 
@@ -423,7 +440,10 @@ export const Dashboard = () => {
                       </div>
                     </div>
                     <div className="flex flex-1 justify-end">
-                      <DashboardChart performanceChartData={perAllformanceChart} value={item.value} />
+                      <DashboardChart
+                        performanceChartData={perAllformanceChart}
+                        value={item.value}
+                      />
                     </div>
                   </div>
                   <div className="flex justify-between pt-5 md:pt-3">
@@ -517,11 +537,8 @@ export const Dashboard = () => {
             <div className="flex items-center justify-center text-xs font-light">
               <select className="pr-2 text-xs font-light text-black">
                 <option>Last 90 Days</option>
-                <option>last 6 Month</option>
-                <option>Today</option>
-                <option>Yesterday</option>
-                <option>Last Year</option>
-                <option>Year to Date</option>
+                <option>Last 30 Days</option>
+                <option>Last 1 Days</option>
               </select>
             </div>
           </div>
@@ -628,11 +645,8 @@ export const Dashboard = () => {
             <div className="flex items-center justify-center text-xs font-light">
               <select className="pr-2 text-xs font-light text-black">
                 <option>Last 90 Days</option>
-                <option>last 6 Month</option>
-                <option>Today</option>
-                <option>Yesterday</option>
-                <option>Last Year</option>
-                <option>Year to Date</option>
+                <option>Last 30 Days</option>
+                <option>Last 1 Days</option>
               </select>
             </div>
           </div>

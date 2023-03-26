@@ -47,7 +47,7 @@ type CustomDateRange = DateRange | "custom";
 
 const formatValueDateRange = (
   from: Date | null | undefined,
-  to: Date | null | undefined 
+  to: Date | null | undefined
 ) => {
   return `${format(
     from || sub(new Date(), { months: 6 }),
