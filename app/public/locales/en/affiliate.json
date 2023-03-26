@@ -172,5 +172,6 @@
   },
   "pay_account": {
     "label": "Account"
-  }
+  },
+  "Document, too big, Maximum document size is 10MB": "Document, too big, Maximum document size is 10MB"
 }
