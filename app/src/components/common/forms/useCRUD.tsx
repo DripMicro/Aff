@@ -34,14 +34,25 @@ export const useCRUD = <T,>({
 }: Props<T>) => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+
   const handleSubmit = async (oldRec: T | undefined, newRec: T) => {
     console.log(`muly:handleSubmit`, { oldRec, newRec });
-    await onUpsert({ ...(oldRec || {}), ...newRec });
-    // await upsertMutation.mutateAsync({
-    //   ...(oldRec || {}),
-    //   ...newRec,
-    // });
-    await refetch();
+    try {
+      await onUpsert({ ...(oldRec || {}), ...newRec });
+      // await upsertMutation.mutateAsync({
+      //   ...(oldRec || {}),
+      //   ...newRec,
+      // });
+      await refetch();
+    } catch (_err) {
+      const error = castError(_err);
+      toast({
+        variant: "destructive",
+        title: text?.addTitle || "Add",
+        description: `Error: ${error.message}`,
+        duration: 10000,
+      });
+    }
   };
 
   const handleDelete = async (editRec: T) => {

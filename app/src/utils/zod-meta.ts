@@ -37,6 +37,7 @@ export interface ZodMetaDataItem {
   label?: string | ControlCallback;
   placeholder?: string;
   text?: Record<string, string>;
+  stepInfo?: "none" | { name?: string; sub: string };
   control?: string | ControlCallback;
   choices?: ChoiceType[];
   className?: string;
