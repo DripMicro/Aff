@@ -565,21 +565,21 @@ model data_reg {
   freeParam5           String        @db.VarChar(170)
   merchant_id          Int
   status               String        @db.VarChar(20)
-  lastUpdate           DateTime      @ignore @default(dbgenerated("'0000-00-00 00:00:00'")) @db.Timestamp(0)
+  lastUpdate           DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @ignore @db.Timestamp(0)
   platform             String        @db.VarChar(30)
   uid                  String        @db.VarChar(35)
   saleStatus           String        @db.VarChar(50)
   lastSaleNote         String        @db.VarChar(200)
-  lastSaleNoteDate     DateTime      @ignore @default(dbgenerated("'0000-00-00 00:00:00'")) @db.Timestamp(0)
-  lastTimeActive       DateTime      @ignore @default(dbgenerated("'0000-00-00 00:00:00'")) @db.Timestamp(0)
-  initialftddate       DateTime      @ignore @default(dbgenerated("'0000-00-00 00:00:00'")) @db.Timestamp(0)
+  lastSaleNoteDate     DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @ignore @db.Timestamp(0)
+  lastTimeActive       DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @ignore @db.Timestamp(0)
+  initialftddate       DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @ignore @db.Timestamp(0)
   initialftdtranzid    String        @db.VarChar(40)
   isSelfDeposit        Boolean       @default(false)
   ftdamount            Float         @default(0)
-  FTDqualificationDate DateTime      @ignore @default(dbgenerated("'0000-00-00 00:00:00'")) @db.Timestamp(0)
+  FTDqualificationDate DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @ignore @db.Timestamp(0)
   traderVolume         Float
   traderTrades         Int
-  lastStatsRecordDate  DateTime      @ignore @default(dbgenerated("'0000-00-00 00:00:00'")) @db.Timestamp(0)
+  lastStatsRecordDate  DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @ignore @db.Timestamp(0)
   traderValue          Float
   // lastDepositRecordDate DateTime      @default(dbgenerated("'0000-00-00 00:00:00'")) @db.Timestamp(0)
   email                String        @db.VarChar(40)
@@ -1426,6 +1426,7 @@ model reporttraders {
   @@index([Param2], map: "Param2")
   @@index([TraderAlias], map: "TraderAlias")
   @@index([TraderID], map: "TraderID")
+  @@map("ReportTraders")
 }
 
 model settings {
