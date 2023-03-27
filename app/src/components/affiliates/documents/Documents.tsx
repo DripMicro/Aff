@@ -9,6 +9,7 @@ import { format } from "date-fns";
 import { usePrepareSchema } from "@/components/common/forms/usePrepareSchema";
 import { useTranslation } from "next-i18next";
 import { useCRUD } from "@/components/common/forms/useCRUD";
+import { useToast } from "@/hooks/use-toast";
 
 const columnHelper = createColumnHelper<AffiliateDocumentType>();
 
@@ -38,11 +39,20 @@ type NewRecType = z.infer<typeof schema>;
 export const Documents = () => {
   const { t } = useTranslation("affiliate");
   const { data, refetch } = api.affiliates.getDocuments.useQuery();
-  const [editRec, setEditRec] = useState<null>(null);
   const formContext = usePrepareSchema(t, schema);
+  const { toast } = useToast();
 
   const handleUpload = async (values: NewRecType) => {
     console.log(`muly:handleUpload`, { values });
+
+    if (values.documentFile.size > 10_000_000) {
+      throw new Error(
+        t(
+          "document.too_big",
+          "Document, too big, Maximum document size is 10MB"
+        ) || ""
+      );
+    }
 
     const formData = new FormData();
     const strMonthYear = format(new Date(), "yyyy-MM-dd");

@@ -9,9 +9,9 @@ const Home: MyPage = () => {
   const { data: session } = useSession();
 
   const links = [
-    { href: "/affiliates/signup", title: "Auth -> Sign Up" },
-    { href: "/affiliates/signin", title: "Auth -> Sign In" },
-    { href: "/affiliates/lost-password", title: "Auth -> Lost Password" },
+    { href: "/auth/signup", title: "Auth -> Sign Up" },
+    { href: "/auth/signin", title: "Auth -> Sign In" },
+    { href: "/auth/lost-password", title: "Auth -> Lost Password" },
     { href: "/affiliates/dashboard", title: "Dashboard" },
     { href: "/affiliates/creative", title: "Creative Materials" },
     { href: "/affiliates/sub", title: "Sub Affiliate Creative Materials" },
