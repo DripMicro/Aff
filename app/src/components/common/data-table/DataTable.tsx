@@ -42,70 +42,66 @@ export function DataTable<Data extends object>({
   });
 
   return (
-    <Table>
-      <Thead>
-        {getHeaderGroups().map((headerGroup) => (
-          <Tr key={headerGroup.id}>
-            {headerGroup.headers.map((header) => {
-              // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
-              const meta = header.column.columnDef.meta;
-              return (
-                <Th
-                  key={header.id}
-                  onClick={header.column.getToggleSortingHandler()}
-                  // @ts-ignore
-                  isNumeric={!!meta?.isNumeric}
-                >
-                  {flexRender(
-                    header.column.columnDef.header,
-                    header.getContext()
-                  )}
+    <div className=" scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-100 scrollbar-thumb-rounded-full  scrollbar-track-rounded-full mt-4 overflow-x-scroll lg:overflow-y-hidden xl:overflow-x-hidden ">
+      <Table border="1px solid #F0F0F0">
+        <Thead bg="#F2F5F7">
+          {getHeaderGroups().map((headerGroup) => (
+            <Tr
+              key={headerGroup.id}
+              border="1px solid #F0F0F0"
+              textAlign="left"
+            >
+              {headerGroup.headers.map((header) => {
+                // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
+                const meta = header.column.columnDef.meta;
+                return (
+                  <Th
+                    key={header.id}
+                    onClick={header.column.getToggleSortingHandler()}
+                    // @ts-ignore
+                    isNumeric={!!meta?.isNumeric}
+                  >
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
 
-                  <chakra.span pl="4">
-                    {header.column.getIsSorted() ? (
-                      header.column.getIsSorted() === "desc" ? (
-                        <TriangleDownIcon aria-label="sorted descending" />
-                      ) : (
-                        <TriangleUpIcon aria-label="sorted ascending" />
-                      )
-                    ) : null}
-                  </chakra.span>
-                </Th>
-              );
-            })}
-          </Tr>
-        ))}
-      </Thead>
-      <Tbody>
-        {getRowModel().rows.map((row) => (
-          <Tr key={row.id}>
-            {row.getVisibleCells().map((cell) => {
-              // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
-              const meta = cell.column.columnDef.meta;
-              return (
-                <Td
-                  key={cell.id}
-                  // @ts-ignore
-                  isNumeric={!!meta?.isNumeric}
-                >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </Td>
-              );
-            })}
-          </Tr>
-        ))}
-      </Tbody>
-      {footerData && (
-        <Tfoot>
-          <Tr>
-            <Td>Total</Td>
-            {footerData.length > 0 &&
-              Object.values(footerData[0]).map((item: any, key) => {
-                return <Td key={key}>{item}</Td>;
+                    <chakra.span pl="4">
+                      {header.column.getIsSorted() ? (
+                        header.column.getIsSorted() === "desc" ? (
+                          <TriangleDownIcon aria-label="sorted descending" />
+                        ) : (
+                          <TriangleUpIcon aria-label="sorted ascending" />
+                        )
+                      ) : null}
+                    </chakra.span>
+                  </Th>
+                );
               })}
-          </Tr>
-        </Tfoot>
-      )}
-    </Table>
+            </Tr>
+          ))}
+        </Thead>
+        <Tbody>
+          {getRowModel().rows.map((row, index) => (
+            <Tr key={row.id} className={index % 2 == 0 ? "" : " bg-[#F9FAFF]"}>
+              {row.getVisibleCells().map((cell) => {
+                // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
+                const meta = cell.column.columnDef.meta;
+                return (
+                  <Td
+                    key={cell.id}
+                    // @ts-ignore
+                    isNumeric={!!meta?.isNumeric}
+                    className="text-sm"
+                  >
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </Td>
+                );
+              })}
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+    </div>
   );
 }

@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { api } from "../../../utils/api";
 import styles from "./../../index.module.css";
+import { SubAffiliateReport } from "../../../components/affiliates/reports/SubAffiliateReport";
 import type { MyPage } from "../../../components/common/types";
 const Page: MyPage = () => {
   const router = useRouter();
@@ -32,8 +33,9 @@ const Page: MyPage = () => {
         <meta name="description" content="Creative Report" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main} style={{ marginTop: "20px" }}>
-        <Flex direction="column" gap={2}>
+      <main>
+        <SubAffiliateReport />
+        {/* <Flex direction="column" gap={2}>
           <Flex direction="row" gap={2}>
             <RangeDatepicker
               selectedDates={selectedDates}
@@ -43,7 +45,7 @@ const Page: MyPage = () => {
         </Flex>
         <Container marginTop={"45%"}>
           <Pagination total={100} />
-        </Container>
+        </Container> */}
       </main>
     </>
   );

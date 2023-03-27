@@ -15,6 +15,8 @@ interface Props {
   activeStep: number;
   values: object;
   type: any;
+  count: number;
+  setCount: any;
   onNext: (values: z.infer<typeof schema>) => void;
   onPrevious: () => void;
 }
@@ -24,6 +26,8 @@ export const TriggerForm = ({
   activeStep,
   values,
   type,
+  count,
+  setCount,
   onNext,
   onPrevious,
 }: Props) => {
@@ -31,10 +35,10 @@ export const TriggerForm = ({
   const formContext = usePrepareSchema(t, schema);
 
   return (
-    <Stack m={12} gap={2}>
-      <Heading as="h6" size="xs">
-        Step 2: Trigger
-      </Heading>
+    <Stack gap={2}>
+      <div className="mt-5 font-medium text-black md:mt-12 md:text-lg">
+        Step 2: Select Trigger
+      </div>
       <StepperForm
         formContext={formContext}
         schema={schema}
@@ -45,6 +49,8 @@ export const TriggerForm = ({
           activeStep: activeStep,
           onPrevious: onPrevious,
           submit: { notification: false },
+          count: count,
+          setCount: setCount,
         }}
         props={{
           type: {
