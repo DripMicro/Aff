@@ -1366,7 +1366,7 @@ export const getpixelLogReport = publicProcedure
     z.object({
       from: z.date().optional(),
       to: z.date().optional(),
-      merchant_id: z.string().optional(),
+      merchant_id: z.number().optional(),
       country: z.string().optional(),
       banner_id: z.string().optional(),
       group_id: z.string().optional(),
@@ -1445,6 +1445,7 @@ export const getpixelLogReport = publicProcedure
                   username: true,
                   group_id: true,
                   id: true,
+                  valid: true,
                 },
               },
               merchant: {
