@@ -1,9 +1,9 @@
+import { DataTable } from "@/components/common/data-table/DataTable";
+import { QuerySelect } from "@/components/common/QuerySelect";
 import { FormLabel, Grid, GridItem, Input } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { DataTable } from "../../../components/common/data-table/DataTable";
-import { QuerySelect } from "../../../components/common/QuerySelect";
 import type { TraderReportType } from "../../../server/db-types";
 import { api } from "../../../utils/api";
 import { DateRangeSelect, useDateRange } from "../../common/DateRangeSelect";
@@ -109,10 +109,6 @@ export const TraderReports = () => {
       cell: (info) => info.getValue(),
       header: "Profile Name",
     }),
-    columnHelper.accessor("TraderStatus", {
-      cell: (info) => info.getValue(),
-      header: "Status",
-    }),
     columnHelper.accessor("Param", {
       cell: (info) => info.getValue(),
       header: "Param",
@@ -205,6 +201,47 @@ export const TraderReports = () => {
     },
   ];
 
+  let totalVolume = 0;
+  let totalLots = 0;
+  let totalWithdrawal = 0;
+  let totalChargeback = 0;
+
+  data?.forEach((row: any) => {
+    totalVolume += Number(row?.Volume);
+    totalLots += Number(row?.totalLots);
+    totalWithdrawal += Number(row?.WithdrawalAmount);
+    totalChargeback += Number(row?.ChargeBackAmount);
+  });
+
+  const totalObj = [];
+  totalObj.push({
+    TraderID: "",
+    sub_trader_count: "",
+    RegistrationDate: "",
+    TraderStatus: "",
+    Country: "",
+    affiliate_id: "",
+    AffiliateUsername: "",
+    merchant_id: "",
+    MerchantName: "",
+    CreativeID: "",
+    CreativeName: "",
+    Type: "",
+    CreativeLanguage: "",
+    ProfileID: "",
+    ProfileName: "",
+    Param: "",
+    Param2: "",
+    Param3: "",
+    Param4: "",
+    Param5: "",
+    totalVolume,
+    totalWithdrawal,
+    totalChargeback,
+    totalLots,
+    SaleStatus: "",
+  });
+
   return (
     <>
       <Grid
@@ -251,7 +288,7 @@ export const TraderReports = () => {
         <DataTable
           data={Object.values(data || {})}
           columns={columns}
-          footerData={[]}
+          footerData={totalObj}
         />
       </Grid>
     </>
