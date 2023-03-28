@@ -156,7 +156,7 @@ export const Billings = () => {
         </div>
       </div>
 
-      <div className="hidden rounded-[5px] bg-white pt-3 pl-3 pb-20 shadow-md md:mb-10 md:block md:rounded-[15px]">
+      <div className="hidden rounded-[5px] bg-white px-3 pt-3 pb-20 shadow-md md:mb-10 md:block md:rounded-[15px]">
         <DataTable data={data} columns={columns} />
       </div>
       <div className="">

@@ -32,10 +32,13 @@ export const QueryText = ({ varName, label }: Props) => {
   );
 
   return (
-    <FormControl maxW="2xs">
-      <FormLabel>{label}</FormLabel>
+    <FormControl>
+      <FormLabel className="ml-2 text-sm font-medium text-[#525252]">
+        {label}
+      </FormLabel>
       <Input
         type="search"
+        placeholder="search"
         value={localValue}
         onChange={(e) => {
           const v = e.target.value;

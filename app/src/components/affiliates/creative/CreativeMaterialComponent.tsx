@@ -102,7 +102,7 @@ export const CreativeMaterialComponent = ({
                   </div>
                 </div>
               </div>
-              <div className="hidden md:block">
+              <div className="mt-2 hidden md:block">
                 <div className=" text-sm font-medium text-[#717171]">
                   Language
                 </div>
@@ -112,12 +112,12 @@ export const CreativeMaterialComponent = ({
               </div>
             </div>
           </div>
-          <div className="mt-1 hidden items-end justify-between md:mt-3 md:block lg:flex">
+          <div className="mt-1 hidden items-end justify-between md:mt-3 md:block lg:block xl:flex">
             <div className="">
               <div className="mb-1 ml-2 text-xs font-medium text-[#525252]">
                 Click URL
               </div>
-              <div className="rounded border border-[#D7D7D7] bg-[#F9F9FF] py-2 px-3 text-sm font-medium text-[#666666] lg:w-96">
+              <div className="rounded border border-[#D7D7D7] bg-[#F9F9FF] py-2 px-3 text-sm font-medium text-[#666666] xl:w-60 2xl:w-96">
                 {url}
               </div>
             </div>
@@ -250,15 +250,15 @@ export const CreativeMaterialComponent = ({
               </form>
             </ModalBody>
             <div className="justify-between px-2 pl-8 pb-6 md:flex">
-              <div className="flex justify-between md:block">
+              <div className="mb-2 flex justify-between md:block">
                 <div className="rounded ">
-                  <button className="rounded border-[#282560] bg-[#1B48BB] px-6 py-2.5 text-xs text-white  duration-300">
+                  <button className="rounded border border-[#1B48BB] bg-[#1B48BB] px-3 py-1.5 text-white  duration-300 md:text-base md:font-medium">
                     Get Code
                   </button>
                 </div>
                 <div className="rounded md:hidden">
-                  <button className="flex items-center justify-center rounded border-[#282560] bg-[#1B48BB] px-6 py-2.5 text-xs text-white duration-300">
-                    <div className="text-white">Copy Click Url</div>
+                  <button className="flex items-center justify-center rounded border border-[#1B48BB] bg-[#1B48BB] px-3 py-1.5 text-white duration-300">
+                    <div className="text-base text-white">Copy Click Url</div>
                     <div className="ml-2">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -280,11 +280,13 @@ export const CreativeMaterialComponent = ({
                   </button>
                 </div>
               </div>
-              <div className="mt-2 flex justify-between md:justify-center md:space-x-2">
+              <div className="flex justify-between md:justify-center md:space-x-2">
                 <div className="hidden rounded md:block">
                   <div className="rounded">
-                    <button className="flex items-center justify-center rounded border-[#282560] bg-[#1B48BB] px-6 py-2.5 text-xs text-white duration-300">
-                      <div className="text-white">Copy Click Url</div>
+                    <button className="flex items-center justify-center rounded border border-[#1B48BB] bg-[#1B48BB] px-3 py-1.5 text-xs text-white duration-300">
+                      <div className="text-base text-white md:font-medium">
+                        Copy Click Url
+                      </div>
                       <div className="ml-2">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -308,16 +310,34 @@ export const CreativeMaterialComponent = ({
                 </div>
                 <div className=" rounded">
                   <div className="">
-                    <button className="flex justify-center rounded border-[#282560] bg-[#1B48BB] px-6 py-2.5 text-xs text-white duration-300">
-                      Get HTML Code
+                    <button className="flex items-center justify-center rounded border border-[#282560] px-3 py-1.5 text-base text-[#282560] duration-300 md:font-medium">
+                      <div className="text-base md:font-medium">
+                        Get HTML Code
+                      </div>
+                      <div className="ml-2">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                        >
+                          <path
+                            d="M5.37498 14.781L6.62498 13.219L2.60098 9.99998L6.62498 6.78098L5.37498 5.21898L0.374981 9.21898C0.257826 9.31267 0.163249 9.4315 0.098254 9.5667C0.033259 9.70189 -0.000488281 9.84998 -0.000488281 9.99998C-0.000488281 10.15 0.033259 10.2981 0.098254 10.4333C0.163249 10.5685 0.257826 10.6873 0.374981 10.781L5.37498 14.781ZM14.625 5.21898L13.375 6.78098L17.399 9.99998L13.375 13.219L14.625 14.781L19.625 10.781C19.7421 10.6873 19.8367 10.5685 19.9017 10.4333C19.9667 10.2981 20.0005 10.15 20.0005 9.99998C20.0005 9.84998 19.9667 9.70189 19.9017 9.5667C19.8367 9.4315 19.7421 9.31267 19.625 9.21898L14.625 5.21898ZM12.976 1.21598L8.97598 19.216L7.02298 18.782L11.023 0.781982L12.976 1.21598Z"
+                            fill="#282560"
+                          />
+                        </svg>
+                      </div>
                     </button>
                   </div>
                 </div>
 
                 <div className=" rounded">
                   <div className="">
-                    <button className="flex items-center justify-center rounded border-[#282560] bg-[#1B48BB] px-6 py-2.5 text-xs text-white duration-300">
-                      <div className="text-white">Download Image</div>
+                    <button className="flex items-center justify-center rounded border border-[#1B48BB] bg-[#1B48BB] px-3 py-1.5 text-xs text-white duration-300">
+                      <div className="text-base text-white md:font-medium">
+                        Download Image
+                      </div>
                       <div className="ml-2">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

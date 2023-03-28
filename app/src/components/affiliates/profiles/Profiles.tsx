@@ -230,7 +230,9 @@ export const Profiles = () => {
         <ModalOverlay />
         <ModalContent ml={4} mr={4}>
           <div className="flex items-end justify-between pl-6 pt-4 md:pl-8  ">
-            <div className="font-xl text-[#27263d]">Add Profile</div>
+            <div className="text-xl font-medium text-[#282560]">
+              Add Profile
+            </div>
             <Image
               alt="..."
               className="mr-4 h-10 w-10 rounded-full align-middle "
@@ -240,15 +242,15 @@ export const Profiles = () => {
           </div>
 
           <ModalBody>
-            <div className="px-0 md:px-2">
+            <div className="mt-6 px-0 md:px-2">
               <SimpleGrid minChildWidth="100px" spacing="35px">
                 <div className="md:flex">
                   <div className="flex-1 p-2">
-                    <label className="mb-1.5 ml-2.5 block font-medium  text-gray-600">
+                    <label className="mb-1.5 ml-2.5 block text-sm font-medium text-[#525252]">
                       Profile Name
                     </label>
                     <input
-                      className="placeholder-blueGray-300 text-blueGray-700 w-full rounded border bg-white px-3 py-4 text-sm shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
+                      className="text-blueGray-700 w-full rounded border bg-white px-4 py-3 text-xs placeholder-[#666666] shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
                       id="profile"
                       type="text"
                       placeholder="Type Here..."
@@ -256,11 +258,11 @@ export const Profiles = () => {
                   </div>
 
                   <div className="flex-1 p-2">
-                    <label className="mb-1.5 ml-2.5 block font-medium  text-gray-600">
+                    <label className="mb-1.5 ml-2.5 block text-sm font-medium text-[#525252]">
                       URL
                     </label>
                     <input
-                      className="placeholder-blueGray-300 text-blueGray-700 w-full rounded border bg-white px-3 py-4 text-sm shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
+                      className="text-blueGray-700 w-full rounded border bg-white px-4 py-3 text-xs placeholder-[#666666] shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
                       id="url"
                       type="text"
                       placeholder="https://"
@@ -271,11 +273,11 @@ export const Profiles = () => {
               <SimpleGrid minChildWidth="100px" spacing="35px">
                 <div className="md:flex">
                   <div className="flex-1 p-2">
-                    <label className="mb-1.5 ml-2.5 block font-medium  text-gray-600">
+                    <label className="mb-1.5 ml-2.5 block text-sm font-medium text-[#525252]">
                       Description
                     </label>
                     <input
-                      className="placeholder-blueGray-300 text-blueGray-700 w-full rounded border bg-white px-3 py-4 text-sm shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
+                      className="text-blueGray-700 w-full rounded border bg-white px-4 py-3 text-xs placeholder-[#666666] shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
                       id="description"
                       type="text"
                       placeholder="Type Here..."
@@ -283,11 +285,11 @@ export const Profiles = () => {
                   </div>
 
                   <div className="flex-1 p-2">
-                    <label className="mb-1.5 ml-2.5 block font-medium  text-gray-600">
+                    <label className="mb-1.5 ml-2.5 block text-sm font-medium text-[#525252]">
                       Traffic Source
                     </label>
                     <input
-                      className="placeholder-blueGray-300 text-blueGray-700 w-full rounded border bg-white px-3 py-4 text-sm shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
+                      className="text-blueGray-700 w-full rounded border bg-white px-4 py-3 text-xs placeholder-[#666666] shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
                       id="traffic"
                       type="text"
                       placeholder="Type Here...."
@@ -298,9 +300,9 @@ export const Profiles = () => {
             </div>
           </ModalBody>
 
-          <div className=" self-center  p-6 font-medium md:p-8 md:pt-10">
+          <div className=" self-center py-6 font-medium md:py-10">
             <button
-              className="mb-4 w-44 rounded-md 	 bg-[#2262C6] px-6 py-3 text-white md:mx-40 md:w-96 md:px-14 "
+              className="mb-4 w-44 rounded-md bg-[#1B48BB] px-6 py-3 text-white md:mx-40 md:w-96 md:px-14 "
               onClick={onClose}
             >
               Save

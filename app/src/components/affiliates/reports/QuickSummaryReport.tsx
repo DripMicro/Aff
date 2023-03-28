@@ -15,7 +15,7 @@ import {
 import { createColumnHelper } from "@tanstack/react-table";
 import { useRouter } from "next/router";
 import { SettingsIcon } from "@chakra-ui/icons";
-import { DataTable } from "../../../components/common/data-table/DataTable";
+import { ReportDataTable } from "../../../components/common/data-table/Report_DataTable";
 import { QuerySelect } from "../../../components/common/QuerySelect";
 import type { QuickReportSummary } from "../../../server/db-types";
 import { api } from "../../../utils/api";
@@ -173,20 +173,6 @@ export const QuickSummaryReport = () => {
       //   isNumeric: true,
       // },
     }),
-    columnHelper.accessor("click-through-ratio" as any, {
-      cell: ({ row }) =>
-        divCol(row?.original?.Clicks, row.original.Impressions),
-      header: "Click Through Ratio(CTR)",
-    }),
-    columnHelper.accessor("click-to-account" as any, {
-      cell: ({ row }) =>
-        divCol(row?.original?.RealAccount, row.original.Clicks),
-      header: "Click to Account",
-    }),
-    columnHelper.accessor("click-to-sale" as any, {
-      cell: ({ row }) => divCol(row?.original?.FTD, row.original.Clicks),
-      header: "Click to Sale",
-    }),
     columnHelper.accessor("Leads", {
       cell: (info) => info.getValue(),
       header: "Leads",
@@ -202,10 +188,6 @@ export const QuickSummaryReport = () => {
     columnHelper.accessor("FTD", {
       cell: (info) => info.getValue(),
       header: "FTD",
-    }),
-    columnHelper.accessor("Volume", {
-      cell: (info) => info.getValue(),
-      header: "Volume",
     }),
     columnHelper.accessor("Withdrawal", {
       cell: (info) => info.getValue(),
@@ -225,6 +207,25 @@ export const QuickSummaryReport = () => {
         return <span>{row?.original?.Commission?.toFixed(2)}</span>;
       },
       header: "Commission",
+    }),
+    columnHelper.accessor("click-through-ratio" as any, {
+      cell: ({ row }) =>
+        divCol(row?.original?.Clicks, row.original.Impressions),
+      header: "Click Through Ratio(CTR)",
+    }),
+    columnHelper.accessor("click-to-account" as any, {
+      cell: ({ row }) =>
+        divCol(row?.original?.RealAccount, row.original.Clicks),
+      header: "Click to Account",
+    }),
+    columnHelper.accessor("click-to-sale" as any, {
+      cell: ({ row }) => divCol(row?.original?.FTD, row.original.Clicks),
+      header: "Click to Sale",
+    }),
+
+    columnHelper.accessor("Volume", {
+      cell: (info) => info.getValue(),
+      header: "Volume",
     }),
   ];
 
@@ -364,7 +365,7 @@ export const QuickSummaryReport = () => {
                 Show Reports
               </button>
               <button className="rounded-md border border-[#2262C6] py-1 px-4 text-base font-semibold text-[#2262C6]">
-                Open a Ticket
+                Reset Search
               </button>
               <button className="rounded-md bg-[#2262C6] px-1 py-1 text-white">
                 <svg
@@ -420,7 +421,7 @@ export const QuickSummaryReport = () => {
               Show Reports
             </button>
             <button className="hidden rounded-md border border-[#2262C6] py-2 px-8 text-base font-semibold text-[#2262C6] lg:block">
-              Open a Ticket
+              Reset Search
             </button>
             <button className="hidden rounded-md bg-[#2262C6] px-2 py-2 text-white lg:block">
               <svg
@@ -474,7 +475,7 @@ export const QuickSummaryReport = () => {
                             checked={field.isChecked}
                             value={field.id}
                             onChange={(e) => void handleReportField(e)}
-                            className="form-checkbox text-blueGray-700 ml-1 h-5 w-5 rounded border-0 transition-all duration-150 ease-linear"
+                            className="form-checkbox ml-1 h-4 w-4 rounded accent-[#1B48BB] outline-2 transition-all duration-150 ease-linear"
                           />
                           <FormLabel
                             htmlFor={`report-field-${field.id}`}
@@ -497,7 +498,7 @@ export const QuickSummaryReport = () => {
             <div className="flex justify-between p-6 font-medium md:p-8 md:pt-20">
               <div className="flex">
                 <button
-                  className="mr-3 rounded-md bg-[#2262C6] px-3 py-3 text-white md:px-14"
+                  className="mr-3 rounded-md bg-[#1B48BB] px-3 py-3 text-white md:px-14"
                   onClick={handleSelectAll}
                 >
                   Select All
@@ -509,12 +510,12 @@ export const QuickSummaryReport = () => {
                   Unselect All
                 </button>
               </div>
-              <button
-                className="rounded-md bg-[#2262C6] px-6 py-3 text-white md:px-14"
+              {/* <button
+                className="rounded-md bg-[#1B48BB] px-6 py-3 text-white md:px-14"
                 onClick={onClose}
               >
                 Save
-              </button>
+              </button> */}
             </div>
           </ModalContent>
         </Modal>
@@ -526,7 +527,11 @@ export const QuickSummaryReport = () => {
             alignSelf="center"
             overflow={"scroll"}
           >
-            <DataTable data={data} columns={columns} />
+            <ReportDataTable
+              data={data}
+              columns={columns}
+              reportFields={reportFields}
+            />
           </Grid>
         </div>
       </div>
