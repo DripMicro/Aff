@@ -1,0 +1,17 @@
+<form
+  action="http://localhost:3001/api/document-upload-just-log"
+  method="POST"
+  enctype="multipart/form-data"
+>
+  <input type="hidden" name="doc_type" value="Address_Verification" />
+  <input type="hidden" name="affiliate_id" value="500" />
+  <input type="hidden" name="monthyear" value="2023-03-26" />
+  <input
+    type="hidden"
+    name="shared-secret"
+    value="eEZJPfeWIzfXZG7Kgf11TXBOxmDyh8+r8VaPh8LTiUM="
+  />
+
+  <input type="file" name="documentFile" />
+  <input type="submit" value="Submit" />
+</form>

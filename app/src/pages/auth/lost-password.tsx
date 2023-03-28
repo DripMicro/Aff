@@ -2,8 +2,16 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { RecoverLostPassword } from "../../components/affiliates/account/RecoverLostPassword";
 import type { MyPage } from "../../components/common/types";
+import { useAuth } from "@/hooks/useAuth";
+import { Loading } from "@/components/common/Loading";
 
 const Page: MyPage = () => {
+  const redirected = useAuth();
+
+  if (redirected) {
+    return <Loading />;
+  }
+
   return (
     <>
       <Head>
