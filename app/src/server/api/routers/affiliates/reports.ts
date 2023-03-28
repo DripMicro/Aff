@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 import { z } from "zod";
 
 import { formatISO, getUnixTime } from "date-fns";
+import moment from "moment";
 import { convertPrismaResultsToNumbers } from "../../../../utils/prisma-convert";
 import { publicProcedure } from "../../trpc";
 import { affiliate_id, merchant_id } from "./const";
@@ -1159,9 +1160,9 @@ export const getLandingPageData = publicProcedure
 export const getTraderReport = publicProcedure
   .input(
     z.object({
-      from: z.string().optional(),
-      to: z.string().optional(),
-      merchant_id: z.string().optional(),
+      from: z.date().optional(),
+      to: z.date().optional(),
+      merchant_id: z.number().optional(),
       country: z.string().optional(),
       banner_id: z.string().optional(),
       trader_id: z.string().optional(),
@@ -1188,6 +1189,7 @@ export const getTraderReport = publicProcedure
       const profileNames = await ctx.prisma.affiliates_profiles.findMany({
         where: {
           valid: 1,
+          affiliate_id: affiliate_id,
         },
         select: {
           id: true,
@@ -1195,11 +1197,6 @@ export const getTraderReport = publicProcedure
         },
         take: 5,
       });
-
-      // profile names
-      const listProfiles: listProfile = {};
-
-      listProfiles["wwProfiles"] = profileNames;
 
       // list of wallets
       const resourceWallet = await ctx.prisma.merchants.findMany({
@@ -1293,6 +1290,7 @@ export const getTraderReport = publicProcedure
           },
           where: {
             ...type_filter,
+            affiliate_id: affiliate_id,
           },
           include: {
             data_reg: {
@@ -1326,9 +1324,10 @@ export const getTraderReport = publicProcedure
           where: {
             ...type_filter,
             RegistrationDate: {
-              gte: from,
-              lt: to,
+              gte: moment(from).toISOString(),
+              lt: moment(to).toISOString(),
             },
+            affiliate_id: affiliate_id,
           },
           include: {
             data_reg: {
@@ -1345,9 +1344,20 @@ export const getTraderReport = publicProcedure
           },
         });
       }
-      console.log("profile names ------>", listProfiles);
+      // console.log("profile names ------>", listProfiles);
+      console.log("profile names ------>", trader_report_resource);
 
-      return trader_report_resource;
+      const merged = [];
+
+      for (let i = 0; i < trader_report_resource.length; i++) {
+        merged.push({
+          ...trader_report_resource[i],
+          sub_trader_count: "",
+          totalLots: 0,
+        });
+      }
+
+      return merged;
     }
   );
 
@@ -1356,7 +1366,7 @@ export const getpixelLogReport = publicProcedure
     z.object({
       from: z.date().optional(),
       to: z.date().optional(),
-      merchant_id: z.string().optional(),
+      merchant_id: z.number().optional(),
       country: z.string().optional(),
       banner_id: z.string().optional(),
       group_id: z.string().optional(),
@@ -1435,6 +1445,7 @@ export const getpixelLogReport = publicProcedure
                   username: true,
                   group_id: true,
                   id: true,
+                  valid: true,
                 },
               },
               merchant: {
