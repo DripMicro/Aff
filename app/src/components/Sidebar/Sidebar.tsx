@@ -35,7 +35,7 @@ export default function Sidebar({ collapseShow }: Props) {
         }
       >
         <div className="flex flex-grow flex-col justify-between overflow-y-auto overflow-x-hidden">
-          <ul className="relative min-h-full cursor-pointer space-y-1 py-5 md:py-16 ">
+          <ul className="relative min-h-full space-y-1 overflow-y-auto py-5 md:cursor-pointer md:py-16">
             <li>
               <SingleLink
                 setactiveName={setactiveName}
@@ -161,7 +161,7 @@ export default function Sidebar({ collapseShow }: Props) {
               />
             </li>
 
-            <div className="absolute bottom-24 md:bottom-36">
+            <div className="py-16">
               <li>
                 <SingleLink
                   setactiveName={setactiveName}

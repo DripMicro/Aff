@@ -72,3 +72,8 @@ export type CreativeReportType =
 
 export type LandingPageReportType =
   RouterOutput["affiliates"]["getLandingPageData"][0];
+
+export type TraderReportType = RouterOutput["affiliates"]["getTraderReport"][0];
+
+export type PixelLogsReportType =
+  RouterOutput["affiliates"]["getpixelLogReport"][0];

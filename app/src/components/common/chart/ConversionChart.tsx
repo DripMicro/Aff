@@ -1,71 +1,100 @@
+import React from "react";
+import { useEffect, useState } from "react";
 import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
   Tooltip,
   Legend,
-  ResponsiveContainer,
-} from "recharts";
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import { CategoryBar } from "@tremor/react";
 
-const ConversionChart = () => {
-  const data = [
-    {
-      impressoes: 200,
-      cliques: 100,
-    },
-    {
-      impressoes: 450,
-      cliques: 390,
-    },
-    {
-      impressoes: 1650,
-      cliques: 1157,
-    },
-    {
-      impressoes: 3594,
-      cliques: 3410,
-    },
-  ];
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
+export const options = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: false,
+    },
+    title: {
+      display: false,
+      text: "",
+    },
+  },
+  scales: {
+    x: {
+      grid: {
+        display: false,
+      },
+    },
+    y: {
+      grid: {
+        display: true,
+      },
+      ticks: { color: "black" },
+      font: {
+        size: 14,
+      },
+    },
+  },
+};
+
+const labels = ["January", "February", "March", "April", "May", "June"];
+
+interface Props {
+  conversionChartData: conversionChartDataType[];
+}
+
+interface conversionChartDataType {
+  Conversions: number | null;
+  date: string;
+  // [index: number]: { Accounts: number; date: string; ActiveTraders: number };
+}
+
+const ConversionChartData = ({ conversionChartData }: Props) => {
+  const Conversions: (number | null)[] = conversionChartData.map((field, i) => {
+    return field.Conversions;
+  });
+
+  const labels: string[] = conversionChartData.map((field, i) => {
+    return field.date;
+  });
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Conversation",
+        data: Conversions,
+        backgroundColor: "#FF8549",
+        borderRadius: 10,
+        yAxisID: "y",
+        // maxBarThickness: 30,
+      },
+    ],
+  };
   return (
-    <div className="App">
-      <h1>Olá</h1>
-      <ResponsiveContainer height={300}>
-        <LineChart
-          width={500}
-          height={300}
-          data={data}
-          margin={{
-            top: 20,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="8 8" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line
-            type="monotone"
-            dataKey="impressoes"
-            strokeWidth={3}
-            stroke="#AD4335"
-          />
-          <Line
-            type="monotone"
-            dataKey="cliques"
-            strokeWidth={3}
-            stroke="#004FAC"
-            activeDot={{ r: 8 }}
-          />
-        </LineChart>
-      </ResponsiveContainer>
-    </div>
+    <>
+      <div className="flex justify-between pb-4">
+        <div className="text-sm">Conversion</div>
+      </div>
+      <Line width={"100%"} options={options} data={data} />
+    </>
   );
 };
 
-export default ConversionChart;
+export default ConversionChartData;

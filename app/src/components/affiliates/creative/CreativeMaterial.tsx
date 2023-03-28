@@ -6,6 +6,8 @@ import { CreativeMaterialTable } from "./CreativeMaterialTable";
 import { QueryText } from "../../common/QueryText";
 import type { merchants_creative_type } from "@prisma/client";
 import { CreativeMaterialRow } from "./CreativeMaterialRow";
+import { CreativeMaterialComponent } from "./CreativeMaterialComponent";
+import { title } from "process";
 
 export const CreativeMaterialTypeMap: {
   [keys in merchants_creative_type]: string;
@@ -44,8 +46,12 @@ export const CreativeMaterial = () => {
   );
 
   return (
-    <Flex direction="column" gap={2}>
-      <Flex direction="row" gap={2}>
+    <div className="-ml-5 w-full pt-5 pb-4">
+      <div className=" mb-5 block text-base font-medium">
+        <span className="text-[#2262C6]">Marketing Tools</span> / Creative
+        Materials
+      </div>
+      <div className="mb-5 grid grid-cols-2 gap-5 md:mb-28 lg:grid-cols-6">
         <QuerySelect
           label="Creative Type"
           choices={meta?.type}
@@ -69,36 +75,70 @@ export const CreativeMaterial = () => {
           varName="promotion"
         />
         <QueryText varName="search" label="Search Creative" />
-      </Flex>
-      <CreativeMaterialTable>
-        {data?.map((item) => {
-          const values = [
-            // { title: "Id", value: item.id },
-            { title: "Creative Name", value: item.title },
-            { title: "Type", value: item.type },
-            {
-              title: "Promotion",
-              value: String(item.promotion_id) || "General",
-            },
-            {
-              title: "Category",
-              value: item.category?.categoryname,
-            },
-            { title: "Size (WxH)", value: `${item.width}x${item.height}` },
-            { title: "Language", value: item.language?.title },
-          ];
-
-          return (
-            <CreativeMaterialRow
-              key={item.id}
-              values={values}
-              file={item.file || undefined}
-              alt={item.alt}
-              url={item.url}
+      </div>
+      {/* <div className="grid grid-cols-2 items-center gap-2 md:-mt-28 md:grid-cols-4">
+        <div className="col-span-2 rounded p-2 md:p-5 ">
+          <div className="w-full  bg-[#F9F9FF] py-2 px-3 "></div>
+        </div>
+        <div className="rounded p-2 md:p-5">
+          <div className="">
+            <div className=" text-[10px] "></div>
+            <QuerySelect
+              choices={meta?.merchants_promotions}
+              emptyTitle="General"
+              varName="promotion"
+              label={""}
             />
-          );
-        })}
-      </CreativeMaterialTable>
-    </Flex>
+          </div>
+        </div>
+        <div className=" rounded p-2 md:p-4">
+          <div className="">
+            <div className="mb-1 text-[10px]"></div>
+            <QuerySelect
+              choices={meta?.merchants_promotions}
+              emptyTitle="General"
+              varName="promotion"
+              label={""}
+            />
+          </div>
+        </div>
+      </div> */}
+
+      {/* <CreativeMaterialTable> */}
+      {data?.map((item) => {
+        const values = [
+          // { title: "Id", value: item.id },
+          { title: "Creative Name", value: item.title },
+          { title: "Type", value: item.type },
+          {
+            title: "Promotion",
+            value: String(item.promotion_id) || "General",
+          },
+          {
+            title: "Category",
+            value: item.category?.categoryname,
+          },
+          { title: "Size (WxH)", value: `${item.width}x${item.height}` },
+          { title: "Language", value: item.language?.title },
+        ];
+        return (
+          <CreativeMaterialComponent
+            key={item.id}
+            values={values}
+            file={item.file || undefined}
+            alt={item.alt}
+            url={item.url}
+          />
+          // <CreativeMaterialRow
+          //   key={item.id}
+          //   values={values}
+          //   file={item.file || undefined}
+          //   alt={item.alt}
+          //   url={item.url}
+          // />
+        );
+      })}
+      {/* </CreativeMaterialTable> */}
+    </div>
   );
 };
