@@ -142,7 +142,7 @@ export const Documents = () => {
   ];
 
   return (
-    <div className="m-12 gap-4">
+    <div className="pt-3.5">
       <DataTable data={data} columns={columns} />
       <div className="flex flex-row justify-end px-6">{createDialog}</div>
     </div>

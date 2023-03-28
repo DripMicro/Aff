@@ -58,6 +58,7 @@ const SingleLink = ({
       <div
         onClick={(e) => {
           e.preventDefault();
+          if (dropdown != dropdownName) activeDropdownVector(true);
           activeLink(defaultLink);
           activeDropdown(dropdownName);
         }}
@@ -101,15 +102,21 @@ const SingleLink = ({
             className="mr-8 truncate py-0.5 text-xs font-medium tracking-wide"
             onClick={(e) => {
               e.preventDefault();
+              console.log(dropdownVector);
               activeDropdownVector(!dropdownVector);
             }}
           >
             <Image
               alt="..."
               className={
-                "border-none align-middle" + (dropdownVector ? " w-3" : " w-2 ")
+                "border-none align-middle" +
+                (dropdownVector && dropdown == dropdownName ? " w-3" : " w-2 ")
               }
-              src={"/img/icons/Vector" + (dropdownVector ? "1" : "") + ".png"}
+              src={
+                "/img/icons/Vector" +
+                (dropdownVector && dropdown == dropdownName ? "1" : "") +
+                ".png"
+              }
             />
           </div>
         </Link>
@@ -118,7 +125,9 @@ const SingleLink = ({
       <ul
         className={
           "flex-col pt-2 duration-300 " +
-          (collapseShow && dropdownVector ? "flex" : "hidden")
+          (dropdown == dropdownName && collapseShow && dropdownVector
+            ? "flex"
+            : "hidden")
         }
       >
         {linkName.map((value, index) => (
@@ -130,7 +139,7 @@ const SingleLink = ({
               }}
             >
               <Link
-                className="text-white-600 hover:text-white-800 relative flex h-11 flex-row items-center pl-14 hover:bg-white focus:outline-none dark:hover:bg-gray-600"
+                className="text-white-600 hover:text-white-800 relative flex h-9 flex-row items-center pl-14 hover:bg-white focus:outline-none dark:hover:bg-gray-600"
                 href={
                   "/affiliates/" +
                   (parentLink == "" ? "" : parentLink + "/") +

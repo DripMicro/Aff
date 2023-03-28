@@ -76,7 +76,7 @@ export const CreativeMaterial = () => {
         />
         <QueryText varName="search" label="Search Creative" />
       </div>
-      <div className="grid grid-cols-2 items-center gap-2 md:-mt-28 md:grid-cols-4">
+      {/* <div className="grid grid-cols-2 items-center gap-2 md:-mt-28 md:grid-cols-4">
         <div className="col-span-2 rounded p-2 md:p-5 ">
           <div className="w-full  bg-[#F9F9FF] py-2 px-3 "></div>
         </div>
@@ -102,7 +102,7 @@ export const CreativeMaterial = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* <CreativeMaterialTable> */}
       {data?.map((item) => {

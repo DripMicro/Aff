@@ -69,8 +69,7 @@ export function CustomizeDataTable<Data extends object>({
                   <Th
                     key={header.id}
                     onClick={header.column.getToggleSortingHandler()}
-                    fontSize="text-xs md:text-sm"
-                    bgSize="auto"
+                    className="font-base font-bold"
                   >
                     {flexRender(
                       header.column.columnDef.header,
