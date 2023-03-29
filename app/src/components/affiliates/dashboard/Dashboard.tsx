@@ -1,4 +1,6 @@
 import { SettingsIcon } from "@chakra-ui/icons";
+
+// TODO:MAX remove all
 import {
   Box,
   Button,
@@ -72,6 +74,7 @@ import {
 // import }DateRange} from '../../common/ddDa'
 
 import Affiliates from "../../../layouts/AffiliatesLayout";
+import { Loading } from "@/components/common/Loading";
 
 const fields = [
   "Impressions",
@@ -138,6 +141,8 @@ export const Dashboard = () => {
     api.affiliates.getReportsHiddenCols.useQuery();
   const { data: account, refetch } = api.affiliates.getAccount.useQuery();
   const upsertReportsField = api.affiliates.upsertReportsField.useMutation();
+
+  // TODO:MAX why needed?
   const refChart = useRef<null | HTMLDivElement>(null);
 
   // const [width, setWidth] = useState<number | undefined>(0);
@@ -179,7 +184,7 @@ export const Dashboard = () => {
     !lastMonthData ||
     !thisMonthData
   ) {
-    return null;
+    return <Loading />;
   }
 
   const columns = [
@@ -220,6 +225,7 @@ export const Dashboard = () => {
     }),
   ];
 
+  // TODO:Max remove?
   const reportColumns = [
     reportColumnHelper.accessor("merchant_id", {
       cell: (info) => info.getValue(),
