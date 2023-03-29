@@ -1957,7 +1957,7 @@ export const getProfileReportData = publicProcedure
     for (let i = 0; i < ww.length; i++) {
       merged.push({
         ...ww[i],
-        ...arrClicksAndImpressions[i],
+        ...arrClicksAndImpressions[i]?._sum,
         totalCPI,
         totalReal,
         ftd,
@@ -1967,9 +1967,9 @@ export const getProfileReportData = publicProcedure
         withdrawal,
         chargeback,
         volume,
+        totalPNL,
       });
     }
-    console.log("merged ------>", merged[0]);
     return merged;
   });
 
