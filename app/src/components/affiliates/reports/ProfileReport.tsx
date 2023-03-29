@@ -185,11 +185,7 @@ export const ProfileReport = () => {
         alignSelf="center"
         overflow={"scroll"}
       >
-        <DataTable
-          data={data ? Object.values(data) : []}
-          columns={columns}
-          footerData={[]}
-        />
+        <DataTable data={data} columns={columns} footerData={[]} />
       </Grid>
     </>
   );
