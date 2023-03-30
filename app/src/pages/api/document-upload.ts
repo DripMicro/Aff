@@ -76,7 +76,7 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
     form.append("shared-secret", env.LEGACY_PHP_ACCESS_TOKEN);
 
     const apiRes = await axios.post(
-      `${String(env.LEGACY_PHP_API_URL)}/ajax/UploadDocumentsApp.php`,
+      `${String(env.LEGACY_PHP_URL)}/ajax/UploadDocumentsApp.php`,
       form,
       {
         headers: {
