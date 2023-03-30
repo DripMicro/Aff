@@ -75,12 +75,16 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
     );
     form.append("shared-secret", env.LEGACY_PHP_ACCESS_TOKEN);
 
-    const apiRes = await axios.post(`${String(env.LEGACY_PHP_API_URL)}`, form, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        "Access-Control-Allow-Origin": "*",
-      },
-    });
+    const apiRes = await axios.post(
+      `${String(env.LEGACY_PHP_API_URL)}/ajax/UploadDocumentsApp.php`,
+      form,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
+    );
 
     console.log(`muly:handler fetch:POST answer`, {
       apiRes,
