@@ -70,6 +70,27 @@ type Row = {
   [key: string]: any;
 };
 
+type DashboardType = {
+  _sum?: {
+    Clicks: number;
+    Impressions: number;
+    Leads: number;
+    Demo: number;
+    RealAccount: number;
+    FTD: number;
+    FTDAmount: number;
+    Deposits: number;
+    DepositsAmount: number;
+    Bonus: number;
+    Withdrawal: number;
+    ChargeBack: number;
+    PNL: number;
+    Install: number;
+    Commission: number;
+    Volume: number;
+  };
+};
+
 export const QuickReportSummarySchema = z.object({
   Date: z.date().nullish(),
   merchant_id: z.number().nullish(),
@@ -1906,14 +1927,6 @@ export const getProfileReportData = publicProcedure
       totalFruadM += fraud[i]?._sum?.id ?? 0;
     }
 
-    // console.log("wwwwwww ----->", ww);
-    // console.log("merchant ----->", merchant_ww);
-
-    // console.log(
-    //   "arr clicks and impressions ----->",
-    //   arrClicksAndImpressions
-    // );
-
     totalImpressionsM += totalTraffic["totalViews"] ?? 0;
     totalClicksM += totalTraffic["totalClicks"] ?? 0;
     totalLeadsAccountsM += totalLeads;
@@ -1978,23 +1991,29 @@ export const getSubAffiliateReport = publicProcedure
     z.object({
       from: z.date().optional(),
       to: z.date().optional(),
+      user_level: z.string().optional(),
     })
   )
-  .query(async ({ ctx, input: { from, to } }) => {
+  .query(async ({ ctx, input: { from, to, user_level } }) => {
     let viewsSum = 0;
     let clicksSum = 0;
     let totalLeads = 0;
     let totalDemo = 0;
     let totalReal = 0;
+    let totalCPI = 0;
     let newFTD = 0;
     let ftdAmount = 0;
     let totalBonus = 0;
     let totalWithdrawal = 0;
     let totalChargeback = 0;
-    let totalSumLots = 0;
+    const totalSumLots = 0;
     let totalCommission = 0;
     let totalPNL = 0;
     let total_deposits = 0;
+    let total_depositsAmount = 0;
+    const group_id = 0;
+    let totalLots = 0;
+    let totalVolume = 0;
     const merchantArray: MerchantArray = {};
 
     const mer_rsc = await ctx.prisma.merchants.findMany({
@@ -2009,258 +2028,263 @@ export const getSubAffiliateReport = publicProcedure
         displayForex = 1;
       }
     }
-    console.log("merchant res");
 
-    merchantArray["arrMerchant"] = mer_rsc;
+    let allAffiliates;
+    let affiliateData;
 
-    const affiliate_ww = await ctx.prisma.affiliates.findMany({
-      where: {
-        valid: 1,
-      },
+    const id = await ctx.prisma.affiliates.findMany({
+      distinct: ["refer_id"],
       select: {
-        id: true,
-        username: true,
+        refer_id: true,
+      },
+      where: {
+        NOT: {
+          refer_id: 0,
+        },
       },
     });
 
-    const total: Total = {};
-    const affiliate: any = affiliate_ww;
-    let _index = 0;
-    while (_index < Object.keys(affiliate_ww).length) {
-      let total_leads = 0;
-      let total_demo = 0;
-      let total_real = 0;
-      const new_ftd = 0;
-      let totalDeposits = 0;
-      let depositsAmount = 0;
-      let bonus = 0;
-      let withdrawal = 0;
-      let chargeback = 0;
-      const thisComis = 0;
-      let volume = 0;
-      let totalLots = 0;
-      let lotdate = new Date();
-      const row: Row = {};
-      const pnlRecordArray: Row = {};
-      const deal_pnl = false;
-      const tradersProccessedForLots: Row = {};
-
-      console.log("affiliate id ", affiliate_ww[_index]?.id);
-      const arrClicksAndImpressions = await ctx.prisma.sub_stats.aggregate({
+    if (user_level === "admin") {
+      allAffiliates = await ctx.prisma.affiliates.findMany({
         where: {
-          affiliate_id: affiliate_ww[_index]?.id ?? 0,
-        },
-        _sum: {
-          clicks: true,
-          views: true,
+          id: id[0]?.refer_id,
+          valid: 1,
         },
       });
-
-      total["viewsSum"] = arrClicksAndImpressions._sum.views ?? 0;
-      total["clicksSum"] = arrClicksAndImpressions._sum.clicks ?? 0;
-
-      let line_views = 0;
-      let line_clicks = 0;
-      let line_leads = 0;
-      let line_demo = 0;
-      let line_real = 0;
-      let line_ftd = 0;
-      let line_lots = 0;
-      let line_ftd_amount = 0;
-      let line_deposits = 0;
-      let line_deposits_amount = 0;
-      let line_bonus = 0;
-      let line_withdrawal = 0;
-      let line_chargeback = 0;
-      let line_comission = 0;
-      const line_pnl = 0;
-
-      line_views = total.viewsSum ?? 0;
-      line_clicks = total.clicksSum ?? 0;
-
-      for (const key in merchantArray) {
-        const needToSkipMerchant = merchantArray[key] ?? 1;
-
-        const ftd_amount: FTDAmount = {};
-        ftd_amount["amount"] = 0;
-
-        const regww = await ctx.prisma.data_reg.findMany({
-          where: {
-            merchant_id: mer_rsc[0]?.id ?? 1,
-            rdate: {
-              gte: from,
-              lt: to,
-            },
-            affiliate_id: affiliate_ww[_index]?.id,
-          },
-          select: {
-            id: true,
-            type: true,
-          },
-        });
-
-        let i = 0;
-        while (i < Object.keys(regww).length) {
-          if (regww[i]?.type === "lead") {
-            total_leads++;
-          }
-
-          if (regww[i]?.type === "real") {
-            total_real++;
-          }
-
-          if (regww[i]?.type === "demo") {
-            total_demo++;
-          }
-          i++;
-        }
-
-        const sales_ww = await ctx.prisma.data_sales.findMany({
-          where: {
-            merchant_id: mer_rsc[0]?.id ?? 1,
-            rdate: {
-              gte: from,
-              lt: to,
-            },
-            affiliate_id: affiliate_ww[_index]?.id,
-          },
-          select: {
-            type: true,
-            amount: true,
-          },
-        });
-
-        let j = 0;
-        while (j < Object.keys(sales_ww).length) {
-          if (sales_ww[j]?.type === "deposit") {
-            depositsAmount += sales_ww[j]?.amount ?? 0;
-            totalDeposits++;
-          }
-          if (sales_ww[j]?.type === "bonus") {
-            bonus += sales_ww[j]?.amount ?? 0;
-          }
-
-          if (sales_ww[j]?.type === "withdrawal") {
-            withdrawal += sales_ww[j]?.amount ?? 0;
-          }
-
-          if (sales_ww[j]?.type === "chargeback") {
-            chargeback += sales_ww[j]?.amount ?? 0;
-          }
-
-          if (sales_ww[j]?.type === "volume") {
-            volume += sales_ww[j]?.amount ?? 0;
-          }
-          j++;
-        }
-
-        // if (!needToSkipMerchant) {
-        //   const arrFtds =
-        // }
-
-        if (mer_rsc[0]?.producttype === "forex") {
-          const traderStatus = await ctx.prisma.data_stats.findMany({
-            select: {
-              turnover: true,
-              trader_id: true,
-              rdate: true,
-              affiliate_id: true,
-              product_id: true,
-              banner_id: true,
-            },
-            where: {
-              affiliate_id: affiliate_ww[_index]?.id,
-              merchant_id: mer_rsc[0].id ?? 1,
-              rdate: {
-                gte: from,
-                lt: to,
-              },
-            },
-          });
-
-          let n = 0;
-          while (n < Object.keys(traderStatus).length) {
-            if (traderStatus[n]?.affiliate_id === null) {
-              continue;
-            }
-
-            totalLots = traderStatus[n]?.turnover ?? 0;
-            tradersProccessedForLots[
-              `${mer_rsc[0]?.id ?? 1} - ${traderStatus[n]?.trader_id ?? 1}`
-            ] = `${mer_rsc[0]?.id ?? 1}  - ${traderStatus[n]?.trader_id ?? 1}`;
-            lotdate = traderStatus[n]?.rdate ?? new Date();
-            row["merchant_id"] = mer_rsc[0]?.id ?? 1;
-            row["affiliate_id"] = traderStatus[n]?.affiliate_id ?? 1;
-            row["rdate"] = lotdate;
-            row["banner_id"] = traderStatus[n]?.banner_id;
-            row["trader_id"] = traderStatus[n]?.trader_id;
-            row["profile_id"] = traderStatus[n]?.product_id;
-            row["type"] = "lots";
-            row["amount"] = totalLots;
-
-            line_lots += totalLots;
-            n++;
-          }
-        }
-
-        if (deal_pnl) {
-          pnlRecordArray["affiliate_id"] = "";
-          pnlRecordArray["merchant_id"] = mer_rsc[0]?.id;
-          pnlRecordArray["trader_id"] = "";
-          pnlRecordArray["banner_id"] = "";
-          pnlRecordArray["profile_id"] = "";
-          pnlRecordArray["group_id"] = pnlRecordArray["searchInSql"] = "";
-          pnlRecordArray["fromdate"] = from;
-          pnlRecordArray["todate"] = to;
-        }
-
-        line_leads += total_leads;
-        line_demo += total_demo;
-        line_real += total_real;
-        line_ftd += new_ftd;
-        line_ftd_amount += ftd_amount["amount"];
-        line_deposits += totalDeposits;
-        line_deposits_amount += depositsAmount;
-        line_bonus += bonus;
-        line_withdrawal += withdrawal;
-        line_chargeback += chargeback;
-        line_comission += 0;
-      }
-
-      viewsSum += line_views;
-      clicksSum += line_clicks;
-      totalLeads += line_leads;
-      totalDemo += line_demo;
-      totalReal += line_real;
-      newFTD += line_ftd;
-      totalBonus += line_bonus;
-      total_deposits += line_deposits;
-      totalWithdrawal += line_withdrawal;
-      totalPNL += line_pnl;
-      ftdAmount += line_ftd_amount;
-      totalChargeback += line_chargeback;
-      totalCommission += line_comission;
-      totalSumLots += line_lots;
-
-      _index++;
+    } else if (user_level === "manager") {
+      allAffiliates = await ctx.prisma.affiliates.findMany({
+        where: {
+          id: id[0]?.refer_id,
+          valid: 1,
+          group_id: user_level === "manager" ? group_id : 0,
+        },
+      });
+    } else {
+      allAffiliates = [];
     }
 
-    return {
-      viewsSum,
-      clicksSum,
-      totalLeads,
-      totalDemo,
-      totalReal,
-      newFTD,
-      totalBonus,
-      total_deposits,
-      totalWithdrawal,
-      totalPNL,
-      ftdAmount,
-      totalChargeback,
-      totalCommission,
-      totalSumLots,
-    };
+    // affiliate data
+
+    if (user_level === "admin") {
+      if (!affiliate_id) {
+        affiliateData = await ctx.prisma.affiliates.findMany({
+          where: {
+            id: id[0]?.refer_id,
+            valid: 1,
+          },
+        });
+      } else {
+        affiliateData = await ctx.prisma.affiliates.findMany({
+          where: {
+            id: id[0]?.refer_id,
+            valid: 1,
+            // OR: {
+            //   id: Number(affiliate_id),
+            //   refer_id: Number(affiliate_id),
+            // },
+          },
+        });
+      }
+    } else if (user_level === "manager") {
+      if (!affiliate_id) {
+        affiliateData = await ctx.prisma.affiliates.findMany({
+          where: {
+            id: id[0]?.refer_id,
+            valid: 1,
+            group_id: user_level === "manager" ? group_id : 0,
+          },
+        });
+      } else {
+        affiliateData = await ctx.prisma.affiliates.findMany({
+          where: {
+            id: id[0]?.refer_id,
+            valid: 1,
+            group_id: user_level === "manager" ? group_id : 0,
+            OR: {
+              id: Number(affiliate_id),
+              refer_id: Number(affiliate_id),
+            },
+          },
+        });
+      }
+    } else {
+      affiliateData = await ctx.prisma.affiliates.findMany({
+        select: {
+          username: true,
+          id: true,
+        },
+        where: {
+          valid: 1,
+        },
+      });
+    }
+    let data;
+    let Commission;
+    const affiliates = affiliateData as any;
+    const IDs = await ctx.prisma.affiliates.findMany({
+      select: {
+        id: true,
+      },
+    });
+
+    if (user_level === "admin" || user_level === "manager") {
+      for (let j = 0; j < IDs?.length; j++) {
+        data = await ctx.prisma.dashboard.aggregate({
+          _sum: {
+            Clicks: true,
+            Impressions: true,
+            Leads: true,
+            Demo: true,
+            RealAccount: true,
+            FTD: true,
+            FTDAmount: true,
+            Deposits: true,
+            DepositsAmount: true,
+            Bonus: true,
+            Withdrawal: true,
+            ChargeBack: true,
+            PNL: true,
+            Install: true,
+            Commission: true,
+            Volume: true,
+          },
+          where: {
+            affiliate_id: IDs[j]?.id,
+            Date: {
+              gt: from,
+              lt: to,
+            },
+          },
+        });
+      }
+    } else {
+      for (let i = 0; i < IDs?.length; i++) {
+        Commission = await ctx.prisma.commissions.aggregate({
+          _sum: {
+            Commission: true,
+          },
+          where: {
+            affiliate_id: IDs[i]?.id,
+            Date: {
+              gt: from,
+              lt: to,
+            },
+          },
+        });
+      }
+      for (let j = 0; j < affiliates?.length; j++) {
+        data = ctx.prisma.dashboard.aggregate({
+          _sum: {
+            Clicks: true,
+            Impressions: true,
+            Leads: true,
+            Demo: true,
+            RealAccount: true,
+            FTD: true,
+            FTDAmount: true,
+            Deposits: true,
+            DepositsAmount: true,
+            Bonus: true,
+            Withdrawal: true,
+            ChargeBack: true,
+            PNL: true,
+            Install: true,
+            Commission: true,
+            Volume: true,
+          },
+          where: {
+            affiliate_id: affiliates[j]?.id,
+            Date: {
+              gt: from,
+              lt: to,
+            },
+          },
+        });
+
+        Commission = await ctx.prisma.commissions.aggregate({
+          _sum: {
+            Commission: true,
+          },
+          where: {
+            affiliate_id: affiliates[j]?.id,
+            Date: {
+              gt: from,
+              lt: to,
+            },
+          },
+        });
+      }
+    }
+
+    const lots = await ctx.prisma.data_stats.findMany({
+      select: {
+        turnover: true,
+        trader_id: true,
+        rdate: true,
+        affiliate_id: true,
+        profile_id: true,
+        banner_id: true,
+      },
+      where: {
+        affiliate_id: affiliate_id,
+        rdate: {
+          gt: from,
+          lt: to,
+        },
+      },
+    });
+
+    for (let i = 0; i < lots.length; i++) {
+      totalLots += lots[i]?.turnover || 0;
+    }
+
+    const Data = data as DashboardType;
+    for (let n = 0; n < Data; n++) {
+      viewsSum += Data?._sum?.Impressions || 0;
+      clicksSum += Data?._sum?.Clicks || 0;
+      totalLeads += Data?._sum?.Leads || 0;
+      totalCPI += Data?._sum?.Install || 0;
+      totalDemo += Data?._sum?.Demo || 0;
+      totalReal += Data?._sum?.RealAccount || 0;
+      newFTD += Data?._sum?.FTD || 0;
+      total_deposits += Data?._sum?.Deposits || 0;
+      total_depositsAmount += Data?._sum?.DepositsAmount || 0;
+      ftdAmount += Data?._sum?.FTDAmount || 0;
+      totalBonus += Data?._sum?.Bonus || 0;
+      totalWithdrawal += Data?._sum?.Withdrawal || 0;
+      totalChargeback += Data?._sum?.ChargeBack || 0;
+      totalPNL += Data?._sum?.Clicks || 0;
+      totalCommission += Data?._sum?.Commission || 0;
+      totalVolume += Data?._sum?.Volume || 0;
+    }
+
+    const merged = [];
+    for (let i = 0; i < affiliates.length; i++) {
+      merged.push({
+        ...affiliates[i],
+        viewsSum,
+        clicksSum,
+        totalLots,
+        totalCommission,
+        totalBonus,
+        totalPNL,
+        totalChargeback,
+        totalVolume,
+        ftdAmount,
+        total_depositsAmount,
+        newFTD,
+        totalReal,
+        totalLeads,
+        total_deposits,
+        totalCPI,
+        totalDemo,
+        totalWithdrawal,
+      });
+    }
+
+    console.log(merged, totalLots);
+
+    return merged as ResultType[];
   });
 
 export const getDataInstall = publicProcedure.query(async ({ ctx }) => {

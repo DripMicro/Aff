@@ -98,7 +98,7 @@ export function DataTable<Data extends object>({
       {footerData && (
         <Tfoot>
           <Tr>
-            <Td>Total</Td>
+            {footerData.length > 0 && <Td>Total</Td>}
             {footerData.length > 0 &&
               Object.values(footerData[0]).map((item: any, key) => {
                 return <Td key={key}>{item}</Td>;

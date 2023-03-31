@@ -80,3 +80,6 @@ export type PixelLogsReportType =
 
 export type ProfileReportType =
   RouterOutput["affiliates"]["getProfileReportData"][0];
+
+export type SubAffiliateReportType =
+  RouterOutput["affiliates"]["getSubAffiliateReport"][0];
