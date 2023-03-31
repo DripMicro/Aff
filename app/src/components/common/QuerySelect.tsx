@@ -18,10 +18,15 @@ export const QuerySelect = ({ varName, label, choices, emptyTitle }: Props) => {
 
   return (
     <FormControl>
-      <FormLabel>{label}</FormLabel>
+      <FormLabel className="ml-2 text-sm font-medium text-[#525252]">
+        {label}
+      </FormLabel>
       <CSelect
         placeholder={emptyTitle || "All"}
         value={value || ""}
+        bg={"white"}
+        className="text-[#666666]"
+        fontSize={12}
         onChange={(event) => {
           console.log(`muly:change`, { event: event.target });
           void setValue(event.target.value);

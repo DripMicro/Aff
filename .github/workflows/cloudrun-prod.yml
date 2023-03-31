@@ -36,6 +36,8 @@ jobs:
           context: app
           push: true
           tags: europe-docker.pkg.dev/api-front-dashbord/production/aff:latest
+          build-args: |
+            "NEXT_PUBLIC_FLAGS_ENV_KEY=flags_pub_358370259303924312"
 
       - id: "deploy_gamingaffiliates"
         name: deploy gamingaffiliates
@@ -52,7 +54,6 @@ jobs:
             NEXTAUTH_SECRET=PROD_NEXTAUTH_SECRET:latest
           env_vars: |
             LEGACY_PHP_URL=https://go.gamingaffiliates.co
-            LEGACY_PHP_API_URL=https://affiliate-com.netlify.app/api/document-upload-just-log
             NEXTAUTH_URL=https://affiliate.gamingaffiliates.co
             NODE_ENV=production
           flags: |
@@ -78,7 +79,6 @@ jobs:
             NEXTAUTH_SECRET=PROD_NEXTAUTH_SECRET:latest
           env_vars: |
             LEGACY_PHP_URL=https://go.best-brokers-partners.com
-            LEGACY_PHP_API_URL=https://affiliate-com.netlify.app/api/document-upload-just-log
             NEXTAUTH_URL=https://affiliate.best-brokers-partners.com
             NODE_ENV=production
           flags: |

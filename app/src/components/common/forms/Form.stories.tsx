@@ -1,6 +1,3 @@
-import { Form } from "@/components/common/forms/Form";
-import { usePrepareSchema } from "@/components/common/forms/usePrepareSchema";
-import { t } from "../../../../.storybook/stories-utils";
 import { z } from "zod";
 import { FormTest } from "./form-test";
 
@@ -15,6 +12,10 @@ export const TextField = {
   args: {
     schema: z.object({
       first_name: z.string().describe("First Name // place holder..."),
+      not_required: z
+        .string()
+        .optional()
+        .describe("First Name // place holder..."),
     }),
   },
 };

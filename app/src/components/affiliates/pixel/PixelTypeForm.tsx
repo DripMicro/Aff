@@ -20,6 +20,8 @@ interface Props {
   values: object;
   merchants: any;
   merchant_creative: any;
+  count: number;
+  setCount: any;
   onNext: (values: z.infer<typeof schema>) => void;
   onPrevious: () => void;
 }
@@ -30,6 +32,8 @@ export const PixelTypeForm = ({
   values,
   merchants,
   merchant_creative,
+  count,
+  setCount,
   onNext,
   onPrevious,
 }: Props) => {
@@ -37,10 +41,10 @@ export const PixelTypeForm = ({
   const formContext = usePrepareSchema(t, schema);
 
   return (
-    <Stack m={12} gap={2}>
-      <Heading as="h6" size="xs">
+    <Stack gap={2}>
+      <div className="mt-5 font-medium text-black md:mt-12 md:text-lg">
         Step 1: Select Pixel Type
-      </Heading>
+      </div>
       <StepperForm
         formContext={formContext}
         schema={schema}
@@ -51,6 +55,8 @@ export const PixelTypeForm = ({
           activeStep: activeStep,
           onPrevious: onPrevious,
           submit: { notification: false },
+          count: count,
+          setCount: setCount,
         }}
         props={{
           merchant_id: {

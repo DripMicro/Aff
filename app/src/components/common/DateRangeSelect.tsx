@@ -33,7 +33,7 @@ import { queryTypes, useQueryState } from "next-usequerystate";
 import { useRouter } from "next/router";
 import { DatePicker } from "./datepicker/Datepicker";
 
-type DateRange =
+export type DateRange =
   | "today"
   | "yesterday"
   | "this-week"
@@ -141,7 +141,20 @@ export const useDateRange = (defaultRange?: DateRange) => {
   const { dates } = router.query;
 
   const value = String(dates);
+  console.log(value);
   return getDateRange(value || defaultRange || "last-6-month");
+};
+
+export const useDateRangeDefault = (defaultRange?: string) => {
+  const router = useRouter();
+  const { dates } = router.query;
+
+  const value = String(dates);
+  console.log("value");
+  console.log(value);
+  console.log("defaultRange");
+  console.log(defaultRange);
+  return getDateRange(defaultRange);
 };
 
 export const DateRangeSelect = ({ range: defaultRange }: Props) => {
@@ -194,7 +207,7 @@ export const DateRangeSelect = ({ range: defaultRange }: Props) => {
           <div className="flex">
             <div className="relative">
               <select
-                className="flex cursor-pointer appearance-none items-center space-x-2 rounded border border-[#D7D7D7] bg-white py-2 pl-2 pr-8 text-xs md:pl-6 md:pr-14 md:text-base"
+                className="flex h-full cursor-pointer appearance-none items-center space-x-2 rounded border border-[#D7D7D7] bg-white py-4 pl-2 pr-8 text-xs md:py-2 md:pl-6 md:pr-14 md:text-base"
                 placeholder="Select date range"
                 value={name}
                 onChange={(event) => {
@@ -214,7 +227,7 @@ export const DateRangeSelect = ({ range: defaultRange }: Props) => {
                 <option value="custom">Custom</option>
               </select>
 
-              <div className="absolute right-2 -mt-7 cursor-pointer md:right-6 md:-mt-8 ">
+              <div className="absolute right-2 -mt-9 cursor-pointer md:right-6 md:-mt-8 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -235,7 +248,7 @@ export const DateRangeSelect = ({ range: defaultRange }: Props) => {
             </div>
 
             <div
-              className="ml-2 cursor-pointer rounded border border-[#D7D7D7] bg-white px-2 py-2 text-xs md:px-4 md:text-base"
+              className="ml-2 flex cursor-pointer items-center justify-center rounded border border-[#D7D7D7] bg-white px-2 py-2 text-xs md:px-4 md:text-base"
               onClick={onOpen}
             >
               {from.getDate()} {month[from.getMonth()]} {from.getFullYear()}{" "}

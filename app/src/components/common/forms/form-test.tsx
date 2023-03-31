@@ -2,8 +2,7 @@ import { usePrepareSchema } from "@/components/common/forms/usePrepareSchema";
 import { t } from "../../../../.storybook/stories-utils";
 import { Form } from "@/components/common/forms/Form";
 
-export const FormTest = (args: any) => {
-  console.log(`muly:FormTest`, { args });
+const FormTestComponent = (args: any) => {
   const formContext = usePrepareSchema(t, args.schema);
 
   const onSubmit = (values: any) => {
@@ -25,4 +24,8 @@ export const FormTest = (args: any) => {
       }}
     ></Form>
   );
+};
+
+export const FormTest = {
+  render: (args: any) => <FormTestComponent {...args} />,
 };

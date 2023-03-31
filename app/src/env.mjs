@@ -24,7 +24,6 @@ const server = z.object({
   // DISCORD_CLIENT_SECRET: z.string(),
 
   LEGACY_PHP_URL: z.string().url(),
-  LEGACY_PHP_API_URL: z.string(),
   LEGACY_PHP_ACCESS_TOKEN: z.string(),
 });
 
@@ -51,7 +50,6 @@ const processEnv = {
   NEXTAUTH_URL: process.env.NEXTAUTH_URL,
 
   LEGACY_PHP_URL: process.env.LEGACY_PHP_URL,
-  LEGACY_PHP_API_URL: process.env.LEGACY_PHP_API_URL,
   LEGACY_PHP_ACCESS_TOKEN: process.env.LEGACY_PHP_ACCESS_TOKEN,
 
   NEXT_PUBLIC_FLAGS_ENV_KEY: process.env.NEXT_PUBLIC_FLAGS_ENV_KEY,

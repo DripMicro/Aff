@@ -1,4 +1,5 @@
 import type { Dispatch, SetStateAction } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Image } from "@chakra-ui/react";
 
@@ -40,66 +41,93 @@ const SingleLink = ({
     setdropdown(value);
   };
 
+  const activeDropdownVector = (value: boolean) => {
+    setdropdownVector(value);
+  };
+
+  const activeOnLink = (value: boolean) => {
+    setonLink(value);
+  };
+
+  const [dropdownVector, setdropdownVector] = useState(true);
+
+  const [onLink, setonLink] = useState(false);
+
   return (
     <>
       <div
         onClick={(e) => {
           e.preventDefault();
+          if (dropdown != dropdownName) activeDropdownVector(true);
           activeLink(defaultLink);
           activeDropdown(dropdownName);
         }}
       >
         <Link
-          className="text-white-600 hover:text-white-800 relative flex h-11 flex-row items-center pl-8 hover:bg-white focus:outline-none dark:hover:bg-gray-600"
+          className="text-white-600 hover:text-white-800 relative flex h-11 flex-row items-center justify-between pl-8 hover:bg-white focus:outline-none dark:hover:bg-gray-600"
           href={
             "/affiliates/" +
             (parentLink == "" ? "" : parentLink + "/") +
             defaultLink
           }
+          onClick={() => {
+            activeOnLink(true);
+          }}
         >
-          <Image
-            alt="..."
-            className="w-6 border-none pt-0.5 align-middle"
-            src={
-              "/img/icons/" +
-              dropdownName +
-              (dropdown == dropdownName ? "Active" : "") +
-              ".png"
-            }
-          />
-          {collapseShow ? (
-            <span
-              className={
-                "ml-4 truncate text-base font-medium tracking-wide " +
-                (dropdown == dropdownName ? "text-[#2262C6]" : "")
+          <div className="text-white-600 hover:text-white-800 relative flex h-11 flex-row items-center hover:bg-white focus:outline-none dark:hover:bg-gray-600">
+            <Image
+              alt="..."
+              className="w-6 border-none pt-0.5 align-middle"
+              src={
+                "/img/icons/" +
+                dropdownName +
+                (dropdown == dropdownName && onLink ? "Active" : "") +
+                ".png"
               }
-            >
-              {navbarName}
-            </span>
-          ) : (
-            ""
-          )}
-          <span className="ml-auto mr-8 truncate py-0.5 text-xs font-medium tracking-wide">
+            />
+            {collapseShow ? (
+              <span
+                className={
+                  "ml-4 truncate text-base font-medium tracking-wide " +
+                  (dropdown == dropdownName && onLink ? "text-[#2262C6]" : "")
+                }
+              >
+                {navbarName}
+              </span>
+            ) : (
+              ""
+            )}
+          </div>
+          <div
+            className="mr-8 truncate py-0.5 text-xs font-medium tracking-wide"
+            onClick={(e) => {
+              e.preventDefault();
+              console.log(dropdownVector);
+              activeDropdownVector(!dropdownVector);
+            }}
+          >
             <Image
               alt="..."
               className={
                 "border-none align-middle" +
-                (dropdown == dropdownName ? " w-3" : " w-2 ")
+                (dropdownVector && dropdown == dropdownName ? " w-3" : " w-2 ")
               }
               src={
                 "/img/icons/Vector" +
-                (dropdown == dropdownName ? "1" : "") +
+                (dropdownVector && dropdown == dropdownName ? "1" : "") +
                 ".png"
               }
             />
-          </span>
+          </div>
         </Link>
       </div>
 
       <ul
         className={
-          "flex-col pt-2 " +
-          (dropdown == dropdownName && collapseShow ? "flex" : "hidden")
+          "flex-col pt-2 duration-300 " +
+          (dropdown == dropdownName && collapseShow && dropdownVector
+            ? "flex"
+            : "hidden")
         }
       >
         {linkName.map((value, index) => (
@@ -111,7 +139,7 @@ const SingleLink = ({
               }}
             >
               <Link
-                className="text-white-600 hover:text-white-800 relative flex h-11 flex-row items-center pl-14 hover:bg-white focus:outline-none dark:hover:bg-gray-600"
+                className="text-white-600 hover:text-white-800 relative flex h-9 flex-row items-center pl-14 hover:bg-white focus:outline-none dark:hover:bg-gray-600"
                 href={
                   "/affiliates/" +
                   (parentLink == "" ? "" : parentLink + "/") +
@@ -122,7 +150,9 @@ const SingleLink = ({
                   <span
                     className={
                       "ml-4 truncate text-base font-medium tracking-wide " +
-                      (activeName == value.link ? "text-[#2262C6]" : "")
+                      (activeName == value.link && onLink
+                        ? "text-[#2262C6]"
+                        : "")
                     }
                   >
                     {value.name}

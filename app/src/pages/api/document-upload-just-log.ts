@@ -25,6 +25,8 @@ function formidablePromise(
     const form = formidable(opts);
 
     form.parse(req, (err, fields, files) => {
+      // console.log(`muly:formidablePromise`, { err, fields, len: files });
+
       if (err) {
         return reject(err);
       }
@@ -45,7 +47,7 @@ const fileConsumer = <T = unknown>(acc: T[]) => {
 };
 
 export async function handler(req: NextApiRequest, res: NextApiResponse) {
-  console.log(`muly:handler:document-upload-just-log`, {});
+  console.log(`muly:handler:document-upload-just-log`, { method: req.method });
 
   if (req.method !== "POST") return res.status(404).end();
 
@@ -58,7 +60,17 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
       fileWriteStreamHandler: () => fileConsumer(chunks),
     });
 
-    console.log(`muly:handler:document-upload-just-log`, { fields, files });
+    if (fields["shared-secret"] !== env.LEGACY_PHP_ACCESS_TOKEN) {
+      throw new Error("Invalid shared-secret");
+    }
+
+    const fileData = Buffer.concat(chunks); // or is it from? I always mix these up
+
+    console.log(`muly:handler:document-upload-just-log`, {
+      fields,
+      chunks: chunks.length,
+      files: fileData.length,
+    });
     return res.status(204).end();
   } catch (_err) {
     const err = castError(_err);

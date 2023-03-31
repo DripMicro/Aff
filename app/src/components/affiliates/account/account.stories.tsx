@@ -76,29 +76,38 @@ export const Signin = {
 };
 
 export const Signup = {
-  render: () => <FormTest schema={signupSchema} />,
+  ...FormTest,
+  args: {
+    schema: signupSchema,
+  },
 };
 
 export const LostPassword = {
-  render: () => <FormTest schema={lostPasswordSchema} />,
+  ...FormTest,
+  args: { schema: lostPasswordSchema },
 };
 
 export const PaymentDetails = {
-  render: () => <FormTest schema={paymentDetailsSchema} />,
+  ...FormTest,
+  args: { schema: paymentDetailsSchema },
 };
 
 export const PixelMonitor = {
-  render: () => <FormTest schema={pixelMonitorSchema} />,
+  ...FormTest,
+  args: { schema: pixelMonitorSchema },
 };
 
 export const Document = {
-  render: () => <FormTest schema={documentSchema} />,
+  ...FormTest,
+  args: { schema: documentSchema },
 };
 
 export const Ticket = {
-  render: () => <FormTest schema={ticketSchema} />,
+  ...FormTest,
+  args: { schema: ticketSchema },
 };
 
 export const Profile = {
-  render: () => <FormTest schema={profileSchema} />,
+  ...FormTest,
+  args: { schema: profileSchema },
 };

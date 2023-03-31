@@ -12,9 +12,9 @@ const Page: MyPage = () => {
         <meta name="description" content="Affiliates Documents" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <Documents />
-      </main>
+      {/* <main className={styles.main}> */}
+      <Documents />
+      {/* </main> */}
     </>
   );
 };

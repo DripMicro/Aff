@@ -8,6 +8,7 @@ import {
 import { getPaymentDetails, getPaymentsPaid } from "./billing";
 import { getMerchantCreative, getMerchantCreativeMeta } from "./creative";
 import {
+  getAllPerformanceChart,
   getConversionChart,
   getCountryReport,
   getDashboard,
@@ -49,6 +50,7 @@ export const affiliatesRouter = createTRPCRouter({
   getDashboard,
   getTopMerchantCreative,
   getPerformanceChart,
+  getAllPerformanceChart,
   getConversionChart,
   getCountryReport,
   getReportsHiddenCols,
