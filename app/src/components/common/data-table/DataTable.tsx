@@ -1,14 +1,5 @@
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
-import {
-  chakra,
-  Table,
-  Tbody,
-  Td,
-  Tfoot,
-  Th,
-  Thead,
-  Tr,
-} from "@chakra-ui/react";
+import { chakra, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import type { ColumnDef, SortingState } from "@tanstack/react-table";
 import {
   flexRender,
