@@ -17,6 +17,7 @@ const renderLink = (
   setActiveName: React.Dispatch<React.SetStateAction<string>>,
   setDropdown: React.Dispatch<React.SetStateAction<string>>,
   activeName: string,
+  dropdown: string,
   collapseShow: boolean
 ) => {
   if (item.type === "single") {
@@ -38,7 +39,7 @@ const renderLink = (
         <DropdownLink
           setactiveName={setActiveName}
           setdropdown={setDropdown}
-          dropdown={activeName}
+          dropdown={dropdown}
           activeName={activeName}
           collapseShow={collapseShow}
           linkName={item.links}
@@ -72,6 +73,7 @@ const Sidebar: React.FC<Props> = ({ collapseShow }) => {
               setActiveName,
               setDropdown,
               activeName,
+              dropdown,
               collapseShow
             )
           )}

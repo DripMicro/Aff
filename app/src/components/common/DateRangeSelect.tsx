@@ -183,7 +183,7 @@ export const DateRangeSelect = ({ range: defaultRange }: Props) => {
     await setValue(value);
   };
 
-  console.log(`muly:DateRangeSelect render ${name}`, { from, to });
+  // console.log(`muly:DateRangeSelect render ${name}`, { from, to });
 
   const month: string[] = [
     "January",
