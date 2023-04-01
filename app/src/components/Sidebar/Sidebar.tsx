@@ -56,7 +56,7 @@ export default function Sidebar({ collapseShow }: Props) {
                 collapseShow={collapseShow}
                 linkName={[
                   { name: "Creative Materials", link: "creative" },
-                  { name: "SubAffliate Creatives", link: "sub" },
+                  { name: "Sub Affiliates Creatives", link: "sub" },
                 ]}
                 defaultLink={"creative"}
                 dropdownName={"marketing"}
@@ -74,8 +74,16 @@ export default function Sidebar({ collapseShow }: Props) {
                 collapseShow={collapseShow}
                 linkName={[
                   { name: "Quick Summary Report", link: "quick-summary" },
+                  { name: "Commission Report", link: "commission-report" },
+                  { name: "Clicks Report", link: "clicks-report" },
+                  { name: "Creative Report", link: "creative-report" },
+                  { name: "Landing Page Report", link: "landing-page" },
+                  { name: "Trader Report", link: "trader_report" },
+                  { name: "Pixels Logs Report", link: "pixel_log_report" },
+                  { name: "Install Report", link: "install-reports" },
+                  { name: "Profile Report", link: "profile-report" },
                   {
-                    name: "Sub Affiliate Report",
+                    name: "Sub Affiliates Report",
                     link: "sub-affiliate-report",
                   },
                 ]}
