@@ -15,7 +15,7 @@ export const PixelLogReports = () => {
   const { from, to } = useDateRange();
   const [traderID, setTraderID] = useState<string>("");
 
-  const { data, isLoading } = api.affiliates.getpixelLogReport.useQuery({
+  const { data, isLoading } = api.affiliates.getPixelLogReport.useQuery({
     from,
     to,
     merchant_id: merchant_id ? Number(merchant_id) : undefined,
