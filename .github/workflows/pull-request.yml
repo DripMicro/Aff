@@ -27,7 +27,6 @@ jobs:
           echo 'NEXTAUTH_SECRET=${{ steps.secrets.outputs.nextauth_secret }}' >> app/.env
           echo 'NEXTAUTH_URL="http://localhost:3001"' >> app/.env
           echo 'LEGACY_PHP_URL="https://go.best-brokers-partners.com"' >> app/.env
-          echo 'LEGACY_PHP_API_URL="https://affiliate-com.netlify.app/api/document-upload-just-log"' >> app/.env
           echo 'LEGACY_PHP_ACCESS_TOKEN="fake"' >> app/.env
           echo 'SENTRY_IGNORE_API_RESOLUTION_ERROR=1' >> app/.env
           echo 'NEXT_PUBLIC_FLAGS_ENV_KEY=flags' >> app/.env

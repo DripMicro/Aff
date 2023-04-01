@@ -3,48 +3,34 @@ import { SettingsIcon } from "@chakra-ui/icons";
 // TODO:MAX remove all
 import {
   Box,
-  Button,
-  Container,
   Flex,
   FormControl,
   FormLabel,
-  Grid,
-  GridItem,
-  Heading,
-  IconButton,
   Image,
   Link,
   Modal,
   ModalBody,
-  ModalCloseButton,
   ModalContent,
-  ModalFooter,
-  ModalHeader,
   ModalOverlay,
   SimpleGrid,
   Stack,
-  Switch,
-  Checkbox,
   Tab,
   TabList,
   TabPanel,
   TabPanels,
   Tabs,
-  Text,
   useDisclosure,
 } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
-import { AreaChart, LineChart } from "@tremor/react";
-import { SingleDatepicker } from "chakra-dayzed-datepicker";
-import { queryTypes, useQueryState } from "next-usequerystate";
 import DashboardChart from "../../common/chart/DashboardChart";
 import PerformanceChart from "../../common/chart/PerformanceChart";
 import ConversionChart from "../../common/chart/ConversionChart";
 import DeviceReportChart from "../../common/chart/DeviceReportChart";
 import DoughnutChart from "../../common/chart/DoughnutChart";
 import CountryChart from "../../common/chart/CountryChart";
+import { Button } from "../../ui/button";
 
-import { useRef, useLayoutEffect, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useElementSize } from "usehooks-ts";
 
 import type {
@@ -52,26 +38,16 @@ import type {
   TopMerchantCreativeType,
 } from "../../../server/db-types";
 import { api } from "../../../utils/api";
-import {
-  conversionFormatter,
-  performanceFormatter,
-} from "../../../utils/format";
 
 import { DataTable } from "../../common/data-table/DataTable";
 
 import type { ChangeEvent } from "react";
-import {
-  AcauisitionIcon,
-  ClicksIcon,
-  ComissionIcon,
-  SignupIcon,
-} from "../../icons";
+
 import {
   DateRangeSelect,
   useDateRange,
   useDateRangeDefault,
 } from "../../common/DateRangeSelect";
-// import }DateRange} from '../../common/ddDa'
 
 import Affiliates from "../../../layouts/AffiliatesLayout";
 import { Loading } from "@/components/common/Loading";
@@ -90,7 +66,6 @@ const fields = [
   "Commission",
 ];
 const columnHelper = createColumnHelper<TopMerchantCreativeType>();
-const reportColumnHelper = createColumnHelper<CountryReportType>();
 
 export const Dashboard = () => {
   const { from, to } = useDateRange();
@@ -114,16 +89,6 @@ export const Dashboard = () => {
     useDateRangeDefault("month-to-date")
   );
 
-  // const {thisFrom, thisTo} = useDateRange('month-to-date');
-
-  // const { data: thisMonthData } = api.affiliates.getDashboard.useQuery({
-  //   thisFrom,
-  //   thisTo,
-  // });
-
-  console.log("data");
-  console.log(data);
-
   const { data: performanceChart } =
     api.affiliates.getPerformanceChart.useQuery({ from, to });
 
@@ -141,26 +106,6 @@ export const Dashboard = () => {
     api.affiliates.getReportsHiddenCols.useQuery();
   const { data: account, refetch } = api.affiliates.getAccount.useQuery();
   const upsertReportsField = api.affiliates.upsertReportsField.useMutation();
-
-  // TODO:MAX why needed?
-  const refChart = useRef<null | HTMLDivElement>(null);
-
-  // const [width, setWidth] = useState<number | undefined>(0);
-
-  // useLayoutEffect(() => {
-  //   console.log("refChart.current?.offsetWidth");
-  //   console.log(refChart.current?.offsetWidth);
-
-  //   const getwidth = () => {
-  //     setWidth(refChart.current?.offsetWidth);
-  //   };
-
-  //   window.addEventListener("resize", getwidth);
-
-  //   return () => window.removeEventListener("resize", getwidth);
-  // });
-
-  const [squareRef, { width, height }] = useElementSize();
 
   useEffect(() => {
     const fieldsArray = fields.map((field, i) => {
@@ -225,22 +170,6 @@ export const Dashboard = () => {
     }),
   ];
 
-  // TODO:Max remove?
-  const reportColumns = [
-    reportColumnHelper.accessor("merchant_id", {
-      cell: (info) => info.getValue(),
-      header: "#",
-    }),
-    reportColumnHelper.accessor("country", {
-      cell: (info) => info.getValue(),
-      header: "Country",
-    }),
-    reportColumnHelper.accessor("_sum.Commission", {
-      cell: (info) => info.getValue(),
-      header: "Report",
-    }),
-  ];
-
   const handleSelectAll = async () => {
     const value = reportFields.map((item) => {
       const temp = Object.assign({}, item);
@@ -286,7 +215,7 @@ export const Dashboard = () => {
       return temp;
     });
     setReportFields(value);
-    const hiddenCols = value.filter((item) => item.isChecked === false);
+    const hiddenCols = value.filter((item) => !item.isChecked);
     const remove_fields = hiddenCols
       .map((item) => {
         return item.value;
@@ -306,9 +235,9 @@ export const Dashboard = () => {
         </div>
         <div className="mb-2.5 flex">
           <DateRangeSelect />
-          <button className="ml-5 hidden justify-self-end rounded-md bg-[#2262C6] px-8 py-2 text-white lg:block">
+          <Button className="ml-2 hidden lg:block" variant="primary">
             Update
-          </button>
+          </Button>
 
           <button
             className="ml-3 rounded-md bg-white px-2 drop-shadow md:ml-5 md:px-3 md:pt-1.5 md:pb-2"
@@ -318,14 +247,12 @@ export const Dashboard = () => {
           </button>
         </div>
         <div className="grid justify-items-stretch lg:hidden">
-          <button className="ml-5 mb-2 justify-self-end rounded-md bg-[#2262C6] px-2 py-1 text-white md:px-8 md:py-2 ">
+          <Button className="ml-2 justify-self-end" variant="primary">
             Update
-          </button>
+          </Button>
         </div>
       </div>
-
       <Modal isOpen={isOpen} size="3xl" onClose={onClose} isCentered>
-        <ModalOverlay />
         <ModalContent ml={4} mr={4}>
           <div className="flex items-end justify-between pl-6 pt-4 md:pl-8">
             <div className="font-medium text-[#282560]">
@@ -390,19 +317,12 @@ export const Dashboard = () => {
                 Unselect All
               </button>
             </div>
-            {/* <button
-              className="rounded-md bg-[#2262C6] px-6 py-3 text-white md:px-14"
-              onClick={onClose}
-            >
-              Save
-            </button> */}
           </div>
         </ModalContent>
       </Modal>
-
       <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
         {reportFields
-          .filter((item) => item.isChecked === true)
+          .filter((item) => item.isChecked)
           .map((item) => {
             interface Sum {
               [index: string]: number;
@@ -463,28 +383,6 @@ export const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-                {/* <Box
-                  key={item.id}
-                  width="100%"
-                  border="1px solid gray"
-                  borderRadius="5"
-                  bg="white"
-                  p="4"
-                  display="flex"
-                  alignItems="center"
-                  columnGap="5"
-                  color="#0E132B"
-                  _hover={{ borderColor: "#069731", cursor: "pointer" }}
-                >
-                  <Box>
-                    <Text fontSize="md" fontWeight="normal" color="#0E132B">
-                      {item.title}
-                    </Text>
-                    <Text fontSize="lg" fontWeight="bold">
-                      {value}
-                    </Text>
-                  </Box>
-                </Box> */}
               </>
             );
           })}
@@ -493,7 +391,6 @@ export const Dashboard = () => {
       <div
         className="my-6 rounded-2xl bg-white px-2 pt-5 pb-5 shadow-sm md:px-6 "
         id="myID"
-        ref={refChart}
       >
         <Stack>
           <Tabs>
@@ -507,26 +404,12 @@ export const Dashboard = () => {
               <TabPanel>
                 <div className="mt-5 h-80 pb-5">
                   <PerformanceChart performanceChartData={performanceChart} />
-                  {/* <div className="w-full h-96" ref={squareRef}>
-                    <p>{`The square width is ${width}px and height ${height}px`}</p>
-                    <ConversionChart />
-                  </div> */}
-                  {/* <ConversionChart conversionChartData={conversionChart} /> */}
                 </div>
               </TabPanel>
               <TabPanel>
                 <div className="mt-5 h-80  pb-5">
                   <ConversionChart conversionChartData={conversionChart} />
                 </div>
-                {/* <LineChart
-                  data={conversionChart}
-                  dataKey="date"
-                  categories={["Conversions"]}
-                  colors={["blue"]}
-                  valueFormatter={conversionFormatter}
-                  marginTop="mt-6"
-                  yAxisWidth="w-10"
-                /> */}
               </TabPanel>
             </TabPanels>
           </Tabs>
@@ -535,7 +418,7 @@ export const Dashboard = () => {
 
       <div className="my-6 grid grid-cols-1 gap-5 lg:grid-cols-3">
         <div className="rounded-2xl bg-white px-2 py-5 shadow-sm md:px-5">
-          <div className="mb-3 text-xl font-bold text-[#2262C6]">
+          <div className="mb-3 text-xl font-bold text-primary">
             Device Report
           </div>
           <div className="mb-5 flex justify-between">
@@ -777,111 +660,6 @@ export const Dashboard = () => {
         </div>
       </div>
 
-      {/* <Stack mt="5">
-        <Flex direction="row" columnGap="10px">
-          <Box flex="1" bg="white" border="1px solid gray" padding="20px 16px">
-            <Heading as="h6" size="xs" mb="2">
-              Country Report
-            </Heading>
-            <DataTable data={report} columns={reportColumns} />
-          </Box>
-          <Box
-            width="35%"
-            bg="white"
-            border="1px solid gray"
-            padding="20px 16px"
-          >
-            <Heading as="h6" size="xs" mb="2">
-              Your Account Manager
-            </Heading>
-            <Box
-              display="flex"
-              flexDirection="column"
-              justifyContent="flex-start"
-              rowGap="5px"
-            >
-              <Box display="flex" flexDirection="row" columnGap="5px">
-                <Text width="100px" color="#8f8f8f" flex="0 0 100px">
-                  Name:
-                </Text>
-                <Text color="#0E132B">
-                  {account?.first_name} {account?.last_name}
-                </Text>
-              </Box>
-              <Box display="flex" flexDirection="row" columnGap="5px">
-                <Text width="100px" color="#8f8f8f" flex="0 0 100px">
-                  Email:
-                </Text>
-                <Text cursor="pointer" wordBreak="break-word">
-                  <Link
-                    href={`mailto:${account?.mail || ""}`}
-                    textDecoration="none"
-                    _hover={{ textDecoration: "none" }}
-                  >
-                    {account?.mail}
-                  </Link>
-                </Text>
-              </Box>
-              <Box display="flex" flexDirection="row" columnGap="5px">
-                <Text width="100px" color="#8f8f8f" flex="0 0 100px">
-                  Skype:
-                </Text>
-                <Text cursor="pointer" wordBreak="break-word">
-                  <Link
-                    href={`skype:${account?.mail || ""}?call`}
-                    textDecoration="none"
-                    _hover={{ textDecoration: "none" }}
-                  >
-                    {account?.mail}
-                  </Link>
-                </Text>
-              </Box>
-              <Box display="flex" flexDirection="row" columnGap="5px">
-                <Text width="100px" color="#8f8f8f" flex="0 0 100px">
-                  Desk:
-                </Text>
-                <Text color="#0E132B">VIP01</Text>
-              </Box>
-              <Box display="flex" flexDirection="row" columnGap="5px">
-                <Text width="100px" color="#8f8f8f" flex="0 0 100px">
-                  Sub Affiliates Link:
-                </Text>
-                <Text
-                  color="#f1792f"
-                  fontWeight="semibold"
-                  wordBreak="break-word"
-                >
-                  <Link href="https://go.gamingaffiliates.co/?ctag=a500-b0-p">
-                    https://go.gamingaffiliates.co/?ctag=a500-b0-p
-                  </Link>
-                </Text>
-              </Box>
-              <Box display="flex" flexDirection="row" columnGap="5px">
-                <Text width="100px" color="#8f8f8f" flex="0 0 100px">
-                  Commission:
-                </Text>
-                <Text color="#069731" fontWeight="bold">
-                  <Link
-                    href="https://go.gamingaffiliates.co/affiliate/account.php?act=commission"
-                    textDecoration="none"
-                    _hover={{ textDecoration: "none" }}
-                  >
-                    $13,857.00
-                  </Link>
-                </Text>
-              </Box>
-              <Box mt="8">
-                <Text color="#F37A20" fontWeight="semibold">
-                  Need some help?{" "}
-                  <Link href="https://go.gamingaffiliates.co/affiliate/tickets.php?act=new">
-                    Click Here
-                  </Link>
-                </Text>
-              </Box>
-            </Box>
-          </Box>
-        </Flex>
-      </Stack> */}
       <div className="mb-5 rounded-2xl bg-white px-2 py-5 shadow-sm md:px-5">
         <div className="text-xl font-bold text-[#2262C6] ">
           Top Performing Creative
