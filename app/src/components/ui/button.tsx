@@ -18,7 +18,7 @@ const buttonVariants = cva(
         destructive:
           "bg-red-500 text-white hover:bg-red-600 dark:hover:bg-red-600",
         outline:
-          "bg-secondary border border-azure hover:bg-slate-100 dark:border-slate-700 dark:text-slate-100",
+          "text-azure text-base bg-white border border-azure rounded-md",
         subtle:
           "bg-slate-100 text-slate-900 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-100",
         ghost:
@@ -28,7 +28,7 @@ const buttonVariants = cva(
       size: {
         default: "py-1 px-2 md:py-2 md:px-9",
         sm: "h-9 px-2 rounded-md",
-        lg: "h-11 px-8 rounded-md",
+        lg: "py-3 rounded-md",
       },
     },
     defaultVariants: {

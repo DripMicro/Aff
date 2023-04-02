@@ -1,4 +1,4 @@
-import { Button } from "./button";
+  import { Button } from "./button";
 
 const Buttons = ({ variant }: any) => (
   <div className="flex flex-col items-start gap-8">

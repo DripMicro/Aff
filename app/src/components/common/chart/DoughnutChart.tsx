@@ -21,19 +21,25 @@ export const options = {
   },
 };
 
-export const data = {
-  labels: ["", "", ""],
-  datasets: [
-    {
-      data: [12, 19],
-      backgroundColor: ["#2262C6", "#EEEEEE"],
-      borderColor: ["#2262C6", "#EEEEEE"],
-      borderWidth: 1,
-    },
-  ],
-};
+interface Props {
+  value: number;
+  color: string;
+}
 
-const DoughnutChart = () => {
+const DoughnutChart = ({value, color}:Props) => {
+
+  const data = {
+    labels: ["", "", ""],
+    datasets: [
+      {
+        data: [value, 100-value],
+        backgroundColor: [color, "#EEEEEE"],
+        borderColor: [color, "#EEEEEE"],
+        borderWidth: 1,
+      },
+    ],
+  };
+
   return <Doughnut options={options} data={data} />;
 };
 

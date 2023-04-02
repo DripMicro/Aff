@@ -5,6 +5,7 @@ const colors = {
   ...defaultColors,
   ...{
     primary: "#2262C6",
+    disabled: "#666666",
     azure: "#1B48BB",
     white: "#fff",
     secondary: "#EFEEFF"
