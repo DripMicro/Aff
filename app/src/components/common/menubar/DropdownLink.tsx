@@ -1,7 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Image } from "@chakra-ui/react";
 
 interface Props {
   activeName: string;
@@ -39,6 +38,8 @@ const SingleLink = ({
 
   const activeDropdown = (value: string) => {
     setdropdown(value);
+    console.log(value);
+    console.log(dropdown);
   };
 
   const activeDropdownVector = (value: boolean) => {
@@ -52,6 +53,11 @@ const SingleLink = ({
   const [dropdownVector, setdropdownVector] = useState(true);
 
   const [onLink, setonLink] = useState(false);
+
+  useEffect(() => {
+    console.log("dropdown");
+    console.log(dropdown);
+  }, [dropdown]);
 
   return (
     <>
@@ -75,7 +81,7 @@ const SingleLink = ({
           }}
         >
           <div className="text-white-600 hover:text-white-800 relative flex h-11 flex-row items-center hover:bg-white focus:outline-none dark:hover:bg-gray-600">
-            <Image
+            <img
               alt="..."
               className="w-6 border-none pt-0.5 align-middle"
               src={
@@ -106,7 +112,7 @@ const SingleLink = ({
               activeDropdownVector(!dropdownVector);
             }}
           >
-            <Image
+            <img
               alt="..."
               className={
                 "border-none align-middle" +

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SingleLink from "../common/menubar/SingleLink";
 import DropdownLink from "../common/menubar/DropdownLink";
 import { cn } from "@/lib/utils";
@@ -17,6 +17,7 @@ const renderLink = (
   setActiveName: React.Dispatch<React.SetStateAction<string>>,
   setDropdown: React.Dispatch<React.SetStateAction<string>>,
   activeName: string,
+  dropdown: string,
   collapseShow: boolean
 ) => {
   if (item.type === "single") {
@@ -38,7 +39,7 @@ const renderLink = (
         <DropdownLink
           setactiveName={setActiveName}
           setdropdown={setDropdown}
-          dropdown={activeName}
+          dropdown={dropdown}
           activeName={activeName}
           collapseShow={collapseShow}
           linkName={item.links}
@@ -61,6 +62,8 @@ const Sidebar: React.FC<Props> = ({ collapseShow }) => {
     "sidebar fixed top-16 left-0 z-10 flex h-full flex-col bg-white text-white transition-all duration-300 dark:bg-gray-900 md:top-20"
   );
 
+  
+
   return (
 
     <div className={sidebarClassName}>
@@ -73,6 +76,7 @@ const Sidebar: React.FC<Props> = ({ collapseShow }) => {
               setActiveName,
               setDropdown,
               activeName,
+              dropdown,
               collapseShow
             )
           )}
