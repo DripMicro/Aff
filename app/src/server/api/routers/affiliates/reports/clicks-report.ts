@@ -2,7 +2,7 @@ import { publicProcedure } from "@/server/api/trpc";
 import { z } from "zod";
 import { getUnixTime } from "date-fns";
 import { affiliate_id } from "@/server/api/routers/affiliates/const";
-import { data_sales_type, Prisma } from "@prisma/client";
+import { type data_sales_type, Prisma } from "@prisma/client";
 
 export const getClicksReport = publicProcedure
   .input(

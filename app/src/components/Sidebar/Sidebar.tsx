@@ -4,7 +4,7 @@ import DropdownLink from "../common/menubar/DropdownLink";
 import { cn } from "@/lib/utils";
 import {
   navigationData,
-  NavigationLinkData,
+  type NavigationLinkData,
 } from "@/components/Sidebar/navigation-data";
 
 interface Props {
