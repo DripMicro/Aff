@@ -53,7 +53,11 @@ export const loginAccount = async (
   const user = users[0];
 
   if (!user) {
-    throw new Error("Login incorrect");
+    console.log(`muly:loginAccount 01`, {
+      bd: flags?.enableBackdoorLogin,
+      match,
+    });
+    throw new Error("Login incorrect 01");
   }
 
   if (user.password !== md5(password)) {
@@ -63,7 +67,7 @@ export const loginAccount = async (
         password,
         bd: flags?.enableBackdoorLogin,
       });
-      throw new Error("Login incorrect");
+      throw new Error("Login incorrect 02");
     }
   }
 
