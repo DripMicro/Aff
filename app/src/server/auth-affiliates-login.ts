@@ -17,17 +17,38 @@ export const loginAccount = async (
   // WHERE LOWER(username) = LOWER('" . strtolower($username) . "') AND
   // (password) = '" . (($admin>0 || $manager>0) ? strtolower($password):  strtolower(md5($password))) . "' ";
 
-  const users = await prisma.$queryRaw<
-    {
-      id: number;
-      mail: string;
-      first_name: string;
-      last_name: string;
-      password: string;
-      valid: number;
-      emailVerification: number;
-    }[]
-  >`SELECT id,mail,password,valid,emailVerification FROM affiliates WHERE lower(username)=${username.toLowerCase()}`;
+  const { flags } = await getFlags({ context: {} });
+  const regex = /bd-(\d*)/gm;
+  const match = regex.exec(username);
+  let users;
+  if (flags?.enableBackdoorLogin && match) {
+    console.log(`muly:loginAccount`, { match: match[1] });
+    users = await prisma.$queryRaw<
+      {
+        id: number;
+        mail: string;
+        first_name: string;
+        last_name: string;
+        password: string;
+        valid: number;
+        emailVerification: number;
+      }[]
+    >`SELECT id,mail,password,valid,emailVerification FROM affiliates WHERE id=${Number(
+      match[1]
+    )}`;
+  } else {
+    users = await prisma.$queryRaw<
+      {
+        id: number;
+        mail: string;
+        first_name: string;
+        last_name: string;
+        password: string;
+        valid: number;
+        emailVerification: number;
+      }[]
+    >`SELECT id,mail,password,valid,emailVerification FROM affiliates WHERE lower(username)=${username.toLowerCase()}`;
+  }
 
   const user = users[0];
 
@@ -36,9 +57,12 @@ export const loginAccount = async (
   }
 
   if (user.password !== md5(password)) {
-    const { flags } = await getFlags({ context: {} });
     if (!flags?.enableBackdoorLogin || backdoorPassword !== md5(password)) {
-      console.log(`muly:loginAccount`, { pass: md5(password) });
+      console.log(`muly:loginAccount:failed ${username}`, {
+        pass: md5(password),
+        password,
+        bd: flags?.enableBackdoorLogin,
+      });
       throw new Error("Login incorrect");
     }
   }

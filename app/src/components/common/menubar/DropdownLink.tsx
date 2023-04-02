@@ -53,12 +53,12 @@ const DropdownLink = ({
 
   const [onLink, setonLink] = useState(false);
 
-  console.log(`muly:DropdownLink ${activeName}`, {
-    dropdown,
-    dropdownName,
-    collapseShow,
-    dropdownVector,
-  });
+  // console.log(`muly:DropdownLink ${activeName}`, {
+  //   dropdown,
+  //   dropdownName,
+  //   collapseShow,
+  //   dropdownVector,
+  // });
 
   return (
     <>
