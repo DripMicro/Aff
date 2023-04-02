@@ -106,13 +106,6 @@ export const SubAffiliateReport = () => {
     }),
   ];
 
-  const merchant_options = merchants?.map((merchant: any) => {
-    return {
-      id: merchant.id,
-      title: merchant?.name,
-    };
-  });
-
   const creativeType = [
     {
       id: "",
@@ -168,7 +161,7 @@ export const SubAffiliateReport = () => {
         <GridItem>
           <QuerySelect
             label="Merchant"
-            choices={merchant_options}
+            choices={merchants}
             varName="merchant_id"
           />
         </GridItem>{" "}
@@ -195,10 +188,10 @@ export const SubAffiliateReport = () => {
         alignItems={"center"}
         width="100%"
       >
-        {data?.map((item: SubAffiliateReportType) => {
+        {data?.map((item: SubAffiliateReportType, idx) => {
           console.log("item", item);
           return (
-            <>
+            <div key={idx}>
               <GridItem>
                 <Text>Impressions</Text>
                 <Text>{item.viewsSum}</Text>
@@ -251,7 +244,7 @@ export const SubAffiliateReport = () => {
                 <Text>Your commission</Text>
                 <Text>{item.totalCommission}</Text>
               </GridItem>
-            </>
+            </div>
           );
         })}
       </Grid>

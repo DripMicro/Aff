@@ -2,15 +2,46 @@ import { publicProcedure } from "@/server/api/trpc";
 import { z } from "zod";
 import { affiliate_id } from "@/server/api/routers/affiliates/const";
 import moment from "moment/moment";
+import { Prisma } from "@prisma/client";
+import { formatISO } from "date-fns";
+
+interface TypeFilter {
+  merchant_id?: number;
+  TraderID?: string;
+  CreativeID?: number;
+  Param?: string;
+  Country?: string;
+  Param2?: string;
+}
+
+const buildTypeFilter = (input: any): TypeFilter => {
+  const typeFilter: TypeFilter = {};
+  const keys = {
+    merchant_id: "merchant_id",
+    trader_id: "TraderID",
+    banner_id: "CreativeID",
+    parameter: "Param",
+    country: "Country",
+    parameter_2: "Param2",
+  };
+
+  Object.entries(keys).forEach(([key, value]) => {
+    if (input[key]) {
+      typeFilter[value as keyof TypeFilter] = input[key];
+    }
+  });
+
+  return typeFilter;
+};
 
 export const getTraderReport = publicProcedure
   .input(
     z.object({
-      from: z.date().optional(),
-      to: z.date().optional(),
+      from: z.date(),
+      to: z.date(),
       merchant_id: z.number().optional(),
       country: z.string().optional(),
-      banner_id: z.string().optional(),
+      banner_id: z.number().optional(),
       trader_id: z.string().optional(),
       parameter: z.string().optional(),
       parameter_2: z.string().optional(),
@@ -32,6 +63,7 @@ export const getTraderReport = publicProcedure
         filter,
       },
     }) => {
+      // TODO: check PHP why needed?
       const profileNames = await ctx.prisma.affiliates_profiles.findMany({
         where: {
           valid: 1,
@@ -45,6 +77,7 @@ export const getTraderReport = publicProcedure
       });
 
       // list of wallets
+      // TODO: check PHP why needed?
       const resourceWallet = await ctx.prisma.merchants.findMany({
         where: {
           valid: 1,
@@ -55,72 +88,52 @@ export const getTraderReport = publicProcedure
         },
       });
 
+      const baseTypeFilter = buildTypeFilter({
+        merchant_id,
+        country,
+        banner_id,
+        trader_id,
+        parameter,
+        parameter_2,
+      });
+
       // type filter
-      let type_filter = {};
-      if (merchant_id) {
-        type_filter = {
-          merchant_id: merchant_id,
-        };
-      }
-
-      if (trader_id) {
-        type_filter = {
-          TraderID: trader_id,
-        };
-      }
-
-      if (banner_id) {
-        type_filter = {
-          CreativeID: banner_id,
-        };
-      }
-
-      if (parameter) {
-        type_filter = {
-          Param: parameter,
-        };
-      }
-
-      if (country) {
-        type_filter = {
-          Country: country,
-        };
-      }
-
-      if (parameter_2) {
-        type_filter = {
-          Param2: parameter_2,
-        };
-      }
+      let type_filter: Prisma.reporttradersWhereInput = {};
       if (filter === "real") {
         type_filter = {
+          ...baseTypeFilter,
           TraderStatus: "real",
         };
       } else if (filter === "lead") {
         type_filter = {
+          ...baseTypeFilter,
           TraderStatus: "lead",
         };
       } else if (filter === "demo") {
         type_filter = {
+          ...baseTypeFilter,
           TraderStatus: "demo",
         };
       } else if (filter === "frozen") {
         type_filter = {
+          ...baseTypeFilter,
           TraderStatus: "frozen",
         };
       } else if (filter === "ftd" || filter === "totalftd") {
         type_filter = {
+          ...baseTypeFilter,
           AND: [{ TraderStatus: "frozen" }, { TraderStatus: "demo" }],
           FirstDeposit: {
-            gte: from,
-            lt: to,
+            gte: formatISO(from),
+            lt: formatISO(to),
           },
         };
       } else if (filter === "activeTrader") {
         type_filter = {
+          ...baseTypeFilter,
           QualificationDate: {
-            gte: from,
-            lt: to,
+            gte: formatISO(from),
+            lt: formatISO(to),
           },
           AND: [{ TraderStatus: "frozen" }, { TraderStatus: "demo" }],
         };
@@ -129,6 +142,7 @@ export const getTraderReport = publicProcedure
       //trader resource
       let trader_report_resource;
       if (filter === "ftd" || filter === "totalftd") {
+        // TODO: missing pagination
         trader_report_resource = await ctx.prisma.reporttraders.findMany({
           orderBy: {
             RegistrationDate: "desc",

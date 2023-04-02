@@ -51,11 +51,11 @@ const Home: MyPage = () => {
       title: "Reports -> Landing Page Report",
     },
     {
-      href: "/affiliates/reports/trader_report",
+      href: "/affiliates/reports/trader-report",
       title: "Reports -> Trader Report",
     },
     {
-      href: "/affiliates/reports/pixel_log_report",
+      href: "/affiliates/reports/pixel-log-report",
       title: "Reports -> pixels Logs Report",
     },
     {

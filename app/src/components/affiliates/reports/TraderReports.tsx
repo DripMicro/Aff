@@ -48,6 +48,7 @@ export const TraderReports = () => {
       header,
     });
 
+  // TODO: no match between columns here and what display on screen
   const columns = [
     createColumn("TraderID", "Trader ID"),
     createColumn("sub_trader_count", "Trader Sub Accounts"),
@@ -76,13 +77,6 @@ export const TraderReports = () => {
     createColumn("totalLots", "Lots"),
     createColumn("SaleStatus", "Sale Status"),
   ];
-
-  const merchant_options = merchants?.map((merchant: Merchant) => {
-    return {
-      id: merchant.id,
-      title: merchant?.name,
-    };
-  });
 
   const creativeType = [
     {
@@ -180,7 +174,7 @@ export const TraderReports = () => {
         <GridItem>
           <QuerySelect
             label="Merchant"
-            choices={merchant_options}
+            choices={merchants}
             varName="merchant_id"
           />
         </GridItem>{" "}

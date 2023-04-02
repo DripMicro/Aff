@@ -1,61 +1,5 @@
-import type { data_install_type, data_sales_type } from "@prisma/client";
-import { Prisma } from "@prisma/client";
 import { z } from "zod";
-
-import { formatISO, getUnixTime } from "date-fns";
-import moment from "moment";
-import { convertPrismaResultsToNumbers } from "../../../../utils/prisma-convert";
 import { publicProcedure } from "../../trpc";
-import { affiliate_id, merchant_id } from "./const";
-
-type ResultType = {
-  [key: string]: any;
-};
-
-type CreativeType = {
-  [key: string]: any;
-};
-
-type Total = {
-  [key: string]: number;
-};
-
-type MerchantIds = {
-  _sum?: {
-    Impressions?: number;
-    Clicks?: number;
-  };
-};
-
-type RegType = {
-  totalDemo: number;
-  totalReal: number;
-  total_leads: number;
-};
-
-type listProfile = {
-  [key: string]: object;
-};
-
-type MerchantArray = {
-  [key: string]: object;
-};
-
-type TotalTraffic = {
-  [key: string]: number;
-};
-
-type Country = {
-  [key: string]: object;
-};
-
-type FTDAmount = {
-  [key: string]: number;
-};
-
-type Row = {
-  [key: string]: any;
-};
 
 export const QuickReportSummarySchema = z.object({
   Date: z.date().nullish(),
@@ -172,9 +116,13 @@ export const getAllMerchants = publicProcedure.query(async ({ ctx }) => {
     where: {
       valid: 1,
     },
+    select: {
+      id: true,
+      name: true,
+    },
   });
 
-  return merchants;
+  return merchants.map(({ id, name }) => ({ id, title: name }));
 });
 
 export const getAffiliateProfile = publicProcedure.query(async ({ ctx }) => {

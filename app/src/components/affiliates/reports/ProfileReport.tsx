@@ -124,13 +124,6 @@ export const ProfileReport = () => {
     }),
   ];
 
-  const merchant_options = merchants?.map((merchant) => {
-    return {
-      id: merchant.id,
-      title: merchant?.name,
-    };
-  });
-
   const searchType = [
     {
       id: "daily",
@@ -224,7 +217,7 @@ export const ProfileReport = () => {
         <GridItem>
           <QuerySelect
             label="Merchant"
-            choices={merchant_options}
+            choices={merchants}
             varName="merchant_id"
           />
         </GridItem>
