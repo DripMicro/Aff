@@ -8,7 +8,8 @@ const colors = {
     disabled: "#666666",
     azure: "#1B48BB",
     white: "#fff",
-    secondary: "#EFEEFF"
+    secondary: "#EFEEFF",
+    black: "#000"
   },
 }
 
