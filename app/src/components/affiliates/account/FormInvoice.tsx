@@ -6,6 +6,7 @@ import { useTranslation } from "next-i18next";
 import { usePrepareSchema } from "@/components/common/forms/usePrepareSchema";
 import type { ChoiceType } from "@/utils/zod-meta";
 import { useState } from "react";
+import { Button } from "../../ui/button";
 
 interface Props {
   onSubmit: (values: z.infer<typeof schema>) => Promise<void>;
@@ -113,9 +114,9 @@ export const FormInvoice = ({ account, onSubmit, countries }: Props) => {
         </div>
         <div className="-mx-3 mb-6 flex flex-wrap">
           <div className="w-full px-3">
-            <button className="mt-8 w-full rounded-md bg-[#1B48BB] py-4  px-12 text-base  font-medium text-white md:w-36">
+            <Button variant="azure" size="lg" className="px-12 mt-8">
               Save
-            </button>
+            </Button>
           </div>
         </div>
       </div>
