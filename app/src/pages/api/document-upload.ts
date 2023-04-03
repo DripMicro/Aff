@@ -67,7 +67,7 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
       form.append(key, fields[key]);
     });
     form.append(
-      "document_upload",
+      "documentFile",
       fileData,
       // @ts-ignore
       String(files?.document_upload?.originalFilename)
