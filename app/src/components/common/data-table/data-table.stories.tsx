@@ -8,7 +8,7 @@ const meta = {
 
 export default meta;
 
-const creative: Data[] = [
+const creative: any = [
     {
         "id": 86,
         "rdate": "2017-10-03T08:27:36.000Z",

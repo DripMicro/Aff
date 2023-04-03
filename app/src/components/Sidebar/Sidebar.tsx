@@ -63,7 +63,7 @@ const Sidebar: React.FC<Props> = ({ collapseShow }) => {
   return (
     <div className={sidebarClassName}>
       <div className="flex flex-grow flex-col justify-between overflow-y-auto overflow-x-hidden">
-        <ul className="relative min-h-full space-y-1 overflow-y-auto py-5 md:cursor-pointer md:py-16">
+        <ul className="relative min-h-full space-y-1 overflow-y-auto py-5 md:py-16">
           {navigationData.map((item, index) =>
             renderLink(
               item,
