@@ -18,7 +18,6 @@ import AccountManager from './AccountManager';
 import { useEffect, useState } from "react";
 
 import type {
-  CountryReportType,
   TopMerchantCreativeType,
 } from "../../../server/db-types";
 import { api } from "../../../utils/api";

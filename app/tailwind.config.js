@@ -9,7 +9,8 @@ const colors = {
     azure: "#1B48BB",
     white: "#fff",
     secondary: "#EFEEFF",
-    black: "#000"
+    black: "#000",
+    paris: "#282560"
   },
 }
 

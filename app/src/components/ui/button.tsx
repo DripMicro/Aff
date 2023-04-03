@@ -11,8 +11,12 @@ const buttonVariants = cva(
       variant: {
         primary:
           "text-white text-base bg-primary rounded-md",
+        azure:
+          "text-white text-base bg-azure rounded-md",
         "primary-outline":
           "text-azure text-base bg-secondary border border-azure rounded-md",
+        "azure-outline":
+          "text-paris text-base bg-secondary border border-azure rounded-md",
         default:
           "bg-slate-900 text-white hover:bg-slate-700 dark:bg-slate-50 dark:text-slate-900",
         destructive:
@@ -28,7 +32,9 @@ const buttonVariants = cva(
       size: {
         default: "py-1 px-2 md:py-2 md:px-9",
         sm: "h-9 px-2 rounded-md",
+        md: "px-3 py-1.5 rounded",
         lg: "py-3 rounded-md",
+        rec: "py-3.5 px-3.5"
       },
     },
     defaultVariants: {
@@ -40,7 +46,7 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   // TODO:TW need to implement
   isLoading?: boolean;
 }
