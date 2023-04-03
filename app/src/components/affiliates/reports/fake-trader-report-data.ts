@@ -1,6 +1,4 @@
-import { TraderReportType } from "@/server/db-types";
-
-export const fakeTraderReportData: TraderReportType[] = [
+export const fakeTraderReportData = [
   {
     Date: "2022-10-01T00:00:00.000Z",
     TraderID: "12381743",

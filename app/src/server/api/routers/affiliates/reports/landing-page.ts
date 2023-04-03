@@ -1,6 +1,7 @@
 import { publicProcedure } from "@/server/api/trpc";
 import { z } from "zod";
-import { data_sales_type, Prisma } from "@prisma/client";
+import type { data_sales_type } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { affiliate_id } from "@/server/api/routers/affiliates/const";
 
 export const getLandingPageData = publicProcedure

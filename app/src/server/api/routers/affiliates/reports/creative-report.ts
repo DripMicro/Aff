@@ -2,7 +2,7 @@ import { publicProcedure } from "@/server/api/trpc";
 import { z } from "zod";
 import { Prisma } from "@prisma/client";
 import { merchant_id } from "@/server/api/routers/affiliates/const";
-import { CreativeReportSchema } from "@/server/api/routers/affiliates/reports";
+import type { CreativeReportSchema } from "@/server/api/routers/affiliates/reports";
 
 type RegType = {
   totalDemo: number;

@@ -4,7 +4,7 @@ import {
   affiliate_id,
   merchant_id,
 } from "@/server/api/routers/affiliates/const";
-import { data_install_type } from "@prisma/client";
+import type { data_install_type } from "@prisma/client";
 
 export const getInstallReport = publicProcedure
   .input(

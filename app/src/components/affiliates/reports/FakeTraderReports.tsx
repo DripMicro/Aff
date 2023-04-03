@@ -22,7 +22,13 @@ export const FakeTraderReports = () => {
   const isLoading = false;
   const startIndex = (page - 1) * pageSize;
   const endIndex = startIndex + pageSize;
-  const data = fakeTraderReportData.slice(startIndex, endIndex);
+  const data = fakeTraderReportData
+    .slice(startIndex, endIndex)
+    .map(({ Date: _date, ...item }) => ({
+      Date: new Date(_date),
+      ...item,
+    }));
+
   // const { data, isLoading } = api.affiliates.getTraderReport.useQuery({
   //   from,
   //   to,
@@ -207,11 +213,7 @@ export const FakeTraderReports = () => {
         alignSelf="center"
         overflow={"scroll"}
       >
-        <DataTable
-          data={Object.values(data || {})}
-          columns={columns}
-          footerData={totalObj}
-        />
+        <DataTable data={data} columns={columns} footerData={totalObj} />
       </Grid>
     </>
   );

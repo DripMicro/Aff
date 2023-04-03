@@ -2,7 +2,7 @@ import { publicProcedure } from "@/server/api/trpc";
 import { z } from "zod";
 import { affiliate_id } from "@/server/api/routers/affiliates/const";
 import moment from "moment/moment";
-import { Prisma } from "@prisma/client";
+import type { Prisma } from "@prisma/client";
 import { formatISO } from "date-fns";
 
 interface TypeFilter {

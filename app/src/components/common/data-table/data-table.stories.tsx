@@ -2,7 +2,7 @@ import React from "react";
 import { DataTable } from "./DataTable";
 import { sampleData } from "./data-table-sample-data";
 import { createColumnHelper } from "@tanstack/react-table";
-import { AffiliateProfileType } from "@/server/db-types";
+import type { AffiliateProfileType } from "@/server/db-types";
 import { Button } from "@chakra-ui/react";
 import { EditIcon } from "@chakra-ui/icons";
 import { ReportDataTable } from "./ReportDataTable";
