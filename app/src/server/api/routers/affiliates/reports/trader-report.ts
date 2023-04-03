@@ -39,6 +39,8 @@ export const getTraderReport = publicProcedure
     z.object({
       from: z.date(),
       to: z.date(),
+      pageSize: z.number(),
+      page: z.number(),
       merchant_id: z.number().optional(),
       country: z.string().optional(),
       banner_id: z.number().optional(),
@@ -54,6 +56,8 @@ export const getTraderReport = publicProcedure
       input: {
         from,
         to,
+        pageSize,
+        page,
         merchant_id,
         country,
         banner_id,
@@ -142,8 +146,9 @@ export const getTraderReport = publicProcedure
       //trader resource
       let trader_report_resource;
       if (filter === "ftd" || filter === "totalftd") {
-        // TODO: missing pagination
+        // TODO: missing pagination use https://github.com/sandrewTx08/prisma-paginate
         trader_report_resource = await ctx.prisma.reporttraders.findMany({
+          take: pageSize,
           orderBy: {
             RegistrationDate: "desc",
             TraderID: "asc",
@@ -177,7 +182,9 @@ export const getTraderReport = publicProcedure
         //    WHERE 1=1 ".$where."
         //    ORDER BY RegistrationDate DESC, rt.TraderID ASC";
 
+        // TODO: missing pagination use https://github.com/sandrewTx08/prisma-paginate
         trader_report_resource = await ctx.prisma.reporttraders.findMany({
+          take: pageSize,
           orderBy: {
             TraderID: "asc",
           },

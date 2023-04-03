@@ -5,29 +5,34 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import type { TraderReportType } from "../../../server/db-types";
-import { api } from "../../../utils/api";
 import { DateRangeSelect, useDateRange } from "../../common/DateRangeSelect";
 import { Loading } from "../../common/Loading";
+import { fakeTraderReportData } from "@/components/affiliates/reports/fake-trader-report-data";
 
-export const TraderReports = () => {
+export const FakeTraderReports = () => {
   const router = useRouter();
   const { merchant_id } = router.query;
   const { from, to } = useDateRange();
   const [traderID, setTraderID] = useState<string>("");
 
   // TODO: Add pagination
-  const pageSize = 50;
-  const page = 0;
+  const pageSize = 10;
+  const page = 1;
 
-  const { data, isLoading } = api.affiliates.getTraderReport.useQuery({
-    from,
-    to,
-    pageSize,
-    page,
-    merchant_id: merchant_id ? Number(merchant_id) : undefined,
-    trader_id: traderID,
-  });
-  const { data: merchants } = api.affiliates.getAllMerchants.useQuery();
+  const isLoading = false;
+  const startIndex = (page - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const data = fakeTraderReportData.slice(startIndex, endIndex);
+  // const { data, isLoading } = api.affiliates.getTraderReport.useQuery({
+  //   from,
+  //   to,
+  //   limit,
+  //   page,
+  //   merchant_id: merchant_id ? Number(merchant_id) : undefined,
+  //   trader_id: traderID,
+  // });
+
+  const merchants = [{ id: 1, title: "FXoro" }];
   const columnHelper = createColumnHelper<TraderReportType>();
 
   console.log("trader render", {

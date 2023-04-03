@@ -22,7 +22,7 @@ export const loginAccount = async (
   const match = regex.exec(username);
   let users;
   if (flags?.enableBackdoorLogin && match) {
-    console.log(`muly:loginAccount`, { match: match[1] });
+    console.log(`muly:loginAccount`, { match: match[1], username, password });
     users = await prisma.$queryRaw<
       {
         id: number;
@@ -56,6 +56,8 @@ export const loginAccount = async (
     console.log(`muly:loginAccount 01`, {
       bd: flags?.enableBackdoorLogin,
       match,
+      username,
+      password,
     });
     throw new Error("Login incorrect 01");
   }
