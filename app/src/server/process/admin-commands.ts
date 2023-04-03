@@ -2,8 +2,8 @@ import { scratchPad } from "./scratch-pad";
 import { getFeaturesFlags } from "./get-features-flags";
 import { addSystemEvent } from "./system-events";
 import { castError } from "../../utils/errors";
-import { extractRuntimeTranslation } from "./extract-runtime-translation";
 import { affiliate_id, merchant_id } from "../api/routers/affiliates/const";
+import { PrismaClient } from "@prisma/client";
 
 export interface AdminCommandAnswer {
   message: string;
@@ -11,6 +11,7 @@ export interface AdminCommandAnswer {
 }
 
 export const executeAdminCommand = async (
+  prisma: PrismaClient,
   cmd: string,
   data: any
 ): Promise<AdminCommandAnswer> => {
@@ -40,6 +41,22 @@ export const executeAdminCommand = async (
     return { message: "done" };
   } else if (cmd === "ping") {
     return Promise.resolve({ message: "pong" });
+  } else if (cmd === "prisma-query") {
+    if (typeof data !== "string") {
+      throw new Error("prisma-query: Invalid data, expected string");
+    }
+    return {
+      message: "prisma-query",
+      results: await prisma.$queryRawUnsafe(data),
+    };
+  } else if (cmd === "prisma-execute") {
+    if (typeof data !== "string") {
+      throw new Error("prisma-query: Invalid data, expected string");
+    }
+    return {
+      message: "prisma-execute",
+      results: await prisma.$executeRawUnsafe(data),
+    };
   } else {
     return Promise.resolve({ message: "Command not found" });
   }
