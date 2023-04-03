@@ -33,7 +33,7 @@ export function DataTable<Data extends object>({
   });
 
   return (
-    <div className=" scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-100 scrollbar-thumb-rounded-full  scrollbar-track-rounded-full mt-4 overflow-x-scroll lg:overflow-y-hidden xl:overflow-x-hidden ">
+    <div className="scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-100 scrollbar-thumb-rounded-full  scrollbar-track-rounded-full mt-4 overflow-x-scroll lg:overflow-y-hidden xl:overflow-x-hidden ">
       <Table border="1px solid #F0F0F0">
         <Thead bg="#F2F5F7">
           {getHeaderGroups().map((headerGroup) => (

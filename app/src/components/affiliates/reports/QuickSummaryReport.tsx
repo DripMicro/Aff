@@ -1,20 +1,5 @@
-import {
-  Grid,
-  GridItem,
-  useDisclosure,
-  ModalContent,
-  Modal,
-  ModalBody,
-  ModalOverlay,
-  Image,
-  SimpleGrid,
-  Box,
-  FormLabel,
-  FormControl,
-} from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import { useRouter } from "next/router";
-import { SettingsIcon } from "@chakra-ui/icons";
 import { ReportDataTable } from "../../../components/common/data-table/Report_DataTable";
 import { QuerySelect } from "../../../components/common/QuerySelect";
 import type { QuickReportSummary } from "../../../server/db-types";
@@ -23,6 +8,10 @@ import { DateRangeSelect, useDateRange } from "../../common/DateRangeSelect";
 import { Loading } from "../../common/Loading";
 import { useRef, useEffect, useState } from "react";
 import type { ChangeEvent } from "react";
+import {
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger
+} from "../../ui/dialog";
+import { Button } from "../../ui/button";
 
 const fields = [
   "Impressions",
@@ -53,7 +42,6 @@ export const QuickSummaryReport = () => {
     merchant_id: merchant_id ? Number(merchant_id) : 1,
   });
   const { data: merchants } = api.affiliates.getAllMerchants.useQuery();
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const columnHelper = createColumnHelper<QuickReportSummary>();
   const { data: reportsHiddenCols } =
     api.affiliates.getReportsHiddenCols.useQuery();
@@ -316,14 +304,14 @@ export const QuickSummaryReport = () => {
 
   return (
     <>
-      <div className="pt-3.5">
+      <div className="pt-3.5 w-full">
         <div className="block text-base font-medium md:justify-between lg:flex">
           <div className="mb-2.5 flex items-center justify-between md:mb-5 lg:mb-5 ">
             <div>
               <span className="text-[#2262C6]">Affliate Program</span>
               &nbsp;-&nbsp;Quick Summary Report
             </div>
-            <button className="lg:hidden">
+            <Button className="lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -340,34 +328,89 @@ export const QuickSummaryReport = () => {
                   fill="#2262C6"
                 />
               </svg>
-            </button>
+            </Button>
           </div>
         </div>
-
-        <div>
-          <div className="flex items-center justify-between">
-            <div className="flex">
-              <button
-                className="rounded-md bg-white px-2 pt-0.5 pb-1 drop-shadow lg:px-3 lg:pt-1.5 lg:pb-2 "
-                onClick={onOpen}
-              >
-                <SettingsIcon />
-              </button>
-              <span className="font-sm ml-3 hidden items-center justify-between font-medium lg:flex">
-                Report Display
-              </span>
+        <Dialog>
+          <div>
+            <div className="flex items-center justify-between">
+              <div className="flex">
+                <DialogTrigger>
+                  <Button variant="white" size="rec-sm">
+                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.07095 0.650238C6.67391 0.650238 6.32977 0.925096 6.24198 1.31231L6.0039 2.36247C5.6249 2.47269 5.26335 2.62363 4.92436 2.81013L4.01335 2.23585C3.67748 2.02413 3.23978 2.07312 2.95903 2.35386L2.35294 2.95996C2.0722 3.2407 2.0232 3.6784 2.23493 4.01427L2.80942 4.92561C2.62307 5.2645 2.47227 5.62594 2.36216 6.00481L1.31209 6.24287C0.924883 6.33065 0.650024 6.6748 0.650024 7.07183V7.92897C0.650024 8.32601 0.924883 8.67015 1.31209 8.75794L2.36228 8.99603C2.47246 9.375 2.62335 9.73652 2.80979 10.0755L2.2354 10.9867C2.02367 11.3225 2.07267 11.7602 2.35341 12.041L2.95951 12.6471C3.24025 12.9278 3.67795 12.9768 4.01382 12.7651L4.92506 12.1907C5.26384 12.377 5.62516 12.5278 6.0039 12.6379L6.24198 13.6881C6.32977 14.0753 6.67391 14.3502 7.07095 14.3502H7.92809C8.32512 14.3502 8.66927 14.0753 8.75705 13.6881L8.99505 12.6383C9.37411 12.5282 9.73573 12.3773 10.0748 12.1909L10.986 12.7653C11.3218 12.977 11.7595 12.928 12.0403 12.6473L12.6464 12.0412C12.9271 11.7604 12.9761 11.3227 12.7644 10.9869L12.1902 10.076C12.3768 9.73688 12.5278 9.37515 12.638 8.99596L13.6879 8.75794C14.0751 8.67015 14.35 8.32601 14.35 7.92897V7.07183C14.35 6.6748 14.0751 6.33065 13.6879 6.24287L12.6381 6.00488C12.528 5.62578 12.3771 5.26414 12.1906 4.92507L12.7648 4.01407C12.9766 3.6782 12.9276 3.2405 12.6468 2.95975L12.0407 2.35366C11.76 2.07292 11.3223 2.02392 10.9864 2.23565L10.0755 2.80989C9.73622 2.62328 9.37437 2.47229 8.99505 2.36209L8.75705 1.31231C8.66927 0.925096 8.32512 0.650238 7.92809 0.650238H7.07095ZM4.92053 3.81251C5.44724 3.44339 6.05665 3.18424 6.71543 3.06839L7.07095 1.50024H7.92809L8.28355 3.06816C8.94267 3.18387 9.5524 3.44302 10.0794 3.81224L11.4397 2.9547L12.0458 3.56079L11.1882 4.92117C11.5573 5.44798 11.8164 6.0575 11.9321 6.71638L13.5 7.07183V7.92897L11.932 8.28444C11.8162 8.94342 11.557 9.55301 11.1878 10.0798L12.0453 11.4402L11.4392 12.0462L10.0787 11.1886C9.55192 11.5576 8.94241 11.8166 8.28355 11.9323L7.92809 13.5002H7.07095L6.71543 11.932C6.0569 11.8162 5.44772 11.5572 4.92116 11.1883L3.56055 12.046L2.95445 11.4399L3.81213 10.0794C3.4431 9.55266 3.18403 8.94326 3.06825 8.2845L1.50002 7.92897V7.07183L3.06818 6.71632C3.18388 6.05765 3.44283 5.44833 3.81171 4.92165L2.95398 3.561L3.56008 2.95491L4.92053 3.81251ZM9.02496 7.50008C9.02496 8.34226 8.34223 9.02499 7.50005 9.02499C6.65786 9.02499 5.97513 8.34226 5.97513 7.50008C5.97513 6.65789 6.65786 5.97516 7.50005 5.97516C8.34223 5.97516 9.02496 6.65789 9.02496 7.50008ZM9.92496 7.50008C9.92496 8.83932 8.83929 9.92499 7.50005 9.92499C6.1608 9.92499 5.07513 8.83932 5.07513 7.50008C5.07513 6.16084 6.1608 5.07516 7.50005 5.07516C8.83929 5.07516 9.92496 6.16084 9.92496 7.50008Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                  </Button>
+                </DialogTrigger>
+                <span className="font-sm ml-3 hidden items-center justify-between font-medium lg:flex">
+                  Report Display
+                </span>
+              </div>
+              <div className="hidden lg:block">
+                <DateRangeSelect />
+              </div>
+              <div className="flex space-x-2 lg:hidden">
+                <Button variant="primary">
+                  Show Reports
+                </Button>
+                <Button variant="primary-outline">
+                  Reset Search
+                </Button>
+                <Button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="28"
+                    height="24"
+                    viewBox="0 0 28 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M13.5701 16L18.0933 11H14.7009V4H12.4393V11H9.04688L13.5701 16Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M22.6161 18H4.52332V11H2.26172V18C2.26172 19.103 3.27605 20 4.52332 20H22.6161C23.8634 20 24.8778 19.103 24.8778 18V11H22.6161V18Z"
+                      fill="white"
+                    />
+                  </svg>
+                </Button>
+              </div>
             </div>
-            <div className="hidden lg:block">
-              <DateRangeSelect />
+          </div>
+          <div className="mt-2 items-end justify-between lg:flex">
+            <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
+              <QuerySelect
+                label="Period"
+                choices={displayOptions}
+                varName="display"
+              />
+              <QuerySelect
+                label="From"
+                choices={merchant_options}
+                varName="merchant_id"
+              />
+              <QuerySelect
+                label="To"
+                choices={merchant_options}
+                varName="merchant_id"
+              />
+              <QuerySelect
+                label="Merchant"
+                choices={merchant_options}
+                varName="merchant_id"
+              />
+              <QuerySelect
+                label="Search Type"
+                choices={displayOptions}
+                varName="display"
+              />
             </div>
-            <div className="flex space-x-2 lg:hidden">
-              <button className="rounded-md bg-[#2262C6] px-4 py-1 text-white">
+            <div className="flex space-x-2">
+              <button className="hidden rounded-md bg-[#2262C6] px-8 py-2 text-white lg:block">
                 Show Reports
               </button>
-              <button className="rounded-md border border-[#2262C6] py-1 px-4 text-base font-semibold text-[#2262C6]">
+              <button className="hidden rounded-md border border-[#2262C6] py-2 px-8 text-base font-semibold text-[#2262C6] lg:block">
                 Reset Search
               </button>
-              <button className="rounded-md bg-[#2262C6] px-1 py-1 text-white">
+              <button className="hidden rounded-md bg-[#2262C6] px-2 py-2 text-white lg:block">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="28"
@@ -387,118 +430,35 @@ export const QuickSummaryReport = () => {
               </button>
             </div>
           </div>
-        </div>
-        <div className="mt-2 items-end justify-between lg:flex">
-          <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
-            <QuerySelect
-              label="Period"
-              choices={displayOptions}
-              varName="display"
-            />
-            <QuerySelect
-              label="From"
-              choices={merchant_options}
-              varName="merchant_id"
-            />
-            <QuerySelect
-              label="To"
-              choices={merchant_options}
-              varName="merchant_id"
-            />
-            <QuerySelect
-              label="Merchant"
-              choices={merchant_options}
-              varName="merchant_id"
-            />
-            <QuerySelect
-              label="Search Type"
-              choices={displayOptions}
-              varName="display"
-            />
-          </div>
-          <div className="flex space-x-2">
-            <button className="hidden rounded-md bg-[#2262C6] px-8 py-2 text-white lg:block">
-              Show Reports
-            </button>
-            <button className="hidden rounded-md border border-[#2262C6] py-2 px-8 text-base font-semibold text-[#2262C6] lg:block">
-              Reset Search
-            </button>
-            <button className="hidden rounded-md bg-[#2262C6] px-2 py-2 text-white lg:block">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="24"
-                viewBox="0 0 28 24"
-                fill="none"
-              >
-                <path
-                  d="M13.5701 16L18.0933 11H14.7009V4H12.4393V11H9.04688L13.5701 16Z"
-                  fill="white"
-                />
-                <path
-                  d="M22.6161 18H4.52332V11H2.26172V18C2.26172 19.103 3.27605 20 4.52332 20H22.6161C23.8634 20 24.8778 19.103 24.8778 18V11H22.6161V18Z"
-                  fill="white"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
 
-        <Modal isOpen={isOpen} size="3xl" onClose={onClose} isCentered>
-          <ModalOverlay />
-          <ModalContent ml={4} mr={4}>
-            <div className="flex items-end justify-between pl-6 pt-4 md:pl-8">
-              <div className="font-medium text-[#282560]">
-                Manage Field On Report - Quick Summary
-              </div>
-              <Image
-                alt="..."
-                className="mr-4 h-10 w-10 rounded-full align-middle "
-                src="/img/icons/close.png"
-                onClick={onClose}
-              />
+          <DialogContent>
+            <DialogHeader className="text-sm font-medium text-azure text-left">Manage Field On Report - Quick Summary</DialogHeader>
+            <DialogTitle className="md:mb-6 font-normal md:pt-2 text-sm text-disabled">Please activate the fields you want to display on the report:</DialogTitle>
+            <div className="grid grid-cols-1 md:grid-cols-2 md:mt-10">
+              {reportFields.map((field) => {
+                return (
+                  <div key={field.id}>
+                    <div className="flex items-center mb-6 md:mb-10">
+                      <input
+                        type="checkbox"
+                        id={`report-field-${field.id}`}
+                        checked={field.isChecked}
+                        value={field.id}
+                        onChange={(e) => void handleReportField(e)}
+                        className="form-checkbox text-blueGray-700 h-4 w-4 rounded border-0 transition-all duration-150 ease-linear"
+                      />
+                      <div className="ml-5 md:ml-10 text-black text-lg font-medium items-center">
+                        {field.title}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-            <div className="mb-6 w-64 pl-6 pt-2 text-sm text-[#717171] md:mb-16 md:w-full md:pl-8">
-              Please activate the fields you want to display on the report:
-            </div>
-
-            <ModalBody>
-              <div className="px-0 md:px-2">
-                <SimpleGrid minChildWidth="300px" spacing="35px">
-                  {reportFields.map((field) => {
-                    return (
-                      <Box key={field.id}>
-                        <FormControl display="flex" alignItems="center">
-                          <input
-                            type="checkbox"
-                            id={`report-field-${field.id}`}
-                            checked={field.isChecked}
-                            value={field.id}
-                            onChange={(e) => void handleReportField(e)}
-                            className="form-checkbox ml-1 h-4 w-4 rounded accent-[#1B48BB] outline-2 transition-all duration-150 ease-linear"
-                          />
-                          <FormLabel
-                            htmlFor={`report-field-${field.id}`}
-                            mb="0"
-                            mr="0"
-                            ml="4"
-                            color="black"
-                            fontSize="md"
-                          >
-                            {field.title}
-                          </FormLabel>
-                        </FormControl>
-                      </Box>
-                    );
-                  })}
-                </SimpleGrid>
-              </div>
-            </ModalBody>
-
-            <div className="flex justify-between p-6 font-medium md:p-8 md:pt-20">
+            <div className="flex justify-between pb-5 font-medium md:pb-8 md:pt-12">
               <div className="flex">
                 <button
-                  className="mr-3 rounded-md bg-[#1B48BB] px-3 py-3 text-white md:px-14"
+                  className="mr-3 rounded-md bg-[#2262C6] px-3 py-3 text-white md:px-14"
                   onClick={handleSelectAll}
                 >
                   Select All
@@ -510,29 +470,16 @@ export const QuickSummaryReport = () => {
                   Unselect All
                 </button>
               </div>
-              {/* <button
-                className="rounded-md bg-[#1B48BB] px-6 py-3 text-white md:px-14"
-                onClick={onClose}
-              >
-                Save
-              </button> */}
             </div>
-          </ModalContent>
-        </Modal>
-        <div className="mb-5 mt-4 rounded bg-white px-2 py-4 shadow-sm">
-          <Grid
-            alignContent={"center"}
-            alignItems={"center"}
-            width="100%"
-            alignSelf="center"
-            overflow={"scroll"}
-          >
-            <ReportDataTable
-              data={data}
-              columns={columns}
-              reportFields={reportFields}
-            />
-          </Grid>
+          </DialogContent>
+        </Dialog>
+
+        <div className="mb-5 mt-4 rounded bg-white px-2 py-4 shadow-sm w-full overflow-scroll">
+          <ReportDataTable
+            data={data}
+            columns={columns}
+            reportFields={reportFields}
+          />
         </div>
       </div>
     </>

@@ -13,6 +13,8 @@ const buttonVariants = cva(
           "text-white text-base bg-primary rounded-md",
         azure:
           "text-white text-base bg-azure rounded-md",
+        white:
+          "text-black text-base bg-white rounded-md",
         "primary-outline":
           "text-azure text-base bg-secondary border border-azure rounded-md",
         "azure-outline":
@@ -34,7 +36,8 @@ const buttonVariants = cva(
         sm: "h-9 px-2 rounded-md",
         md: "px-3 py-1.5 rounded",
         lg: "py-3 rounded-md",
-        rec: "py-3.5 px-3.5"
+        rec: "py-3.5 px-3.5",
+        "rec-sm": "py-2.5 px-2.5"
       },
     },
     defaultVariants: {
