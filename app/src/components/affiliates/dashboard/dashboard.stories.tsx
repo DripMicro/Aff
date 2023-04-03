@@ -9,25 +9,18 @@ const meta = {
 export default meta;
 
 export const DeviceReports = {
-  render: () => {
-    <div className="h-96 w-full">
-      <DeviceReport />
-    </div>;
-  },
+  render: () => <DeviceReport />,
 };
 
 export const CountryReports = {
-  render: () => {
-    <CountryReport />;
-  },
+  render: () => <CountryReport />,
 };
 
 export const AccountManagers = {
-  render: () => {
+  render: () => 
     <AccountManager
       first_name={"FirstName"}
       last_name={"LastName"}
       mail={"Mail"}
-    />;
-  },
+    />,
 };

@@ -45,6 +45,8 @@ export const CreativeMaterial = () => {
     { keepPreviousData: true }
   );
 
+  console.log(data);
+
   return (
     <div className="-ml-5 w-full pt-5 pb-4">
       <div className=" mb-5 block text-base font-medium">
