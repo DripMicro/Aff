@@ -28,6 +28,7 @@ export type DataTableProps = {
   state: boolean;
 };
 
+// TODO: no need for this special edit in row table, just normal table and edit in a normal form
 export function PixelMonitorDataTable({
   data,
   columns,

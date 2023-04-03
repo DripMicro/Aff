@@ -229,13 +229,6 @@ export const QuickSummaryReport = () => {
     }),
   ];
 
-  const merchant_options = merchants?.map((merchant) => {
-    return {
-      id: merchant.id,
-      title: merchant?.name,
-    };
-  });
-
   const displayOptions = [
     {
       id: "monthly",
@@ -396,18 +389,8 @@ export const QuickSummaryReport = () => {
               varName="display"
             />
             <QuerySelect
-              label="From"
-              choices={merchant_options}
-              varName="merchant_id"
-            />
-            <QuerySelect
-              label="To"
-              choices={merchant_options}
-              varName="merchant_id"
-            />
-            <QuerySelect
               label="Merchant"
-              choices={merchant_options}
+              choices={merchants}
               varName="merchant_id"
             />
             <QuerySelect

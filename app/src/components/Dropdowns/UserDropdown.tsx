@@ -1,8 +1,11 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
 import { Image } from "@chakra-ui/react";
+import { signOut, useSession } from "next-auth/react";
 
 const UserDropdown = () => {
+  const { data: session } = useSession();
+
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef: any = React.createRef();
@@ -24,10 +27,13 @@ const UserDropdown = () => {
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
+
+  console.log(`muly:UserDropdown`, { session });
+
   return (
     <>
       <span className="hidden h-9 items-center justify-center pr-2 text-base font-semibold text-[#303134] md:inline-flex">
-        James Blunt
+        {`[${session?.user?.id}] ${session?.user?.name}`}
       </span>
       <a
         className="text-blueGray-500 block"
@@ -90,7 +96,12 @@ const UserDropdown = () => {
             Profile
           </span>
         </div>
-        <div className="flex w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal">
+        <div
+          className="flex w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal"
+          onClick={() => {
+            void signOut();
+          }}
+        >
           <span className="inline-flex items-center justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"

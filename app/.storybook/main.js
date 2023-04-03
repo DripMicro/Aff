@@ -6,6 +6,7 @@ const config = {
     "@storybook/addon-links",
     // "@storybook/addon-essentials",
     "@storybook/addon-toolbars",
+    // "@storybook/addon-docs",
     // "@storybook/addon-interactions",
     {
       name: "@storybook/addon-styling",

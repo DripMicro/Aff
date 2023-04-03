@@ -37,6 +37,29 @@ export interface ZodMetaDataItem {
   label?: string | ControlCallback;
   placeholder?: string;
   text?: Record<string, string>;
+  type?:
+    | "text"
+    | "password"
+    | "submit"
+    | "reset"
+    | "radio"
+    | "checkbox"
+    | "button"
+    | "color"
+    | "date"
+    | "datetime-local"
+    | "email"
+    | "file"
+    | "hidden"
+    | "image"
+    | "month"
+    | "number"
+    | "range"
+    | "search"
+    | "tel"
+    | "time"
+    | "url"
+    | "week";
   stepInfo?: "none" | { name?: string; sub: string };
   control?: string | ControlCallback;
   choices?: ChoiceType[];

@@ -21,7 +21,7 @@ interface LinkName {
   link: string;
 }
 
-const SingleLink = ({
+const DropdownLink = ({
   setactiveName,
   setdropdown,
   activeName,
@@ -52,6 +52,13 @@ const SingleLink = ({
   const [dropdownVector, setdropdownVector] = useState(true);
 
   const [onLink, setonLink] = useState(false);
+
+  // console.log(`muly:DropdownLink ${activeName}`, {
+  //   dropdown,
+  //   dropdownName,
+  //   collapseShow,
+  //   dropdownVector,
+  // });
 
   return (
     <>
@@ -169,4 +176,4 @@ const SingleLink = ({
   );
 };
 
-export default SingleLink;
+export default DropdownLink;

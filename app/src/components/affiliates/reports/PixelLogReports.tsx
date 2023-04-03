@@ -15,7 +15,7 @@ export const PixelLogReports = () => {
   const { from, to } = useDateRange();
   const [traderID, setTraderID] = useState<string>("");
 
-  const { data, isLoading } = api.affiliates.getpixelLogReport.useQuery({
+  const { data, isLoading } = api.affiliates.getPixelLogReport.useQuery({
     from,
     to,
     merchant_id: merchant_id ? Number(merchant_id) : undefined,
@@ -106,13 +106,6 @@ export const PixelLogReports = () => {
     }),
   ];
 
-  const merchant_options = merchants?.map((merchant) => {
-    return {
-      id: merchant.id,
-      title: merchant?.name,
-    };
-  });
-
   const country_options = countries?.map((country: any) => {
     return {
       id: country.id,
@@ -175,7 +168,7 @@ export const PixelLogReports = () => {
         <GridItem>
           <QuerySelect
             label="Merchant"
-            choices={merchant_options}
+            choices={merchants}
             varName="merchant_id"
           />
         </GridItem>

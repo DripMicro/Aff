@@ -62,7 +62,7 @@ const getPredefinedDateRange = (value?: string | null) => {
     to,
   });
 
-  console.log(`muly:handleSelectDateRange ${value}`, {});
+  // console.log(`muly:handleSelectDateRange ${value}`, {});
   const today = new Date();
   let range;
   if (value === "today") {
@@ -104,9 +104,9 @@ const getDateRange = (value?: string) => {
   const regex = /^(\d{8})-(\d{8})$/gm;
 
   if (value && regex.exec(value)) {
-    console.log(`muly:getDateRange parse dates, are they? ${value}`, {
-      re: regex.exec(value),
-    });
+    // console.log(`muly:getDateRange parse dates, are they? ${value}`, {
+    //   re: regex.exec(value),
+    // });
     const [fromS, toS] = (value || "").split("-");
 
     const from = parse(fromS || "", "yyyyMMdd", new Date());
@@ -141,19 +141,14 @@ export const useDateRange = (defaultRange?: DateRange) => {
   const { dates } = router.query;
 
   const value = String(dates);
-  console.log(value);
+  // console.log(value);
   return getDateRange(value || defaultRange || "last-6-month");
 };
 
 export const useDateRangeDefault = (defaultRange?: string) => {
-  const router = useRouter();
-  const { dates } = router.query;
-
-  const value = String(dates);
-  console.log("value");
-  console.log(value);
-  console.log("defaultRange");
-  console.log(defaultRange);
+  // const router = useRouter();
+  // const { dates } = router.query;
+  // const value = String(dates);
   return getDateRange(defaultRange);
 };
 
@@ -183,7 +178,7 @@ export const DateRangeSelect = ({ range: defaultRange }: Props) => {
     await setValue(value);
   };
 
-  console.log(`muly:DateRangeSelect render ${name}`, { from, to });
+  // console.log(`muly:DateRangeSelect render ${name}`, { from, to });
 
   const month: string[] = [
     "January",

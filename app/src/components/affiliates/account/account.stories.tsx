@@ -35,6 +35,12 @@ export const Account = {
       }}
     />
   ),
+  parameters: {
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/file/CHxJV6V2o7WVj1rsYmRRWe/Affiliate_client_Design?node-id=91-20396&t=iaMez9Khkj5AeV4D-4",
+    },
+  },
 };
 
 export const Contact = {
@@ -46,6 +52,12 @@ export const Contact = {
       }}
     />
   ),
+  parameters: {
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/file/CHxJV6V2o7WVj1rsYmRRWe/Affiliate_client_Design?node-id=91-21349&t=iaMez9Khkj5AeV4D-4",
+    },
+  },
 };
 
 export const Invoice = {
@@ -58,6 +70,12 @@ export const Invoice = {
       countries={[]}
     />
   ),
+  parameters: {
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/file/CHxJV6V2o7WVj1rsYmRRWe/Affiliate_client_Design?node-id=160-21291&t=iaMez9Khkj5AeV4D-4",
+    },
+  },
 };
 
 export const WebSites = {
@@ -69,16 +87,34 @@ export const WebSites = {
       }}
     />
   ),
+  parameters: {
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/file/CHxJV6V2o7WVj1rsYmRRWe/Affiliate_client_Design?node-id=160-21064&t=iaMez9Khkj5AeV4D-4",
+    },
+  },
 };
 
 export const Signin = {
   render: () => <FormSignin />,
+  parameters: {
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/file/CHxJV6V2o7WVj1rsYmRRWe/Affiliate_client_Design?node-id=161-22164&t=iaMez9Khkj5AeV4D-4",
+    },
+  },
 };
 
 export const Signup = {
   ...FormTest,
   args: {
     schema: signupSchema,
+  },
+  parameters: {
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/file/CHxJV6V2o7WVj1rsYmRRWe/Affiliate_client_Design?node-id=163-22872&t=iaMez9Khkj5AeV4D-4",
+    },
   },
 };
 

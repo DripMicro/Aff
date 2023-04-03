@@ -15,9 +15,15 @@ export const TraderReports = () => {
   const { from, to } = useDateRange();
   const [traderID, setTraderID] = useState<string>("");
 
+  // TODO: Add pagination
+  const pageSize = 50;
+  const page = 0;
+
   const { data, isLoading } = api.affiliates.getTraderReport.useQuery({
     from,
     to,
+    pageSize,
+    page,
     merchant_id: merchant_id ? Number(merchant_id) : undefined,
     trader_id: traderID,
   });
@@ -37,130 +43,41 @@ export const TraderReports = () => {
     return <Loading />;
   }
 
-  const divCol = (
-    val: number | null | undefined,
-    div: number | null | undefined
-  ) => {
-    return val ? (
-      <span>{((val / (div || 1)) * 100).toFixed(2)}%</span>
-    ) : (
-      <span></span>
-    );
-  };
+  const createColumn = (id: keyof TraderReportType, header: string) =>
+    columnHelper.accessor(id, {
+      cell: (info) => info.getValue(),
+      header,
+    });
 
+  // TODO: no match between columns here and what display on screen
   const columns = [
-    columnHelper.accessor("TraderID", {
-      cell: (info) => info.getValue(),
-      header: "Trader ID",
-    }),
-    columnHelper.accessor("sub_trader_count", {
-      cell: (info) => info.getValue(),
-      header: "Trader Sub Accounts",
-    }),
-    columnHelper.accessor("RegistrationDate", {
-      cell: (info) => info.getValue(),
-      header: "Registration Date",
-    }),
-    columnHelper.accessor("TraderStatus", {
-      cell: (info) => info.getValue(),
-      header: "Trader Status",
-    }),
-    columnHelper.accessor("Country", {
-      cell: (info) => info.getValue(),
-      header: "Country",
-    }),
-    columnHelper.accessor("affiliate_id", {
-      cell: (info) => info.getValue(),
-      header: "Affiliate ID",
-    }),
-    columnHelper.accessor("AffiliateUsername", {
-      cell: (info) => info.getValue(),
-      header: "Affiliate Username",
-    }),
-    columnHelper.accessor("merchant_id", {
-      cell: (info) => info.getValue(),
-      header: "Merchant ID",
-    }),
-    columnHelper.accessor("MerchantName", {
-      cell: (info) => info.getValue(),
-      header: "Merchant Name",
-    }),
-    columnHelper.accessor("CreativeID", {
-      cell: (info) => info.getValue(),
-      header: "Creative ID",
-    }),
-    columnHelper.accessor("CreativeName", {
-      cell: (info) => info.getValue(),
-      header: "Creative Name",
-    }),
-    columnHelper.accessor("Type", {
-      cell: (info) => info.getValue(),
-      header: "Type",
-    }),
-    columnHelper.accessor("CreativeLanguage", {
-      cell: (info) => info.getValue(),
-      header: "Creative Language",
-    }),
-    columnHelper.accessor("ProfileID", {
-      cell: (info) => info.getValue(),
-      header: "Profile ID",
-    }),
-    columnHelper.accessor("ProfileName", {
-      cell: (info) => info.getValue(),
-      header: "Profile Name",
-    }),
-    columnHelper.accessor("Param", {
-      cell: (info) => info.getValue(),
-      header: "Param",
-    }),
-    columnHelper.accessor("Param2", {
-      cell: (info) => info.getValue(),
-      header: "Param2",
-    }),
-    columnHelper.accessor("Param3", {
-      cell: (info) => info.getValue(),
-      header: "Param3",
-    }),
-    columnHelper.accessor("Param4", {
-      cell: (info) => info.getValue(),
-      header: "Param4",
-    }),
-    columnHelper.accessor("Param5", {
-      cell: (info) => info.getValue(),
-      header: "Param5",
-    }),
-    columnHelper.accessor("FirstDeposit", {
-      cell: (info) => info.getValue(),
-      header: "First Deposit",
-    }),
-    columnHelper.accessor("Volume", {
-      cell: (info) => info.getValue(),
-      header: "Volume",
-    }),
-    columnHelper.accessor("WithdrawalAmount", {
-      cell: (info) => info.getValue(),
-      header: "Withdrawal Amount",
-    }),
-    columnHelper.accessor("ChargeBackAmount", {
-      cell: (info) => info.getValue(),
-      header: "ChargeBack Amount",
-    }),
-    columnHelper.accessor("totalLots", {
-      cell: (info) => info.getValue(),
-      header: "Lots",
-    }),
-    columnHelper.accessor("SaleStatus", {
-      cell: (info) => info.getValue(),
-      header: "Sale Status",
-    }),
+    createColumn("TraderID", "Trader ID"),
+    createColumn("sub_trader_count", "Trader Sub Accounts"),
+    createColumn("RegistrationDate", "Registration Date"),
+    createColumn("TraderStatus", "Trader Status"),
+    createColumn("Country", "Country"),
+    createColumn("affiliate_id", "Affiliate ID"),
+    createColumn("AffiliateUsername", "Affiliate Username"),
+    createColumn("merchant_id", "Merchant ID"),
+    createColumn("MerchantName", "Merchant Name"),
+    createColumn("CreativeID", "Creative ID"),
+    createColumn("CreativeName", "Creative Name"),
+    createColumn("Type", "Type"),
+    createColumn("CreativeLanguage", "Creative Language"),
+    createColumn("ProfileID", "Profile ID"),
+    createColumn("ProfileName", "Profile Name"),
+    createColumn("Param", "Param"),
+    createColumn("Param2", "Param2"),
+    createColumn("Param3", "Param3"),
+    createColumn("Param4", "Param4"),
+    createColumn("Param5", "Param5"),
+    createColumn("FirstDeposit", "First Deposit"),
+    createColumn("Volume", "Volume"),
+    createColumn("WithdrawalAmount", "Withdrawal Amount"),
+    createColumn("ChargeBackAmount", "ChargeBack Amount"),
+    createColumn("totalLots", "Lots"),
+    createColumn("SaleStatus", "Sale Status"),
   ];
-
-  const merchant_options = merchants?.map((merchant: any) => {
-    return {
-      id: merchant.id,
-      title: merchant?.name,
-    };
-  });
 
   const creativeType = [
     {
@@ -258,7 +175,7 @@ export const TraderReports = () => {
         <GridItem>
           <QuerySelect
             label="Merchant"
-            choices={merchant_options}
+            choices={merchants}
             varName="merchant_id"
           />
         </GridItem>{" "}

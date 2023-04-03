@@ -172,13 +172,6 @@ export const ClicksReport = () => {
     }),
   ];
 
-  const merchant_options = merchants?.map((merchant) => {
-    return {
-      id: merchant.id,
-      title: merchant?.name,
-    };
-  });
-
   const commissionOption = [
     {
       id: "CPA",
@@ -202,7 +195,7 @@ export const ClicksReport = () => {
         <GridItem>
           <QuerySelect
             label="Merchant"
-            choices={merchant_options}
+            choices={merchants}
             varName="merchant_id"
           />
         </GridItem>

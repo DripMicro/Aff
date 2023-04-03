@@ -102,13 +102,6 @@ export const InstallReport = () => {
     }),
   ];
 
-  const merchant_options = merchants?.map((merchant) => {
-    return {
-      id: merchant.id,
-      title: merchant?.name,
-    };
-  });
-
   const country_options = countries?.map((country: any) => {
     return {
       id: country.id,
@@ -132,7 +125,7 @@ export const InstallReport = () => {
         <GridItem>
           <QuerySelect
             label="Merchant"
-            choices={merchant_options}
+            choices={merchants}
             varName="merchant_id"
           />
         </GridItem>

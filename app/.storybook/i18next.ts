@@ -2,6 +2,7 @@ import { initReactI18next } from "react-i18next";
 import i18n from "i18next";
 import Backend from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
+// import { missingKeyHandler } from "@/utils/i18n-utils";
 
 const ns = ["common", "affiliate"];
 const supportedLngs = ["en", "he", "zz"];
@@ -15,6 +16,17 @@ const resources = ns.reduce((acc, n) => {
   });
   return acc;
 }, {});
+
+export const missingKeyHandler = (
+  lngs: readonly string[],
+  ns: string,
+  key: string,
+  fallbackValue: string,
+  updateMissing: boolean,
+  options: any
+) => {
+  console.log(`muly:missingKeyHandler`, { ns, key, fallbackValue });
+};
 
 i18n
   .use(initReactI18next)
@@ -30,6 +42,13 @@ i18n
     react: { useSuspense: false },
     supportedLngs,
     resources,
+    saveMissing: true,
+    updateMissing: true,
+    saveMissingTo: "all",
+    missingKeyHandler,
+  })
+  .then((r) => {
+    console.log(`muly:i18n init done`, { r });
   });
 
 export default i18n;

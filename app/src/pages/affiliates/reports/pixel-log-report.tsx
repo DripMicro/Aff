@@ -18,4 +18,4 @@ const Page: MyPage = () => {
 };
 
 export default Page;
-Page.Layout = "NoLayout";
+Page.Layout = "Affiliates";
