@@ -64,12 +64,12 @@ export const Billings = () => {
   console.log("UserQuery data: ", data);
   console.log("Example Data: ", ex_data);
   const paid_payment = (
-    <button className="h-5 w-16 rounded-md bg-green-200 text-green-800  ">
+    <button className="bg-green-200 text-green-800 h-5 w-16 rounded-md  ">
       Paid
     </button>
   );
   const pending_payment = (
-    <button className="h-5 w-16 rounded-md bg-red-200 text-red-800 ">
+    <button className="bg-red-200 text-red-800 h-5 w-16 rounded-md ">
       Pending
     </button>
   );

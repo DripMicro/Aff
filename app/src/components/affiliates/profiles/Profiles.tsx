@@ -1,14 +1,10 @@
-import {
-  useToast,
-} from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
 import { api } from "../../../utils/api";
 import type { AffiliateProfileType } from "../../../server/db-types";
 import { createColumnHelper } from "@tanstack/react-table";
 import * as z from "zod";
 import { ModalForm } from "../../common/forms/ModalForm";
-import {
-  EditIcon,
-} from "@chakra-ui/icons";
+import { EditIcon } from "@chakra-ui/icons";
 import React, { useState } from "react";
 import {
   ModalFormAction,
@@ -19,7 +15,13 @@ import Affiliates from "../../../layouts/AffiliatesLayout";
 import { CustomizeDataTable } from "../../common/data-table/Customize_DataTable";
 import { Button } from "../../ui/button";
 import {
-  Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from "../../ui/dialog";
 
 const columnHelper = createColumnHelper<AffiliateProfileType>();
@@ -191,12 +193,19 @@ export const Profiles = () => {
             state={false}
           />
           <DialogTrigger>
-            <Button
-              variant="primary"
-            >
+            <Button variant="primary">
               <div className="mr-2 inline-flex h-6 items-center justify-center text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M15.3 8.82H8.91V15.3H6.36V8.82H0V6.51H6.36V0H8.91V6.51H15.3V8.82Z" fill="white" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                >
+                  <path
+                    d="M15.3 8.82H8.91V15.3H6.36V8.82H0V6.51H6.36V0H8.91V6.51H15.3V8.82Z"
+                    fill="white"
+                  />
                 </svg>
               </div>
               Add
@@ -204,7 +213,9 @@ export const Profiles = () => {
           </DialogTrigger>
         </div>
         <DialogContent>
-          <DialogHeader className="text-sm font-medium text-azure text-left">Add Profile</DialogHeader>
+          <DialogHeader className="text-left text-sm font-medium text-azure">
+            Add Profile
+          </DialogHeader>
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="flex-1 p-2">
               <label className="mb-1.5 ml-2.5 block text-sm font-medium text-[#525252]">
@@ -254,9 +265,7 @@ export const Profiles = () => {
               />
             </div>
           </div>
-          <Button variant="primary">
-            Save
-          </Button>
+          <Button variant="primary">Save</Button>
           {/* <div className=" self-center py-6 font-medium md:py-10">
             <button
               className="mb-4 w-44 rounded-md bg-[#1B48BB] px-6 py-3 text-white md:mx-40 md:w-96 md:px-14 "

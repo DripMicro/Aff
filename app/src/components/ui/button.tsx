@@ -9,12 +9,9 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary:
-          "text-white text-base bg-primary rounded-md",
-        azure:
-          "text-white text-base bg-azure rounded-md",
-        white:
-          "text-black text-base bg-white rounded-md",
+        primary: "text-white text-base bg-primary rounded-md",
+        azure: "text-white text-base bg-azure rounded-md",
+        white: "text-black text-base bg-white rounded-md",
         "primary-outline":
           "text-azure text-base bg-secondary border border-azure rounded-md",
         "azure-outline":
@@ -23,8 +20,7 @@ const buttonVariants = cva(
           "bg-slate-900 text-white hover:bg-slate-700 dark:bg-slate-50 dark:text-slate-900",
         destructive:
           "bg-red-500 text-white hover:bg-red-600 dark:hover:bg-red-600",
-        outline:
-          "text-azure text-base bg-white border border-azure rounded-md",
+        outline: "text-azure text-base bg-white border border-azure rounded-md",
         subtle:
           "bg-slate-100 text-slate-900 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-100",
         ghost:
@@ -37,7 +33,7 @@ const buttonVariants = cva(
         md: "px-3 py-1.5 rounded",
         lg: "py-3 rounded-md",
         rec: "py-3.5 px-3.5",
-        "rec-sm": "py-2.5 px-2.5"
+        "rec-sm": "py-2.5 px-2.5",
       },
     },
     defaultVariants: {
@@ -49,7 +45,7 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-  VariantProps<typeof buttonVariants> {
+    VariantProps<typeof buttonVariants> {
   // TODO:TW need to implement
   isLoading?: boolean;
 }

@@ -1,5 +1,5 @@
 const { fontFamily } = require("tailwindcss/defaultTheme");
-const { colors: defaultColors } = require('tailwindcss/defaultTheme');
+const { colors: defaultColors } = require("tailwindcss/defaultTheme");
 
 const colors = {
   ...defaultColors,
@@ -10,9 +10,9 @@ const colors = {
     white: "#fff",
     secondary: "#EFEEFF",
     black: "#000",
-    paris: "#282560"
+    paris: "#282560",
   },
-}
+};
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -38,7 +38,7 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
-    colors: colors
+    colors: colors,
   },
   // @ts-ignore
   plugins: [require("tailwindcss-animate")],

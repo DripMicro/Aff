@@ -70,7 +70,7 @@ const SingleLink = ({
         }}
       >
         <Link
-          className="text-white-600 hover:text-white-800 relative flex h-11 flex-row items-center justify-between pl-8 hover:bg-white focus:outline-none dark:hover:bg-gray-600"
+          className="text-white-600 hover:text-white-800 dark:hover:bg-gray-600 relative flex h-11 flex-row items-center justify-between pl-8 hover:bg-white focus:outline-none"
           href={
             "/affiliates/" +
             (parentLink == "" ? "" : parentLink + "/") +
@@ -80,7 +80,7 @@ const SingleLink = ({
             activeOnLink(true);
           }}
         >
-          <div className="text-white-600 hover:text-white-800 relative flex h-11 flex-row items-center hover:bg-white focus:outline-none dark:hover:bg-gray-600">
+          <div className="text-white-600 hover:text-white-800 dark:hover:bg-gray-600 relative flex h-11 flex-row items-center hover:bg-white focus:outline-none">
             <img
               alt="..."
               className="w-6 border-none pt-0.5 align-middle"
@@ -145,7 +145,7 @@ const SingleLink = ({
               }}
             >
               <Link
-                className="text-white-600 hover:text-white-800 relative flex h-9 flex-row items-center pl-14 hover:bg-white focus:outline-none dark:hover:bg-gray-600"
+                className="text-white-600 hover:text-white-800 dark:hover:bg-gray-600 relative flex h-9 flex-row items-center pl-14 hover:bg-white focus:outline-none"
                 href={
                   "/affiliates/" +
                   (parentLink == "" ? "" : parentLink + "/") +

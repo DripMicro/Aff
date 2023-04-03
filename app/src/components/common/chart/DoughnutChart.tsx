@@ -26,13 +26,12 @@ interface Props {
   color: string;
 }
 
-const DoughnutChart = ({value, color}:Props) => {
-
+const DoughnutChart = ({ value, color }: Props) => {
   const data = {
     labels: ["", "", ""],
     datasets: [
       {
-        data: [value, 100-value],
+        data: [value, 100 - value],
         backgroundColor: [color, "#EEEEEE"],
         borderColor: [color, "#EEEEEE"],
         borderWidth: 1,

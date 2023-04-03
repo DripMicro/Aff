@@ -1,13 +1,20 @@
 import {
-  Select, SelectGroup, SelectValue, SelectTrigger, SelectContent, SelectLabel, SelectItem, SelectSeparator
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectLabel,
+  SelectItem,
+  SelectSeparator,
 } from "./select";
 
 const Selects = () => (
-    <div className="flex flex-col items-start gap-8">
-      <Select>
-        <SelectTrigger>
-          <SelectValue placeholder="Select a fruit..."/>
-        </SelectTrigger>
+  <div className="flex flex-col items-start gap-8">
+    <Select>
+      <SelectTrigger>
+        <SelectValue placeholder="Select a fruit..." />
+      </SelectTrigger>
 
       <SelectContent>
         <SelectGroup>
@@ -17,7 +24,7 @@ const Selects = () => (
           <SelectItem value={"Item3"}>Item3</SelectItem>
         </SelectGroup>
 
-        <SelectSeparator/>
+        <SelectSeparator />
 
         <SelectGroup>
           <SelectLabel>ItemGroup</SelectLabel>
@@ -26,8 +33,8 @@ const Selects = () => (
           <SelectItem value={"Item6"}>Item6</SelectItem>
         </SelectGroup>
       </SelectContent>
-      </Select>
-    </div>
+    </Select>
+  </div>
 );
 
 const meta = {
@@ -39,9 +46,9 @@ export default meta;
 export const Primary = {
   render: (args: any) => {
     return (
-        <div className="mt-4 flex">
-          <Selects/>
-        </div>
+      <div className="mt-4 flex">
+        <Selects />
+      </div>
     );
-  }
-}
+  },
+};

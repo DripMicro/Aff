@@ -5,21 +5,23 @@ import DashboardChart from "../../common/chart/DashboardChart";
 import PerformanceChart from "../../common/chart/PerformanceChart";
 import ConversionChart from "../../common/chart/ConversionChart";
 import { Button } from "../../ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../ui/tabs";
 import {
-  Tabs, TabsContent, TabsList, TabsTrigger
-} from "../../ui/tabs";
-import {
-  Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from "../../ui/dialog";
-import DeviceReport from './DeviceReport';
-import CountryReport from './CountryReport';
-import AccountManager from './AccountManager';
+import DeviceReport from "./DeviceReport";
+import CountryReport from "./CountryReport";
+import AccountManager from "./AccountManager";
 
 import { useEffect, useState } from "react";
 
-import type {
-  TopMerchantCreativeType,
-} from "../../../server/db-types";
+import type { TopMerchantCreativeType } from "../../../server/db-types";
 import { api } from "../../../utils/api";
 
 import { DataTable } from "../../common/data-table/DataTable";
@@ -131,7 +133,7 @@ export const Dashboard = () => {
       cell: ({ row }) => {
         return !!row.original.file ? (
           <img
-            className="bg-cover w-44 md:w-full"
+            className="w-44 bg-cover md:w-full"
             src={row.original.file}
             alt={row.original.alt}
           />
@@ -221,9 +223,7 @@ export const Dashboard = () => {
               Update
             </Button>
             <DialogTrigger>
-              <button
-                className="ml-3 rounded-md bg-white px-2 drop-shadow md:ml-5 md:px-3 md:pt-1.5 md:pb-2"
-              >
+              <button className="ml-3 rounded-md bg-white px-2 drop-shadow md:ml-5 md:px-3 md:pt-1.5 md:pb-2">
                 <SettingsIcon />
               </button>
             </DialogTrigger>
@@ -236,13 +236,17 @@ export const Dashboard = () => {
         </div>
 
         <DialogContent>
-          <DialogHeader className="text-sm font-medium text-azure text-left">Manage Field On Report - Quick Summary</DialogHeader>
-          <DialogTitle className="md:mb-6 font-normal md:pt-2 text-sm text-disabled">Please activate the fields you want to display on the report:</DialogTitle>
-          <div className="grid grid-cols-1 md:grid-cols-2 md:mt-10">
+          <DialogHeader className="text-left text-sm font-medium text-azure">
+            Manage Field On Report - Quick Summary
+          </DialogHeader>
+          <DialogTitle className="text-sm font-normal text-disabled md:mb-6 md:pt-2">
+            Please activate the fields you want to display on the report:
+          </DialogTitle>
+          <div className="grid grid-cols-1 md:mt-10 md:grid-cols-2">
             {reportFields.map((field) => {
               return (
                 <div key={field.id}>
-                  <div className="flex items-center mb-6 md:mb-10">
+                  <div className="mb-6 flex items-center md:mb-10">
                     <input
                       type="checkbox"
                       id={`report-field-${field.id}`}
@@ -251,7 +255,7 @@ export const Dashboard = () => {
                       onChange={(e) => void handleReportField(e)}
                       className="form-checkbox text-blueGray-700 h-4 w-4 rounded border-0 transition-all duration-150 ease-linear"
                     />
-                    <div className="ml-5 md:ml-10 text-black text-lg font-medium items-center">
+                    <div className="ml-5 items-center text-lg font-medium text-black md:ml-10">
                       {field.title}
                     </div>
                   </div>
@@ -346,13 +350,21 @@ export const Dashboard = () => {
           })}
       </div>
 
-      <div
-        className="my-6 rounded-2xl bg-white px-2 pt-5 pb-5 shadow-sm md:px-6 "
-      >
+      <div className="my-6 rounded-2xl bg-white px-2 pt-5 pb-5 shadow-sm md:px-6 ">
         <Tabs defaultValue="Performance">
           <TabsList>
-            <TabsTrigger className="rounded-none shadow-none font-normal text-disabled border-b-2 focus:text-primary focus:border-primary focus:font-bold" value="Performance">Performace Chart</TabsTrigger>
-            <TabsTrigger className="rounded-none shadow-none font-normal text-disabled border-b-2 focus:text-primary focus:border-primary focus:font-bold" value="conversion">Conversion Chart</TabsTrigger>
+            <TabsTrigger
+              className="rounded-none border-b-2 font-normal text-disabled shadow-none focus:border-primary focus:font-bold focus:text-primary"
+              value="Performance"
+            >
+              Performace Chart
+            </TabsTrigger>
+            <TabsTrigger
+              className="rounded-none border-b-2 font-normal text-disabled shadow-none focus:border-primary focus:font-bold focus:text-primary"
+              value="conversion"
+            >
+              Conversion Chart
+            </TabsTrigger>
           </TabsList>
           <TabsContent className="border-0" value="Performance">
             <div className="mt-5 h-80 pb-5">
@@ -370,7 +382,11 @@ export const Dashboard = () => {
       <div className="my-6 grid grid-cols-1 gap-5 lg:grid-cols-3">
         <DeviceReport />
         <CountryReport />
-        <AccountManager first_name={account?.first_name} last_name={account?.last_name} mail={account?.mail} />
+        <AccountManager
+          first_name={account?.first_name}
+          last_name={account?.last_name}
+          mail={account?.mail}
+        />
       </div>
 
       <div className="mb-5 rounded-2xl bg-white px-2 py-5 shadow-sm md:px-5">

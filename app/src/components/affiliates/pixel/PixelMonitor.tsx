@@ -1,13 +1,7 @@
-import {
-  SearchIcon,
-} from "@chakra-ui/icons";
-import {
-  useDisclosure,
-} from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
+import { useDisclosure } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
-import {
-  useSteps,
-} from "chakra-ui-steps";
+import { useSteps } from "chakra-ui-steps";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import * as z from "zod";
@@ -27,7 +21,13 @@ import TableDropDown from "../../Dropdowns/TableDropdown";
 import { PixelMonitorDataTable } from "../../common/data-table/PixelMonitor_DataTable";
 import { Button } from "../../ui/button";
 import {
-  Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from "../../ui/dialog";
 
 const columnHelper = createColumnHelper<PixelMonitorData>();
@@ -289,7 +289,7 @@ const PixelMonitor = () => {
         return (
           <img
             src={info.getValue() === 1 ? "/docs_green.jpg" : "/docs_red.png"}
-            className="inline-block bg-cover w-5 h-5"
+            className="inline-block h-5 w-5 bg-cover"
             alt="Dan Abramov"
           />
         );
@@ -323,7 +323,7 @@ const PixelMonitor = () => {
       <div className="mb-5 block px-6 text-base font-medium">
         <span className="text-[#2262C6]">Dashboard</span> - Attributions
       </div>
-      <div className="md:flex mb-5">
+      <div className="mb-5 md:flex">
         <div className="relative hidden flex-1  rounded-md p-2 px-2 drop-shadow md:ml-5 md:block md:px-3 md:pt-1.5 md:pb-2">
           <input
             className="placeholder-blueGray-300 text-blueGray-700 h-10 w-96 rounded  border bg-white px-3 py-3 text-sm shadow "
@@ -335,13 +335,15 @@ const PixelMonitor = () => {
         </div>
         <Dialog>
           <DialogTrigger>
-            <Button variant="primary">
-              New Pixel Monitor
-            </Button>
+            <Button variant="primary">New Pixel Monitor</Button>
           </DialogTrigger>
           <DialogContent>
-            <DialogHeader className="text-sm font-medium text-azure text-left">Add New Pixel Monitor</DialogHeader>
-            <DialogTitle className="md:mb-6 font-normal md:pt-2 text-sm text-disabled">Please activate the fields you want to display on the report:</DialogTitle>
+            <DialogHeader className="text-left text-sm font-medium text-azure">
+              Add New Pixel Monitor
+            </DialogHeader>
+            <DialogTitle className="text-sm font-normal text-disabled md:mb-6 md:pt-2">
+              Please activate the fields you want to display on the report:
+            </DialogTitle>
             <div className="flex">
               {steps.map(({ id, label, content }) => {
                 return (
@@ -390,7 +392,6 @@ const PixelMonitor = () => {
             </div>
           </DialogContent>
         </Dialog>
-
       </div>
 
       <div className="rounded-[5px] bg-white pt-3 pl-3 pb-20 shadow-md md:mb-10 md:rounded-[15px]">
@@ -401,9 +402,7 @@ const PixelMonitor = () => {
           state={state}
         />
         <div className="flex  justify-end ">
-          <button
-            className="mb-7 mr-3 mt-6 h-10 w-44 rounded-md bg-blue-600 text-sm text-stone-50 outline md:hidden"
-          >
+          <button className="bg-blue-600 text-stone-50 mb-7 mr-3 mt-6 h-10 w-44 rounded-md text-sm outline md:hidden">
             New Pixel Monitor
           </button>
         </div>

@@ -71,7 +71,7 @@ const UserDropdown = () => {
           "z-50 float-left w-32 list-none rounded bg-white py-2 text-left text-base shadow-lg"
         }
       >
-        <div className="flex w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal">
+        <div className="bg-transparent flex w-full whitespace-nowrap py-2 px-4 text-sm font-normal">
           <span className="inline-flex items-center justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +90,7 @@ const UserDropdown = () => {
             Profile
           </span>
         </div>
-        <div className="flex w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal">
+        <div className="bg-transparent flex w-full whitespace-nowrap py-2 px-4 text-sm font-normal">
           <span className="inline-flex items-center justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"

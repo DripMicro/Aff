@@ -181,7 +181,7 @@ const DateSelection: React.FC<Record<never, never>> = (props) => {
     dates.push(
       <button
         key={`day${i}`}
-        className={`rounded p-1 text-sm hover:bg-gray-200 ${
+        className={`hover:bg-gray-200 rounded p-1 text-sm ${
           isSelectedDate(i) ? "bg-gray-300 font-semibold" : ""
         }`}
         onClick={() => selectDate(i)}

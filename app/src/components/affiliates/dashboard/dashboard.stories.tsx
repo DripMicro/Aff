@@ -10,20 +10,24 @@ export default meta;
 
 export const DeviceReports = {
   render: () => {
-    <div className="w-full h-96">
-      <DeviceReport/>
-    </div>
+    <div className="h-96 w-full">
+      <DeviceReport />
+    </div>;
   },
 };
 
 export const CountryReports = {
   render: () => {
-    <CountryReport/>
+    <CountryReport />;
   },
 };
 
 export const AccountManagers = {
   render: () => {
-    <AccountManager first_name={"FirstName"} last_name={"LastName"} mail={"Mail"}/>
+    <AccountManager
+      first_name={"FirstName"}
+      last_name={"LastName"}
+      mail={"Mail"}
+    />;
   },
 };

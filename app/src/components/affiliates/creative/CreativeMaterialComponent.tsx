@@ -1,8 +1,16 @@
 import {
-  Dialog, DialogContent, DialogHeader, DialogTrigger
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTrigger,
 } from "../../ui/dialog";
 import {
-  Select, SelectGroup, SelectValue, SelectTrigger, SelectContent, SelectItem
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
 } from "../../ui/select";
 
 import { Button } from "../../ui/button";
@@ -25,16 +33,11 @@ export const CreativeMaterialComponent = ({
   alt,
   url,
 }: Props) => {
-
   return (
     <div className=" mb-5 rounded-xl bg-white p-4 shadow">
       <div className="mt-4 flex items-start">
         <div className="w-32 rounded-xl md:w-96">
-          <img
-            src={file}
-            className="rounded-xl bg-cover"
-            alt={alt}
-          />
+          <img src={file} className="rounded-xl bg-cover" alt={alt} />
         </div>
         <Dialog>
           <div className="ml-5 w-full rounded-xl">
@@ -175,7 +178,9 @@ export const CreativeMaterialComponent = ({
           </div>
 
           <DialogContent>
-            <DialogHeader className="text-lg font-medium text-azure text-left">HTML Code</DialogHeader>
+            <DialogHeader className="text-left text-lg font-medium text-azure">
+              HTML Code
+            </DialogHeader>
             <form className="w-full pt-5">
               <div className="mb-6 justify-between md:flex md:space-x-4">
                 <div className="mb-3 w-full md:w-1/2">
@@ -188,10 +193,10 @@ export const CreativeMaterialComponent = ({
                   <div className="flex">
                     <div className=" relative flex w-full items-center ">
                       <Select defaultValue={"1"}>
-                        <SelectTrigger className="text-xs border px-4  py-3 ">
+                        <SelectTrigger className="border px-4 py-3  text-xs ">
                           <SelectValue placeholder="Select days" />
                         </SelectTrigger>
-                        <SelectContent className="text-xs border">
+                        <SelectContent className="border text-xs">
                           <SelectGroup>
                             <SelectItem value={"1"}>Account 1</SelectItem>
                             <SelectItem value={"2"}>Account 2</SelectItem>
@@ -201,8 +206,17 @@ export const CreativeMaterialComponent = ({
                         </SelectContent>
                       </Select>
                       <Button variant="primary" className="ml-2" size="rec">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                          <path d="M15.3 8.82H8.91V15.3H6.36V8.82H0V6.51H6.36V0H8.91V6.51H15.3V8.82Z" fill="white" />
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                        >
+                          <path
+                            d="M15.3 8.82H8.91V15.3H6.36V8.82H0V6.51H6.36V0H8.91V6.51H15.3V8.82Z"
+                            fill="white"
+                          />
                         </svg>
                       </Button>
                     </div>
@@ -218,10 +232,10 @@ export const CreativeMaterialComponent = ({
                   <div className="flex">
                     <div className=" relative flex w-full items-center ">
                       <Select defaultValue={"1"}>
-                        <SelectTrigger className="text-xs border px-4  py-3 ">
+                        <SelectTrigger className="border px-4 py-3  text-xs ">
                           <SelectValue placeholder="Select days" />
                         </SelectTrigger>
-                        <SelectContent className="text-xs border">
+                        <SelectContent className="border text-xs">
                           <SelectGroup>
                             <SelectItem value={"1"}>Account 1</SelectItem>
                             <SelectItem value={"2"}>Account 2</SelectItem>
@@ -231,8 +245,17 @@ export const CreativeMaterialComponent = ({
                         </SelectContent>
                       </Select>
                       <Button variant="primary" className="ml-2" size="rec">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                          <path d="M15.3 8.82H8.91V15.3H6.36V8.82H0V6.51H6.36V0H8.91V6.51H15.3V8.82Z" fill="white" />
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                        >
+                          <path
+                            d="M15.3 8.82H8.91V15.3H6.36V8.82H0V6.51H6.36V0H8.91V6.51H15.3V8.82Z"
+                            fill="white"
+                          />
                         </svg>
                       </Button>
                     </div>
@@ -286,7 +309,7 @@ export const CreativeMaterialComponent = ({
               <div className="flex justify-between md:justify-center md:space-x-2">
                 <div className="hidden rounded md:block">
                   <div className="rounded">
-                  <Button variant="azure" size="md">
+                    <Button variant="azure" size="md">
                       <div className="text-base text-white md:font-medium">
                         Copy Click Url
                       </div>
@@ -314,7 +337,7 @@ export const CreativeMaterialComponent = ({
                 <div className=" rounded">
                   <div className="">
                     <Button variant="azure-outline" size="md">
-                        Get HTML Code
+                      Get HTML Code
                       <div className="ml-2">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -336,7 +359,7 @@ export const CreativeMaterialComponent = ({
                 <div className=" rounded">
                   <div className="">
                     <Button variant="azure" size="md">
-                        Download Image
+                      Download Image
                       <div className="ml-2">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

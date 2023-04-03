@@ -4,9 +4,7 @@ import { FormAccount } from "./FormAccount";
 import { FormContact } from "./FormContact";
 import { FormInvoice } from "./FormInvoice";
 import { FormWebSites } from "./FormWebSites";
-import {
-  Tabs, TabsContent, TabsList, TabsTrigger
-} from "../../ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../ui/tabs";
 
 export const AccountDetails = () => {
   const { data: account, refetch } = api.affiliates.getAccount.useQuery();
@@ -32,10 +30,30 @@ export const AccountDetails = () => {
         <div className="flex w-full">
           <Tabs defaultValue="account" className="w-full">
             <TabsList className="mt-2">
-              <TabsTrigger className="rounded-none shadow-none font-normal text-disabled border-b-2 focus:text-primary focus:border-primary focus:font-bold" value="account">Account</TabsTrigger>
-              <TabsTrigger className="rounded-none shadow-none font-normal text-disabled border-b-2 focus:text-primary focus:border-primary focus:font-bold" value="contract">Contact</TabsTrigger>
-              <TabsTrigger className="rounded-none shadow-none font-normal text-disabled border-b-2 focus:text-primary focus:border-primary focus:font-bold" value="invoice">Invoice</TabsTrigger>
-              <TabsTrigger className="rounded-none shadow-none font-normal text-disabled border-b-2 focus:text-primary focus:border-primary focus:font-bold" value="website">Website</TabsTrigger>
+              <TabsTrigger
+                className="rounded-none border-b-2 font-normal text-disabled shadow-none focus:border-primary focus:font-bold focus:text-primary"
+                value="account"
+              >
+                Account
+              </TabsTrigger>
+              <TabsTrigger
+                className="rounded-none border-b-2 font-normal text-disabled shadow-none focus:border-primary focus:font-bold focus:text-primary"
+                value="contract"
+              >
+                Contact
+              </TabsTrigger>
+              <TabsTrigger
+                className="rounded-none border-b-2 font-normal text-disabled shadow-none focus:border-primary focus:font-bold focus:text-primary"
+                value="invoice"
+              >
+                Invoice
+              </TabsTrigger>
+              <TabsTrigger
+                className="rounded-none border-b-2 font-normal text-disabled shadow-none focus:border-primary focus:font-bold focus:text-primary"
+                value="website"
+              >
+                Website
+              </TabsTrigger>
             </TabsList>
             <TabsContent className="border-0" value="account">
               <FormAccount account={account} onSubmit={handleSubmit} />

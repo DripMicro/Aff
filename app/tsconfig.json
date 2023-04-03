@@ -27,7 +27,8 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.cjs",
-    ".contentlayer/generated"
-, "tailwind.config.js"  ],
+    ".contentlayer/generated",
+    "tailwind.config.js"
+  ],
   "exclude": ["node_modules"]
 }

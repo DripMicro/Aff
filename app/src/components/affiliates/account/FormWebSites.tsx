@@ -25,7 +25,7 @@ export const FormWebSites = ({ account, onSubmit }: Props) => {
     <>
       <div className="w-full">
         <div className="mt-6 w-full pb-4 text-base md:w-1/2 md:text-sm">
-          <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
+          <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
             Website1
           </label>
           <input
@@ -36,7 +36,7 @@ export const FormWebSites = ({ account, onSubmit }: Props) => {
           />
         </div>
         <div className="mt-6 w-full pb-4 text-base md:w-1/2 md:text-sm">
-          <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
+          <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
             Website2
           </label>
           <input
@@ -47,7 +47,7 @@ export const FormWebSites = ({ account, onSubmit }: Props) => {
           />
         </div>
         <div className="mt-6 w-full pb-4 text-base md:w-1/2 md:text-sm">
-          <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
+          <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
             Website3
           </label>
           <input
@@ -59,7 +59,7 @@ export const FormWebSites = ({ account, onSubmit }: Props) => {
         </div>
         <div className="-mx-3 mb-6 flex flex-wrap">
           <div className="w-full px-3">
-            <Button variant="azure" size="lg" className="px-12 mt-8">
+            <Button variant="azure" size="lg" className="mt-8 px-12">
               Save
             </Button>
           </div>

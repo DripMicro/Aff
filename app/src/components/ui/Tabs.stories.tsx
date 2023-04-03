@@ -1,6 +1,4 @@
-import {
-  Tabs, TabsContent, TabsList, TabsTrigger
-} from "./tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
 
 const Tab = () => (
   <div className="flex flex-col items-start gap-8">
@@ -12,9 +10,7 @@ const Tab = () => (
       <TabsContent className="border-0" value="tab1">
         Tab1 Content
       </TabsContent>
-      <TabsContent value="tab2">
-        Tab2 Content
-      </TabsContent>
+      <TabsContent value="tab2">Tab2 Content</TabsContent>
     </Tabs>
   </div>
 );
@@ -32,5 +28,5 @@ export const Primary = {
         <Tab />
       </div>
     );
-  }
-}
+  },
+};

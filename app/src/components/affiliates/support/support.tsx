@@ -14,7 +14,13 @@ import SupportTableComponent from "./supportTableComponent";
 import { useState } from "react";
 import { Button } from "../../ui/button";
 import {
-  Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from "../../ui/dialog";
 
 const Support = () => {
@@ -60,7 +66,7 @@ const Support = () => {
                 />
                 <svg
                   aria-hidden="true"
-                  className="-ml-10 h-5  w-5 text-[#B3B3B3] dark:text-gray-400 "
+                  className="dark:text-gray-400 -ml-10  h-5 w-5 text-[#B3B3B3] "
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -75,7 +81,7 @@ const Support = () => {
                 </svg>
               </div>
             </div>
-            <div className="flex items-center justify-end text-xs font-medium text-gray-700 transition duration-150 ease-in-out">
+            <div className="text-gray-700 flex items-center justify-end text-xs font-medium transition duration-150 ease-in-out">
               <Button
                 type="submit"
                 onClick={() => setFlag(!flag)}
@@ -95,9 +101,11 @@ const Support = () => {
                     Add new Ticket
                   </Button>
                 </DialogTrigger>
-                
+
                 <DialogContent>
-                  <DialogHeader className="text-sm font-medium text-azure text-left">Open New Ticket</DialogHeader>
+                  <DialogHeader className="text-left text-sm font-medium text-azure">
+                    Open New Ticket
+                  </DialogHeader>
                   <form className="w-full pt-5">
                     <div className="-mx-3 mb-6 flex flex-wrap">
                       <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">

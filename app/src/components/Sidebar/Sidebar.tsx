@@ -2,10 +2,8 @@ import React, { useEffect } from "react";
 import SingleLink from "../common/menubar/SingleLink";
 import DropdownLink from "../common/menubar/DropdownLink";
 import { cn } from "@/lib/utils";
-import {
-  navigationData,
-  NavigationLinkData,
-} from "@/components/Sidebar/navigation-data";
+import type { NavigationLinkData } from "@/components/Sidebar/navigation-data";
+import { navigationData } from "@/components/Sidebar/navigation-data";
 
 interface Props {
   collapseShow: boolean;
@@ -62,10 +60,7 @@ const Sidebar: React.FC<Props> = ({ collapseShow }) => {
     "sidebar fixed top-16 left-0 z-10 flex h-full flex-col bg-white text-white transition-all duration-300 dark:bg-gray-900 md:top-20"
   );
 
-  
-
   return (
-
     <div className={sidebarClassName}>
       <div className="flex flex-grow flex-col justify-between overflow-y-auto overflow-x-hidden">
         <ul className="relative min-h-full space-y-1 overflow-y-auto py-5 md:cursor-pointer md:py-16">

@@ -24,7 +24,7 @@ export const SubCreativeMaterial = () => {
         <span className="text-[#2262C6]">Marketing Tools</span> / Sub Creative
         Materials
       </div>
-      <div className="flex items-center justify-between mb-2">
+      <div className="mb-2 flex items-center justify-between">
         <div className=" text-sm font-medium">
           <QuerySelect
             label="Creative Type"
