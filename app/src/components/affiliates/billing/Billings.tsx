@@ -1,11 +1,3 @@
-import {
-  Stack,
-  Button,
-  HStack,
-  useToast,
-  Flex,
-  SimpleGrid,
-} from "@chakra-ui/react";
 import { DataTable } from "../../common/data-table/DataTable";
 import { api } from "../../../utils/api";
 import type { PaymentsPaidType } from "../../../server/db-types";

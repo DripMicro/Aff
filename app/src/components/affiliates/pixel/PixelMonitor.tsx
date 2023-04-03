@@ -1,33 +1,11 @@
 import {
-  AddIcon,
-  DeleteIcon,
-  EditIcon,
   SearchIcon,
-  CheckIcon,
-  InfoIcon,
 } from "@chakra-ui/icons";
 import {
-  Button,
-  Flex,
-  HStack,
-  Image,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-  Stack,
   useDisclosure,
-  useToast,
 } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import {
-  Step,
-  Steps,
-  //   StepLabel,
-  //   StepIcon,
-  //   useColorModeValue,
   useSteps,
 } from "chakra-ui-steps";
 import { useRouter } from "next/router";
@@ -37,13 +15,7 @@ import type {
   PixelMonitorType,
   pixel_monitorModelType,
 } from "../../../server/db-types";
-// import type { schema as schemaPixelMonitor } from "../../../shared-types/forms/pixel-monitor";
 import { api } from "../../../utils/api";
-import { DataTable } from "../../common/data-table/DataTable";
-import { ModalForm } from "../../common/forms/ModalForm";
-import { ModalFormAction } from "../../common/modal/ModalFormButton";
-import { QuerySelect } from "../../common/QuerySelect";
-import { QueryText } from "../../common/QueryText";
 import { FinishForm } from "./FinishForm";
 import { MethodForm } from "./MethodForm";
 import { PixelCodeForm } from "./PixelCodeForm";
@@ -53,6 +25,10 @@ import { TriggerForm } from "./TriggerForm";
 import Affiliates from "../../../layouts/AffiliatesLayout";
 import TableDropDown from "../../Dropdowns/TableDropdown";
 import { PixelMonitorDataTable } from "../../common/data-table/PixelMonitor_DataTable";
+import { Button } from "../../ui/button";
+import {
+  Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger
+} from "../../ui/dialog";
 
 const columnHelper = createColumnHelper<PixelMonitorData>();
 
@@ -134,7 +110,6 @@ const PixelMonitor = () => {
   });
   const [count, setCount] = useState(1);
   const [state, setState] = useState(false);
-  const toast = useToast();
 
   const [formState, setFormState] = useState<NewRecType>(newRecValues);
 
@@ -158,51 +133,6 @@ const PixelMonitor = () => {
     return null;
   }
   console.log("QueryPiexlMonitor: ", data);
-
-  // const handleDelete = () => {
-  //   if (editRec?.id) {
-  //     deletePixelMonitor.mutate(
-  //       { id: editRec.id },
-  //       {
-  //         onSuccess: () => {
-  //           setEditRec(null);
-  //           toast({
-  //             title: "Pixel Monitor deleted",
-  //             status: "success",
-  //             duration: 5000,
-  //             isClosable: true,
-  //           });
-  //           void refetch();
-  //         },
-  //         onError: (error) => {
-  //           toast({
-  //             title: "Failed to delete pixel monitor",
-  //             description: `Error: ${error.message}`,
-  //             status: "error",
-  //             duration: 10000,
-  //             isClosable: true,
-  //           });
-  //         },
-  //       }
-  //     );
-  //   }
-  // };
-
-  // const handleUpdate = async (values: NewRecType) => {
-  //   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-  //   const merchant_id = parseInt(values.merchant_id);
-
-  //   if (!merchant_id) {
-  //     throw new Error("Missing merchant_id");
-  //   }
-
-  //   await upsertPixelMonitor.mutateAsync({
-  //     ...(editRec || {}),
-  //     ...values,
-  //     merchant_id,
-  //   });
-  //   await refetch();
-  // };
 
   const handleNext = (values: object) => {
     const keys = Object.keys(values);
@@ -357,12 +287,10 @@ const PixelMonitor = () => {
     columnHelper.accessor("status", {
       cell: (info) => {
         return (
-          <Image
+          <img
             src={info.getValue() === 1 ? "/docs_green.jpg" : "/docs_red.png"}
-            boxSize="20px"
-            objectFit="cover"
+            className="inline-block bg-cover w-5 h-5"
             alt="Dan Abramov"
-            display="inline-block"
           />
         );
       },
@@ -395,7 +323,7 @@ const PixelMonitor = () => {
       <div className="mb-5 block px-6 text-base font-medium">
         <span className="text-[#2262C6]">Dashboard</span> - Attributions
       </div>
-      <div className="md:flex">
+      <div className="md:flex mb-5">
         <div className="relative hidden flex-1  rounded-md p-2 px-2 drop-shadow md:ml-5 md:block md:px-3 md:pt-1.5 md:pb-2">
           <input
             className="placeholder-blueGray-300 text-blueGray-700 h-10 w-96 rounded  border bg-white px-3 py-3 text-sm shadow "
@@ -405,78 +333,64 @@ const PixelMonitor = () => {
             <SearchIcon color="#B3B3B3" />
           </label>
         </div>
-        <HStack justifyContent="end">
-          <button
-            onClick={onOpen}
-            className="mb-7 hidden h-10 w-44 rounded-md bg-blue-600 text-sm text-stone-50 outline md:block"
-          >
-            New Pixel Monitor
-          </button>
-          <Modal isOpen={isOpen} onClose={onClose} isCentered size="5xl">
-            <ModalOverlay />
-            <ModalContent ml={4} mr={4}>
-              <div className="mb-2 mr-2 ml-2 flex items-end justify-between pl-6 pt-4 md:pl-8 ">
-                <div className="font-xl font-normal text-[#000000]">
-                  Add New Pixel Monitor
-                </div>
-                <img
-                  alt="..."
-                  className="mr-4 h-10 w-10 rounded-full align-middle "
-                  src="/img/icons/close.png"
-                  onClick={onClose}
-                />
-              </div>
-              <ModalBody>
-                <div className="flex">
-                  {steps.map(({ id, label, content }) => {
-                    return (
-                      <>
-                        <div key={id} className="flex-1">
-                          <div className="flex items-center">
-                            {count >= id ? (
-                              count > id ? (
-                                <div className="flex h-5 w-5 items-center justify-center rounded-full border-2 border-dashed border-[#2262C6] bg-[#F4F4F4] text-center text-xs text-[#2262C6] md:h-12 md:w-12 md:text-base">
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="18"
-                                    height="14"
-                                    viewBox="0 0 18 14"
-                                    fill="none"
-                                  >
-                                    <path
-                                      d="M6.00039 11.2L1.80039 7L0.400391 8.4L6.00039 14L18.0004 2L16.6004 0.599998L6.00039 11.2Z"
-                                      fill="#2262C6"
-                                    />
-                                  </svg>
-                                </div>
-                              ) : (
-                                <div className="flex h-5 w-5 items-center justify-center rounded-full border-2 border-dashed border-[#2262C6] bg-[#F4F4F4] text-center text-[8px] font-medium text-[#2262C6] md:h-12 md:w-12 md:text-base">
-                                  0{id}
-                                </div>
-                              )
-                            ) : (
-                              <div className="flex h-5 w-5 items-center justify-center rounded-full border-2 border-dashed border-[#727272] bg-[#F4F4F4] text-center text-[8px] font-medium text-black md:h-12 md:w-12 md:text-base">
-                                0{id}
-                              </div>
-                            )}
-                            <div className=" ml-1 text-[8px] text-[#000000] md:ml-2 md:text-base">
-                              {label}
+        <Dialog>
+          <DialogTrigger>
+            <Button variant="primary">
+              New Pixel Monitor
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader className="text-sm font-medium text-azure text-left">Add New Pixel Monitor</DialogHeader>
+            <DialogTitle className="md:mb-6 font-normal md:pt-2 text-sm text-disabled">Please activate the fields you want to display on the report:</DialogTitle>
+            <div className="flex">
+              {steps.map(({ id, label, content }) => {
+                return (
+                  <>
+                    <div key={id} className="flex-1">
+                      <div className="flex items-center">
+                        {count >= id ? (
+                          count > id ? (
+                            <div className="flex h-5 w-5 items-center justify-center rounded-full border-2 border-dashed border-[#2262C6] bg-[#F4F4F4] text-center text-xs text-[#2262C6] md:h-12 md:w-12 md:text-base">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="18"
+                                height="14"
+                                viewBox="0 0 18 14"
+                                fill="none"
+                              >
+                                <path
+                                  d="M6.00039 11.2L1.80039 7L0.400391 8.4L6.00039 14L18.0004 2L16.6004 0.599998L6.00039 11.2Z"
+                                  fill="#2262C6"
+                                />
+                              </svg>
                             </div>
+                          ) : (
+                            <div className="flex h-5 w-5 items-center justify-center rounded-full border-2 border-dashed border-[#2262C6] bg-[#F4F4F4] text-center text-[8px] font-medium text-[#2262C6] md:h-12 md:w-12 md:text-base">
+                              0{id}
+                            </div>
+                          )
+                        ) : (
+                          <div className="flex h-5 w-5 items-center justify-center rounded-full border-2 border-dashed border-[#727272] bg-[#F4F4F4] text-center text-[8px] font-medium text-black md:h-12 md:w-12 md:text-base">
+                            0{id}
                           </div>
+                        )}
+                        <div className=" ml-1 text-[8px] text-[#000000] md:ml-2 md:text-base">
+                          {label}
                         </div>
-                      </>
-                    );
-                  })}
-                </div>
-                <div>
-                  {steps.map(({ id, label, content }) => {
-                    return <div key={id}>{count === id ? content : null}</div>;
-                  })}
-                </div>
-              </ModalBody>
-            </ModalContent>
-          </Modal>
-        </HStack>
+                      </div>
+                    </div>
+                  </>
+                );
+              })}
+            </div>
+            <div>
+              {steps.map(({ id, label, content }) => {
+                return <div key={id}>{count === id ? content : null}</div>;
+              })}
+            </div>
+          </DialogContent>
+        </Dialog>
+
       </div>
 
       <div className="rounded-[5px] bg-white pt-3 pl-3 pb-20 shadow-md md:mb-10 md:rounded-[15px]">
@@ -488,7 +402,6 @@ const PixelMonitor = () => {
         />
         <div className="flex  justify-end ">
           <button
-            onClick={onOpen}
             className="mb-7 mr-3 mt-6 h-10 w-44 rounded-md bg-blue-600 text-sm text-stone-50 outline md:hidden"
           >
             New Pixel Monitor

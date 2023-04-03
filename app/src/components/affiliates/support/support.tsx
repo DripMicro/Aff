@@ -12,6 +12,10 @@ import {
 import SupportComponent from "./supportComponent";
 import SupportTableComponent from "./supportTableComponent";
 import { useState } from "react";
+import { Button } from "../../ui/button";
+import {
+  Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger
+} from "../../ui/dialog";
 
 const Support = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -72,23 +76,89 @@ const Support = () => {
               </div>
             </div>
             <div className="flex items-center justify-end text-xs font-medium text-gray-700 transition duration-150 ease-in-out">
-              <button
+              <Button
                 type="submit"
                 onClick={() => setFlag(!flag)}
-                className="h-10 rounded-lg bg-[#2262C6] px-4 py-2 text-sm font-medium  text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                variant="primary"
               >
                 FAQ
-              </button>
+              </Button>
 
-              <button
-                type="submit"
-                className=" ml-2 h-10 rounded-lg bg-[#2262C6] px-4 py-2 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                onClick={onOpen}
-              >
-                Add new Ticket
-              </button>
+              <Dialog>
+                <DialogTrigger>
+                  <Button
+                    type="submit"
+                    onClick={onOpen}
+                    variant="primary"
+                    className="ml-2"
+                  >
+                    Add new Ticket
+                  </Button>
+                </DialogTrigger>
+                
+                <DialogContent>
+                  <DialogHeader className="text-sm font-medium text-azure text-left">Open New Ticket</DialogHeader>
+                  <form className="w-full pt-5">
+                    <div className="-mx-3 mb-6 flex flex-wrap">
+                      <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
+                        <label
+                          className="mb-2 block  pl-4 text-sm font-medium tracking-wide text-[#525252] md:text-base"
+                          htmlFor="grid-first-name"
+                        >
+                          Ticket Subject
+                        </label>
+                        <input
+                          className=" border-#D7D7D7 mb-3 w-full rounded-md border py-3 px-4 text-[#525252] placeholder:text-[#D7D7D7] "
+                          id="grid-first-name"
+                          type="text"
+                          placeholder="Type here.."
+                        />
+                      </div>
+                      <div className="-mt-5 w-full px-3 md:mt-0 md:w-1/2">
+                        <label
+                          className="mb-2 block  pl-4 text-sm font-medium tracking-wide text-[#525252] md:text-base"
+                          htmlFor="grid-last-name"
+                        >
+                          Your Email
+                        </label>
+                        <input
+                          className="border-#D7D7D7  mb-3 w-full rounded-md border py-3 px-4 text-[#525252] placeholder:text-[#D7D7D7] "
+                          id="grid-last-name"
+                          type="text"
+                          placeholder="Type here.."
+                        />
+                      </div>
+                    </div>
+                    <div className="-mx-3 -mt-4 mb-3 flex flex-wrap md:-mt-5 ">
+                      <div className="w-full px-3">
+                        <label
+                          className="mb-2 block  pl-4 text-sm font-medium tracking-wide text-[#525252] md:text-base"
+                          htmlFor="grid-password"
+                        >
+                          Ticket Subject
+                        </label>
+                        <textarea className="border-#D7D7D7 mb-3 h-32 w-full rounded-md border py-2 px-4 text-[#525252] md:h-40 " />
+                      </div>
+                    </div>
+                  </form>
+                  <div className="mb-12 text-center">
+                    <Button variant="primary" type="submit">
+                      Send Ticket
+                    </Button>
+                    {/* <button
+                      type="submit"
+                      className="h-12  rounded  bg-[#1B48BB] px-5 text-sm font-medium text-white
+                             hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700
+                              dark:focus:ring-blue-800 "
+                      onClick={onClose}
+                    >
+                      Send Ticket
+                    </button> */}
+                  </div>
+                </DialogContent>
+              </Dialog>
 
-              <Modal isOpen={isOpen} size="3xl" onClose={onClose} isCentered>
+              {/* <Modal isOpen={isOpen} size="3xl" onClose={onClose} isCentered>
                 <ModalOverlay />
                 <ModalContent ml={4} mr={4}>
                   <div className="flex items-end  justify-between pl-5 pt-4 md:pl-6">
@@ -159,7 +229,7 @@ const Support = () => {
                     </button>
                   </div>
                 </ModalContent>
-              </Modal>
+              </Modal> */}
             </div>
           </div>
         </div>
