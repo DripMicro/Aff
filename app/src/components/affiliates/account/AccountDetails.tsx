@@ -31,25 +31,21 @@ export const AccountDetails = () => {
           <Tabs defaultValue="account" className="w-full">
             <TabsList className="mt-2">
               <TabsTrigger
-                className="rounded-none border-b-2 font-normal text-disabled shadow-none focus:border-primary focus:font-bold focus:text-primary"
                 value="account"
               >
                 Account
               </TabsTrigger>
               <TabsTrigger
-                className="rounded-none border-b-2 font-normal text-disabled shadow-none focus:border-primary focus:font-bold focus:text-primary"
                 value="contract"
               >
                 Contact
               </TabsTrigger>
               <TabsTrigger
-                className="rounded-none border-b-2 font-normal text-disabled shadow-none focus:border-primary focus:font-bold focus:text-primary"
                 value="invoice"
               >
                 Invoice
               </TabsTrigger>
               <TabsTrigger
-                className="rounded-none border-b-2 font-normal text-disabled shadow-none focus:border-primary focus:font-bold focus:text-primary"
                 value="website"
               >
                 Website

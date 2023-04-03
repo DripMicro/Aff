@@ -354,13 +354,11 @@ export const Dashboard = () => {
         <Tabs defaultValue="Performance">
           <TabsList>
             <TabsTrigger
-              className="rounded-none border-b-2 font-normal text-disabled shadow-none focus:border-primary focus:font-bold focus:text-primary"
               value="Performance"
             >
               Performace Chart
             </TabsTrigger>
             <TabsTrigger
-              className="rounded-none border-b-2 font-normal text-disabled shadow-none focus:border-primary focus:font-bold focus:text-primary"
               value="conversion"
             >
               Conversion Chart
