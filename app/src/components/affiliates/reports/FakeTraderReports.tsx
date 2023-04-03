@@ -1,5 +1,14 @@
-import { DataTable } from "@/components/common/data-table/DataTable";
+import { fakeTraderReportData } from "@/components/affiliates/reports/fake-trader-report-data";
 import { QuerySelect } from "@/components/common/QuerySelect";
+import { DataTable } from "@/components/common/data-table/DataTable";
+import { Pagination } from "@/components/ui/pagination";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { FormLabel, Grid, GridItem, Input } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import { useRouter } from "next/router";
@@ -7,7 +16,6 @@ import { useState } from "react";
 import type { TraderReportType } from "../../../server/db-types";
 import { DateRangeSelect, useDateRange } from "../../common/DateRangeSelect";
 import { Loading } from "../../common/Loading";
-import { fakeTraderReportData } from "@/components/affiliates/reports/fake-trader-report-data";
 
 export const FakeTraderReports = () => {
   const router = useRouter();
@@ -215,6 +223,22 @@ export const FakeTraderReports = () => {
       >
         <DataTable data={data} columns={columns} footerData={totalObj} />
       </Grid>
+      <div className="grid grid-cols-2 gap-2">
+        <Pagination count={5} variant="focus" />
+        <div className="mt-2">
+          <Select>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="1">10</SelectItem>
+              <SelectItem value="2">20</SelectItem>
+              <SelectItem value="3">50</SelectItem>
+              <SelectItem value="4">100</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
     </>
   );
 };

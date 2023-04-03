@@ -3,7 +3,7 @@ import { getFeaturesFlags } from "./get-features-flags";
 import { addSystemEvent } from "./system-events";
 import { castError } from "../../utils/errors";
 import { affiliate_id, merchant_id } from "../api/routers/affiliates/const";
-import { PrismaClient } from "@prisma/client";
+import type { PrismaClient } from "@prisma/client";
 
 export interface AdminCommandAnswer {
   message: string;
