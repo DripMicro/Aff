@@ -1,15 +1,5 @@
 import {
-  Stack,
-  Button,
-  HStack,
   useToast,
-  useDisclosure,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalOverlay,
-  SimpleGrid,
-  Image,
 } from "@chakra-ui/react";
 import { api } from "../../../utils/api";
 import type { AffiliateProfileType } from "../../../server/db-types";
@@ -17,11 +7,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 import * as z from "zod";
 import { ModalForm } from "../../common/forms/ModalForm";
 import {
-  AddIcon,
-  CheckIcon,
-  DeleteIcon,
   EditIcon,
-  CloseIcon,
 } from "@chakra-ui/icons";
 import React, { useState } from "react";
 import {
@@ -31,6 +17,10 @@ import {
 import type { affiliates_profilesModelType } from "../../../server/db-types";
 import Affiliates from "../../../layouts/AffiliatesLayout";
 import { CustomizeDataTable } from "../../common/data-table/Customize_DataTable";
+import { Button } from "../../ui/button";
+import {
+  Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger
+} from "../../ui/dialog";
 
 const columnHelper = createColumnHelper<AffiliateProfileType>();
 
@@ -58,18 +48,6 @@ export const Profiles = () => {
   const deleteProfile = api.affiliates.deleteProfile.useMutation();
   const [editRec, setEditRec] = useState<RecType | null>(null);
   const toast = useToast();
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const {
-    isOpen: isOpenAddModal,
-    onOpen: onOpenAddModal,
-    onClose: onCloseAddModal,
-  } = useDisclosure();
-  const {
-    isOpen: isOpenEditModal,
-    onOpen: onOpenEditModal,
-    onClose: onCloseEditModal,
-  } = useDisclosure();
 
   if (!data) {
     return null;
@@ -184,12 +162,10 @@ export const Profiles = () => {
       cell: (info) => {
         return (
           <Button
-            leftIcon={<EditIcon />}
             onClick={() => setEditRec(info.row.original)}
-            fontSize="text-xs"
-            px={2}
-            height={8}
+            variant="primary"
           >
+            <EditIcon />
             Edit
           </Button>
         );
@@ -206,110 +182,91 @@ export const Profiles = () => {
           &nbsp;-&nbsp;Profiles
         </div>
       </div>
+      <Dialog>
+        <div className="rounded-[5px] bg-white pt-3 pl-3 pb-10 shadow-md md:mb-10 md:rounded-[15px]">
+          <CustomizeDataTable
+            data={data}
+            columns={columns}
+            editRec={-11}
+            state={false}
+          />
+          <DialogTrigger>
+            <Button
+              variant="primary"
+            >
+              <div className="mr-2 inline-flex h-6 items-center justify-center text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M15.3 8.82H8.91V15.3H6.36V8.82H0V6.51H6.36V0H8.91V6.51H15.3V8.82Z" fill="white" />
+                </svg>
+              </div>
+              Add
+            </Button>
+          </DialogTrigger>
+        </div>
+        <DialogContent>
+          <DialogHeader className="text-sm font-medium text-azure text-left">Add Profile</DialogHeader>
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            <div className="flex-1 p-2">
+              <label className="mb-1.5 ml-2.5 block text-sm font-medium text-[#525252]">
+                Profile Name
+              </label>
+              <input
+                className="text-blueGray-700 w-full rounded border bg-white px-4 py-3 text-xs placeholder-[#666666] shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
+                id="profile"
+                type="text"
+                placeholder="Type Here..."
+              />
+            </div>
 
-      <div className="rounded-[5px] bg-white pt-3 pl-3 pb-10 shadow-md md:mb-10 md:rounded-[15px]">
-        <CustomizeDataTable
-          data={data}
-          columns={columns}
-          editRec={-11}
-          state={false}
-        />
-        <HStack justifyContent="end" px={6} pt={6}>
-          <button
-            onClick={onOpen}
-            className="flex justify-center rounded-md bg-[#1B48BB] px-8 py-2 text-base font-medium text-white"
-          >
-            <div className="mr-2 inline-flex h-6 items-center justify-center text-white">
-              <AddIcon />
+            <div className="flex-1 p-2">
+              <label className="mb-1.5 ml-2.5 block text-sm font-medium text-[#525252]">
+                URL
+              </label>
+              <input
+                className="text-blueGray-700 w-full rounded border bg-white px-4 py-3 text-xs placeholder-[#666666] shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
+                id="url"
+                type="text"
+                placeholder="https://"
+              />
             </div>
-            Add
-          </button>
-        </HStack>
-      </div>
-      <Modal isOpen={isOpen} size="3xl" onClose={onClose} isCentered>
-        <ModalOverlay />
-        <ModalContent ml={4} mr={4}>
-          <div className="flex items-end justify-between pl-6 pt-4 md:pl-8  ">
-            <div className="text-xl font-medium text-[#282560]">
-              Add Profile
+
+            <div className="flex-1 p-2">
+              <label className="mb-1.5 ml-2.5 block text-sm font-medium text-[#525252]">
+                Description
+              </label>
+              <input
+                className="text-blueGray-700 w-full rounded border bg-white px-4 py-3 text-xs placeholder-[#666666] shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
+                id="description"
+                type="text"
+                placeholder="Type Here..."
+              />
             </div>
-            <Image
-              alt="..."
-              className="mr-4 h-10 w-10 rounded-full align-middle "
-              src="/img/icons/close.png"
-              onClick={onClose}
-            />
+
+            <div className="flex-1 p-2">
+              <label className="mb-1.5 ml-2.5 block text-sm font-medium text-[#525252]">
+                Traffic Source
+              </label>
+              <input
+                className="text-blueGray-700 w-full rounded border bg-white px-4 py-3 text-xs placeholder-[#666666] shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
+                id="traffic"
+                type="text"
+                placeholder="Type Here...."
+              />
+            </div>
           </div>
-
-          <ModalBody>
-            <div className="mt-6 px-0 md:px-2">
-              <SimpleGrid minChildWidth="100px" spacing="35px">
-                <div className="md:flex">
-                  <div className="flex-1 p-2">
-                    <label className="mb-1.5 ml-2.5 block text-sm font-medium text-[#525252]">
-                      Profile Name
-                    </label>
-                    <input
-                      className="text-blueGray-700 w-full rounded border bg-white px-4 py-3 text-xs placeholder-[#666666] shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                      id="profile"
-                      type="text"
-                      placeholder="Type Here..."
-                    />
-                  </div>
-
-                  <div className="flex-1 p-2">
-                    <label className="mb-1.5 ml-2.5 block text-sm font-medium text-[#525252]">
-                      URL
-                    </label>
-                    <input
-                      className="text-blueGray-700 w-full rounded border bg-white px-4 py-3 text-xs placeholder-[#666666] shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                      id="url"
-                      type="text"
-                      placeholder="https://"
-                    />
-                  </div>
-                </div>
-              </SimpleGrid>
-              <SimpleGrid minChildWidth="100px" spacing="35px">
-                <div className="md:flex">
-                  <div className="flex-1 p-2">
-                    <label className="mb-1.5 ml-2.5 block text-sm font-medium text-[#525252]">
-                      Description
-                    </label>
-                    <input
-                      className="text-blueGray-700 w-full rounded border bg-white px-4 py-3 text-xs placeholder-[#666666] shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                      id="description"
-                      type="text"
-                      placeholder="Type Here..."
-                    />
-                  </div>
-
-                  <div className="flex-1 p-2">
-                    <label className="mb-1.5 ml-2.5 block text-sm font-medium text-[#525252]">
-                      Traffic Source
-                    </label>
-                    <input
-                      className="text-blueGray-700 w-full rounded border bg-white px-4 py-3 text-xs placeholder-[#666666] shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
-                      id="traffic"
-                      type="text"
-                      placeholder="Type Here...."
-                    />
-                  </div>
-                </div>
-              </SimpleGrid>
-            </div>
-          </ModalBody>
-
-          <div className=" self-center py-6 font-medium md:py-10">
+          <Button variant="primary">
+            Save
+          </Button>
+          {/* <div className=" self-center py-6 font-medium md:py-10">
             <button
               className="mb-4 w-44 rounded-md bg-[#1B48BB] px-6 py-3 text-white md:mx-40 md:w-96 md:px-14 "
               onClick={onClose}
             >
               Save
             </button>
-          </div>
-        </ModalContent>
-      </Modal>
+          </div> */}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
