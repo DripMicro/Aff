@@ -5,11 +5,24 @@ import { cva } from "class-variance-authority";
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import * as React from "react";
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./select";
+
 export interface PaginationProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: any;
   count: number;
   variant?: string;
+  itemsPerPage: number;
+  totalItems: number;
+  currentPage: number;
+  paginate: (item: number) => void;
+  handleChange: (e: any) => void;
 }
 
 const paginationVariants = cva(
@@ -29,17 +42,25 @@ const paginationVariants = cva(
 const Pagination = React.forwardRef<HTMLInputElement, PaginationProps>(
   ({ error, className, variant, ...props }, ref) => {
     const pages = [];
-
-    for (let i = 1; i <= props.count; i++) {
+    const page =
+      props.totalItems / props.itemsPerPage < 1
+        ? 1
+        : props.totalItems / props.itemsPerPage;
+    for (let i = 1; i <= page; i++) {
       pages.push(i);
     }
+
+    // console.log("items per page ", props.totalItems / props.itemsPerPage);
     return (
       <nav
         className="flex items-center justify-start space-x-2"
         ref={ref}
         {...props}
       >
-        <a className="inline-flex items-center gap-2 rounded-md p-4 text-gray-500 hover:text-blue-600">
+        <a
+          onClick={() => props.paginate(--props.currentPage)}
+          className="inline-flex items-center gap-2 rounded-md p-4 text-gray-500 hover:text-blue-600"
+        >
           <ChevronsLeft />
         </a>
 
@@ -47,11 +68,11 @@ const Pagination = React.forwardRef<HTMLInputElement, PaginationProps>(
           return (
             <a
               className={
-                item === 1
+                item === props.currentPage
                   ? cn(paginationVariants({ variant: "focus" }))
                   : cn(paginationVariants({ variant: "secondary" }))
               }
-              href="#"
+              onClick={() => props.paginate(item)}
               aria-current="page"
               key={key}
             >
@@ -59,13 +80,30 @@ const Pagination = React.forwardRef<HTMLInputElement, PaginationProps>(
             </a>
           );
         })}
-        <a className="inline-flex items-center gap-2 rounded-md p-4 text-gray-500 hover:text-blue-600">
+        <a
+          onClick={() => props.paginate(++props.currentPage)}
+          className="inline-flex items-center gap-2 rounded-md p-4 text-gray-500 hover:text-blue-600"
+        >
           <ChevronsRight />
         </a>
+
+        <div className="mt-2">
+          <Select onValueChange={props.handleChange}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="10">10</SelectItem>
+              <SelectItem value="20">20</SelectItem>
+              <SelectItem value="50">50</SelectItem>
+              <SelectItem value="100">100</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </nav>
     );
   }
 );
-Pagination.displayName = "Input";
+Pagination.displayName = "Pagination";
 
 export { Pagination };

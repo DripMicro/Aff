@@ -2,13 +2,6 @@ import { fakeTraderReportData } from "@/components/affiliates/reports/fake-trade
 import { QuerySelect } from "@/components/common/QuerySelect";
 import { DataTable } from "@/components/common/data-table/DataTable";
 import { Pagination } from "@/components/ui/pagination";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { FormLabel, Grid, GridItem, Input } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import { useRouter } from "next/router";
@@ -22,6 +15,8 @@ export const FakeTraderReports = () => {
   const { merchant_id } = router.query;
   const { from, to } = useDateRange();
   const [traderID, setTraderID] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemPerPage] = useState(2);
 
   // TODO: Add pagination
   const pageSize = 10;
@@ -178,6 +173,11 @@ export const FakeTraderReports = () => {
     SaleStatus: "",
   });
 
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  const handleChange = (e: any) => {
+    setItemPerPage(e);
+  };
+
   return (
     <>
       <Grid
@@ -224,20 +224,15 @@ export const FakeTraderReports = () => {
         <DataTable data={data} columns={columns} footerData={totalObj} />
       </Grid>
       <div className="grid grid-cols-2 gap-2">
-        <Pagination count={5} variant="focus" />
-        <div className="mt-2">
-          <Select>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="1">10</SelectItem>
-              <SelectItem value="2">20</SelectItem>
-              <SelectItem value="3">50</SelectItem>
-              <SelectItem value="4">100</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+        <Pagination
+          count={5}
+          variant="focus"
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+          totalItems={data.length}
+          paginate={paginate}
+          handleChange={handleChange}
+        />
       </div>
     </>
   );
