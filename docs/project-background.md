@@ -33,7 +33,7 @@ once you login to admin,
 
 select Affiliate->Affiliate List->Search affiliate 500->Login
 
-![login-to-affiliate-dashboard.png](..%2F02-screenshots%2Flogin-to-affiliate-dashboard.png)
+![login-to-affiliate-dashboard.png](outsource-projects%2F02-screenshots%2Flogin-to-affiliate-dashboard.png)
 
 ## Access new system
 

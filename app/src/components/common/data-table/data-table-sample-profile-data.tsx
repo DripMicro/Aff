@@ -1,3 +1,11 @@
+import { createColumnHelper } from "@tanstack/react-table";
+import {
+  AffiliateProfileType,
+  TopMerchantCreativeType,
+} from "@/server/db-types";
+import { Button } from "@/components/ui/button";
+import { EditIcon } from "lucide-react";
+
 export const sampleData = [
   {
     id: 112,
@@ -409,4 +417,176 @@ export const sampleData = [
     description: "http://localhost:3001/affiliates/profiles",
     source_traffic: "http://localhost:3001/affiliates/profiles",
   },
+];
+
+export const creativeSampleData: any = [
+  {
+    id: 86,
+    rdate: "2017-10-03T08:27:36.000Z",
+    last_update: "2018-03-08T12:02:44.000Z",
+    valid: 1,
+    admin_id: 1,
+    merchant_id: 1,
+    product_id: 0,
+    language_id: 1,
+    promotion_id: 0,
+    title: "CKcasino Free spins _6",
+    type: "image",
+    width: 728,
+    height: 90,
+    url: "https://ckcasino.com/#/lobby",
+    iframe_url: "",
+    alt: "CKcasino Free spins ",
+    scriptCode: "",
+    affiliate_id: 0,
+    category_id: 3,
+    featured: 1,
+    affiliateReady: 1,
+    merchant: {
+      name: "CKCasino",
+    },
+    language: {
+      title: "English",
+    },
+    category: {
+      categoryname: "Free Spins ",
+    },
+    file: "https://go.best-brokers-partners.com/files/banners/1507019256y56Xq.png",
+  },
+  {
+    id: 85,
+    rdate: "2017-10-03T08:27:36.000Z",
+    last_update: "2018-03-08T12:02:39.000Z",
+    valid: 1,
+    admin_id: 1,
+    merchant_id: 1,
+    product_id: 0,
+    language_id: 1,
+    promotion_id: 0,
+    title: "CKcasino Free spins _5",
+    type: "image",
+    width: 468,
+    height: 60,
+    url: "https://ckcasino.com/#/lobby",
+    iframe_url: "",
+    alt: "CKcasino Free spins ",
+    scriptCode: "",
+    affiliate_id: 0,
+    category_id: 3,
+    featured: 1,
+    affiliateReady: 1,
+    merchant: {
+      name: "CKCasino",
+    },
+    language: {
+      title: "English",
+    },
+    category: {
+      categoryname: "Free Spins ",
+    },
+    file: "https://go.best-brokers-partners.com/files/banners/1507019256u56PO.png",
+  },
+  {
+    id: 11,
+    rdate: "2017-06-19T08:59:55.000Z",
+    last_update: "2017-09-27T12:22:16.000Z",
+    valid: 1,
+    admin_id: 1,
+    merchant_id: 1,
+    product_id: 0,
+    language_id: 1,
+    promotion_id: 0,
+    title: "CKcasino Exclusive offer  _4",
+    type: "image",
+    width: 300,
+    height: 250,
+    url: "https://ckcasino.com/#/lobby",
+    iframe_url: "",
+    alt: "CKcasino  Exclusive offer  ",
+    scriptCode: "",
+    affiliate_id: 0,
+    category_id: 1,
+    featured: 1,
+    affiliateReady: 1,
+    merchant: {
+      name: "CKCasino",
+    },
+    language: {
+      title: "English",
+    },
+    category: {
+      categoryname: "Welcome Bonus ",
+    },
+    file: "https://go.best-brokers-partners.com/files/banners/1497862795p95FJ.gif",
+  },
+];
+
+const columnHelper = createColumnHelper<AffiliateProfileType>();
+
+const createColumn = (id: keyof AffiliateProfileType, header: string) =>
+  columnHelper.accessor(id, {
+    cell: (info) => info.getValue(),
+    header,
+  });
+
+export const profileColumns = [
+  createColumn("id", "#"),
+  createColumn("name", "Profile Name"),
+  createColumn("url", "URL"),
+  createColumn("description", "Description"),
+  createColumn("source_traffic", "Traffic Source"),
+  columnHelper.accessor("valid", {
+    // cell: (info) => info.getValue(),
+    cell: (info) => {
+      return info.getValue() ? (
+        <div className="flex justify-center text-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="10"
+            viewBox="0 0 12 10"
+            fill="none"
+          >
+            <path
+              d="M0.951172 5.85409L4.28451 8.97909L10.9512 0.645752"
+              stroke="#50B8B6"
+              stroke-width="2"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      ) : (
+        <div className="flex justify-center text-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="8"
+            height="8"
+            viewBox="0 0 8 8"
+            fill="none"
+          >
+            <path
+              d="M1.52576 8L4 5.52576L6.47424 8L8 6.47424L5.52576 4L8 1.52576L6.47424 0L4 2.47424L1.52576 0L0 1.52576L2.47424 4L0 6.47424L1.52576 8Z"
+              fill="#FE6969"
+            />
+          </svg>
+        </div>
+      );
+    },
+    header: "Available",
+  }),
+  columnHelper.accessor("edit-button" as any, {
+    cell: (info) => {
+      return (
+        <Button
+          onClick={() => {
+            console.log(`muly:Action`, {});
+          }}
+        >
+          <EditIcon className="mr-2 h-4 w-4" />
+          Edit
+        </Button>
+      );
+    },
+    header: "Action",
+  }),
 ];
