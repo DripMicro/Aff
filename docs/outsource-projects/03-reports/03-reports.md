@@ -17,8 +17,6 @@ Looking for nodejs developer with MySQL/PHP that can translate to Prisma queries
 - TypeScript
 - TRPC for API
 - React, client side code
-- Chakra-UI - Design System/Components/Theme
-- Tremor
 
 ### Experience Needed
 - PHP - To read existing code

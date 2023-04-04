@@ -30,26 +30,10 @@ export const AccountDetails = () => {
         <div className="flex w-full">
           <Tabs defaultValue="account" className="w-full">
             <TabsList className="mt-2">
-              <TabsTrigger
-                value="account"
-              >
-                Account
-              </TabsTrigger>
-              <TabsTrigger
-                value="contract"
-              >
-                Contact
-              </TabsTrigger>
-              <TabsTrigger
-                value="invoice"
-              >
-                Invoice
-              </TabsTrigger>
-              <TabsTrigger
-                value="website"
-              >
-                Website
-              </TabsTrigger>
+              <TabsTrigger value="account">Account</TabsTrigger>
+              <TabsTrigger value="contract">Contact</TabsTrigger>
+              <TabsTrigger value="invoice">Invoice</TabsTrigger>
+              <TabsTrigger value="website">Website</TabsTrigger>
             </TabsList>
             <TabsContent className="border-0" value="account">
               <FormAccount account={account} onSubmit={handleSubmit} />

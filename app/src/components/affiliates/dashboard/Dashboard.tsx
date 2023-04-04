@@ -285,7 +285,7 @@ export const Dashboard = () => {
       <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
         {reportFields
           .filter((item) => item.isChecked)
-          .map((item) => {
+          .map((item, idx) => {
             interface Sum {
               [index: string]: number;
             }
@@ -336,7 +336,7 @@ export const Dashboard = () => {
                     />
                   </div>
                 </div>
-              </>
+              </div>
             );
           })}
       </div>
@@ -344,16 +344,8 @@ export const Dashboard = () => {
       <div className="my-6 rounded-2xl bg-white px-2 pt-5 pb-5 shadow-sm md:px-6 ">
         <Tabs defaultValue="Performance">
           <TabsList>
-            <TabsTrigger
-              value="Performance"
-            >
-              Performace Chart
-            </TabsTrigger>
-            <TabsTrigger
-              value="conversion"
-            >
-              Conversion Chart
-            </TabsTrigger>
+            <TabsTrigger value="Performance">Performace Chart</TabsTrigger>
+            <TabsTrigger value="conversion">Conversion Chart</TabsTrigger>
           </TabsList>
           <TabsContent className="border-0" value="Performance">
             <div className="mt-5 h-80 pb-5">

@@ -390,17 +390,17 @@ export const QuickSummaryReport = () => {
               />
               <QuerySelect
                 label="From"
-                choices={merchant_options}
+                choices={merchants}
                 varName="merchant_id"
               />
               <QuerySelect
                 label="To"
-                choices={merchant_options}
+                choices={merchants}
                 varName="merchant_id"
               />
               <QuerySelect
                 label="Merchant"
-                choices={merchant_options}
+                choices={merchants}
                 varName="merchant_id"
               />
               <QuerySelect

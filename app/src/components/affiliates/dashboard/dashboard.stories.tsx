@@ -17,10 +17,11 @@ export const CountryReports = {
 };
 
 export const AccountManagers = {
-  render: () => 
+  render: () => (
     <AccountManager
       first_name={"FirstName"}
       last_name={"LastName"}
       mail={"Mail"}
-    />,
+    />
+  ),
 };

@@ -96,7 +96,8 @@ const UserDropdown = () => {
             Profile
           </span>
         </div>
-        <div className="bg-transparent flex w-full whitespace-nowrap py-2 px-4 text-sm font-normal"
+        <div
+          className="bg-transparent flex w-full whitespace-nowrap py-2 px-4 text-sm font-normal"
           onClick={() => {
             void signOut();
           }}
