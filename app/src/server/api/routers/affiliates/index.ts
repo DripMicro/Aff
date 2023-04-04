@@ -30,21 +30,21 @@ import {
   getPixelMonitorMeta,
   upsertPixelMonitor,
 } from "./pixel";
+import { badQuerySample } from "@/server/api/routers/affiliates/bad-query-sample";
+import { getQuickReportSummary } from "@/server/api/routers/affiliates/reports/quick-summary";
+import { getInstallReport } from "@/server/api/routers/affiliates/reports/install-reports";
 import {
   getAllMerchants,
-  getClicksReport,
-  getCommissionReport,
-  getCreativeReport,
-  getInstallReport,
-  getLandingPageData,
   getLongCountries,
-  getpixelLogReport,
-  getProfileReportData,
-  getQuickReportSummary,
-  getSubAffiliateReport,
-  getTraderReport,
-} from "./reports";
-import { badQuerySample } from "@/server/api/routers/affiliates/bad-query-sample";
+} from "@/server/api/routers/affiliates/reports";
+import { getCommissionReport } from "@/server/api/routers/affiliates/reports/commission-report";
+import { getClicksReport } from "@/server/api/routers/affiliates/reports/clicks-report";
+import { getCreativeReport } from "@/server/api/routers/affiliates/reports/creative-report";
+import { getLandingPageData } from "@/server/api/routers/affiliates/reports/landing-page";
+import { getTraderReport } from "@/server/api/routers/affiliates/reports/trader-report";
+import { getPixelLogReport } from "@/server/api/routers/affiliates/reports/pixel-log-report";
+import { getProfileReportData } from "@/server/api/routers/affiliates/reports/profile-report";
+import { getSubAffiliateReport } from "@/server/api/routers/affiliates/reports/sub-affiliate-report";
 
 export const affiliatesRouter = createTRPCRouter({
   getDashboard,
@@ -92,7 +92,7 @@ export const affiliatesRouter = createTRPCRouter({
 
   getTraderReport,
   getLongCountries,
-  getpixelLogReport,
+  getPixelLogReport,
 
   getProfileReportData,
   getSubAffiliateReport,

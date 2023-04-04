@@ -6,5 +6,5 @@ const account = accountSchema.innerType().shape;
 
 export const schema = z.object({
   username: account.username,
-  password: z.string().describe("Password"),
+  password: z.string().describe("Password").meta({ type: "password" }),
 });

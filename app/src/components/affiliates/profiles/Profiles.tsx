@@ -97,30 +97,18 @@ export const Profiles = () => {
     await refetch();
   };
 
+  const createColumn = (id: keyof AffiliateProfileType, header: string) =>
+    columnHelper.accessor(id, {
+      cell: (info) => info.getValue(),
+      header,
+    });
+
   const columns = [
-    columnHelper.accessor("id", {
-      cell: (info) => info.getValue(),
-      header: "#",
-    }),
-    columnHelper.accessor("name", {
-      cell: (info) => info.getValue(),
-      header: "Profile Name",
-    }),
-    columnHelper.accessor("url", {
-      cell: (info) => info.getValue(),
-      header: "URL",
-    }),
-    columnHelper.accessor("description", {
-      cell: (info) => info.getValue(),
-      header: "Description",
-      // meta: {
-      //   isNumeric: true,
-      // },
-    }),
-    columnHelper.accessor("source_traffic", {
-      cell: (info) => info.getValue(),
-      header: "Traffic Source",
-    }),
+    createColumn("id", "#"),
+    createColumn("name", "Profile Name"),
+    createColumn("url", "URL"),
+    createColumn("description", "Description"),
+    createColumn("source_traffic", "Traffic Source"),
     columnHelper.accessor("valid", {
       // cell: (info) => info.getValue(),
       cell: (info) => {

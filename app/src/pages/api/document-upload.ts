@@ -45,7 +45,7 @@ const fileConsumer = <T = unknown>(acc: T[]) => {
 };
 
 export async function handler(req: NextApiRequest, res: NextApiResponse) {
-  console.log(`muly:handler:document-upload`, {});
+  console.log(`muly:handler:document-upload v2`, {});
 
   if (req.method !== "POST") return res.status(404).end();
 
@@ -58,7 +58,6 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
       fileWriteStreamHandler: () => fileConsumer(chunks),
     });
 
-    console.log(`document-upload API`, { fields, files });
     // const { file } = files;
 
     const fileData = Buffer.concat(chunks); // or is it from? I always mix these up
@@ -68,26 +67,32 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
       form.append(key, fields[key]);
     });
     form.append(
-      "document_upload",
+      "documentFile",
       fileData,
       // @ts-ignore
       String(files?.document_upload?.originalFilename)
     );
     form.append("shared-secret", env.LEGACY_PHP_ACCESS_TOKEN);
 
-    const apiRes = await axios.post(
-      `${String(env.LEGACY_PHP_URL)}/ajax/UploadDocumentsApp.php`,
+    console.log(`document-upload API`, { fields, files });
+    const url = `${String(env.LEGACY_PHP_URL)}/ajax/UploadDocumentsApp.php`;
+
+    console.log(`muly:handler send POST request`, {
+      url,
       form,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          "Access-Control-Allow-Origin": "*",
-        },
-      }
-    );
+    });
+
+    const apiRes = await axios.post(url, form, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
 
     console.log(`muly:handler fetch:POST answer`, {
-      apiRes,
+      status: apiRes.status,
+      statusText: apiRes.statusText,
+      jsonResponse: apiRes.data,
     });
 
     return res.status(204).end();

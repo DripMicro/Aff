@@ -221,13 +221,6 @@ export const QuickSummaryReport = () => {
     }),
   ];
 
-  const merchant_options = merchants?.map((merchant) => {
-    return {
-      id: merchant.id,
-      title: merchant?.name,
-    };
-  });
-
   const displayOptions = [
     {
       id: "monthly",

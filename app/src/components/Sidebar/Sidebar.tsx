@@ -2,8 +2,10 @@ import React, { useEffect } from "react";
 import SingleLink from "../common/menubar/SingleLink";
 import DropdownLink from "../common/menubar/DropdownLink";
 import { cn } from "@/lib/utils";
-import type { NavigationLinkData } from "@/components/Sidebar/navigation-data";
-import { navigationData } from "@/components/Sidebar/navigation-data";
+import {
+  navigationData,
+  type NavigationLinkData,
+} from "@/components/Sidebar/navigation-data";
 
 interface Props {
   collapseShow: boolean;

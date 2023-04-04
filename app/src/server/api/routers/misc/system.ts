@@ -23,7 +23,7 @@ export const runAdminCommand = publicProcedure
     }
     try {
       const start = Date.now();
-      const answer = await executeAdminCommand(cmd, data);
+      const answer = await executeAdminCommand(ctx.prisma, cmd, data);
       const message = `admin-command [${cmd}]: ${answer?.message} ${
         (Date.now() - start) / 1000
       }sec`;

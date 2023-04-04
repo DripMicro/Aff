@@ -87,13 +87,6 @@ export const CommissionReport = () => {
     }),
   ];
 
-  const merchant_options = merchants?.map((merchant) => {
-    return {
-      id: merchant.id,
-      title: merchant?.name,
-    };
-  });
-
   let totalAmount = 0;
   let totalCommission = 0;
   const totalData = [];
@@ -131,7 +124,7 @@ export const CommissionReport = () => {
         <GridItem>
           <QuerySelect
             label="Merchant"
-            choices={merchant_options}
+            choices={merchants}
             varName="merchant_id"
           />
         </GridItem>

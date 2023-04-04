@@ -3,12 +3,11 @@ import { DateRangeSelect } from "./DateRangeSelect";
 import { Dialog } from "@/components/common/dialog";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { pause } from "@/utils/pause";
 import { DialogForm as DialogFormComponent } from "@/components/common/forms/dialog-form";
 import { schema } from "@/components/affiliates/profiles/Profiles";
 import { usePrepareSchema } from "@/components/common/forms/usePrepareSchema";
-import { t } from "../../../.storybook/stories-utils";
+import { EditIcon, PlusIcon, Trash2Icon } from "lucide-react";
+import { useTranslation } from "next-i18next";
 
 const meta = {
   component: Loading,
@@ -58,6 +57,8 @@ export const Test4 = {
 };
 
 export const DialogForm = () => {
+  const { t } = useTranslation("affiliate");
+
   const formContext = usePrepareSchema(t, schema);
   return (
     <DialogFormComponent
@@ -67,7 +68,7 @@ export const DialogForm = () => {
       formProps={{
         trigger: (
           <Button>
-            <AddIcon className="mr-2 h-4 w-4" />
+            <PlusIcon className="mr-2 h-4 w-4" />
             Add
           </Button>
         ),

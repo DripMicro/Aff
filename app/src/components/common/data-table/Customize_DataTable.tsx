@@ -34,6 +34,7 @@ export type DataTableProps<Data extends object> = {
   state: boolean;
 };
 
+// TODO: Not sure why need this special table remove and use normal DataTable
 export function CustomizeDataTable<Data extends object>({
   data,
   columns,

@@ -26,12 +26,6 @@ export const Primary = {
       </div>
     );
   },
-  parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/sAvmr55UwcNhZNAJ9XGpA6/smapy-landing-page?node-id=4-3503&t=Omiw4Kd4jROxXo3N-4",
-    },
-  },
 };
 
 export const Checked = {

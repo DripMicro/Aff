@@ -20,7 +20,7 @@ interface LinkName {
   link: string;
 }
 
-const SingleLink = ({
+const DropdownLink = ({
   setactiveName,
   setdropdown,
   activeName,
@@ -175,4 +175,4 @@ const SingleLink = ({
   );
 };
 
-export default SingleLink;
+export default DropdownLink;

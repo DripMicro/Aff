@@ -297,52 +297,43 @@ export const Dashboard = () => {
             const thisMonth = thisMonthObject ? thisMonthObject[item.value] : 0;
 
             return (
-              <>
-                <div className="rounded-2xl bg-white px-2 pt-3 pb-2 shadow-sm md:px-6">
-                  <div className="text-sm font-semibold text-[#2262C6] md:text-base">
-                    {item.title}{" "}
-                    <span className="hidden text-xs font-normal text-[#B9B9B9] md:inline-flex md:text-sm">
-                      ( Last 6 Month )
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <div className="flex-1">
-                      <div className="flex h-12 items-center">
-                        <div className="flex items-center">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="12"
-                            height="13"
-                            viewBox="0 0 12 13"
-                            fill="none"
-                          >
-                            <path
-                              d="M6.66685 13.0001L6.66685 3.27612L10.1955 6.80479L11.1382 5.86212L6.00018 0.724121L0.862183 5.86212L1.80485 6.80479L5.33352 3.27612L5.33352 13.0001L6.66685 13.0001Z"
-                              fill="#50B8B6"
-                            />
-                          </svg>
-                        </div>
-                        <span className="ml-1 text-xl font-bold md:ml-3">
-                          {value}
-                        </span>
+              <div
+                key={idx}
+                className="rounded-2xl bg-white px-2 pt-3 pb-2 shadow-sm md:px-6"
+              >
+                <div className="text-sm font-semibold text-[#2262C6] md:text-base">
+                  {item.title}{" "}
+                  <span className="hidden text-xs font-normal text-[#B9B9B9] md:inline-flex md:text-sm">
+                    ( Last 6 Month )
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <div className="flex-1">
+                    <div className="flex h-12 items-center">
+                      <div className="flex items-center">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="12"
+                          height="13"
+                          viewBox="0 0 12 13"
+                          fill="none"
+                        >
+                          <path
+                            d="M6.66685 13.0001L6.66685 3.27612L10.1955 6.80479L11.1382 5.86212L6.00018 0.724121L0.862183 5.86212L1.80485 6.80479L5.33352 3.27612L5.33352 13.0001L6.66685 13.0001Z"
+                            fill="#50B8B6"
+                          />
+                        </svg>
                       </div>
-                    </div>
-                    <div className="flex flex-1 justify-end">
-                      <DashboardChart
-                        performanceChartData={perAllformanceChart}
-                        value={item.value}
-                      />
+                      <span className="ml-1 text-xl font-bold md:ml-3">
+                        {value}
+                      </span>
                     </div>
                   </div>
-                  <div className="flex justify-between pt-5 md:pt-3">
-                    <div className="text-center">
-                      <div className="text-sm">Last Month</div>
-                      <div className="text-base font-bold">{lastMonth}</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-sm">This Month</div>
-                      <div className="text-base font-bold">{thisMonth}</div>
-                    </div>
+                  <div className="flex flex-1 justify-end">
+                    <DashboardChart
+                      performanceChartData={perAllformanceChart}
+                      value={item.value}
+                    />
                   </div>
                 </div>
               </>
