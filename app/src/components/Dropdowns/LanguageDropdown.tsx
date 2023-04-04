@@ -71,7 +71,7 @@ const LanguageDropdown = () => {
           "z-50 float-left w-48 list-none rounded bg-white py-2 text-left text-base shadow-lg"
         }
       >
-        <div className="flex w-full whitespace-nowrap bg-transparent py-3 pl-6 text-sm font-normal">
+        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
           <span className="inline-flex h-9 w-6 items-center justify-center rounded-full text-sm text-white md:w-9">
             <Image
               alt="..."
@@ -83,7 +83,7 @@ const LanguageDropdown = () => {
             English
           </span>
         </div>
-        <div className="flex w-full whitespace-nowrap bg-transparent py-3 pl-6 text-sm font-normal">
+        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
           <span className="inline-flex h-9 w-6 items-center justify-center rounded-full text-sm text-white md:w-9">
             <Image
               alt="..."
@@ -95,7 +95,7 @@ const LanguageDropdown = () => {
             Spain
           </span>
         </div>
-        <div className="flex w-full whitespace-nowrap bg-transparent py-3 pl-6 text-sm font-normal">
+        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
           <span className="inline-flex h-9 w-6 items-center justify-center rounded-full text-sm text-white md:w-9">
             <Image
               alt="..."

@@ -1,18 +1,10 @@
-import {
-  Box,
-  Flex,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-} from "@chakra-ui/react";
 import type { AffiliateAccountUpdateType } from "../../../server/db-types";
 import { api } from "../../../utils/api";
 import { FormAccount } from "./FormAccount";
 import { FormContact } from "./FormContact";
 import { FormInvoice } from "./FormInvoice";
 import { FormWebSites } from "./FormWebSites";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../ui/tabs";
 
 export const AccountDetails = () => {
   const { data: account, refetch } = api.affiliates.getAccount.useQuery();
@@ -35,23 +27,50 @@ export const AccountDetails = () => {
         Details
       </div>
       <div className="mt-6 h-auto rounded-2xl bg-white px-4 pt-4 pb-20 shadow-[4px_3px_33px_0_rgba(0,0,0,0.05)] md:mb-10">
-        <Flex direction="column" gap={2} maxW="4xl" width="100%">
-          <Tabs>
-            <TabList>
-              <Tab px={3} className="font-medium text-[#2262C6]">
+        <div className="flex w-full">
+          <Tabs defaultValue="account" className="w-full">
+            <TabsList className="mt-2">
+              <TabsTrigger
+                value="account"
+              >
                 Account
-              </Tab>
-              <Tab px={3} className="font-medium text-[#2262C6]">
+              </TabsTrigger>
+              <TabsTrigger
+                value="contract"
+              >
                 Contact
-              </Tab>
-              <Tab px={3} className="font-medium text-[#2262C6]">
+              </TabsTrigger>
+              <TabsTrigger
+                value="invoice"
+              >
                 Invoice
-              </Tab>
-              <Tab px={3} className="font-medium text-[#2262C6]">
+              </TabsTrigger>
+              <TabsTrigger
+                value="website"
+              >
                 Website
-              </Tab>
-              {/*<Tab>Market</Tab>*/}
-            </TabList>
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent className="border-0" value="account">
+              <FormAccount account={account} onSubmit={handleSubmit} />
+            </TabsContent>
+            <TabsContent className="border-0" value="contract">
+              <FormContact account={account} onSubmit={handleSubmit} />
+            </TabsContent>
+            <TabsContent className="border-0" value="invoice">
+              <FormInvoice
+                account={account}
+                onSubmit={handleSubmit}
+                countries={countries || []}
+              />
+            </TabsContent>
+            <TabsContent className="border-0" value="website">
+              <FormWebSites account={account} onSubmit={handleSubmit} />
+            </TabsContent>
+          </Tabs>
+        </div>
+        {/* <Flex direction="column" gap={2} maxW="4xl" width="100%">
+          <Tabs>
 
             <TabPanels>
               <TabPanel>
@@ -70,15 +89,10 @@ export const AccountDetails = () => {
               <TabPanel>
                 <FormWebSites account={account} onSubmit={handleSubmit} />
               </TabPanel>
-              {/*<TabPanel>*/}
-              {/*  <FormMarketInfo account={account} onSubmit={handleSubmit} />*/}
-              {/*</TabPanel>*/}
             </TabPanels>
           </Tabs>
-          {/* <Box maxW="100%">
-            <pre>{JSON.stringify(account, null, 2)}</pre>
-          </Box> */}
-        </Flex>
+          
+        </Flex> */}
       </div>
     </div>
   );

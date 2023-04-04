@@ -65,7 +65,7 @@ interface conversionChartDataType {
   // [index: number]: { Accounts: number; date: string; ActiveTraders: number };
 }
 
-const ConversionChartData = ({ conversionChartData }: Props) => {
+const ConversionChart = ({ conversionChartData }: Props) => {
   const Conversions: (number | null)[] = conversionChartData.map((field, i) => {
     return field.Conversions;
   });
@@ -97,4 +97,4 @@ const ConversionChartData = ({ conversionChartData }: Props) => {
   );
 };
 
-export default ConversionChartData;
+export default ConversionChart;

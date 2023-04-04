@@ -1,7 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import type { MyPage } from "../../components/common/types";
-import { FormSignup } from "../../components/affiliates/account/FormSignup";
+import type { MyPage } from "@/components/common/types";
+import { FormSignup } from "@/components/affiliates/account/FormSignup";
 import AuthenticationFooter from "../../components/common/footer/AuthenticationFooter";
 import { useAuth } from "@/hooks/useAuth";
 import { Loading } from "@/components/common/Loading";

@@ -6,6 +6,7 @@ import { useTranslation } from "next-i18next";
 import { usePrepareSchema } from "@/components/common/forms/usePrepareSchema";
 import type { ChoiceType } from "@/utils/zod-meta";
 import { useState } from "react";
+import { Button } from "../../ui/button";
 
 interface Props {
   onSubmit: (values: z.infer<typeof schema>) => Promise<void>;
@@ -37,7 +38,7 @@ export const FormInvoice = ({ account, onSubmit, countries }: Props) => {
       <div className="w-full pt-5">
         <div className="-mx-3 mb-6 flex flex-wrap">
           <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
-            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
+            <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
               Street
             </label>
             <input
@@ -48,7 +49,7 @@ export const FormInvoice = ({ account, onSubmit, countries }: Props) => {
             />
           </div>
           <div className="w-full px-3 md:w-1/2">
-            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
+            <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
               Postal / Zip Code
             </label>
             <input
@@ -61,7 +62,7 @@ export const FormInvoice = ({ account, onSubmit, countries }: Props) => {
         </div>
         <div className="-mx-3 mb-6 flex flex-wrap">
           <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
-            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
+            <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
               City
             </label>
             <input
@@ -72,7 +73,7 @@ export const FormInvoice = ({ account, onSubmit, countries }: Props) => {
             />
           </div>
           <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
-            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
+            <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
               Country
             </label>
             <div className="relative w-full">
@@ -113,9 +114,9 @@ export const FormInvoice = ({ account, onSubmit, countries }: Props) => {
         </div>
         <div className="-mx-3 mb-6 flex flex-wrap">
           <div className="w-full px-3">
-            <button className="mt-8 w-full rounded-md bg-[#1B48BB] py-4  px-12 text-base  font-medium text-white md:w-36">
+            <Button variant="azure" size="lg" className="mt-8 px-12">
               Save
-            </button>
+            </Button>
           </div>
         </div>
       </div>

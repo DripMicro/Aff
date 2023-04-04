@@ -1,116 +1,160 @@
-import React from "react";
-import { DataTable } from "./DataTable";
-import { sampleData } from "./data-table-sample-data";
 import { createColumnHelper } from "@tanstack/react-table";
-import type { AffiliateProfileType } from "@/server/db-types";
-import { Button } from "@chakra-ui/react";
-import { EditIcon } from "@chakra-ui/icons";
-import { ReportDataTable } from "./ReportDataTable";
+import type { TopMerchantCreativeType } from "../../../server/db-types";
+import { DataTable } from "./DataTable";
 
 const meta = {
-  component: DataTable,
+    component: DataTable,
 };
 
 export default meta;
 
-const columnHelper = createColumnHelper<AffiliateProfileType>();
+const creative: any = [
+    {
+        "id": 86,
+        "rdate": "2017-10-03T08:27:36.000Z",
+        "last_update": "2018-03-08T12:02:44.000Z",
+        "valid": 1,
+        "admin_id": 1,
+        "merchant_id": 1,
+        "product_id": 0,
+        "language_id": 1,
+        "promotion_id": 0,
+        "title": "CKcasino Free spins _6",
+        "type": "image",
+        "width": 728,
+        "height": 90,
+        "url": "https://ckcasino.com/#/lobby",
+        "iframe_url": "",
+        "alt": "CKcasino Free spins ",
+        "scriptCode": "",
+        "affiliate_id": 0,
+        "category_id": 3,
+        "featured": 1,
+        "affiliateReady": 1,
+        "merchant": {
+            "name": "CKCasino"
+        },
+        "language": {
+            "title": "English"
+        },
+        "category": {
+            "categoryname": "Free Spins "
+        },
+        "file": "https://go.best-brokers-partners.com/files/banners/1507019256y56Xq.png"
+    },
+    {
+        "id": 85,
+        "rdate": "2017-10-03T08:27:36.000Z",
+        "last_update": "2018-03-08T12:02:39.000Z",
+        "valid": 1,
+        "admin_id": 1,
+        "merchant_id": 1,
+        "product_id": 0,
+        "language_id": 1,
+        "promotion_id": 0,
+        "title": "CKcasino Free spins _5",
+        "type": "image",
+        "width": 468,
+        "height": 60,
+        "url": "https://ckcasino.com/#/lobby",
+        "iframe_url": "",
+        "alt": "CKcasino Free spins ",
+        "scriptCode": "",
+        "affiliate_id": 0,
+        "category_id": 3,
+        "featured": 1,
+        "affiliateReady": 1,
+        "merchant": {
+            "name": "CKCasino"
+        },
+        "language": {
+            "title": "English"
+        },
+        "category": {
+            "categoryname": "Free Spins "
+        },
+        "file": "https://go.best-brokers-partners.com/files/banners/1507019256u56PO.png"
+    },
+    {
+        "id": 11,
+        "rdate": "2017-06-19T08:59:55.000Z",
+        "last_update": "2017-09-27T12:22:16.000Z",
+        "valid": 1,
+        "admin_id": 1,
+        "merchant_id": 1,
+        "product_id": 0,
+        "language_id": 1,
+        "promotion_id": 0,
+        "title": "CKcasino Exclusive offer  _4",
+        "type": "image",
+        "width": 300,
+        "height": 250,
+        "url": "https://ckcasino.com/#/lobby",
+        "iframe_url": "",
+        "alt": "CKcasino  Exclusive offer  ",
+        "scriptCode": "",
+        "affiliate_id": 0,
+        "category_id": 1,
+        "featured": 1,
+        "affiliateReady": 1,
+        "merchant": {
+            "name": "CKCasino"
+        },
+        "language": {
+            "title": "English"
+        },
+        "category": {
+            "categoryname": "Welcome Bonus "
+        },
+        "file": "https://go.best-brokers-partners.com/files/banners/1497862795p95FJ.gif"
+    }
+]
 
-const createColumn = (id: keyof AffiliateProfileType, header: string) =>
-  columnHelper.accessor(id, {
-    cell: (info) => info.getValue(),
-    header,
-  });
+const columnHelper = createColumnHelper<TopMerchantCreativeType>();
 
 const columns = [
-  createColumn("id", "#"),
-  createColumn("name", "Profile Name"),
-  createColumn("url", "URL"),
-  createColumn("description", "Description"),
-  createColumn("source_traffic", "Traffic Source"),
-  columnHelper.accessor("valid", {
-    // cell: (info) => info.getValue(),
-    cell: (info) => {
-      return info.getValue() ? (
-        <div className="flex justify-center text-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="12"
-            height="10"
-            viewBox="0 0 12 10"
-            fill="none"
-          >
-            <path
-              d="M0.951172 5.85409L4.28451 8.97909L10.9512 0.645752"
-              stroke="#50B8B6"
-              stroke-width="2"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </div>
-      ) : (
-        <div className="flex justify-center text-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="8"
-            height="8"
-            viewBox="0 0 8 8"
-            fill="none"
-          >
-            <path
-              d="M1.52576 8L4 5.52576L6.47424 8L8 6.47424L5.52576 4L8 1.52576L6.47424 0L4 2.47424L1.52576 0L0 1.52576L2.47424 4L0 6.47424L1.52576 8Z"
-              fill="#FE6969"
-            />
-          </svg>
-        </div>
-      );
-    },
-    header: "Available",
-  }),
-  columnHelper.accessor("edit-button" as any, {
-    cell: (info) => {
-      return (
-        <Button
-          leftIcon={<EditIcon />}
-          onClick={() => {
-            console.log(`muly:Action`, {});
-          }}
-          fontSize="text-xs"
-          px={2}
-          height={8}
-        >
-          Edit
-        </Button>
-      );
-    },
-    header: "Action",
-  }),
+    columnHelper.accessor("merchant.name", {
+        cell: (info) => info.getValue(),
+        header: "Merchant",
+    }),
+    columnHelper.accessor("language.title", {
+        cell: (info) => info.getValue(),
+        header: "Language",
+    }),
+    columnHelper.accessor("title", {
+        cell: (info) => info.getValue(),
+        header: "Creative Name",
+    }),
+    columnHelper.accessor("file", {
+        cell: ({ row }) => {
+            return !!row.original.file ? (
+                <img
+                    className="w-44 bg-cover md:w-full"
+                    src={row.original.file}
+                    alt={row.original.alt}
+                />
+            ) : null;
+        },
+        header: "Preview",
+    }),
+    columnHelper.accessor("width", {
+        cell: ({ row }) => {
+            return (
+                <span>
+                    {row.original.width}x{row.original.height}
+                </span>
+            );
+        },
+        header: "LP Preview",
+    }),
 ];
 
-const data = sampleData.map((item) => {
-  return {
-    ...item,
-    rdate: new Date(item.rdate),
-  };
-});
-
-export const DataTableComponent = {
-  render: () => <DataTable data={data} columns={columns} />,
-  name: "DataTable",
-  parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/CHxJV6V2o7WVj1rsYmRRWe/Affiliate_client_Design?node-id=37-2842&t=iaMez9Khkj5AeV4D-4",
-    },
-  },
-};
-
-export const ReportDataTableComponent = {
-  render: () => <ReportDataTable data={data} columns={columns} />,
-  name: "ReportDataTable",
-  parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/CHxJV6V2o7WVj1rsYmRRWe/Affiliate_client_Design?node-id=35-1312&t=iaMez9Khkj5AeV4D-4",
-    },
-  },
+export const DataTables = {
+    render: () => 
+    <div className="mb-5 rounded-2xl bg-white px-2 py-5 shadow-sm md:px-5">
+        <div className="text-xl font-bold text-[#2262C6] ">
+            Top Performing Creative
+        </div>
+        <DataTable data={creative} columns={columns} />
+    </div>,
 };
