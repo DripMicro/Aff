@@ -3,3 +3,4 @@ node_modules
 .next
 storybook-static
 prisma/zod
+.contentlayer/*
