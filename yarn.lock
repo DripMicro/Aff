@@ -7547,6 +7547,11 @@ date-fns@^2.0.0, date-fns@^2.0.1, date-fns@^2.24.0, date-fns@^2.28.0, date-fns@^
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.29.3.tgz#27402d2fc67eb442b511b70bbdf98e6411cd68a8"
   integrity sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==
 
+dayjs@^1.11.7:
+  version "1.11.7"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.7.tgz#4b296922642f70999544d1144a2c25730fce63e2"
+  integrity sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==
+
 dayzed@^3.2.3:
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/dayzed/-/dayzed-3.2.3.tgz#78c5ab7e28579cd3c0f9f848b744ac5c768e9a22"
@@ -8840,6 +8845,21 @@ flow-parser@0.*:
   version "0.202.0"
   resolved "https://registry.yarnpkg.com/flow-parser/-/flow-parser-0.202.0.tgz#534178266d3ceec5368415e59990db97eece5bd0"
   integrity sha512-ZiXxSIXK3zPmY3zrzCofFonM2T+/3Jz5QZKJyPVtUERQEJUnYkXBQ+0H3FzyqiyJs+VXqb/UNU6/K6sziVYdxw==
+
+flowbite-datepicker@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/flowbite-datepicker/-/flowbite-datepicker-1.2.2.tgz#b3430ef6077d17c9bc4792c592587365eb4e289e"
+  integrity sha512-qOKDVtwkiOa0RrhD3sRtT45H8efAtyLiswuFIAV0UBhWSRYonzL0g1gAZwHiRRKtSmbET/8RQpQXlSEmAgadkg==
+  dependencies:
+    flowbite "^1.4.5"
+
+flowbite@^1.4.5, flowbite@^1.6.4:
+  version "1.6.4"
+  resolved "https://registry.yarnpkg.com/flowbite/-/flowbite-1.6.4.tgz#ea86f8f90e8d1279e2611c25838f6d112777e7d3"
+  integrity sha512-//kSaigwERCcE3udumadB3+xfOXeN/ZQzcub2qVCHuB7uscB4XIm3yP9R8zL0XsEOnYG2lnroq/dydQZbzvESw==
+  dependencies:
+    "@popperjs/core" "^2.9.3"
+    mini-svg-data-uri "^1.4.3"
 
 flush-write-stream@^1.0.2:
   version "1.1.1"
@@ -11679,6 +11699,11 @@ min-indent@^1.0.0:
   resolved "https://registry.yarnpkg.com/min-indent/-/min-indent-1.0.1.tgz#a63f681673b30571fbe8bc25686ae746eefa9869"
   integrity sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==
 
+mini-svg-data-uri@^1.4.3:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/mini-svg-data-uri/-/mini-svg-data-uri-1.4.4.tgz#8ab0aabcdf8c29ad5693ca595af19dd2ead09939"
+  integrity sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==
+
 minimatch@^3.0.2, minimatch@^3.0.4, minimatch@^3.0.5, minimatch@^3.1.1, minimatch@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.1.2.tgz#19cd194bfd3e428f049a70817c038d89ab4be35b"
@@ -12952,10 +12977,10 @@ react-colorful@^5.1.2:
   resolved "https://registry.yarnpkg.com/react-colorful/-/react-colorful-5.6.1.tgz#7dc2aed2d7c72fac89694e834d179e32f3da563b"
   integrity sha512-1exovf0uGTGyq5mXQT0zgQ80uvj2PCwvF8zY1RN9/vbJVSjSo3fsB/4L3ObbF7u70NduSiK4xu4Y6q1MHoUGEw==
 
-react-datepicker@^4.10.0:
-  version "4.10.0"
-  resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-4.10.0.tgz#3f386ac5873dac5ea56544e51cdc01109938796c"
-  integrity sha512-6IfBCZyWj54ZZGLmEZJ9c4Yph0s9MVfEGDC2evOvf9AmVz+RRcfP2Czqad88Ff9wREbcbqa4dk7IFYeXF1d3Ag==
+react-datepicker@^4.11.0:
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-4.11.0.tgz#40e73b4729a284ed206fdb322b8e84eb566e11a3"
+  integrity sha512-50n93o7mQwBEhg05tbopjFKgs8qgi8VBCAOMC4VqrKut72eAjESc/wXS/k5hRtnP0oe2FCGw7MJuIwh37wuXOw==
   dependencies:
     "@popperjs/core" "^2.9.2"
     classnames "^2.2.6"
@@ -13168,6 +13193,16 @@ react-style-singleton@^2.2.1:
     get-nonce "^1.0.0"
     invariant "^2.2.4"
     tslib "^2.0.0"
+
+react-tailwindcss-datepicker@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/react-tailwindcss-datepicker/-/react-tailwindcss-datepicker-1.5.1.tgz#442fbda87e0e686cf338ce7427ca9c3165f26cd6"
+  integrity sha512-IbNw3Lu2dwkRYOlYr3ffOwEbLiVz+QufaYbwiy0ToeLmx7ZUt0CPh3HfwVQGNS1/o4D/+8Rl4WHNsLd+wVb5Mg==
+
+react-tailwindcss-select@^1.8.5:
+  version "1.8.5"
+  resolved "https://registry.yarnpkg.com/react-tailwindcss-select/-/react-tailwindcss-select-1.8.5.tgz#adf752c7e54889c38fd76bd1aa5cf8cf6d2b9788"
+  integrity sha512-x29IrLiqBT5FnkC9oFQReOr05tEOZHtDtZdha84nlSWcj3qD67yonKFHXIf69yc8ElFlKUxCEv0zCllN8jHBFA==
 
 react-transition-group@2.9.0, react-transition-group@^2.5.0:
   version "2.9.0"
