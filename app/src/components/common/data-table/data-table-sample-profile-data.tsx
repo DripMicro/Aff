@@ -1,8 +1,6 @@
 import { createColumnHelper } from "@tanstack/react-table";
-import {
-  AffiliateProfileType,
-  TopMerchantCreativeType,
-} from "@/server/db-types";
+import type { AffiliateProfileType } from "@/server/db-types";
+import { TopMerchantCreativeType } from "@/server/db-types";
 import { Button } from "@/components/ui/button";
 import { EditIcon } from "lucide-react";
 
