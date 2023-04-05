@@ -1,4 +1,3 @@
-import { Stack } from "@chakra-ui/react";
 import Affiliates from "../../../layouts/AffiliatesLayout";
 
 const Terms = () => {
@@ -95,7 +94,7 @@ const Terms = () => {
   return (
     <div className="pt-5 pb-4">
       <div className="mb-5 block px-6 text-base font-medium">
-        <span className="text-[#2262C6]">Dashboard</span> - Terms & Condition
+        <span className="text-[#2262C6]">Dashboard</span> / Terms & Condition
       </div>
 
       <div className="rounded-[5px] bg-white pt-4 pl-3 pb-20 shadow-md md:mb-20 md:rounded-[15px] md:pt-7 md:pl-4">

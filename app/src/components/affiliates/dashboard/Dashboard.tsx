@@ -1,29 +1,24 @@
 import { SettingsIcon } from "@chakra-ui/icons";
-
 import { createColumnHelper } from "@tanstack/react-table";
+import { useEffect, useState } from "react";
+import ConversionChart from "../../common/chart/ConversionChart";
 import DashboardChart from "../../common/chart/DashboardChart";
 import PerformanceChart from "../../common/chart/PerformanceChart";
-import ConversionChart from "../../common/chart/ConversionChart";
 import { Button } from "../../ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../ui/tabs";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "../../ui/dialog";
-import DeviceReport from "./DeviceReport";
-import CountryReport from "./CountryReport";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../ui/tabs";
 import AccountManager from "./AccountManager";
-
-import { useEffect, useState } from "react";
+import CountryReport from "./CountryReport";
+import DeviceReport from "./DeviceReport";
 
 import type { TopMerchantCreativeType } from "../../../server/db-types";
 import { api } from "../../../utils/api";
-
 import { DataTable } from "../../common/data-table/DataTable";
 
 import type { ChangeEvent } from "react";
@@ -34,9 +29,9 @@ import {
   useDateRangeDefault,
 } from "../../common/DateRangeSelect";
 
-import Affiliates from "../../../layouts/AffiliatesLayout";
 import { Loading } from "@/components/common/Loading";
-
+import { Home } from "lucide-react";
+import Affiliates from "../../../layouts/AffiliatesLayout";
 const fields = [
   "Impressions",
   "Clicks",
@@ -213,9 +208,9 @@ export const Dashboard = () => {
     <div className="pt-3.5">
       <Dialog>
         <div className="block text-base font-medium md:justify-between lg:flex">
-          <div className="mb-2.5 flex items-center md:mb-5 lg:mb-5 ">
-            <span className="text-[#2262C6]">Affliate Program</span>
-            &nbsp;-&nbsp;Dashboard
+          <div className="mb-2.5 flex items-center md:mb-5 lg:mb-5">
+            <Home className="text-[#2262C6]" />
+            &nbsp;/&nbsp;Dashboard
           </div>
           <div className="mb-2.5 flex">
             <DateRangeSelect />
@@ -223,7 +218,7 @@ export const Dashboard = () => {
               Update
             </Button>
             <DialogTrigger>
-              <button className="ml-3 rounded-md bg-white px-2 drop-shadow md:ml-5 md:px-3 md:pt-1.5 md:pb-2">
+              <button className="ml-2 rounded-md bg-white px-2 drop-shadow md:px-3 md:pt-1.5 md:pb-2">
                 <SettingsIcon />
               </button>
             </DialogTrigger>

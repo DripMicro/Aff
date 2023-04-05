@@ -1,13 +1,14 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { useRouter } from "next/router";
-import { ReportDataTable } from "../../../components/common/data-table/Report_DataTable";
+import type { ChangeEvent } from "react";
+import { useEffect, useState } from "react";
 import { QuerySelect } from "../../../components/common/QuerySelect";
+import { ReportDataTable } from "../../../components/common/data-table/Report_DataTable";
 import type { QuickReportSummary } from "../../../server/db-types";
 import { api } from "../../../utils/api";
 import { DateRangeSelect, useDateRange } from "../../common/DateRangeSelect";
 import { Loading } from "../../common/Loading";
-import { useRef, useEffect, useState } from "react";
-import type { ChangeEvent } from "react";
+import { Button } from "../../ui/button";
 import {
   Dialog,
   DialogContent,
@@ -15,7 +16,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../../ui/dialog";
-import { Button } from "../../ui/button";
 
 const fields = [
   "Impressions",
@@ -306,7 +306,7 @@ export const QuickSummaryReport = () => {
           <div className="mb-2.5 flex items-center justify-between md:mb-5 lg:mb-5 ">
             <div>
               <span className="text-[#2262C6]">Affliate Program</span>
-              &nbsp;-&nbsp;Quick Summary Report
+              &nbsp;/&nbsp;Quick Summary Report
             </div>
             <Button className="lg:hidden">
               <svg

@@ -1,27 +1,15 @@
-import Affiliates from "../../../layouts/AffiliatesLayout";
-import {
-  Image,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  useDisclosure,
-} from "@chakra-ui/react";
-import SupportComponent from "./supportComponent";
-import SupportTableComponent from "./supportTableComponent";
+import { useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
+import Affiliates from "../../../layouts/AffiliatesLayout";
 import { Button } from "../../ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "../../ui/dialog";
+import SupportComponent from "./supportComponent";
+import SupportTableComponent from "./supportTableComponent";
 
 const Support = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -51,7 +39,7 @@ const Support = () => {
   return (
     <div className="pt-5 pb-4">
       <div className=" mb-5 block text-base font-medium">
-        <span className="text-[#2262C6]">Dashboard</span> - Support
+        <span className="text-[#2262C6]">Dashboard</span> / Support
         <div className="container mt-3">
           <div className="items-center justify-between text-center text-white md:flex md:text-left">
             <div className="mb-4 flex flex-wrap items-center justify-start md:mb-0 md:justify-start">

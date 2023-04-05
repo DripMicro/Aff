@@ -1,10 +1,9 @@
-import React from "react";
+import { Image } from "@chakra-ui/react";
 import Link from "next/link";
+import type { Dispatch, SetStateAction } from "react";
+import LanguageDropdown from "../../Dropdowns/LanguageDropdown";
 import NotificationDropDown from "../../Dropdowns/NotificationDropdown";
 import UserDropdown from "../../Dropdowns/UserDropdown";
-import LanguageDropdown from "../../Dropdowns/LanguageDropdown";
-import type { Dispatch, SetStateAction } from "react";
-import { Image } from "@chakra-ui/react";
 
 interface Props {
   collapseShow: boolean;
@@ -34,8 +33,8 @@ const AffiliatesNavbar = ({ collapseShow, setCollapseShow }: Props) => {
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="18"
+                    width="22"
+                    height="22"
                     viewBox="0 0 14 18"
                     fill="none"
                   >
@@ -50,7 +49,7 @@ const AffiliatesNavbar = ({ collapseShow, setCollapseShow }: Props) => {
               </a>
 
               <Link href="/">
-                <span className="bg-blueGray-200 inline-flex h-10 w-20 items-center justify-center text-sm text-white md:ml-5 md:h-12 md:w-32">
+                <span className="bg-blueGray-200 inline-flex h-10 w-20 items-center justify-center text-sm text-white md:h-12 md:w-32">
                   <Image src="/img/logo.png" htmlWidth="90" alt="logo" />
                 </span>
               </Link>

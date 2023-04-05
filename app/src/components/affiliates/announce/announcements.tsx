@@ -27,7 +27,7 @@ const Announcements = () => {
   return (
     <div className="pt-5 pb-4">
       <div className="mb-5 block px-6 text-base font-medium">
-        <span className="text-[#2262C6]">Dashboard</span> - Announcements
+        <span className="text-[#2262C6]">Dashboard</span> / Announcements
       </div>
       <div className="mt-7 h-auto rounded-md bg-white px-4 pt-4 pb-20 shadow-md md:mb-10 md:rounded-2xl">
         {data.map((data, i) => {

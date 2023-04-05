@@ -1,26 +1,21 @@
-import { useToast } from "@chakra-ui/react";
-import { api } from "../../../utils/api";
-import type { AffiliateProfileType } from "../../../server/db-types";
-import { createColumnHelper } from "@tanstack/react-table";
-import * as z from "zod";
-import { ModalForm } from "../../common/forms/ModalForm";
 import { EditIcon } from "@chakra-ui/icons";
-import React, { useState } from "react";
-import {
-  ModalFormAction,
-  ModalFormButton,
-} from "../../common/modal/ModalFormButton";
-import type { affiliates_profilesModelType } from "../../../server/db-types";
+import { useToast } from "@chakra-ui/react";
+import { createColumnHelper } from "@tanstack/react-table";
+import { Home } from "lucide-react";
+import { useState } from "react";
+import * as z from "zod";
 import Affiliates from "../../../layouts/AffiliatesLayout";
+import type {
+  AffiliateProfileType,
+  affiliates_profilesModelType,
+} from "../../../server/db-types";
+import { api } from "../../../utils/api";
 import { CustomizeDataTable } from "../../common/data-table/Customize_DataTable";
 import { Button } from "../../ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "../../ui/dialog";
 
@@ -168,8 +163,8 @@ export const Profiles = () => {
     <div className="pt-3.5">
       <div className="block text-base font-medium md:justify-between lg:flex">
         <div className="mb-2.5 flex items-center md:mb-5 lg:mb-5 ">
-          <span className="text-[#2262C6]">Affliate Program</span>
-          &nbsp;-&nbsp;Profiles
+          <Home className="text-[#2262C6]" />
+          &nbsp;/&nbsp;Profiles
         </div>
       </div>
       <Dialog>
