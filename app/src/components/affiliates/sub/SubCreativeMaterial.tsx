@@ -1,10 +1,7 @@
 import { QuerySelect } from "../../common/QuerySelect";
 import { api } from "../../../utils/api";
 import { useRouter } from "next/router";
-import { Flex } from "@chakra-ui/react";
 import { QueryText } from "../../common/QueryText";
-import { CreativeMaterialTable } from "../creative/CreativeMaterialTable";
-import { CreativeMaterialRow } from "../creative/CreativeMaterialRow";
 import { CreativeMaterialComponent } from "../creative/CreativeMaterialComponent";
 
 export const SubCreativeMaterial = () => {
@@ -27,7 +24,7 @@ export const SubCreativeMaterial = () => {
         <span className="text-[#2262C6]">Marketing Tools</span> / Sub Creative
         Materials
       </div>
-      <div className="flex items-center justify-between">
+      <div className="mb-2 flex items-center justify-between">
         <div className=" text-sm font-medium">
           <QuerySelect
             label="Creative Type"
@@ -35,7 +32,7 @@ export const SubCreativeMaterial = () => {
             varName="type"
           />
         </div>
-        <div className="text-lg font-medium md:mt-3 md:text-sm">
+        <div className="text-lg font-medium md:text-sm">
           <QueryText varName="search" label="Search Creative" />
         </div>
       </div>
@@ -63,41 +60,5 @@ export const SubCreativeMaterial = () => {
         );
       })}
     </div>
-    // <Flex direction="column" gap={2}>
-
-    //   <Flex direction="row" gap={2}>
-    // <QuerySelect
-    //   label="Creative Type"
-    //   choices={meta?.type}
-    //   varName="type"
-    // />
-    // <QueryText varName="search" label="Search Creative" />
-    //   </Flex>
-    //   <CreativeMaterialTable>
-    // {data?.map((item) => {
-    //   const values = [
-    //     { title: "Creative Name", value: item.title },
-    //     { title: "Format", value: item.type },
-    //     {
-    //       title: "Landing URL",
-    //       value: String(item.promotion_id) || "General",
-    //     },
-    //     { title: "Size (WxH)", value: `${item.width}x${item.height}` },
-    //     { title: "Impressions", value: `${String(item.views)}` },
-    //     { title: "Clicks", value: `${String(item.clicks)}` },
-    //   ];
-
-    //   return (
-    //     <CreativeMaterialRow
-    //       key={item.id}
-    //       values={values}
-    //       file={item.file}
-    //       alt={item.alt}
-    //       url={item.url}
-    //     />
-    //   );
-    // })}
-    //   </CreativeMaterialTable>
-    // </Flex>
   );
 };

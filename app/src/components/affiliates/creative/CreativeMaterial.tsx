@@ -45,13 +45,15 @@ export const CreativeMaterial = () => {
     { keepPreviousData: true }
   );
 
+  console.log(data);
+
   return (
     <div className="-ml-5 w-full pt-5 pb-4">
       <div className=" mb-5 block text-base font-medium">
         <span className="text-[#2262C6]">Marketing Tools</span> / Creative
         Materials
       </div>
-      <div className="mb-5 grid grid-cols-2 gap-5 md:mb-28 lg:grid-cols-6">
+      <div className="mb-5 grid grid-cols-2 gap-5 md:mb-7 lg:grid-cols-6">
         <QuerySelect
           label="Creative Type"
           choices={meta?.type}

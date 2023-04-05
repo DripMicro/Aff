@@ -36,7 +36,7 @@ const SingleLink = ({
       }}
     >
       <Link
-        className="text-white-600 hover:text-white-800 relative flex h-11 flex-row items-center pl-8 hover:bg-white focus:outline-none dark:hover:bg-gray-600"
+        className="text-white-600 hover:text-white-800 dark:hover:bg-gray-600 relative flex h-11 flex-row items-center pl-8 hover:bg-white focus:outline-none"
         href={"/affiliates/" + link}
       >
         <Image

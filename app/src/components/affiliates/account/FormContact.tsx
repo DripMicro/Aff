@@ -7,6 +7,7 @@ import { imUserTypes } from "../../../shared-types/forms/common";
 import { useTranslation } from "next-i18next";
 import { usePrepareSchema } from "@/components/common/forms/usePrepareSchema";
 import { useState } from "react";
+import { Button } from "../../ui/button";
 
 interface Props {
   onSubmit: (values: z.infer<typeof schema>) => Promise<void>;
@@ -37,7 +38,7 @@ export const FormContact = ({ account, onSubmit }: Props) => {
       <div className="w-full pt-5">
         <div className="-mx-3 mb-6 flex flex-wrap">
           <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
-            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
+            <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
               Username
             </label>
             <input
@@ -48,7 +49,7 @@ export const FormContact = ({ account, onSubmit }: Props) => {
             />
           </div>
           <div className="w-full px-3 md:w-1/2">
-            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
+            <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
               Salutation
             </label>
             <div className="relative w-full">
@@ -89,7 +90,7 @@ export const FormContact = ({ account, onSubmit }: Props) => {
         </div>
         <div className="-mx-3 mb-6 flex flex-wrap">
           <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
-            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
+            <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
               First Name
             </label>
             <input
@@ -100,7 +101,7 @@ export const FormContact = ({ account, onSubmit }: Props) => {
             />
           </div>
           <div className="w-full px-3 md:w-1/2">
-            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
+            <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
               Last Name
             </label>
             <input
@@ -113,7 +114,7 @@ export const FormContact = ({ account, onSubmit }: Props) => {
         </div>
         <div className="-mx-3 mb-6 flex flex-wrap">
           <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
-            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
+            <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
               Email
             </label>
             <input
@@ -124,7 +125,7 @@ export const FormContact = ({ account, onSubmit }: Props) => {
             />
           </div>
           <div className="w-full px-3 md:w-1/2">
-            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
+            <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
               Phone #
             </label>
             <input
@@ -137,7 +138,7 @@ export const FormContact = ({ account, onSubmit }: Props) => {
         </div>
         <div className="-mx-3 mb-6 flex flex-wrap">
           <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
-            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
+            <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
               Instant Messaging
             </label>
             <div className="relative w-full">
@@ -176,7 +177,7 @@ export const FormContact = ({ account, onSubmit }: Props) => {
             </div>
           </div>
           <div className="w-full px-3 md:w-1/2">
-            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
+            <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
               Instant Messaging Account
             </label>
             <input
@@ -189,9 +190,9 @@ export const FormContact = ({ account, onSubmit }: Props) => {
         </div>
         <div className="-mx-3 mb-6 flex flex-wrap">
           <div className="w-full px-3">
-            <button className="mt-8 w-full rounded-md bg-[#1B48BB] py-4  px-12 text-base  font-medium text-white md:w-36">
+            <Button variant="azure" size="lg" className="mt-8 px-12">
               Save
-            </button>
+            </Button>
           </div>
         </div>
       </div>

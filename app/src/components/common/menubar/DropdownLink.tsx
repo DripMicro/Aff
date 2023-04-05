@@ -1,7 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Image } from "@chakra-ui/react";
 
 interface Props {
   activeName: string;
@@ -39,6 +38,8 @@ const DropdownLink = ({
 
   const activeDropdown = (value: string) => {
     setdropdown(value);
+    console.log(value);
+    console.log(dropdown);
   };
 
   const activeDropdownVector = (value: boolean) => {
@@ -53,12 +54,10 @@ const DropdownLink = ({
 
   const [onLink, setonLink] = useState(false);
 
-  // console.log(`muly:DropdownLink ${activeName}`, {
-  //   dropdown,
-  //   dropdownName,
-  //   collapseShow,
-  //   dropdownVector,
-  // });
+  useEffect(() => {
+    console.log("dropdown");
+    console.log(dropdown);
+  }, [dropdown]);
 
   return (
     <>
@@ -71,7 +70,7 @@ const DropdownLink = ({
         }}
       >
         <Link
-          className="text-white-600 hover:text-white-800 relative flex h-11 flex-row items-center justify-between pl-8 hover:bg-white focus:outline-none dark:hover:bg-gray-600"
+          className="text-white-600 hover:text-white-800 dark:hover:bg-gray-600 relative flex h-11 flex-row items-center justify-between pl-8 hover:bg-white focus:outline-none"
           href={
             "/affiliates/" +
             (parentLink == "" ? "" : parentLink + "/") +
@@ -81,8 +80,8 @@ const DropdownLink = ({
             activeOnLink(true);
           }}
         >
-          <div className="text-white-600 hover:text-white-800 relative flex h-11 flex-row items-center hover:bg-white focus:outline-none dark:hover:bg-gray-600">
-            <Image
+          <div className="text-white-600 hover:text-white-800 dark:hover:bg-gray-600 relative flex h-11 flex-row items-center hover:bg-white focus:outline-none">
+            <img
               alt="..."
               className="w-6 border-none pt-0.5 align-middle"
               src={
@@ -113,7 +112,7 @@ const DropdownLink = ({
               activeDropdownVector(!dropdownVector);
             }}
           >
-            <Image
+            <img
               alt="..."
               className={
                 "border-none align-middle" +
@@ -146,7 +145,7 @@ const DropdownLink = ({
               }}
             >
               <Link
-                className="text-white-600 hover:text-white-800 relative flex h-9 flex-row items-center pl-14 hover:bg-white focus:outline-none dark:hover:bg-gray-600"
+                className="text-white-600 hover:text-white-800 dark:hover:bg-gray-600 relative flex h-9 flex-row items-center pl-14 hover:bg-white focus:outline-none"
                 href={
                   "/affiliates/" +
                   (parentLink == "" ? "" : parentLink + "/") +

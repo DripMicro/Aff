@@ -4,6 +4,7 @@ import { z } from "zod";
 import { Form } from "../../common/forms/Form";
 import { useTranslation } from "next-i18next";
 import { usePrepareSchema } from "@/components/common/forms/usePrepareSchema";
+import { Button } from "../../ui/button";
 
 const Schema = z.object({
   website: z.string().url().optional().describe("WebSite 1"),
@@ -24,7 +25,7 @@ export const FormWebSites = ({ account, onSubmit }: Props) => {
     <>
       <div className="w-full">
         <div className="mt-6 w-full pb-4 text-base md:w-1/2 md:text-sm">
-          <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
+          <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
             Website1
           </label>
           <input
@@ -35,7 +36,7 @@ export const FormWebSites = ({ account, onSubmit }: Props) => {
           />
         </div>
         <div className="mt-6 w-full pb-4 text-base md:w-1/2 md:text-sm">
-          <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
+          <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
             Website2
           </label>
           <input
@@ -46,7 +47,7 @@ export const FormWebSites = ({ account, onSubmit }: Props) => {
           />
         </div>
         <div className="mt-6 w-full pb-4 text-base md:w-1/2 md:text-sm">
-          <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
+          <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
             Website3
           </label>
           <input
@@ -58,9 +59,9 @@ export const FormWebSites = ({ account, onSubmit }: Props) => {
         </div>
         <div className="-mx-3 mb-6 flex flex-wrap">
           <div className="w-full px-3">
-            <button className="mt-8 w-full rounded-md bg-[#1B48BB] py-3  px-12 text-base  font-medium text-white md:w-36">
+            <Button variant="azure" size="lg" className="mt-8 px-12">
               Save
-            </button>
+            </Button>
           </div>
         </div>
       </div>

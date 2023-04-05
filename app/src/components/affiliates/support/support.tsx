@@ -1,17 +1,15 @@
+import { useDisclosure } from "@chakra-ui/react";
+import { useState } from "react";
 import Affiliates from "../../../layouts/AffiliatesLayout";
+import { Button } from "../../ui/button";
 import {
-  Image,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  useDisclosure,
-} from "@chakra-ui/react";
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTrigger,
+} from "../../ui/dialog";
 import SupportComponent from "./supportComponent";
 import SupportTableComponent from "./supportTableComponent";
-import { useState } from "react";
 
 const Support = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -41,7 +39,7 @@ const Support = () => {
   return (
     <div className="pt-5 pb-4">
       <div className=" mb-5 block text-base font-medium">
-        <span className="text-[#2262C6]">Dashboard</span> - Support
+        <span className="text-[#2262C6]">Dashboard</span> / Support
         <div className="container mt-3">
           <div className="items-center justify-between text-center text-white md:flex md:text-left">
             <div className="mb-4 flex flex-wrap items-center justify-start md:mb-0 md:justify-start">
@@ -56,7 +54,7 @@ const Support = () => {
                 />
                 <svg
                   aria-hidden="true"
-                  className="-ml-10 h-5  w-5 text-[#B3B3B3] dark:text-gray-400 "
+                  className="dark:text-gray-400 -ml-10  h-5 w-5 text-[#B3B3B3] "
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -71,24 +69,92 @@ const Support = () => {
                 </svg>
               </div>
             </div>
-            <div className="flex items-center justify-end text-xs font-medium text-gray-700 transition duration-150 ease-in-out">
-              <button
+            <div className="text-gray-700 flex items-center justify-end text-xs font-medium transition duration-150 ease-in-out">
+              <Button
                 type="submit"
                 onClick={() => setFlag(!flag)}
-                className="h-10 rounded-lg bg-[#2262C6] px-4 py-2 text-sm font-medium  text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                variant="primary"
               >
                 FAQ
-              </button>
+              </Button>
 
-              <button
-                type="submit"
-                className=" ml-2 h-10 rounded-lg bg-[#2262C6] px-4 py-2 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                onClick={onOpen}
-              >
-                Add new Ticket
-              </button>
+              <Dialog>
+                <DialogTrigger>
+                  <Button
+                    type="submit"
+                    onClick={onOpen}
+                    variant="primary"
+                    className="ml-2"
+                  >
+                    Add new Ticket
+                  </Button>
+                </DialogTrigger>
 
-              <Modal isOpen={isOpen} size="3xl" onClose={onClose} isCentered>
+                <DialogContent>
+                  <DialogHeader className="text-left text-sm font-medium text-azure">
+                    Open New Ticket
+                  </DialogHeader>
+                  <form className="w-full pt-5">
+                    <div className="-mx-3 mb-6 flex flex-wrap">
+                      <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
+                        <label
+                          className="mb-2 block  pl-4 text-sm font-medium tracking-wide text-[#525252] md:text-base"
+                          htmlFor="grid-first-name"
+                        >
+                          Ticket Subject
+                        </label>
+                        <input
+                          className=" border-#D7D7D7 mb-3 w-full rounded-md border py-3 px-4 text-[#525252] placeholder:text-[#D7D7D7] "
+                          id="grid-first-name"
+                          type="text"
+                          placeholder="Type here.."
+                        />
+                      </div>
+                      <div className="-mt-5 w-full px-3 md:mt-0 md:w-1/2">
+                        <label
+                          className="mb-2 block  pl-4 text-sm font-medium tracking-wide text-[#525252] md:text-base"
+                          htmlFor="grid-last-name"
+                        >
+                          Your Email
+                        </label>
+                        <input
+                          className="border-#D7D7D7  mb-3 w-full rounded-md border py-3 px-4 text-[#525252] placeholder:text-[#D7D7D7] "
+                          id="grid-last-name"
+                          type="text"
+                          placeholder="Type here.."
+                        />
+                      </div>
+                    </div>
+                    <div className="-mx-3 -mt-4 mb-3 flex flex-wrap md:-mt-5 ">
+                      <div className="w-full px-3">
+                        <label
+                          className="mb-2 block  pl-4 text-sm font-medium tracking-wide text-[#525252] md:text-base"
+                          htmlFor="grid-password"
+                        >
+                          Ticket Subject
+                        </label>
+                        <textarea className="border-#D7D7D7 mb-3 h-32 w-full rounded-md border py-2 px-4 text-[#525252] md:h-40 " />
+                      </div>
+                    </div>
+                  </form>
+                  <div className="mb-12 text-center">
+                    <Button variant="primary" type="submit">
+                      Send Ticket
+                    </Button>
+                    {/* <button
+                      type="submit"
+                      className="h-12  rounded  bg-[#1B48BB] px-5 text-sm font-medium text-white
+                             hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700
+                              dark:focus:ring-blue-800 "
+                      onClick={onClose}
+                    >
+                      Send Ticket
+                    </button> */}
+                  </div>
+                </DialogContent>
+              </Dialog>
+
+              {/* <Modal isOpen={isOpen} size="3xl" onClose={onClose} isCentered>
                 <ModalOverlay />
                 <ModalContent ml={4} mr={4}>
                   <div className="flex items-end  justify-between pl-5 pt-4 md:pl-6">
@@ -159,7 +225,7 @@ const Support = () => {
                     </button>
                   </div>
                 </ModalContent>
-              </Modal>
+              </Modal> */}
             </div>
           </div>
         </div>
