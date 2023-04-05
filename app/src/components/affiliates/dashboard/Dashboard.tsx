@@ -19,7 +19,6 @@ import DeviceReport from "./DeviceReport";
 
 import type { TopMerchantCreativeType } from "../../../server/db-types";
 import { api } from "../../../utils/api";
-import { DataTable } from "../../common/data-table/DataTable";
 
 import type { ChangeEvent } from "react";
 
@@ -365,12 +364,12 @@ export const Dashboard = () => {
         />
       </div>
 
-      <div className="mb-5 rounded-2xl bg-white px-2 py-5 shadow-sm md:px-5">
+      {/* <div className="mb-5 rounded-2xl bg-white px-2 py-5 shadow-sm md:px-5">
         <div className="text-xl font-bold text-[#2262C6] ">
           Top Performing Creative
         </div>
         <DataTable data={creative} columns={columns} />
-      </div>
+      </div> */}
     </div>
   );
 };

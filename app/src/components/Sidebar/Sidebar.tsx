@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import SingleLink from "../common/menubar/SingleLink";
-import DropdownLink from "../common/menubar/DropdownLink";
-import { cn } from "@/lib/utils";
 import {
   navigationData,
   type NavigationLinkData,
 } from "@/components/Sidebar/navigation-data";
+import { cn } from "@/lib/utils";
+import React from "react";
+import DropdownLink from "../common/menubar/DropdownLink";
+import SingleLink from "../common/menubar/SingleLink";
 
 interface Props {
   collapseShow: boolean;
@@ -54,6 +54,7 @@ const renderLink = (
 };
 
 const Sidebar: React.FC<Props> = ({ collapseShow }) => {
+  console.log("collapseShow: ", collapseShow);
   const [activeName, setActiveName] = React.useState("dashboard");
   const [dropdown, setDropdown] = React.useState("");
 

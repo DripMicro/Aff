@@ -102,11 +102,11 @@ const Terms = () => {
           {terms.map((terms, index) => {
             return (
               <li
-                className="pt-3 pb-2 text-lg font-bold md:pt-0 md:text-3xl"
+                className="list-none pt-3 pb-2 text-lg font-bold md:pt-0"
                 key={index}
               >
-                {terms.headline}
-                <ul className="list-outside pt-2 pb-2 text-sm font-normal md:pb-7 md:text-xl">
+                <h2>{terms.headline}</h2>
+                <ul className="list-outside pt-2 pb-2 text-base font-normal md:pb-7 md:text-base">
                   {terms.content}
                 </ul>
               </li>

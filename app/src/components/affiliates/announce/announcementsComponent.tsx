@@ -1,5 +1,3 @@
-import Affiliates from "../../../layouts/AffiliatesLayout";
-
 import { useState } from "react";
 
 interface PropsType {
@@ -18,13 +16,13 @@ const AnnouncementsComponent = ({ propsdata }: PropsType) => {
   return (
     <div className="mt-4 flex h-auto cursor-pointer flex-col justify-between rounded-md  bg-[#F5F8FA] px-4 py-4 pt-3 transition-all duration-500 md:px-5">
       <div className="text-base font-medium md:text-xl ">
-        {propsdata.title}
-        <div className="mt-2 text-xs font-medium text-[#636363] md:mt-2.5 md:text-sm">
+        <h2>{propsdata.title}</h2>
+        <div className="mt-2 text-base font-medium text-[#636363] md:mt-2.5">
           {propsdata.time}
         </div>
         <div
           className={
-            "mt-3.5 p-3 text-xs  font-medium  transition duration-150 ease-in-out  md:mt-4 md:pr-56 md:text-sm" +
+            "mt-3.5 p-3 text-sm  font-medium  transition duration-150 ease-in-out  md:mt-4 md:pr-56 " +
             (expanded1 ? " max-h-9 truncate " : "")
           }
         >

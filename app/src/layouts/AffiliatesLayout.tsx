@@ -8,7 +8,7 @@ import Sidebar from "../components/Sidebar/Sidebar";
 // import FooterAdmin from "components/Footers/FooterAdmin.js";
 
 const AffiliatesLayout = ({ children }: PropsWithChildren) => {
-  const [collapseShow, setCollapseShow] = React.useState(false);
+  const [collapseShow, setCollapseShow] = React.useState(true);
   return (
     <>
       <div
