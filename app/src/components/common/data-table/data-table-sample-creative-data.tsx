@@ -1,5 +1,5 @@
 import { createColumnHelper } from "@tanstack/react-table";
-import { TopMerchantCreativeType } from "@/server/db-types";
+import type { TopMerchantCreativeType } from "@/server/db-types";
 
 export const creativeSampleData: any = [
   {
