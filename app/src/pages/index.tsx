@@ -1,5 +1,4 @@
 import { Box, Button, Link, Stack, Text } from "@chakra-ui/react";
-import { type NextPage } from "next";
 import { signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import NextLink from "next/link";

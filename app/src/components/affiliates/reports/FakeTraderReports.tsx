@@ -1,13 +1,15 @@
 import { fakeTraderReportData } from "@/components/affiliates/reports/fake-trader-report-data";
 import { QuerySelect } from "@/components/common/QuerySelect";
 import { DataTable } from "@/components/common/data-table/DataTable";
+import { DateRangeSelect } from "@/components/ui/date-range";
 import { Pagination } from "@/components/ui/pagination";
 import { FormLabel, Grid, GridItem, Input } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import "react-datepicker/dist/react-datepicker.css";
 import type { TraderReportType } from "../../../server/db-types";
-import { DateRangeSelect, useDateRange } from "../../common/DateRangeSelect";
+import { useDateRange } from "../../common/DateRangeSelect";
 import { Loading } from "../../common/Loading";
 
 export const FakeTraderReports = () => {
@@ -188,9 +190,7 @@ export const FakeTraderReports = () => {
         alignItems={"center"}
         alignSelf="center"
       >
-        <GridItem>
-          <DateRangeSelect />
-        </GridItem>
+        <DateRangeSelect />
         <GridItem>
           <QuerySelect
             label="Merchant"
