@@ -25,7 +25,7 @@ const AccountManager = ({ first_name, last_name, mail }: Props) => {
       </div>
       <div className="rounded-2xl bg-[#F4F7F9] px-4 py-5 drop-shadow">
         <div className="mb-5 flex">
-          <div className="flex items-center justify-center px-10">
+          <div className="flex items-center justify-center px-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -44,7 +44,7 @@ const AccountManager = ({ first_name, last_name, mail }: Props) => {
           </div>
         </div>
         <div className="mb-5 flex">
-          <div className="flex items-center justify-center px-10">
+          <div className="flex items-center justify-center px-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -63,7 +63,7 @@ const AccountManager = ({ first_name, last_name, mail }: Props) => {
           </div>
         </div>
         <div className="mb-5 flex">
-          <div className="flex items-center justify-center px-10">
+          <div className="flex items-center justify-center px-3">
             <img width="23" src="/img/icons/skype.png" alt="worldmap" />
           </div>
           <div className="truncate font-medium text-[#3D3D3D]">
@@ -71,7 +71,7 @@ const AccountManager = ({ first_name, last_name, mail }: Props) => {
           </div>
         </div>
         <div className="flex ">
-          <div className="flex items-center justify-center px-10">
+          <div className="flex items-center justify-center px-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

@@ -1,20 +1,10 @@
-import { DataTable } from "../../common/data-table/DataTable";
-import { api } from "../../../utils/api";
-import type { PaymentsPaidType } from "../../../server/db-types";
+import { SearchIcon } from "@chakra-ui/icons";
 import { createColumnHelper } from "@tanstack/react-table";
-import {
-  AddIcon,
-  CheckIcon,
-  DeleteIcon,
-  EditIcon,
-  ViewIcon,
-  SearchIcon,
-} from "@chakra-ui/icons";
-import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { QueryText } from "../../common/QueryText";
-import NextLink from "next/link";
+import type { PaymentsPaidType } from "../../../server/db-types";
+import { api } from "../../../utils/api";
 import { formatPrice } from "../../../utils/format";
+import { DataTable } from "../../common/data-table/DataTable";
 
 import Affiliates from "../../../layouts/AffiliatesLayout";
 import { PaymentView } from "./PaymentView";
@@ -116,7 +106,7 @@ export const Billings = () => {
       <div className=" text-base font-medium md:flex md:justify-between lg:flex">
         <div className="mb-2.5 hidden items-center md:flex ">
           <span className="text-[#2262C6]">Dashboard</span>
-          &nbsp;-&nbsp;Billings
+          &nbsp;/&nbsp;Billings
         </div>
         <div className="md:flex">
           <div className="relative hidden flex-1  rounded-md p-2 px-2 drop-shadow md:ml-5 md:block md:px-3 md:pt-1.5 md:pb-2">
@@ -133,7 +123,7 @@ export const Billings = () => {
       <div className="flex justify-between font-medium">
         <div className="mb-2.5 flex items-center md:hidden">
           <span className="text-[#2262C6]">Dashboard</span>
-          &nbsp;-&nbsp;Billings
+          &nbsp;/&nbsp;Billings
         </div>
         <div className="flex md:hidden">
           <div className="relative flex-1 rounded-md p-2 drop-shadow md:ml-5 md:px-3 md:pt-1.5 md:pb-2">

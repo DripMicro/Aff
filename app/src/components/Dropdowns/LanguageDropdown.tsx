@@ -1,6 +1,18 @@
-import React from "react";
-import { Image } from "@chakra-ui/react";
 import { createPopper } from "@popperjs/core";
+import {
+  AR,
+  CN,
+  ES,
+  FR,
+  IL,
+  IT,
+  JP,
+  NL,
+  PT,
+  RU,
+  US,
+} from "country-flag-icons/react/3x2";
+import React from "react";
 
 const LanguageDropdown = () => {
   // dropdown props
@@ -36,12 +48,8 @@ const LanguageDropdown = () => {
         }}
       >
         <div className="flex items-center">
-          <span className="inline-flex h-6 w-6 items-center justify-center rounded-full text-sm text-white md:h-9 md:w-9">
-            <Image
-              alt="..."
-              className="w-full rounded-full border-none align-middle shadow-lg"
-              src="/img/icons/united-states.png"
-            />
+          <span className="inline-flex h-6 w-6 items-center justify-center text-sm text-white md:h-9 md:w-9">
+            <US className="align-middle shadow-lg" />
           </span>
           <span className="hidden h-9 items-center justify-center pl-2 text-base font-semibold text-[#303134] md:inline-flex">
             English
@@ -72,39 +80,91 @@ const LanguageDropdown = () => {
         }
       >
         <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
-          <span className="inline-flex h-9 w-6 items-center justify-center rounded-full text-sm text-white md:w-9">
-            <Image
-              alt="..."
-              className="w-full rounded-full border-none align-middle shadow-lg"
-              src="/img/icons/united-states.png"
-            />
+          <span className="inline-flex h-9 w-6 items-center justify-center  text-sm text-white md:w-9">
+            <US className="align-middle shadow-lg" />
           </span>
           <span className="inline-flex h-9 items-center justify-center pl-2 text-base font-semibold text-[#303134]">
             English
           </span>
         </div>
         <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
-          <span className="inline-flex h-9 w-6 items-center justify-center rounded-full text-sm text-white md:w-9">
-            <Image
-              alt="..."
-              className="w-full rounded-full border-none align-middle shadow-lg"
-              src="/img/icons/spain.png"
-            />
+          <span className="inline-flex h-9 w-6 items-center justify-center  text-sm text-white md:w-9">
+            <RU className="align-middle shadow-lg" />
+          </span>
+          <span className="inline-flex h-9 items-center justify-center pl-2 text-base font-semibold text-[#303134]">
+            Russian
+          </span>
+        </div>
+        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
+          <span className="inline-flex h-9 w-6 items-center justify-center  text-sm text-white md:w-9">
+            <NL className="align-middle shadow-lg" />
+          </span>
+          <span className="inline-flex h-9 items-center justify-center pl-2 text-base font-semibold text-[#303134]">
+            Dutch
+          </span>
+        </div>
+        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
+          <span className="inline-flex h-9 w-6 items-center justify-center  text-sm text-white md:w-9">
+            <ES className="align-middle shadow-lg" />
           </span>
           <span className="inline-flex h-9 items-center justify-center pl-2 text-base font-semibold text-[#303134]">
             Spain
           </span>
         </div>
         <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
-          <span className="inline-flex h-9 w-6 items-center justify-center rounded-full text-sm text-white md:w-9">
-            <Image
-              alt="..."
-              className="w-full rounded-full border-none align-middle shadow-lg"
-              src="/img/icons/france.png"
-            />
+          <span className="inline-flex h-9 w-6 items-center justify-center   text-sm text-white md:w-9">
+            <FR className="align-middle shadow-lg" />
           </span>
           <span className="inline-flex h-9 items-center justify-center pl-2 text-base font-semibold text-[#303134]">
             French
+          </span>
+        </div>
+        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
+          <span className="inline-flex h-9 w-6 items-center justify-center  text-sm text-white md:w-9">
+            <IT className="align-middle shadow-lg" />
+          </span>
+          <span className="inline-flex h-9 items-center justify-center pl-2 text-base font-semibold text-[#303134]">
+            Italian
+          </span>
+        </div>
+        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
+          <span className="inline-flex h-9 w-6 items-center justify-center  text-sm text-white md:w-9">
+            <AR className="align-middle shadow-lg" />
+          </span>
+          <span className="inline-flex h-9 items-center justify-center pl-2 text-base font-semibold text-[#303134]">
+            Arabic
+          </span>
+        </div>
+        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
+          <span className="inline-flex h-9 w-6 items-center justify-center  text-sm text-white md:w-9">
+            <CN className="align-middle shadow-lg" />
+          </span>
+          <span className="inline-flex h-9 items-center justify-center pl-2 text-base font-semibold text-[#303134]">
+            Chinese
+          </span>
+        </div>
+        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
+          <span className="inline-flex h-9 w-6 items-center justify-center   text-sm text-white md:w-9">
+            <PT className="align-middle shadow-lg" />
+          </span>
+          <span className="inline-flex h-9 items-center justify-center pl-2 text-base font-semibold text-[#303134]">
+            Portugese
+          </span>
+        </div>
+        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
+          <span className="inline-flex h-9 w-6 items-center justify-center  text-sm text-white md:w-9">
+            <IL className="align-middle shadow-lg" />
+          </span>
+          <span className="inline-flex h-9 items-center justify-center pl-2 text-base font-semibold text-[#303134]">
+            Hebrew
+          </span>
+        </div>
+        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
+          <span className="inline-flex h-9 w-6 items-center justify-center rounded-full text-sm text-white md:w-9">
+            <JP />
+          </span>
+          <span className="inline-flex h-9 items-center justify-center pl-2 text-base font-semibold text-[#303134]">
+            Japanese
           </span>
         </div>
       </div>

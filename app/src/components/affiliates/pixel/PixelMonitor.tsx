@@ -5,10 +5,7 @@ import { useSteps } from "chakra-ui-steps";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import * as z from "zod";
-import type {
-  PixelMonitorType,
-  pixel_monitorModelType,
-} from "../../../server/db-types";
+import type { pixel_monitorModelType } from "../../../server/db-types";
 import { api } from "../../../utils/api";
 import { FinishForm } from "./FinishForm";
 import { MethodForm } from "./MethodForm";
@@ -23,8 +20,6 @@ import { Button } from "../../ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -321,7 +316,7 @@ const PixelMonitor = () => {
   return (
     <div className="pt-5 pb-4">
       <div className="mb-5 block px-6 text-base font-medium">
-        <span className="text-[#2262C6]">Dashboard</span> - Attributions
+        <span className="text-[#2262C6]">Dashboard</span> / Attributions
       </div>
       <div className="mb-5 md:flex">
         <div className="relative hidden flex-1  rounded-md p-2 px-2 drop-shadow md:ml-5 md:block md:px-3 md:pt-1.5 md:pb-2">
