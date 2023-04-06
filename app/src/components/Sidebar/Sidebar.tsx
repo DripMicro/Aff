@@ -54,7 +54,6 @@ const renderLink = (
 };
 
 const Sidebar: React.FC<Props> = ({ collapseShow }) => {
-  console.log("collapseShow: ", collapseShow);
   const [activeName, setActiveName] = React.useState("dashboard");
   const [dropdown, setDropdown] = React.useState("");
 

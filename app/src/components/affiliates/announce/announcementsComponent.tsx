@@ -22,7 +22,7 @@ const AnnouncementsComponent = ({ propsdata }: PropsType) => {
         </div>
         <div
           className={
-            "mt-3.5 p-3 text-sm  font-medium  transition duration-150 ease-in-out  md:mt-4 md:pr-56 " +
+            "mt-3.5 p-3 text-base  font-medium  transition duration-150 ease-in-out  md:mt-4 md:pr-56 " +
             (expanded1 ? " max-h-9 truncate " : "")
           }
         >

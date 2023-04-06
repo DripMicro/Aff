@@ -363,7 +363,7 @@ export const Dashboard = () => {
           mail={account?.mail}
         />
       </div>
-
+      {/*  Top Performing Creative Commented for a while will be added later */}
       {/* <div className="mb-5 rounded-2xl bg-white px-2 py-5 shadow-sm md:px-5">
         <div className="text-xl font-bold text-[#2262C6] ">
           Top Performing Creative
