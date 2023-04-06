@@ -1,8 +1,9 @@
-import * as React from "react";
 import type { VariantProps } from "class-variance-authority";
 import { cva } from "class-variance-authority";
+import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { Loader2 } from "lucide-react";
 
 const buttonVariants = cva(
   "active:scale-95 inline-flex items-center justify-center rounded-md font-medium focus:outline-none dark:hover:bg-slate-800 dark:hover:text-slate-100 disabled:opacity-50 dark:focus:ring-slate-400 disabled:pointer-events-none dark:focus:ring-offset-slate-900 data-[state=open]:bg-slate-100 dark:data-[state=open]:bg-slate-800",
@@ -54,12 +55,26 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, isLoading, ...props }, ref) => {
     //TODO: isLoading
     return (
-      <button
-        type="button"
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
+      <>
+        {isLoading ? (
+          <button
+            type="button"
+            className={cn(buttonVariants({ variant, size, className }))}
+            disabled={isLoading}
+            ref={ref}
+            {...props}
+          >
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          </button>
+        ) : (
+          <button
+            type="button"
+            className={cn(buttonVariants({ variant, size, className }))}
+            ref={ref}
+            {...props}
+          />
+        )}
+      </>
     );
   }
 );

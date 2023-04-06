@@ -9,6 +9,7 @@ import Sidebar from "../components/Sidebar/Sidebar";
 
 const AffiliatesLayout = ({ children }: PropsWithChildren) => {
   const [collapseShow, setCollapseShow] = React.useState(true);
+
   return (
     <>
       <div
@@ -17,7 +18,10 @@ const AffiliatesLayout = ({ children }: PropsWithChildren) => {
           "bg-blueGray-100 sidebar relative z-10 transition-all duration-300"
         }
       >
-        <Sidebar collapseShow={collapseShow} />
+        <Sidebar
+          collapseShow={collapseShow}
+          setCollapseShow={setCollapseShow}
+        />
         <AffiliatesNavbar
           collapseShow={collapseShow}
           setCollapseShow={setCollapseShow}

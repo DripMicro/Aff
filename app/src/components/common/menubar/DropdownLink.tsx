@@ -1,6 +1,6 @@
-import type { Dispatch, SetStateAction } from "react";
-import { useState, useEffect } from "react";
 import Link from "next/link";
+import type { Dispatch, SetStateAction } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   activeName: string;
@@ -13,6 +13,8 @@ interface Props {
   linkName: LinkName[];
   setactiveName: Dispatch<SetStateAction<string>>;
   setdropdown: Dispatch<SetStateAction<string>>;
+  sidebarActive: boolean;
+  setSidebarActive: Dispatch<SetStateAction<boolean>>;
 }
 
 interface LinkName {
@@ -31,15 +33,16 @@ const DropdownLink = ({
   dropdownName,
   parentLink,
   defaultLink,
+  setSidebarActive,
+  sidebarActive,
 }: Props) => {
   const activeLink = (value: string) => {
     setactiveName(value);
   };
 
   const activeDropdown = (value: string) => {
+    console.log("activeDropdown value: ", value);
     setdropdown(value);
-    console.log(value);
-    console.log(dropdown);
   };
 
   const activeDropdownVector = (value: boolean) => {
@@ -55,8 +58,7 @@ const DropdownLink = ({
   const [onLink, setonLink] = useState(false);
 
   useEffect(() => {
-    console.log("dropdown");
-    console.log(dropdown);
+    console.log("dropdown", dropdown);
   }, [dropdown]);
 
   return (
@@ -67,6 +69,7 @@ const DropdownLink = ({
           if (dropdown != dropdownName) activeDropdownVector(true);
           activeLink(defaultLink);
           activeDropdown(dropdownName);
+          setSidebarActive(!sidebarActive);
         }}
       >
         <Link
@@ -104,27 +107,33 @@ const DropdownLink = ({
               ""
             )}
           </div>
-          <div
-            className="mr-8 truncate py-0.5 text-xs font-medium tracking-wide"
-            onClick={(e) => {
-              e.preventDefault();
-              console.log(dropdownVector);
-              activeDropdownVector(!dropdownVector);
-            }}
-          >
-            <img
-              alt="..."
-              className={
-                "border-none align-middle" +
-                (dropdownVector && dropdown == dropdownName ? " w-3" : " w-2 ")
-              }
-              src={
-                "/img/icons/Vector" +
-                (dropdownVector && dropdown == dropdownName ? "1" : "") +
-                ".png"
-              }
-            />
-          </div>
+          {collapseShow ? (
+            <div
+              className="mr-8 truncate py-0.5 text-xs font-medium tracking-wide"
+              onClick={(e) => {
+                // e.preventDefault();
+                e.stopPropagation();
+                activeDropdownVector(!dropdownVector);
+              }}
+            >
+              <img
+                alt="..."
+                className={
+                  "border-none align-middle" +
+                  (dropdownVector && dropdown == dropdownName
+                    ? " w-3"
+                    : " w-2 ")
+                }
+                src={
+                  "/img/icons/Vector" +
+                  (dropdownVector && dropdown == dropdownName ? "1" : "") +
+                  ".png"
+                }
+              />
+            </div>
+          ) : (
+            ""
+          )}
         </Link>
       </div>
 

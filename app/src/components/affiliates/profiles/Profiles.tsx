@@ -168,14 +168,14 @@ export const Profiles = () => {
         </div>
       </div>
       <Dialog>
-        <div className="rounded-[5px] bg-white pt-3 pl-3 pb-10 shadow-md md:mb-10 md:rounded-[15px]">
+        <div className="rounded-[5px] bg-white px-3 pt-3 pb-10 shadow-md md:mb-10 md:rounded-[15px]">
           <CustomizeDataTable
             data={data}
             columns={columns}
             editRec={-11}
             state={false}
           />
-          <DialogTrigger>
+          <DialogTrigger className="flex w-full justify-end pr-7">
             <Button variant="primary">
               <div className="mr-2 inline-flex h-6 items-center justify-center text-white">
                 <svg

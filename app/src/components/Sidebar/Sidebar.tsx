@@ -3,12 +3,13 @@ import {
   type NavigationLinkData,
 } from "@/components/Sidebar/navigation-data";
 import { cn } from "@/lib/utils";
-import React from "react";
+import React, { useEffect } from "react";
 import DropdownLink from "../common/menubar/DropdownLink";
 import SingleLink from "../common/menubar/SingleLink";
 
 interface Props {
   collapseShow: boolean;
+  setCollapseShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const renderLink = (
@@ -18,7 +19,9 @@ const renderLink = (
   setDropdown: React.Dispatch<React.SetStateAction<string>>,
   activeName: string,
   dropdown: string,
-  collapseShow: boolean
+  collapseShow: boolean,
+  setSidebarActive: React.Dispatch<React.SetStateAction<boolean>>,
+  sidebarActive: boolean
 ) => {
   if (item.type === "single") {
     return (
@@ -47,16 +50,23 @@ const renderLink = (
           dropdownName={item.dropdownName}
           navbarName={item.linkName}
           parentLink={item.parentLink || ""}
+          setSidebarActive={setSidebarActive}
+          sidebarActive={sidebarActive}
         />
       </li>
     );
   }
 };
 
-const Sidebar: React.FC<Props> = ({ collapseShow }) => {
+const Sidebar: React.FC<Props> = ({ collapseShow, setCollapseShow }) => {
   const [activeName, setActiveName] = React.useState("dashboard");
   const [dropdown, setDropdown] = React.useState("");
+  const [sidebarActive, setSidebarActive] = React.useState(true);
 
+  useEffect(() => {
+    setCollapseShow(sidebarActive);
+  }, [sidebarActive]);
+  console.log("sidebarCollapse: ", setSidebarActive);
   const sidebarClassName = cn(
     collapseShow ? "w-64 rounded-tr-[50px] md:rounded-none" : "w-0 md:w-32",
     "sidebar fixed top-16 left-0 z-10 flex h-full flex-col bg-white text-white transition-all duration-300 dark:bg-gray-900 md:top-20"
@@ -74,7 +84,9 @@ const Sidebar: React.FC<Props> = ({ collapseShow }) => {
               setDropdown,
               activeName,
               dropdown,
-              collapseShow
+              collapseShow,
+              setSidebarActive,
+              sidebarActive
             )
           )}
         </ul>

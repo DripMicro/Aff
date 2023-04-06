@@ -1,11 +1,10 @@
-import { api } from "../../../utils/api";
+import { Form } from "@/components/common/forms/Form";
+import { usePrepareSchema } from "@/components/common/forms/usePrepareSchema";
+import { Image } from "@chakra-ui/react";
+import { useTranslation } from "next-i18next";
 import type { z } from "zod";
 import { schema } from "../../../shared-types/forms/register";
-import { useTranslation } from "next-i18next";
-import { usePrepareSchema } from "@/components/common/forms/usePrepareSchema";
-import { Form } from "@/components/common/forms/Form";
-import { Image } from "@chakra-ui/react";
-import React from "react";
+import { api } from "../../../utils/api";
 
 export const FormSignup = () => {
   const { t } = useTranslation("affiliate");

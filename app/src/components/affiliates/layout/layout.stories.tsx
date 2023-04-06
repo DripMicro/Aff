@@ -1,7 +1,7 @@
-import AuthenticationFooterComponent from "@/components/common/footer/AuthenticationFooter";
 import Sidebar from "@/components/Sidebar/Sidebar";
+import AuthenticationFooterComponent from "@/components/common/footer/AuthenticationFooter";
 import AffiliatesNavbar from "@/components/common/navbars/AffiliatesNavbar";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const meta = {
   component: AuthenticationFooterComponent,
