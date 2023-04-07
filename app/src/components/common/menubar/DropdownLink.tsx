@@ -13,8 +13,6 @@ interface Props {
   linkName: LinkName[];
   setactiveName: Dispatch<SetStateAction<string>>;
   setdropdown: Dispatch<SetStateAction<string>>;
-  sidebarActive: boolean;
-  setSidebarActive: Dispatch<SetStateAction<boolean>>;
 }
 
 interface LinkName {
@@ -33,15 +31,12 @@ const DropdownLink = ({
   dropdownName,
   parentLink,
   defaultLink,
-  setSidebarActive,
-  sidebarActive,
 }: Props) => {
   const activeLink = (value: string) => {
     setactiveName(value);
   };
 
   const activeDropdown = (value: string) => {
-    console.log("activeDropdown value: ", value);
     setdropdown(value);
   };
 
@@ -69,7 +64,6 @@ const DropdownLink = ({
           if (dropdown != dropdownName) activeDropdownVector(true);
           activeLink(defaultLink);
           activeDropdown(dropdownName);
-          setSidebarActive(!sidebarActive);
         }}
       >
         <Link

@@ -18,10 +18,7 @@ const AffiliatesLayout = ({ children }: PropsWithChildren) => {
           "bg-blueGray-100 sidebar relative z-10 transition-all duration-300"
         }
       >
-        <Sidebar
-          collapseShow={collapseShow}
-          setCollapseShow={setCollapseShow}
-        />
+        <Sidebar collapseShow={collapseShow} />
         <AffiliatesNavbar
           collapseShow={collapseShow}
           setCollapseShow={setCollapseShow}
