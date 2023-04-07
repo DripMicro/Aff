@@ -29,7 +29,6 @@ const DropdownLink = ({
   linkName,
   navbarName,
   dropdownName,
-
   parentLink,
   defaultLink,
 }: Props) => {
@@ -54,7 +53,8 @@ const DropdownLink = ({
   const [onLink, setonLink] = useState(false);
 
   useEffect(() => {
-    console.log("dropdown", dropdown);
+    console.log("dropdown");
+    console.log(dropdown);
   }, [dropdown]);
 
   return (

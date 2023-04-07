@@ -56,7 +56,6 @@ const renderLink = (
 const Sidebar: React.FC<Props> = ({ collapseShow }) => {
   const [activeName, setActiveName] = React.useState("dashboard");
   const [dropdown, setDropdown] = React.useState("");
-  const [sidebarActive, setSidebarActive] = React.useState(true);
 
   const sidebarClassName = cn(
     collapseShow ? "w-64 rounded-tr-[50px] md:rounded-none" : "w-0 md:w-32",
