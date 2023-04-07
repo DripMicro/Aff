@@ -1,6 +1,6 @@
-import type { Dispatch, SetStateAction } from "react";
-import Link from "next/link";
 import { Image } from "@chakra-ui/react";
+import Link from "next/link";
+import type { Dispatch, SetStateAction } from "react";
 
 interface Props {
   activeName: string;
@@ -9,6 +9,7 @@ interface Props {
   setdropdown: Dispatch<SetStateAction<string>>;
   link: string;
   linkName: string;
+  setCollapseShow: Dispatch<SetStateAction<boolean>>;
 }
 
 const SingleLink = ({
@@ -18,6 +19,7 @@ const SingleLink = ({
   collapseShow,
   link,
   linkName,
+  setCollapseShow,
 }: Props) => {
   const activeLink = (value: string) => {
     setactiveName(value);
@@ -39,13 +41,23 @@ const SingleLink = ({
         className="text-white-600 hover:text-white-800 dark:hover:bg-gray-600 relative flex h-11 flex-row items-center pl-8 hover:bg-white focus:outline-none"
         href={"/affiliates/" + link}
       >
-        <Image
-          alt="..."
-          className="w-6 border-none pt-0.5 align-middle"
-          src={
-            "/img/icons/" + link + (activeName == link ? "Active" : "") + ".png"
-          }
-        />
+        <div
+          onClick={(e) => {
+            e.preventDefault();
+            setCollapseShow(!collapseShow);
+          }}
+        >
+          <Image
+            alt="..."
+            className="w-6 border-none pt-0.5 align-middle"
+            src={
+              "/img/icons/" +
+              link +
+              (activeName == link ? "Active" : "") +
+              ".png"
+            }
+          />
+        </div>
         {collapseShow ? (
           <span
             className={

@@ -8,14 +8,22 @@ import UserDropdown from "../../Dropdowns/UserDropdown";
 interface Props {
   collapseShow: boolean;
   setCollapseShow: Dispatch<SetStateAction<boolean>>;
+  navbarRef: React.RefObject<HTMLDivElement>;
 }
 
-const AffiliatesNavbar = ({ collapseShow, setCollapseShow }: Props) => {
+const AffiliatesNavbar = ({
+  collapseShow,
+  setCollapseShow,
+  navbarRef,
+}: Props) => {
   // const [collapseShow, setCollapseShow] = React.useState(false);
   return (
     <>
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 z-10 flex w-full flex-row flex-nowrap items-center justify-start border-b-2 border-[#E7E7E7] bg-[#F5F8FA] p-2 md:p-4">
+      <nav
+        className="fixed top-0 left-0 z-10 flex w-full flex-row flex-nowrap items-center justify-start border-b-2 border-[#E7E7E7] bg-[#F5F8FA] p-2 md:p-4"
+        ref={navbarRef}
+      >
         <div className="mx-autp flex w-full flex-wrap items-center justify-between md:flex-nowrap ">
           <div className="flex-col items-center justify-center ">
             <div className="flex items-center">

@@ -9,7 +9,7 @@ import Sidebar from "../components/Sidebar/Sidebar";
 
 const AffiliatesLayout = ({ children }: PropsWithChildren) => {
   const [collapseShow, setCollapseShow] = React.useState(true);
-
+  const navbarRef = React.useRef<HTMLDivElement>(null);
   return (
     <>
       <div
@@ -18,10 +18,15 @@ const AffiliatesLayout = ({ children }: PropsWithChildren) => {
           "bg-blueGray-100 sidebar relative z-10 transition-all duration-300"
         }
       >
-        <Sidebar collapseShow={collapseShow} />
+        <Sidebar
+          collapseShow={collapseShow}
+          setCollapseShow={setCollapseShow}
+          navbarRef={navbarRef}
+        />
         <AffiliatesNavbar
           collapseShow={collapseShow}
           setCollapseShow={setCollapseShow}
+          navbarRef={navbarRef}
         />
         <div className="mx-auto min-h-screen w-full bg-[#F5F8FA] px-4 pt-16 pb-4 md:px-10 md:pt-20">
           {children}

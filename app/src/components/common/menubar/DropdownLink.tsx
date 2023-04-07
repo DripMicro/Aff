@@ -13,6 +13,7 @@ interface Props {
   linkName: LinkName[];
   setactiveName: Dispatch<SetStateAction<string>>;
   setdropdown: Dispatch<SetStateAction<string>>;
+  setCollapseShow: Dispatch<SetStateAction<boolean>>;
 }
 
 interface LinkName {
@@ -23,6 +24,7 @@ interface LinkName {
 const DropdownLink = ({
   setactiveName,
   setdropdown,
+  setCollapseShow,
   activeName,
   collapseShow,
   dropdown,
@@ -78,7 +80,13 @@ const DropdownLink = ({
             activeOnLink(true);
           }}
         >
-          <div className="text-white-600 hover:text-white-800 dark:hover:bg-gray-600 relative flex h-11 flex-row items-center hover:bg-white focus:outline-none">
+          <div
+            className="text-white-600 hover:text-white-800 dark:hover:bg-gray-600 relative flex h-11 flex-row items-center hover:bg-white focus:outline-none"
+            onClick={(e) => {
+              e.preventDefault();
+              setCollapseShow(!collapseShow);
+            }}
+          >
             <img
               alt="..."
               className="w-6 border-none pt-0.5 align-middle"

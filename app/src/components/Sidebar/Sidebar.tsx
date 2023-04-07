@@ -9,6 +9,8 @@ import SingleLink from "../common/menubar/SingleLink";
 
 interface Props {
   collapseShow: boolean;
+  setCollapseShow: React.Dispatch<React.SetStateAction<boolean>>;
+  navbarRef: React.RefObject<HTMLDivElement>;
 }
 
 const renderLink = (
@@ -18,7 +20,8 @@ const renderLink = (
   setDropdown: React.Dispatch<React.SetStateAction<string>>,
   activeName: string,
   dropdown: string,
-  collapseShow: boolean
+  collapseShow: boolean,
+  setCollapseShow: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (item.type === "single") {
     return (
@@ -26,6 +29,7 @@ const renderLink = (
         <SingleLink
           setactiveName={setActiveName}
           setdropdown={setDropdown}
+          setCollapseShow={setCollapseShow}
           activeName={activeName}
           collapseShow={collapseShow}
           link={item.link}
@@ -38,6 +42,7 @@ const renderLink = (
       <li key={index}>
         <DropdownLink
           setactiveName={setActiveName}
+          setCollapseShow={setCollapseShow}
           setdropdown={setDropdown}
           dropdown={dropdown}
           activeName={activeName}
@@ -53,9 +58,33 @@ const renderLink = (
   }
 };
 
-const Sidebar: React.FC<Props> = ({ collapseShow }) => {
+const Sidebar: React.FC<Props> = ({
+  collapseShow,
+  setCollapseShow,
+  navbarRef,
+}) => {
   const [activeName, setActiveName] = React.useState("dashboard");
   const [dropdown, setDropdown] = React.useState("");
+
+  const sidebarRef = React.useRef<HTMLDivElement>(null);
+
+  const handleClickOutside = (event: { target: any }) => {
+    if (
+      sidebarRef.current &&
+      !sidebarRef.current.contains(event.target) &&
+      navbarRef.current &&
+      !navbarRef.current.contains(event.target)
+    ) {
+      setCollapseShow(false);
+    }
+  };
+
+  React.useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const sidebarClassName = cn(
     collapseShow ? "w-64 rounded-tr-[50px] md:rounded-none" : "w-0 md:w-32",
@@ -63,7 +92,7 @@ const Sidebar: React.FC<Props> = ({ collapseShow }) => {
   );
 
   return (
-    <div className={sidebarClassName}>
+    <div className={sidebarClassName} ref={sidebarRef}>
       <div className="flex flex-grow flex-col justify-between overflow-y-auto overflow-x-hidden">
         <ul className="relative min-h-full space-y-1 overflow-y-auto py-5 md:py-16">
           {navigationData.map((item, index) =>
@@ -74,7 +103,8 @@ const Sidebar: React.FC<Props> = ({ collapseShow }) => {
               setDropdown,
               activeName,
               dropdown,
-              collapseShow
+              collapseShow,
+              setCollapseShow
             )
           )}
         </ul>
