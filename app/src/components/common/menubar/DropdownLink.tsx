@@ -29,6 +29,7 @@ const DropdownLink = ({
   linkName,
   navbarName,
   dropdownName,
+
   parentLink,
   defaultLink,
 }: Props) => {
@@ -105,8 +106,7 @@ const DropdownLink = ({
             <div
               className="mr-8 truncate py-0.5 text-xs font-medium tracking-wide"
               onClick={(e) => {
-                // e.preventDefault();
-                e.stopPropagation();
+                e.preventDefault();
                 activeDropdownVector(!dropdownVector);
               }}
             >

@@ -16,8 +16,8 @@ const AnnouncementsComponent = ({ propsdata }: PropsType) => {
   return (
     <div className="mt-4 flex h-auto cursor-pointer flex-col justify-between rounded-md  bg-[#F5F8FA] px-4 py-4 pt-3 transition-all duration-500 md:px-5">
       <div className="text-base font-medium md:text-xl ">
-        <h2>{propsdata.title}</h2>
-        <div className="mt-2 text-base font-medium text-[#636363] md:mt-2.5">
+        {propsdata.title}
+        <div className="mt-2 text-sm font-medium text-[#636363] md:mt-2.5">
           {propsdata.time}
         </div>
         <div

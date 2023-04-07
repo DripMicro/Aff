@@ -87,9 +87,9 @@ const Privacy = () => {
         <ul className="mx-4 list-outside list-disc px-1 md:ml-8 md:mr-40 md:px-8 ">
           {privacy.map((privacy, index) => {
             return (
-              <li className="list-none text-lg font-bold" key={index}>
-                <h2>{privacy.headline}</h2>
-                <ul className="list-outside pt-2 pb-2 text-sm font-normal md:pb-4 md:text-base">
+              <li className="list-none text-xl font-bold" key={index}>
+                <h1>{privacy.headline}</h1>
+                <ul className="list-outside pt-2 pb-2 text-base font-normal md:pb-4 md:text-base">
                   {privacy.content.map((content, index) => {
                     return <Content content={content} key={index} />;
                   })}
