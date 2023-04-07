@@ -1,19 +1,24 @@
-import { DataTable } from "@/components/common/data-table/DataTable";
+import { fakeTraderReportData } from "@/components/affiliates/reports/fake-trader-report-data";
 import { QuerySelect } from "@/components/common/QuerySelect";
+import { DataTable } from "@/components/common/data-table/DataTable";
+import { DateRangeSelect } from "@/components/ui/date-range";
+import { Pagination } from "@/components/ui/pagination";
 import { FormLabel, Grid, GridItem, Input } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import "react-datepicker/dist/react-datepicker.css";
 import type { TraderReportType } from "../../../server/db-types";
-import { DateRangeSelect, useDateRange } from "../../common/DateRangeSelect";
+import { useDateRange } from "../../common/DateRangeSelect";
 import { Loading } from "../../common/Loading";
-import { fakeTraderReportData } from "@/components/affiliates/reports/fake-trader-report-data";
 
 export const FakeTraderReports = () => {
   const router = useRouter();
   const { merchant_id } = router.query;
   const { from, to } = useDateRange();
   const [traderID, setTraderID] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemPerPage] = useState(2);
 
   // TODO: Add pagination
   const pageSize = 10;
@@ -170,6 +175,11 @@ export const FakeTraderReports = () => {
     SaleStatus: "",
   });
 
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  const handleChange = (e: any) => {
+    setItemPerPage(e);
+  };
+
   return (
     <>
       <Grid
@@ -180,9 +190,7 @@ export const FakeTraderReports = () => {
         alignItems={"center"}
         alignSelf="center"
       >
-        <GridItem>
-          <DateRangeSelect />
-        </GridItem>
+        <DateRangeSelect />
         <GridItem>
           <QuerySelect
             label="Merchant"
@@ -215,6 +223,17 @@ export const FakeTraderReports = () => {
       >
         <DataTable data={data} columns={columns} footerData={totalObj} />
       </Grid>
+      <div className="grid grid-cols-2 gap-2">
+        <Pagination
+          count={5}
+          variant="focus"
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+          totalItems={data.length}
+          paginate={paginate}
+          handleChange={handleChange}
+        />
+      </div>
     </>
   );
 };
