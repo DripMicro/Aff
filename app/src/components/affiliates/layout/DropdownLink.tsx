@@ -13,7 +13,7 @@ interface Props {
   linkName: LinkName[];
   setactiveName: Dispatch<SetStateAction<string>>;
   setdropdown: Dispatch<SetStateAction<string>>;
-  setCollapseShow: Dispatch<SetStateAction<boolean>>;
+  setCollapseShow: (value: boolean) => void;
 }
 
 interface LinkName {
@@ -70,7 +70,7 @@ const DropdownLink = ({
         }}
       >
         <Link
-          className="text-white-600 hover:text-white-800 dark:hover:bg-gray-600 relative flex h-11 flex-row items-center justify-between pl-8 hover:bg-white focus:outline-none"
+          className="text-white-600 hover:text-white-800 focus:orutline-none relative flex h-11 flex-row items-center justify-between pl-4 hover:bg-white dark:hover:bg-gray-600"
           href={
             "/affiliates/" +
             (parentLink == "" ? "" : parentLink + "/") +
@@ -81,8 +81,9 @@ const DropdownLink = ({
           }}
         >
           <div
-            className="text-white-600 hover:text-white-800 dark:hover:bg-gray-600 relative flex h-11 flex-row items-center hover:bg-white focus:outline-none"
+            className="text-white-600 hover:text-white-800 relative flex h-11 flex-row items-center hover:bg-white focus:outline-none dark:hover:bg-gray-600"
             onClick={(e) => {
+              console.log(`muly:click link ${collapseShow}`, {});
               e.preventDefault();
               setCollapseShow(!collapseShow);
             }}
@@ -114,6 +115,7 @@ const DropdownLink = ({
             <div
               className="mr-8 truncate py-0.5 text-xs font-medium tracking-wide"
               onClick={(e) => {
+                console.log(`muly:click dropdownVector`, { dropdownVector });
                 e.preventDefault();
                 activeDropdownVector(!dropdownVector);
               }}
@@ -151,12 +153,14 @@ const DropdownLink = ({
           <li key={index}>
             <div
               onClick={(e) => {
+                console.log(`muly:link click ${value.link}`, {});
                 e.preventDefault();
                 setactiveName(value.link);
+                setCollapseShow(false);
               }}
             >
               <Link
-                className="text-white-600 hover:text-white-800 dark:hover:bg-gray-600 relative flex h-9 flex-row items-center pl-14 hover:bg-white focus:outline-none"
+                className="text-white-600 hover:text-white-800 relative flex h-9 flex-row items-center pl-14 hover:bg-white focus:outline-none dark:hover:bg-gray-600"
                 href={
                   "/affiliates/" +
                   (parentLink == "" ? "" : parentLink + "/") +

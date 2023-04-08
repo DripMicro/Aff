@@ -63,7 +63,7 @@ const SupportDropDown = () => {
         <a
           href="#pablo"
           className={
-            "text-blueGray-700 bg-transparent block w-full whitespace-nowrap py-2 px-4 text-sm font-normal"
+            "text-blueGray-700 block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal"
           }
         >
           Edit
@@ -71,7 +71,7 @@ const SupportDropDown = () => {
         <a
           href="#pablo"
           className={
-            "text-blueGray-700 bg-transparent block w-full whitespace-nowrap py-2 px-4 text-sm font-normal"
+            "text-blueGray-700 block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal"
           }
         >
           Delete

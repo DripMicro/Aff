@@ -79,7 +79,7 @@ const LanguageDropdown = () => {
           "z-50 float-left w-48 list-none rounded bg-white py-2 text-left text-base shadow-lg"
         }
       >
-        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
+        <div className="flex w-full whitespace-nowrap bg-transparent py-3 pl-6 text-sm font-normal">
           <span className="inline-flex h-9 w-6 items-center justify-center  text-sm text-white md:w-9">
             <US className="align-middle shadow-lg" />
           </span>
@@ -87,7 +87,7 @@ const LanguageDropdown = () => {
             English
           </span>
         </div>
-        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
+        <div className="flex w-full whitespace-nowrap bg-transparent py-3 pl-6 text-sm font-normal">
           <span className="inline-flex h-9 w-6 items-center justify-center  text-sm text-white md:w-9">
             <RU className="align-middle shadow-lg" />
           </span>
@@ -95,7 +95,7 @@ const LanguageDropdown = () => {
             Russian
           </span>
         </div>
-        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
+        <div className="flex w-full whitespace-nowrap bg-transparent py-3 pl-6 text-sm font-normal">
           <span className="inline-flex h-9 w-6 items-center justify-center  text-sm text-white md:w-9">
             <NL className="align-middle shadow-lg" />
           </span>
@@ -103,7 +103,7 @@ const LanguageDropdown = () => {
             Dutch
           </span>
         </div>
-        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
+        <div className="flex w-full whitespace-nowrap bg-transparent py-3 pl-6 text-sm font-normal">
           <span className="inline-flex h-9 w-6 items-center justify-center  text-sm text-white md:w-9">
             <ES className="align-middle shadow-lg" />
           </span>
@@ -111,7 +111,7 @@ const LanguageDropdown = () => {
             Spain
           </span>
         </div>
-        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
+        <div className="flex w-full whitespace-nowrap bg-transparent py-3 pl-6 text-sm font-normal">
           <span className="inline-flex h-9 w-6 items-center justify-center   text-sm text-white md:w-9">
             <FR className="align-middle shadow-lg" />
           </span>
@@ -119,7 +119,7 @@ const LanguageDropdown = () => {
             French
           </span>
         </div>
-        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
+        <div className="flex w-full whitespace-nowrap bg-transparent py-3 pl-6 text-sm font-normal">
           <span className="inline-flex h-9 w-6 items-center justify-center  text-sm text-white md:w-9">
             <IT className="align-middle shadow-lg" />
           </span>
@@ -127,7 +127,7 @@ const LanguageDropdown = () => {
             Italian
           </span>
         </div>
-        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
+        <div className="flex w-full whitespace-nowrap bg-transparent py-3 pl-6 text-sm font-normal">
           <span className="inline-flex h-9 w-6 items-center justify-center  text-sm text-white md:w-9">
             <AR className="align-middle shadow-lg" />
           </span>
@@ -135,7 +135,7 @@ const LanguageDropdown = () => {
             Arabic
           </span>
         </div>
-        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
+        <div className="flex w-full whitespace-nowrap bg-transparent py-3 pl-6 text-sm font-normal">
           <span className="inline-flex h-9 w-6 items-center justify-center  text-sm text-white md:w-9">
             <CN className="align-middle shadow-lg" />
           </span>
@@ -143,7 +143,7 @@ const LanguageDropdown = () => {
             Chinese
           </span>
         </div>
-        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
+        <div className="flex w-full whitespace-nowrap bg-transparent py-3 pl-6 text-sm font-normal">
           <span className="inline-flex h-9 w-6 items-center justify-center   text-sm text-white md:w-9">
             <PT className="align-middle shadow-lg" />
           </span>
@@ -151,7 +151,7 @@ const LanguageDropdown = () => {
             Portugese
           </span>
         </div>
-        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
+        <div className="flex w-full whitespace-nowrap bg-transparent py-3 pl-6 text-sm font-normal">
           <span className="inline-flex h-9 w-6 items-center justify-center  text-sm text-white md:w-9">
             <IL className="align-middle shadow-lg" />
           </span>
@@ -159,7 +159,7 @@ const LanguageDropdown = () => {
             Hebrew
           </span>
         </div>
-        <div className="bg-transparent flex w-full whitespace-nowrap py-3 pl-6 text-sm font-normal">
+        <div className="flex w-full whitespace-nowrap bg-transparent py-3 pl-6 text-sm font-normal">
           <span className="inline-flex h-9 w-6 items-center justify-center rounded-full text-sm text-white md:w-9">
             <JP />
           </span>

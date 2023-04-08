@@ -68,12 +68,12 @@ export const PaymentView = ({ id }: Props) => {
   // const { data } = api.affiliates.getPaymentDetails.useQuery({ paymentId: id });
 
   const paid_payment = (
-    <button className="bg-green-200 text-green-800 h-6  w-16 rounded-md ">
+    <button className="h-6 w-16 rounded-md  bg-green-200 text-green-800 ">
       Paid
     </button>
   );
   const pending_payment = (
-    <button className="bg-red-200 text-red-800 h-6  w-16 rounded-md ">
+    <button className="h-6 w-16 rounded-md  bg-red-200 text-red-800 ">
       Pending
     </button>
   );

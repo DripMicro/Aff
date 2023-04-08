@@ -21,7 +21,7 @@ export const FormAccount = ({ account, onSubmit }: Props) => {
     <>
       <div className="w-full">
         <div className="mt-6 w-full pb-4 text-base md:w-1/2 md:text-sm">
-          <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
+          <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
             Username
           </label>
           <input
@@ -32,7 +32,7 @@ export const FormAccount = ({ account, onSubmit }: Props) => {
           />
         </div>
         <div className="relative w-full pb-2.5 pt-5  text-base md:w-1/2 md:text-sm">
-          <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
+          <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
             Password
           </label>
           <input
@@ -87,7 +87,7 @@ export const FormAccount = ({ account, onSubmit }: Props) => {
         </div>
 
         <div className="relative w-full  pb-2.5 pt-5 text-base md:w-1/2 md:text-sm">
-          <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
+          <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
             Repeat Password
           </label>
           <input
@@ -142,8 +142,8 @@ export const FormAccount = ({ account, onSubmit }: Props) => {
         </div>
 
         <div className="flex items-start space-x-2 py-6 text-sm">
-          <input type="checkbox" className="border-gray-300 h-5 w-5 rounded" />
-          <label className="text-gray-700 mt-1 font-medium leading-none">
+          <input type="checkbox" className="h-5 w-5 rounded border-gray-300" />
+          <label className="mt-1 font-medium leading-none text-gray-700">
             Yes, I would like to receive the Affiliate newsletter
           </label>
         </div>

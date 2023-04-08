@@ -25,7 +25,7 @@ export const FormWebSites = ({ account, onSubmit }: Props) => {
     <>
       <div className="w-full">
         <div className="mt-6 w-full pb-4 text-base md:w-1/2 md:text-sm">
-          <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
+          <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
             Website1
           </label>
           <input
@@ -36,7 +36,7 @@ export const FormWebSites = ({ account, onSubmit }: Props) => {
           />
         </div>
         <div className="mt-6 w-full pb-4 text-base md:w-1/2 md:text-sm">
-          <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
+          <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
             Website2
           </label>
           <input
@@ -47,7 +47,7 @@ export const FormWebSites = ({ account, onSubmit }: Props) => {
           />
         </div>
         <div className="mt-6 w-full pb-4 text-base md:w-1/2 md:text-sm">
-          <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
+          <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
             Website3
           </label>
           <input

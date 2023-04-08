@@ -54,7 +54,7 @@ const Support = () => {
                 />
                 <svg
                   aria-hidden="true"
-                  className="dark:text-gray-400 -ml-10  h-5 w-5 text-[#B3B3B3] "
+                  className="-ml-10 h-5  w-5 text-[#B3B3B3] dark:text-gray-400 "
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -69,7 +69,7 @@ const Support = () => {
                 </svg>
               </div>
             </div>
-            <div className="text-gray-700 flex items-center justify-end text-xs font-medium transition duration-150 ease-in-out">
+            <div className="flex items-center justify-end text-xs font-medium text-gray-700 transition duration-150 ease-in-out">
               <Button
                 type="submit"
                 onClick={() => setFlag(!flag)}

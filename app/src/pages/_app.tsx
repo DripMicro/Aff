@@ -18,7 +18,6 @@ import { FlagBagProvider } from "@happykit/flags/context";
 import { Toaster } from "@/components/ui/toaster";
 
 import "../styles/globals.css";
-import "@tremor/react/dist/esm/tremor.css";
 import "react-datepicker/dist/react-datepicker.css";
 import "@etchteam/next-pagination/dist/index.css";
 

@@ -1,16 +1,17 @@
 import {
   navigationData,
   type NavigationLinkData,
-} from "@/components/Sidebar/navigation-data";
+} from "@/components/affiliates/layout/navigation-data";
 import { cn } from "@/lib/utils";
-import React from "react";
-import DropdownLink from "../common/menubar/DropdownLink";
-import SingleLink from "../common/menubar/SingleLink";
+import React, { useState } from "react";
+import DropdownLink from "./DropdownLink";
+import SingleLink from "./SingleLink";
+import { useOnClickOutside } from "usehooks-ts";
 
 interface Props {
   collapseShow: boolean;
-  setCollapseShow: React.Dispatch<React.SetStateAction<boolean>>;
-  navbarRef: React.RefObject<HTMLDivElement>;
+  tempCollapseShow: boolean;
+  setTempCollapseShow: (value: boolean) => void;
 }
 
 const renderLink = (
@@ -21,7 +22,7 @@ const renderLink = (
   activeName: string,
   dropdown: string,
   collapseShow: boolean,
-  setCollapseShow: React.Dispatch<React.SetStateAction<boolean>>
+  setCollapseShow: (value: boolean) => void
 ) => {
   if (item.type === "single") {
     return (
@@ -29,9 +30,9 @@ const renderLink = (
         <SingleLink
           setactiveName={setActiveName}
           setdropdown={setDropdown}
-          setCollapseShow={setCollapseShow}
           activeName={activeName}
           collapseShow={collapseShow}
+          setCollapseShow={setCollapseShow}
           link={item.link}
           linkName={item.linkName}
         />
@@ -60,34 +61,23 @@ const renderLink = (
 
 const Sidebar: React.FC<Props> = ({
   collapseShow,
-  setCollapseShow,
-  navbarRef,
+  tempCollapseShow,
+  setTempCollapseShow,
 }) => {
   const [activeName, setActiveName] = React.useState("dashboard");
   const [dropdown, setDropdown] = React.useState("");
-
   const sidebarRef = React.useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (event: { target: any }) => {
-    if (
-      sidebarRef.current &&
-      !sidebarRef.current.contains(event.target) &&
-      navbarRef.current &&
-      !navbarRef.current.contains(event.target)
-    ) {
-      setCollapseShow(false);
+    if (!collapseShow && tempCollapseShow) {
+      setTempCollapseShow(false);
     }
   };
 
-  React.useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  useOnClickOutside(sidebarRef, handleClickOutside);
 
   const sidebarClassName = cn(
-    collapseShow ? "w-64 rounded-tr-[50px] md:rounded-none" : "w-0 md:w-32",
+    tempCollapseShow ? "w-64 rounded-tr-[50px] md:rounded-none" : "w-0 md:w-14",
     "sidebar fixed top-16 left-0 z-10 flex h-full flex-col bg-white text-white transition-all duration-300 dark:bg-gray-900 md:top-20"
   );
 
@@ -103,8 +93,8 @@ const Sidebar: React.FC<Props> = ({
               setDropdown,
               activeName,
               dropdown,
-              collapseShow,
-              setCollapseShow
+              tempCollapseShow,
+              setTempCollapseShow
             )
           )}
         </ul>

@@ -397,7 +397,7 @@ const PixelMonitor = () => {
           state={state}
         />
         <div className="flex  justify-end ">
-          <button className="bg-blue-600 text-stone-50 mb-7 mr-3 mt-6 h-10 w-44 rounded-md text-sm outline md:hidden">
+          <button className="text-stone-50 mb-7 mr-3 mt-6 h-10 w-44 rounded-md bg-blue-600 text-sm outline md:hidden">
             New Pixel Monitor
           </button>
         </div>

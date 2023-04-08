@@ -31,7 +31,7 @@ const AnnouncementsComponent = ({ propsdata }: PropsType) => {
       </div>
       <div className="mt-5 flex md:mt-6">
         <button
-          className="text-blue-500 text-left  text-sm font-medium"
+          className="text-left text-sm  font-medium text-blue-500"
           onClick={() => setExpanded1(!expanded1)}
         >
           {expanded1 ? "More" : "Less"}

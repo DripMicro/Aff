@@ -7,9 +7,7 @@ import {
   InputRightAddon,
   Select as CSelect,
 } from "@chakra-ui/react";
-import { SelectBox, SelectBoxItem } from "@tremor/react";
 import { useQueryState } from "next-usequerystate";
-import { SearchIcon } from "@chakra-ui/icons";
 import { useDebounceCallback } from "@react-hook/debounce";
 import { ChangeEvent, ChangeEventHandler, useState } from "react";
 

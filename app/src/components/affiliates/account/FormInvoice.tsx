@@ -37,7 +37,7 @@ export const FormInvoice = ({ account, onSubmit, countries }: Props) => {
       <div className="w-full pt-5">
         <div className="-mx-3 mb-6 flex flex-wrap">
           <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
-            <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               Street
             </label>
             <input
@@ -48,7 +48,7 @@ export const FormInvoice = ({ account, onSubmit, countries }: Props) => {
             />
           </div>
           <div className="w-full px-3 md:w-1/2">
-            <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               Postal / Zip Code
             </label>
             <input
@@ -61,7 +61,7 @@ export const FormInvoice = ({ account, onSubmit, countries }: Props) => {
         </div>
         <div className="-mx-3 mb-6 flex flex-wrap">
           <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
-            <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               City
             </label>
             <input
@@ -72,7 +72,7 @@ export const FormInvoice = ({ account, onSubmit, countries }: Props) => {
             />
           </div>
           <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
-            <label className="text-gray-600 mb-1.5 ml-2.5 block text-base  font-medium">
+            <label className="mb-1.5 ml-2.5 block text-base font-medium  text-gray-600">
               Country
             </label>
             <div className="relative w-full">

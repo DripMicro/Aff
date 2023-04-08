@@ -5,11 +5,11 @@ import type { Dispatch, SetStateAction } from "react";
 interface Props {
   activeName: string;
   collapseShow: boolean;
+  setCollapseShow: (value: boolean) => void;
   setactiveName: Dispatch<SetStateAction<string>>;
   setdropdown: Dispatch<SetStateAction<string>>;
   link: string;
   linkName: string;
-  setCollapseShow: Dispatch<SetStateAction<boolean>>;
 }
 
 const SingleLink = ({
@@ -17,9 +17,9 @@ const SingleLink = ({
   setdropdown,
   activeName,
   collapseShow,
+  setCollapseShow,
   link,
   linkName,
-  setCollapseShow,
 }: Props) => {
   const activeLink = (value: string) => {
     setactiveName(value);
@@ -35,18 +35,14 @@ const SingleLink = ({
         e.preventDefault();
         activeLink(link);
         activeDropdown("");
+        setCollapseShow(false);
       }}
     >
       <Link
-        className="text-white-600 hover:text-white-800 dark:hover:bg-gray-600 relative flex h-11 flex-row items-center pl-8 hover:bg-white focus:outline-none"
+        className="text-white-600 hover:text-white-800 relative flex h-11 flex-row items-center pl-4 hover:bg-white focus:outline-none dark:hover:bg-gray-600"
         href={"/affiliates/" + link}
       >
-        <div
-          onClick={(e) => {
-            e.preventDefault();
-            setCollapseShow(!collapseShow);
-          }}
-        >
+        <div>
           <Image
             alt="..."
             className="w-6 border-none pt-0.5 align-middle"
