@@ -14,7 +14,7 @@ const AnnouncementsComponent = ({ propsdata }: PropsType) => {
   const [expanded1, setExpanded1] = useState(true);
 
   return (
-    <div className="mt-4 flex h-auto cursor-pointer flex-col justify-between rounded-md  bg-[#F5F8FA] px-4 py-4 pt-3 transition-all duration-500 md:px-5">
+    <div className="mt-4 flex h-auto cursor-pointer flex-col justify-between rounded-md  bg-[#F5F8FA] p-4 pt-3 transition-all duration-500 md:px-5">
       <div className="text-base font-medium md:text-xl ">
         {propsdata.title}
         <div className="mt-2 text-sm font-medium text-[#636363] md:mt-2.5">

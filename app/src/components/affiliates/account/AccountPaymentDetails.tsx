@@ -35,9 +35,6 @@ export const AccountPaymentDetails = () => {
           preferredCurrency: {
             choices: ["TBD"],
           },
-          pay_account: {
-            choices: countries,
-          },
         }}
       ></Form>
     </Flex>

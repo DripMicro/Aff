@@ -1,7 +1,7 @@
 import Head from "next/head";
 
-import Support from "../../components/affiliates/support/support";
 import type { MyPage } from "../../components/common/types";
+import { Tickets } from "@/components/affiliates/tickets/Tickets";
 
 const Page: MyPage = () => {
   return (
@@ -11,7 +11,7 @@ const Page: MyPage = () => {
         <meta name="description" content="Privacy" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Support />
+      <Tickets />
     </>
   );
 };

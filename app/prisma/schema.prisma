@@ -1066,10 +1066,11 @@ model merchants_creative {
   affiliateReady Int                     @default(0) @db.TinyInt
   // isOverrideTrackingLink Boolean                 @default(false)
 
-  category merchants_creative_categories? @relation(fields: [category_id], references: [id])
-  merchant merchants                      @relation(fields: [merchant_id], references: [id])
-  language languages                      @relation(fields: [language_id], references: [id])
-  traffic  traffic[]
+  category      merchants_creative_categories? @relation(fields: [category_id], references: [id])
+  merchant      merchants                      @relation(fields: [merchant_id], references: [id])
+  language      languages                      @relation(fields: [language_id], references: [id])
+  traffic       traffic[]
+  pixel_monitor pixel_monitor[]
 
   @@index([category_id], map: "category_id")
   @@index([language_id], map: "language_id")
@@ -1226,11 +1227,12 @@ model pixel_monitor {
   pixelCode    String               @db.Text
   totalFired   Int
   product_id   Int
-  banner_id    Int
+  banner_id    Int?
 
-  merchant   merchants    @relation(fields: [merchant_id], references: [id])
-  affiliate  affiliates   @relation(fields: [affiliate_id], references: [id])
-  pixel_logs pixel_logs[]
+  merchants_creative merchants_creative? @relation(fields: [banner_id], references: [id])
+  merchant           merchants           @relation(fields: [merchant_id], references: [id])
+  affiliate          affiliates          @relation(fields: [affiliate_id], references: [id])
+  pixel_logs         pixel_logs[]
 
   @@index([merchant_id], map: "merchant_id")
   @@index([affiliate_id], map: "affiliate_id")

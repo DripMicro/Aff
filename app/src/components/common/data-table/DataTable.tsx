@@ -6,6 +6,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import * as React from "react";
+import { cn } from "@/lib/utils";
 
 export type DataTableProps<Data extends object> = {
   data: Data[] | null | undefined;
@@ -31,13 +32,13 @@ export function DataTable<Data extends object>({
   });
 
   return (
-    <div className="scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-100 scrollbar-thumb-rounded-full  scrollbar-track-rounded-full mt-4 overflow-x-scroll lg:overflow-y-hidden xl:overflow-x-hidden ">
-      <table className="w-full border border-[F0F0F0]">
-        <thead className="bg-[#F2F5F7]">
+    <div className="scrollbar-thin relative overflow-x-auto shadow-md sm:rounded-lg">
+      <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
+        <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
           {getHeaderGroups().map((headerGroup) => (
             <tr
               key={headerGroup.id}
-              className="border border-[#F0F0F0] text-left"
+              className="border border-[#F0F0F0] bg-[#F2F5F7] text-left"
             >
               {headerGroup.headers.map((header) => {
                 // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
@@ -46,10 +47,9 @@ export function DataTable<Data extends object>({
                   <th
                     key={header.id}
                     onClick={header.column.getToggleSortingHandler()}
-                    // @ts-ignore
-                    isNumeric={!!meta?.isNumeric}
+                    className="border"
                   >
-                    <div className="text=[#323232] flex p-3 text-sm">
+                    <div className="text=[#323232] flex p-2 text-sm">
                       {flexRender(
                         header.column.columnDef.header,
                         header.getContext()
@@ -99,15 +99,19 @@ export function DataTable<Data extends object>({
         </thead>
         <tbody>
           {getRowModel().rows.map((row, index) => (
-            <tr key={row.id} className={index % 2 == 0 ? "" : " bg-[#F9FAFF]"}>
+            <tr
+              key={row.id}
+              className={cn([{ "bg-[#F9FAFF]": index % 2 === 0 }])}
+            >
               {row.getVisibleCells().map((cell) => {
                 const meta = cell.column.columnDef.meta;
                 return (
                   <td
                     key={cell.id}
-                    // @ts-ignore
-                    isNumeric={!!meta?.isNumeric}
-                    className="p-3 text-sm text-[#404040]"
+                    className={cn("border py-1 px-2 text-sm text-[#404040]", {
+                      // @ts-ignore
+                      "text-right": meta?.isNumeric,
+                    })}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>

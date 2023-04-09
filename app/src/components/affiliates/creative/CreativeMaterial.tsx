@@ -31,7 +31,13 @@ export const CreativeMaterial = () => {
 
   // console.log(`muly:query`, { type, category, language, size, promotion });
 
-  const { data: meta } = api.affiliates.getMerchantCreativeMeta.useQuery();
+  const { data: meta } = api.affiliates.getMerchantCreativeMeta.useQuery(
+    undefined,
+    {
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
 
   const { data } = api.affiliates.getMerchantCreative.useQuery(
     {
@@ -42,7 +48,7 @@ export const CreativeMaterial = () => {
       promotion: promotion ? Number(promotion) : undefined,
       search: search ? String(search) : undefined,
     },
-    { keepPreviousData: true }
+    { keepPreviousData: true, refetchOnWindowFocus: false }
   );
 
   console.log(data);

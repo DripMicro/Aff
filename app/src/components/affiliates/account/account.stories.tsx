@@ -67,7 +67,7 @@ export const Invoice = {
       onSubmit={async (values: any) => {
         console.log(`muly`, { values });
       }}
-      countries={[]}
+      countries={["Israel", "USA"]}
     />
   ),
   parameters: {

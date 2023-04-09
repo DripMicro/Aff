@@ -1,164 +1,86 @@
-import { SearchIcon } from "@chakra-ui/icons";
 import { createColumnHelper } from "@tanstack/react-table";
-import { useRouter } from "next/router";
 import type { PaymentsPaidType } from "../../../server/db-types";
 import { api } from "../../../utils/api";
-import { formatPrice } from "../../../utils/format";
 import { DataTable } from "../../common/data-table/DataTable";
 
 import Affiliates from "../../../layouts/AffiliatesLayout";
-import { PaymentView } from "./PaymentView";
+import { Button } from "@/components/ui/button";
+import { ViewIcon } from "lucide-react";
+import React from "react";
+import { Loading } from "@/components/common/Loading";
+import { PageHeader } from "@/components/common/page/page-header";
+import { Badge } from "@/components/ui/badge";
+import { formatPrice } from "@/utils/format";
+import { SearchText } from "@/components/common/search/search-text";
+import { SearchApply } from "@/components/common/search/saerch-apply-button";
+import { useSearchContext } from "@/components/common/search/search-context";
 
 const columnHelper = createColumnHelper<PaymentsPaidType>();
 
-const ex_data = [
-  {
-    totalFTD: 60,
-    id: 1,
-    rdate: Date,
-    month: "March",
-    year: "2005",
-    affiliate_id: 500,
-    paid: 20,
-    transaction_id: "string",
-    notes: "string",
-    extras: "string",
-    total: 50,
-  },
-  {
-    totalFTD: 60,
-    id: 1,
-    rdate: Date,
-    month: "March",
-    year: "2005",
-    affiliate_id: 500,
-    paid: 20,
-    transaction_id: "string",
-    notes: "string",
-    extras: "string",
-    total: 50,
-  },
-];
+const createColumn = (
+  id: keyof PaymentsPaidType,
+  header: string,
+  isNumeric?: boolean
+) =>
+  columnHelper.accessor(id, {
+    cell: (info) => info.getValue(),
+    header,
+    meta: { isNumeric },
+  });
 
 export const Billings = () => {
-  const router = useRouter();
-  const { search } = router.query;
+  const {
+    values: { billing: search },
+  } = useSearchContext();
 
-  const { data } = api.affiliates.getPaymentsPaid.useQuery(
-    {
-      search: search ? String(search) : undefined,
-    },
-    { keepPreviousData: true }
-  );
-
-  console.log("UserQuery data: ", data);
-  console.log("Example Data: ", ex_data);
-  const paid_payment = (
-    <button className="h-5 w-16 rounded-md bg-green-200 text-green-800  ">
-      Paid
-    </button>
-  );
-  const pending_payment = (
-    <button className="h-5 w-16 rounded-md bg-red-200 text-red-800 ">
-      Pending
-    </button>
-  );
+  const { data, isLoading, isRefetching } =
+    api.affiliates.getPaymentsPaid.useQuery(
+      {
+        search,
+      },
+      { keepPreviousData: true, refetchOnWindowFocus: false }
+    );
 
   const columns = [
-    columnHelper.accessor("id", {
-      cell: (info) => info.getValue(),
-      header: "#",
-    }),
-    columnHelper.accessor("paymentID", {
-      cell: (info) => info.getValue(),
-      header: "Payment ID",
-    }),
-    columnHelper.accessor("month", {
-      cell: (info) => `${info.getValue()}`,
-      header: "Month",
-    }),
-    columnHelper.accessor("totalFTD", {
-      cell: (info) => info.getValue(),
-      header: "Total FTD",
-      meta: {
-        isNumeric: true,
-      },
-    }),
+    createColumn("id", "#"),
+    createColumn("paymentID", "Payment ID"),
+    createColumn("month", "Month"),
+    createColumn("totalFTD", "Total FTD", true),
     columnHelper.accessor("total", {
       cell: (info) => formatPrice(info.getValue()),
       header: "Amount",
-      meta: {
-        isNumeric: true,
-      },
+      meta: { isNumeric: true, isCurrency: true },
     }),
     columnHelper.accessor("paid", {
-      cell: (info) => (info.getValue() ? paid_payment : pending_payment),
+      cell: (info) =>
+        info.getValue() ? (
+          <Badge variant="green">Paid</Badge>
+        ) : (
+          <Badge variant="red">Pending</Badge>
+        ),
       header: "Status",
+    }),
+    columnHelper.accessor("edit-button" as any, {
+      cell: (info) => (
+        <Button variant="text">
+          <ViewIcon className="mr-2 h-4 w-4" />
+          View
+        </Button>
+      ),
+      header: "",
     }),
   ];
 
-  if (!data) {
-    return null;
-  }
-
-  return (
-    <div className="pt-5 pb-4 ">
-      <div className=" text-base font-medium md:flex md:justify-between lg:flex">
-        <div className="mb-2.5 hidden items-center md:flex ">
-          <span className="text-[#2262C6]">Dashboard</span>
-          &nbsp;/&nbsp;Billings
-        </div>
-        <div className="md:flex">
-          <div className="relative hidden flex-1  rounded-md p-2 px-2 drop-shadow md:ml-5 md:block md:px-3 md:pt-1.5 md:pb-2">
-            <input
-              className="placeholder-blueGray-300 text-blueGray-700 mr-5 w-40 rounded  border bg-white px-3 py-3 text-sm shadow transition-all duration-150 ease-linear focus:outline-none focus:ring  md:w-96"
-              placeholder="Search Merchant.."
-            />
-            <label className="right-8 mt-2  pr-4 md:absolute">
-              <SearchIcon color="#B3B3B3" />
-            </label>
-          </div>
-        </div>
-      </div>
-      <div className="flex justify-between font-medium">
-        <div className="mb-2.5 flex items-center md:hidden">
-          <span className="text-[#2262C6]">Dashboard</span>
-          &nbsp;/&nbsp;Billings
-        </div>
-        <div className="flex md:hidden">
-          <div className="relative flex-1 rounded-md p-2 drop-shadow md:ml-5 md:px-3 md:pt-1.5 md:pb-2">
-            <input
-              className="placeholder-blueGray-300 text-blueGray-700 dm:mr-5 rounded border bg-white px-3 py-3 text-sm shadow transition-all duration-150 ease-linear focus:outline-none  focus:ring"
-              placeholder="Search Merchant.."
-            />
-            <label className="absolute left-44 pt-2">
-              <SearchIcon color="#B3B3B3" />
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <div className="hidden rounded-[5px] bg-white px-3 pt-3 pb-20 shadow-md md:mb-10 md:block md:rounded-[15px]">
-        <DataTable data={data} columns={columns} />
-      </div>
-      <div className="">
-        <PaymentView id={""} />
-      </div>
-      <div className="md:hidden">
-        <div className="rounded-lg bg-white shadow-md ">
-          {/* {
-            ex_data.map((ex, index)) => {
-              return <div key={index}>
-                <div className="flex">
-
-                </div>
-              </div>
-            })
-          }
-             */}
-        </div>
-      </div>
-    </div>
+  return data ? (
+    <>
+      <PageHeader title="Billing">
+        <SearchText varName="billing" />
+        <SearchApply isLoading={isRefetching} />
+      </PageHeader>
+      <DataTable data={data} columns={columns} />
+    </>
+  ) : (
+    <Loading />
   );
 };
 

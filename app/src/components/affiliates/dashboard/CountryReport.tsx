@@ -33,7 +33,7 @@ const AccountManager = () => {
           </Select>
         </div>
       </div>
-      <div className="align-center align-center mb-5 flex justify-center">
+      <div className="align-center mb-5 flex justify-center">
         <img width="243" src="/img/worldMap.png" alt="worldmap" />
       </div>
 

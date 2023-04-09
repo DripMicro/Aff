@@ -7,5 +7,9 @@ const meta = {
 export default meta;
 
 export const TBD = {
-  render: () => <div>TBD: Add stories for all components in this folder</div>,
+  render: () => (
+    <div className="text-azure-100">
+      TBD: Add stories for all components in this folder
+    </div>
+  ),
 };

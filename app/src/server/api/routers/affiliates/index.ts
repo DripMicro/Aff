@@ -25,7 +25,6 @@ import { getCommissions } from "./commission";
 import { getDocuments } from "./document";
 import {
   deletePixelMonitor,
-  getMerchants,
   getPixelMonitor,
   getPixelMonitorMeta,
   upsertPixelMonitor,
@@ -99,7 +98,6 @@ export const affiliatesRouter = createTRPCRouter({
 
   getPixelMonitorMeta,
   getPixelMonitor,
-  getMerchants,
   upsertPixelMonitor,
   deletePixelMonitor,
 

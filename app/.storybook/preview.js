@@ -1,7 +1,6 @@
 import "../src/styles/globals.css";
 import "react-datepicker/dist/react-datepicker.css";
 import i18n from "./i18next";
-import { Preview } from "@storybook/react";
 import { withI18next } from "./decorators";
 
 const parameters = {

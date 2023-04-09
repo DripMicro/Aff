@@ -19,7 +19,7 @@ export const Primary = {
           >
             Accept terms and conditions
           </label>
-          <p className="text-slate-500 dark:text-slate-400 text-sm">
+          <p className="text-sm text-slate-500 dark:text-slate-400">
             You agree to our Terms of Service and Privacy Policy.
           </p>
         </div>

@@ -181,5 +181,32 @@
   },
   "text": {
     "label": "Ticket Content"
-  }
+  },
+  "pay_bank": {
+    "label": "Account"
+  },
+  "pay_iban": {
+    "label": "IBAN"
+  },
+  "pay_branch": {
+    "label": "Account"
+  },
+  "pay_swift": {
+    "label": "Swift"
+  },
+  "account_name": {
+    "label": "Account Name"
+  },
+  "account_number": {
+    "label": "Account Name"
+  },
+  "banner_id": {
+    "label": "Pixel Code"
+  },
+  "Expected string, received number": "Expected string, received number",
+  "all_creative": {
+    "label": "All Creative"
+  },
+  "Expected number, received string": "Expected number, received string",
+  "Expected 'post' | 'get' | 'client', received null": "Expected 'post' | 'get' | 'client', received null"
 }

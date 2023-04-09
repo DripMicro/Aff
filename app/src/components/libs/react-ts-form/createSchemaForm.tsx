@@ -471,7 +471,7 @@ export function createTsForm<
       }
 
       const fieldMetaInfo: MetaInfo = formContext.formMeta.children[key]!;
-      const meta: ZodMetaDataItem = fieldMetaInfo.meta;
+      let meta: ZodMetaDataItem = fieldMetaInfo.meta;
 
       // const meta = getMetaInformationForZodType(type);
 
@@ -503,17 +503,21 @@ export function createTsForm<
       //   }
       // );
 
+      let extendMetaData = undefined;
       if (meta.condition && formContext.flowContext) {
-        const cond = meta.condition(formContext.flowContext, _form.watch());
-        // console.log(`muly:condition ${key} ${cond}`, {
-        //   meta,
-        //   cond,
-        //   _form: _form.watch(),
-        //   condition: meta.meta.meta?.condition,
-        // });
+        const data = _form.watch();
+        const cond = meta.condition(formContext.flowContext, data);
+        console.log(`muly:form:condition ${key} ${cond}`, {
+          formContext,
+          meta,
+          cond,
+          data,
+        });
 
         if (!cond) {
           return null;
+        } else if (typeof cond === "object") {
+          meta = { ...meta, ...cond };
         }
       }
 
@@ -523,9 +527,10 @@ export function createTsForm<
         ...fieldProps,
       };
 
-      if (preprocessField) {
-        preprocessField(key, _form, controlProps);
-      }
+      // if (preprocessField) {
+      //   preprocessField(key, _form, controlProps);
+      // }
+
       const {
         beforeElement,
         afterElement,

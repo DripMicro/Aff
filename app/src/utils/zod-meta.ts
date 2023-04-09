@@ -31,7 +31,12 @@ export type ControlCallback = (
   options?: { submit?: () => void }
 ) => React.ReactNode;
 
-export type ConditionCallback = (wizardInfo: WizardInfo, data?: any) => boolean;
+// export type PreprocessCallback = (wizardInfo: WizardInfo) => ZodMetaDataItem;
+
+export type ConditionCallback = (
+  wizardInfo: WizardInfo,
+  data?: any
+) => boolean | ZodMetaDataItem;
 
 export interface ZodMetaDataItem {
   name?: string;
@@ -68,6 +73,7 @@ export interface ZodMetaDataItem {
   props?: Record<string, any>;
   beforeElement?: ControlCallback;
   afterElement?: ControlCallback;
+  // preprocess?: PreprocessCallback;
   render?: (
     controls: Record<string, React.ReactNode>,
     wizard: WizardControlProps

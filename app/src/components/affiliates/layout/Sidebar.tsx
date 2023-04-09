@@ -78,12 +78,12 @@ const Sidebar: React.FC<Props> = ({
 
   const sidebarClassName = cn(
     tempCollapseShow ? "w-64 rounded-tr-[50px] md:rounded-none" : "w-0 md:w-14",
-    "sidebar fixed top-16 left-0 z-10 flex h-full flex-col bg-white text-white transition-all duration-300 dark:bg-gray-900 md:top-20"
+    "sidebar fixed top-16 left-0 z-10 flex h-full flex-col bg-white text-white transition-all duration-300 dark:bg-gray-900 md:top-20 scrollbar-thin"
   );
 
   return (
     <div className={sidebarClassName} ref={sidebarRef}>
-      <div className="flex flex-grow flex-col justify-between overflow-y-auto overflow-x-hidden">
+      <div className="flex grow flex-col justify-between overflow-y-auto overflow-x-hidden">
         <ul className="relative min-h-full space-y-1 overflow-y-auto py-5 md:py-16">
           {navigationData.map((item, index) =>
             renderLink(

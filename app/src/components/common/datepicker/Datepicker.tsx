@@ -68,7 +68,7 @@ export const RawDatePicker: React.FC<{
           {({ ref }) => (
             <div className="relative" ref={ref}>
               <input
-                className="placeholder-blueGray-300 text-blueGray-600 w-full rounded-md border-2 bg-white px-3 py-4 font-normal text-[#404040] shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
+                className="placeholder:text-blueGray-300 text-blueGray-600 w-full rounded-md border-2 bg-white px-3 py-4 font-normal text-[#404040] shadow transition-all duration-150 ease-linear focus:outline-none focus:ring"
                 type="text"
                 onFocus={(e) => ctxValue.showCalendar()}
                 value={formattedDate(date)}
@@ -263,7 +263,7 @@ const MonthSelection: React.FC<Record<never, never>> = (props) => {
         <CalButton chevron="left" onClick={(e) => prevYear()}>
           &nbsp;
         </CalButton>
-        <CalButton className="flex-grow" onClick={(e) => viewYears()}>
+        <CalButton className="grow" onClick={(e) => viewYears()}>
           {visible.year}
         </CalButton>
         <CalButton chevron="right" onClick={(e) => nextYear()}>
@@ -313,9 +313,7 @@ const YearSelection: React.FC<Record<never, never>> = (props) => {
         <CalButton chevron="left" onClick={(e) => prevDecade()}>
           &nbsp;
         </CalButton>
-        <CalButton className="flex-grow">
-          {`${minYear} - ${maxYear - 1}`}
-        </CalButton>
+        <CalButton className="grow">{`${minYear} - ${maxYear - 1}`}</CalButton>
         <CalButton chevron="right" onClick={(e) => nextDecade()}>
           &nbsp;
         </CalButton>

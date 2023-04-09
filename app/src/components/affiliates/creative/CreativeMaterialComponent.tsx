@@ -41,7 +41,7 @@ export const CreativeMaterialComponent = ({
         </div>
         <Dialog>
           <div className="ml-5 w-full rounded-xl">
-            <div className=" bg-[#F5F8FA] py-4 px-4 md:px-8">
+            <div className=" bg-[#F5F8FA] p-4 md:px-8">
               <div className="justify-between md:flex">
                 <div className="">
                   <div className=" text-sm font-medium text-[#717171]">

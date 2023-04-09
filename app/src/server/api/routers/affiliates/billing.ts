@@ -16,7 +16,7 @@ export const getPaymentsPaid = publicProcedure
   )
   .query(async ({ ctx, input: { search } }) => {
     const where = {
-      affiliate_id,
+      // affiliate_id,
       // valid: 1,
       // ...addFreeTextSearchWhere("paymentID", search),
     };

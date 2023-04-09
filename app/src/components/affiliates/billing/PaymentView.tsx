@@ -79,7 +79,7 @@ export const PaymentView = ({ id }: Props) => {
   );
 
   return (
-    <div className="ml-5 mr-5 md:hidden ">
+    <div className="mx-5 md:hidden">
       {data
         ? data.map((data, index) => {
             return (

@@ -63,9 +63,9 @@ export const navigationData: NavigationLinkData[] = [
     defaultLink: "account",
     links: [
       { name: "Account Details", link: "account" },
-      { name: "Document", link: "documents" },
-      { name: "Payment Method", link: "account-payment" },
+      { name: "Payment Method Details", link: "account-payment" },
       { name: "Commission Structure", link: "commissions" },
+      { name: "Documents", link: "documents" },
     ],
   },
   {

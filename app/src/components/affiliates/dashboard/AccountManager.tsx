@@ -13,7 +13,7 @@ const AccountManager = ({ first_name, last_name, mail }: Props) => {
       <div className="mb-3 text-xl font-bold text-[#2262C6]">
         Your Account Manager
       </div>
-      <div className="align-center align-center mb-2 flex justify-center">
+      <div className="align-center mb-2 flex justify-center">
         <img width="100" src="/img/icons/user.png" alt="worldmap" />
       </div>
       <div className="align-center mb-5 text-center text-base">

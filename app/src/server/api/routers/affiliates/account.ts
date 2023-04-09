@@ -124,6 +124,7 @@ export const registerAccount = publicProcedure
         products: "",
         optinGuid: "",
         regReferUrl: "",
+        newsletter: 1,
       },
     });
     return data;

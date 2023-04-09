@@ -1,25 +1,41 @@
 @tailwind base;
 
-/* Firefox */
-* {
-  scrollbar-width: thin;
-}
+/*!* Firefox *!*/
+/** {*/
+/*  scrollbar-width: thin;*/
+/*}*/
 
-/* Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-  width: 0px;
-}
+/*!* Chrome, Edge, and Safari *!*/
+/**::-webkit-scrollbar {*/
+/*  width: 0px;*/
+/*}*/
 
-*::-webkit-scrollbar-track {
-  border-radius: 5px;
-}
+/**::-webkit-scrollbar-track {*/
+/*  border-radius: 5px;*/
+/*}*/
 
-*::-webkit-scrollbar-thumb {
-  border-radius: 14px;
-}
+/**::-webkit-scrollbar-thumb {*/
+/*  border-radius: 14px;*/
+/*}*/
 
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px; /* Adjust the width of the scrollbar */
+    height: 4px; /* Adjust the height of the scrollbar */
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    @apply rounded bg-gray-200;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply rounded bg-gray-500;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-700;
+  }
+}
 
 body {
   font-family: "Inter";

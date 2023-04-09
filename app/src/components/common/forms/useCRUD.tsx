@@ -7,10 +7,12 @@ import { useToast } from "@/hooks/use-toast";
 import { castError } from "@/utils/errors";
 
 import { EditIcon, PlusIcon, Trash2Icon } from "lucide-react";
+import { PreprocessField } from "@/components/libs/react-ts-form/createSchemaForm";
 
 interface Props<T> {
   formContext: FormContext;
   schema: AnyZodObject | ZodEffects<any, any>;
+  props?: any;
 
   onDelete: null | ((editRec: T) => Promise<T>);
   onUpsert: (newRec: T) => Promise<T>;
@@ -21,7 +23,10 @@ interface Props<T> {
     editTitle: string;
     add: string;
     addTitle: string;
+    deleteTitle: string;
   };
+
+  // preprocessField: PreprocessField;
 }
 
 export const useCRUD = <T,>({
@@ -31,6 +36,7 @@ export const useCRUD = <T,>({
   onDelete,
   refetch,
   text,
+  props,
 }: Props<T>) => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
@@ -66,12 +72,12 @@ export const useCRUD = <T,>({
       // await deleteMutation.mutateAsync({ id: editRec.id });
       await onDelete(editRec);
 
-      toast({
-        title: text.editTitle,
-        duration: 5000,
-      });
       console.log(`muly:handleDelete Done, refetch`, { editRec });
       await refetch();
+      toast({
+        title: text.deleteTitle,
+        duration: 5000,
+      });
     } catch (_err) {
       const error = castError(_err);
       toast({
@@ -93,7 +99,7 @@ export const useCRUD = <T,>({
       onSubmit={(newRec) => handleSubmit(row, newRec)}
       formProps={{
         trigger: (
-          <Button>
+          <Button variant="text">
             <EditIcon className="mr-2 h-4 w-4" />
             {text.edit}
           </Button>
@@ -111,6 +117,7 @@ export const useCRUD = <T,>({
           </Button>
         ) : undefined,
       }}
+      props={props}
       defaultValues={row}
     />
   );
@@ -123,7 +130,7 @@ export const useCRUD = <T,>({
       onSubmit={(newRec) => handleSubmit(undefined, newRec)}
       formProps={{
         trigger: (
-          <Button>
+          <Button variant="primary">
             <PlusIcon className="mr-2 h-4 w-4" />
             {text?.add}
           </Button>
@@ -131,6 +138,7 @@ export const useCRUD = <T,>({
         title: text?.addTitle || "Add",
         actionName: text?.add || "Add",
       }}
+      props={props}
     />
   );
 

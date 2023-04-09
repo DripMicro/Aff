@@ -106,7 +106,7 @@ const Terms = () => {
                 key={index}
               >
                 <h1>{terms.headline}</h1>
-                <ul className="list-outside pt-2 pb-2 text-base font-normal md:pb-7 md:text-base">
+                <ul className="list-outside py-2 text-base font-normal md:pb-7 md:text-base">
                   <h2> {terms.content}</h2>
                 </ul>
               </li>

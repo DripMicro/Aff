@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import type { ChangeEvent } from "react";
 import { useEffect, useState } from "react";
 import { QuerySelect } from "../../../components/common/QuerySelect";
-import { ReportDataTable } from "../../../components/common/data-table/Report_DataTable";
+import { ReportDataTable } from "../../../components/common/data-table/ReportDataTable";
 import type { QuickReportSummary } from "../../../server/db-types";
 import { api } from "../../../utils/api";
 import { DateRangeSelect, useDateRange } from "../../common/DateRangeSelect";
@@ -416,7 +416,7 @@ export const QuickSummaryReport = () => {
               <button className="hidden rounded-md border border-[#2262C6] py-2 px-8 text-base font-semibold text-[#2262C6] lg:block">
                 Reset Search
               </button>
-              <button className="hidden rounded-md bg-[#2262C6] px-2 py-2 text-white lg:block">
+              <button className="hidden rounded-md bg-[#2262C6] p-2 text-white lg:block">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="28"
@@ -468,13 +468,13 @@ export const QuickSummaryReport = () => {
             <div className="flex justify-between pb-5 font-medium md:pb-8 md:pt-12">
               <div className="flex">
                 <button
-                  className="mr-3 rounded-md bg-[#2262C6] px-3 py-3 text-white md:px-14"
+                  className="mr-3 rounded-md bg-[#2262C6] p-3 text-white md:px-14"
                   onClick={handleSelectAll}
                 >
                   Select All
                 </button>
                 <button
-                  className="rounded-md border border-[#1B48BB] bg-[#EFEEFF] px-3 py-3 text-[#1B48BB] md:px-12"
+                  className="rounded-md border border-[#1B48BB] bg-[#EFEEFF] p-3 text-[#1B48BB] md:px-12"
                   onClick={handleUnSelectAll}
                 >
                   Unselect All
@@ -488,7 +488,7 @@ export const QuickSummaryReport = () => {
           <ReportDataTable
             data={data}
             columns={columns}
-            reportFields={reportFields}
+            // reportFields={reportFields}
           />
         </div>
       </div>

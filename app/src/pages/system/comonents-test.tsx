@@ -1,33 +1,18 @@
 // http://localhost:3001/system/comonents-test
 
-import {
-  Flex,
-  Box,
-  Button,
-  SimpleGrid,
-  VStack,
-  HStack,
-} from "@chakra-ui/react";
-import { useState } from "react";
-import { DateRangeSelect } from "../../components/common/DateRangeSelect";
-import { Select } from "@chakra-ui/react";
-import { startOfMonth, startOfWeek, startOfYear, sub } from "date-fns";
-
 import type { MyPage } from "../../components/common/types";
 const ComponentTest: MyPage = () => {
   return (
-    <VStack
-      direction="column"
-      width="100%"
-      m="auto"
-      maxW="xl"
-      mt={12}
-      alignItems="start"
-      gap={8}
-    >
-      <Box>Component Test Page</Box>
-      <DateRangeSelect />
-    </VStack>
+    <div className="flex flex-col gap-8">
+      <div className="text-red-500">Sample Red Text</div>
+      <div className="bg-red-500">Sample Red Text</div>
+      <div className="border border-azure text-azure">Sample Azure Text</div>
+      <div className="bg-azure">Sample Azure Text</div>
+      <div className="border border-slate-200 text-slate-500">
+        Sample Slate Text
+      </div>
+      <div className="bg-slate-500">Sample Slate Text</div>
+    </div>
   );
 };
 

@@ -243,7 +243,7 @@ export const DateRangeSelect = ({ range: defaultRange }: Props) => {
             </div>
 
             <div
-              className="ml-2 flex cursor-pointer items-center justify-center rounded border border-[#D7D7D7] bg-white px-2 py-2 text-xs md:px-4 md:text-base"
+              className="ml-2 flex cursor-pointer items-center justify-center rounded border border-[#D7D7D7] bg-white p-2 text-xs md:px-4 md:text-base"
               onClick={onOpen}
             >
               {from.getDate()} {month[from.getMonth()]} {from.getFullYear()}{" "}

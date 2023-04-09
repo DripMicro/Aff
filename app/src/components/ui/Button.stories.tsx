@@ -42,6 +42,17 @@ export const Primary = {
   },
 };
 
+export const Text = {
+  args: {
+    variant: "text",
+    pseudo: {
+      hover: ["#button-hover"],
+      focus: ["#button-focus"],
+      active: ["#button-active"],
+    },
+  },
+};
+
 export const PrimaryOutline = {
   ...Primary,
   args: {

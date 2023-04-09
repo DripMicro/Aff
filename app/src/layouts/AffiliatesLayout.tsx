@@ -7,6 +7,7 @@ import Sidebar from "../components/affiliates/layout/Sidebar";
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "usehooks-ts";
 import { isSSR } from "@/utils/nextjs-utils";
+import { SearchProvider } from "@/components/common/search/search-context";
 // import HeaderStats from "components/Headers/HeaderStats.js";
 // import FooterAdmin from "components/Footers/FooterAdmin.js";
 
@@ -34,7 +35,7 @@ const AffiliatesLayout = ({ children }: PropsWithChildren) => {
   };
 
   return (
-    <>
+    <div className="max-w-full">
       <div
         className={cn([
           { "md:ml-64": tempCollapseShow, "md:ml-14": !tempCollapseShow },
@@ -50,11 +51,14 @@ const AffiliatesLayout = ({ children }: PropsWithChildren) => {
           collapseShow={tempCollapseShow}
           setCollapseShow={handleChangeCollapseShow}
         />
-        <div className="mx-auto min-h-screen w-full bg-[#F5F8FA] px-4 pt-16 pb-4 md:px-10 md:pt-20">
-          {children}
-        </div>
+
+        <SearchProvider>
+          <div className="mx-auto min-h-screen w-full bg-[#F5F8FA] px-4 pt-16 pb-4 md:px-10 md:pt-20">
+            {children}
+          </div>
+        </SearchProvider>
       </div>
-    </>
+    </div>
   );
 };
 

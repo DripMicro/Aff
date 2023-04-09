@@ -10,6 +10,10 @@ import { usePrepareSchema } from "@/components/common/forms/usePrepareSchema";
 import { useTranslation } from "next-i18next";
 import { useCRUD } from "@/components/common/forms/useCRUD";
 import { useToast } from "@/hooks/use-toast";
+import { PageHeader } from "@/components/common/page/page-header";
+import { Loading } from "@/components/common/Loading";
+import { Button } from "@/components/ui/button";
+import { ViewIcon } from "lucide-react";
 
 const columnHelper = createColumnHelper<AffiliateDocumentType>();
 
@@ -86,12 +90,9 @@ export const Documents = () => {
       editTitle: "Edit Document",
       addTitle: "Upload New Document",
       add: "Upload New Document",
+      deleteTitle: "Delete Document",
     },
   });
-
-  if (!data) {
-    return null;
-  }
 
   const columns = [
     columnHelper.accessor("id", {
@@ -134,17 +135,24 @@ export const Documents = () => {
       header: "Status",
     }),
     columnHelper.accessor("edit-button" as any, {
-      cell: (info) => {
-        return <a href="#">view</a>;
-      },
+      cell: (info) => (
+        <Button variant="text">
+          <ViewIcon className="mr-2 h-4 w-4" />
+          View
+        </Button>
+      ),
       header: "",
     }),
   ];
 
-  return (
-    <div className="pt-3.5">
+  console.log(`muly:Documents`, { data });
+
+  return data ? (
+    <>
+      <PageHeader title="Documents">{createDialog}</PageHeader>
       <DataTable data={data} columns={columns} />
-      <div className="flex flex-row justify-end px-6">{createDialog}</div>
-    </div>
+    </>
+  ) : (
+    <Loading />
   );
 };

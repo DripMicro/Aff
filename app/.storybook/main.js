@@ -38,6 +38,11 @@ const config = {
       "next-i18next": "react-i18next",
     };
 
+    // Needed for Tailwind url() backgorund images to be loaded correctly
+    config.resolve.extensions.push(".png", ".jpg", ".jpeg", ".gif", ".svg");
+    config.resolve.alias["/images"] =
+      require("path").resolve("./public/images");
+
     return config;
   },
   docs: {

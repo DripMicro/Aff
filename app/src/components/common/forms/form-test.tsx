@@ -23,6 +23,7 @@ const FormTestComponent = (args: any) => {
           text: "Next",
         },
       }}
+      defaultValues={args.defaultValues}
     ></Form>
   );
 };

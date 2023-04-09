@@ -13,108 +13,139 @@ import { upsertSchema } from "../../../../../prisma/zod-add-schema";
 import { publicProcedure } from "../../trpc";
 import { affiliate_id, merchant_id } from "./const";
 
-export const getPixelMonitorMeta = publicProcedure.query(async ({ ctx }) => {
-  const data = await ctx.prisma.merchants.findUnique({
-    where: {
-      id: merchant_id,
-    },
-    select: {
-      id: true,
-      name: true,
-      merchants_creative: {
-        where: {
-          product_id: 0,
-          valid: 1,
-        },
-        select: {
-          id: true,
-          title: true,
-        },
-      },
-    },
-  });
+const ChoicesSchema = z.array(
+  z.object({ id: z.number().or(z.string()), title: z.string() })
+);
 
-  if (!data) {
-    throw new Error("Failed to get");
-  }
-
-  return {
-    pixel_type: [{ id: "merchants", title: "Merchants" }],
-    merchants: [{ id: data.id, title: data.name }],
-    merchants_creative: data.merchants_creative,
-    type: [
-      { id: "lead", title: "Lead" },
-      { id: "account", title: "Account" },
-      { id: "sale", title: "FTD" },
-      { id: "qftd", title: "Qualified FTD" },
-    ],
-    method: [
-      { id: "post", title: "Server To Server - POST" },
-      { id: "get", title: "Server To Server - GET" },
-      // { id: "client", title: "Client Side" },
-    ],
-  };
-});
-
-export const getPixelMonitor = publicProcedure
-  .input(
+export const getPixelMonitorMeta = publicProcedure
+  .output(
     z.object({
-      pixel_type: z.string().optional(),
-      merchant: z.number().optional(),
-      pixel_code: z.string().optional(),
-      type: z.string().optional(),
-      method: z.string().optional(),
+      // pixel_type: ChoicesSchema,
+      merchants: z.array(
+        z.object({
+          id: z.number(),
+          title: z.string(),
+          merchants_creative: ChoicesSchema,
+        })
+      ),
+      type: ChoicesSchema,
+      method: ChoicesSchema,
     })
   )
-  .query(
-    async ({
-      ctx,
-      input: { pixel_type, merchant, pixel_code, type, method },
-    }) => {
-      const where: Prisma.pixel_monitorWhereInput = {
-        affiliate_id,
-        merchant_id: merchant,
-        type: type ? (type as pixel_monitor_type) : undefined,
-        method: method ? (method as pixel_monitor_method) : undefined,
-        ...addFreeTextSearchWhere("pixelCode", pixel_code),
-      };
-
-      console.log(`muly:pixel_monitor:findMany`, {
-        where,
-        select: {
-          merchant: {
-            select: { name: true },
+  .query(async ({ ctx }) => {
+    const data = await ctx.prisma.merchants.findMany({
+      select: {
+        id: true,
+        name: true,
+        merchants_creative: {
+          where: {
+            product_id: 0,
+            valid: 1,
+          },
+          select: {
+            id: true,
+            title: true,
           },
         },
-      });
+      },
+    });
 
-      return addFreeTextSearchJSFilter(
-        await ctx.prisma.pixel_monitor.findMany({
-          where,
-          include: {
-            merchant: {
-              select: { name: true },
-            },
-          },
-        }),
-        "pixelCode",
-        pixel_code
-      );
-    }
-  );
-
-export const getMerchants = publicProcedure.query(async ({ ctx }) => {
-  const data = await ctx.prisma.merchants.findMany({
-    where: {
-      valid: 1,
-    },
-    select: {
-      id: true,
-      name: true,
-    },
+    return {
+      merchants: [
+        ...data.map(({ id, name, merchants_creative }) => ({
+          id,
+          title: name,
+          merchants_creative,
+        })),
+        // {
+        //   id: 99,
+        //   title: "fake",
+        //   merchants_creative: [{ id: 99, title: "fake2" }],
+        // },
+      ],
+      type: [
+        { id: "lead", title: "Lead" },
+        { id: "account", title: "Account" },
+        { id: "sale", title: "FTD" },
+        { id: "qftd", title: "Qualified FTD" },
+      ],
+      method: [
+        { id: "post", title: "Server To Server - POST" },
+        { id: "get", title: "Server To Server - GET" },
+        // { id: "client", title: "Client Side" },
+      ],
+    };
   });
-  return data;
-});
+
+export const getPixelMonitor = publicProcedure
+  .output(
+    z.array(
+      pixel_monitorModel.extend({
+        merchant: z.object({ name: z.string() }),
+        merchants_creative: z.object({ title: z.string() }).nullish(),
+
+        // Simplify form
+        all_creative: z.boolean(),
+      })
+    )
+  )
+  .query(async ({ ctx }) => {
+    // console.log(`muly:query`, {});
+    const where: Prisma.pixel_monitorWhereInput = {
+      affiliate_id,
+      // merchant_id: merchant,
+      // type: type ? (type as pixel_monitor_type) : undefined,
+      // method: method ? (method as pixel_monitor_method) : undefined,
+      // ...addFreeTextSearchWhere("pixelCode", pixel_code),
+    };
+
+    // return addFreeTextSearchJSFilter(
+    //   await ctx.prisma.pixel_monitor.findMany({
+    //     where,
+    //     include: {
+    //       merchant: {
+    //         select: { name: true },
+    //       },
+    //     },
+    //   }),
+    //   "pixelCode",
+    //   pixel_code
+    // );
+
+    const answer = await ctx.prisma.pixel_monitor.findMany({
+      where,
+      include: {
+        merchant: {
+          select: { name: true },
+        },
+        merchants_creative: {
+          select: { title: true },
+        },
+      },
+    });
+
+    const m = answer.map(({ banner_id, ...rest }) => ({
+      banner_id,
+      all_creative: !banner_id,
+      ...rest,
+    }));
+
+    // console.log(`muly:Answer":pixel`, { m });
+    return m;
+  });
+
+// export const getMerchants = publicProcedure.query(async ({ ctx }) => {
+//   const data = await ctx.prisma.merchants.findMany({
+//     where: {
+//       valid: 1,
+//     },
+//     select: {
+//       id: true,
+//       name: true,
+//     },
+//   });
+//   return data;
+// });
 
 export const upsertPixelMonitor = publicProcedure
   .input(
@@ -125,34 +156,46 @@ export const upsertPixelMonitor = publicProcedure
           type: true,
           pixelCode: true,
           method: true,
-          valid: true,
         })
         .extend({
           id: pixel_monitorModel.shape.id.optional(),
+          valid: pixel_monitorModel.shape.valid.nullish(),
+          all_creative: z.boolean().nullish(),
+          banner_id: z.number().nullish(),
         })
     )
   )
-  .mutation(async ({ ctx, input: { id, ...data } }) => {
-    return await (id
-      ? ctx.prisma.pixel_monitor.update({
-          where: { id },
-          data: {
-            ...data,
-          },
-        })
-      : ctx.prisma.pixel_monitor.create({
-          data: {
-            id,
-            ...data,
-            affiliate_id: affiliate_id,
-            rdate: new Date(),
-            valid: 1,
-            totalFired: 0,
-            product_id: 0,
-            banner_id: 0,
-          },
-        }));
-  });
+  .mutation(
+    async ({ ctx, input: { id, valid, banner_id, all_creative, ...data } }) => {
+      if (all_creative) {
+        banner_id = 0;
+      }
+
+      console.log(`mupixel_monitor:upsert`, { banner_id, all_creative });
+
+      return await (id
+        ? ctx.prisma.pixel_monitor.update({
+            where: { id },
+            data: {
+              banner_id: banner_id ?? 0,
+              valid: valid ?? 1,
+              ...data,
+            },
+          })
+        : ctx.prisma.pixel_monitor.create({
+            data: {
+              id,
+              banner_id: banner_id ?? 0,
+              affiliate_id: affiliate_id,
+              valid: valid ?? 1,
+              ...data,
+              rdate: new Date(),
+              totalFired: 0,
+              product_id: 0,
+            },
+          }));
+    }
+  );
 
 export const deletePixelMonitor = publicProcedure
   .input(

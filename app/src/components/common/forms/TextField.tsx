@@ -20,6 +20,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { InputPassword } from "@/components/common/forms/InputPassword";
+import { evaluateFormControlCallback } from "@/components/common/forms/usePrepareSchema";
 
 export interface Props {
   choices?: ChoiceType[];
@@ -37,16 +39,28 @@ export const TextField = (
   const { field, error, formContext } = useTsController<string>();
   const meta = useMeta();
   const {
+    props,
     label,
     placeholder,
     choices: choicesDescription,
     className,
+    // preprocess,
   } = meta || {
     label: "",
     placeholder: "",
   };
 
-  const choices = choicesParams || choicesDescription;
+  const disabled =
+    typeof props?.disabled === "boolean" ? props.disabled : false;
+
+  // let extraMeta = undefined;
+  // if (preprocess) {
+  //   // @ts-ignore
+  //   extraMeta = preprocess({ formContext });
+  // }
+
+  const choices =
+    /* extraMeta?.choices || */ choicesParams || choicesDescription;
 
   // const options = parseOptionsString(placeholder);
   // if (options.choices && !choices) {
@@ -79,14 +93,16 @@ export const TextField = (
           onChange={(e) => {
             field.onChange(e.target.value);
           }}
+          disabled={disabled}
         />
       );
     } else if (controlName === "File") {
       control = (
         <input
-          className={clsx([{ error: "file-input-error" }])}
+          // className={clsx([{ "tbd-error-style": error }])}
           type="file"
           name={field.name}
+          disabled={disabled}
           onChange={(e) => {
             let file;
 
@@ -100,6 +116,8 @@ export const TextField = (
           }}
         />
       );
+    } else if (type === "password") {
+      control = <InputPassword />;
     } else {
       // console.log(`muly:TextField`, { error });
       control = (
@@ -110,6 +128,7 @@ export const TextField = (
           type={type || undefined}
           placeholder={placeholder}
           value={field.value ? field.value + "" : ""}
+          disabled={disabled}
           onChange={(e) => {
             field.onChange(e.target.value);
           }}
@@ -123,10 +142,11 @@ export const TextField = (
     control = (
       <div className="flex items-center space-x-2">
         <Checkbox
-          className={clsx(["checkbox", { error: "checkbox-error" }])}
+          // className={clsx(["checkbox", { error: "checkbox-error" }])}
           id={field.name}
           name={field.name}
           checked={field.value == valueTrue}
+          disabled={disabled}
           onCheckedChange={(checked) => {
             field.onChange(checked ? String(valueTrue) : String(valueFalse));
           }}
@@ -146,10 +166,10 @@ export const TextField = (
     control = (
       <div className="flex items-center space-x-2">
         <Switch
-          className="border-slate-300 placeholder:text-slate-400 focus:ring-slate-400 dark:border-slate-700 dark:text-slate-50 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900 flex h-10 w-full rounded-md border bg-transparent py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
           id={field.name}
           name={field.name}
           checked={field.value == valueTrue}
+          disabled={disabled}
           onCheckedChange={(checked) => {
             field.onChange(checked ? String(valueTrue) : String(valueFalse));
           }}
@@ -185,15 +205,17 @@ export const TextField = (
       />
     );
   } else {
+    // console.log(`muly:Select Field ${disabled}`, { props });
     control = (
       <Select
         name={field.name}
         value={field.value ? field.value + "" : ""}
+        disabled={disabled}
         onValueChange={(value) => {
           field.onChange(value);
         }}
       >
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="w-full">
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
 

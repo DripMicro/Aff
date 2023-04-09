@@ -20,6 +20,19 @@ export const TextField = {
   },
 };
 
+export const PasswordField = {
+  ...FormTest,
+  args: {
+    schema: z.object({
+      password: z
+        .string()
+        .optional()
+        .describe("Password")
+        .meta({ type: "password" }),
+    }),
+  },
+};
+
 export const NumberField = {
   ...FormTest,
   args: {
@@ -136,6 +149,16 @@ export const CheckboxBoolean = {
     schema: z.object({
       bool: z.boolean().describe("Boolean"),
     }),
+  },
+};
+
+export const CheckboxWithDefault = {
+  ...FormTest,
+  args: {
+    schema: z.object({
+      bool: z.boolean().default(true).describe("Boolean"),
+    }),
+    defaultValues: { bool: true },
   },
 };
 
