@@ -6,13 +6,14 @@ import {
 } from "../../ui/dialog";
 import {
   Select,
-  SelectGroup,
-  SelectValue,
-  SelectTrigger,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "../../ui/select";
 
+import { Code2Icon, Copy } from "lucide-react";
 import { Button } from "../../ui/button";
 
 interface Props {
@@ -130,22 +131,7 @@ export const CreativeMaterialComponent = ({
                     <Button variant="azure">
                       <div className="text-white">Copy Click Url</div>
                       <div className="ml-2 items-center">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                        >
-                          <path
-                            d="M20 2H8C6.897 2 6 2.897 6 4V16C6 17.103 6.897 18 8 18H20C21.103 18 22 17.103 22 16V4C22 2.897 21.103 2 20 2ZM8 16V4H20L20.002 16H8Z"
-                            fill="white"
-                          />
-                          <path
-                            d="M4 8H2V20C2 21.103 2.897 22 4 22H16V20H4V8Z"
-                            fill="white"
-                          />
-                        </svg>
+                        <Copy className="text-white" />
                       </div>
                     </Button>
                   </div>
@@ -156,18 +142,7 @@ export const CreativeMaterialComponent = ({
                       <Button variant="azure-outline">
                         Get HTML Code
                         <div className="ml-2 items-center">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 22 22"
-                            fill="none"
-                          >
-                            <path
-                              d="M5.37498 14.781L6.62498 13.219L2.60098 9.99998L6.62498 6.78098L5.37498 5.21898L0.374981 9.21898C0.257826 9.31267 0.163249 9.4315 0.098254 9.5667C0.033259 9.70189 -0.000488281 9.84998 -0.000488281 9.99998C-0.000488281 10.15 0.033259 10.2981 0.098254 10.4333C0.163249 10.5685 0.257826 10.6873 0.374981 10.781L5.37498 14.781ZM14.625 5.21898L13.375 6.78098L17.399 9.99998L13.375 13.219L14.625 14.781L19.625 10.781C19.7421 10.6873 19.8367 10.5685 19.9017 10.4333C19.9667 10.2981 20.0005 10.15 20.0005 9.99998C20.0005 9.84998 19.9667 9.70189 19.9017 9.5667C19.8367 9.4315 19.7421 9.31267 19.625 9.21898L14.625 5.21898ZM12.976 1.21598L8.97598 19.216L7.02298 18.782L11.023 0.781982L12.976 1.21598Z"
-                              fill="#282560"
-                            />
-                          </svg>
+                          <Code2Icon className="text-[#282560]" />
                         </div>
                       </Button>
                     </DialogTrigger>
