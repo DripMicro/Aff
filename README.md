@@ -9,7 +9,7 @@ yarn storybook
 
 ## Links
 
-[GtiHub](https://github.com/affiliatets-com/aff)
+[GtiHub](https://github.com/DripMicro/aff)
 
 [Figma](https://www.figma.com/file/CHxJV6V2o7WVj1rsYmRRWe/Affiliate_client_Design?node-id=0%3A1&t=b5ZG550bMTXpdqQ7-1)
 
