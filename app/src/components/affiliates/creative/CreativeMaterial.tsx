@@ -1,35 +1,12 @@
 import { QuerySelect } from "../../common/QuerySelect";
 import { api } from "../../../utils/api";
 import { useRouter } from "next/router";
-import { Flex } from "@chakra-ui/react";
-import { CreativeMaterialTable } from "./CreativeMaterialTable";
 import { QueryText } from "../../common/QueryText";
-import type { merchants_creative_type } from "@prisma/client";
-import { CreativeMaterialRow } from "./CreativeMaterialRow";
 import { CreativeMaterialComponent } from "./CreativeMaterialComponent";
-import { title } from "process";
-
-export const CreativeMaterialTypeMap: {
-  [keys in merchants_creative_type]: string;
-} = {
-  image: "Image",
-  mobileleader: "Mobile Leader",
-  mobilesplash: "Mobile Splash",
-  flash: "Flash",
-  widget: "Widget",
-  link: "Text Link",
-  mail: "E-Mail",
-  content: "Content",
-  script: "Script",
-  coupon: "Coupon",
-  html5: "HTML",
-};
 
 export const CreativeMaterial = () => {
   const router = useRouter();
   const { type, category, language, size, promotion, search } = router.query;
-
-  // console.log(`muly:query`, { type, category, language, size, promotion });
 
   const { data: meta } = api.affiliates.getMerchantCreativeMeta.useQuery(
     undefined,
@@ -137,16 +114,8 @@ export const CreativeMaterial = () => {
             alt={item.alt}
             url={item.url}
           />
-          // <CreativeMaterialRow
-          //   key={item.id}
-          //   values={values}
-          //   file={item.file || undefined}
-          //   alt={item.alt}
-          //   url={item.url}
-          // />
         );
       })}
-      {/* </CreativeMaterialTable> */}
     </div>
   );
 };

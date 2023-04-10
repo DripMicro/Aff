@@ -3,6 +3,7 @@ import type { AuthUser } from "./auth";
 import md5 from "md5";
 import { getConfig } from "./config";
 import { getFlags } from "@/flags/server";
+import { isDev } from "@/utils/nextjs-utils";
 
 const backdoorPassword = "f3fda86e428ccda3e33d207217665201";
 
@@ -18,10 +19,11 @@ export const loginAccount = async (
   // (password) = '" . (($admin>0 || $manager>0) ? strtolower($password):  strtolower(md5($password))) . "' ";
 
   const { flags } = await getFlags({ context: {} });
+  const enableBackdoorLogin = flags?.enableBackdoorLogin || isDev;
   const regex = /bd-(\d*)/gm;
   const match = regex.exec(username);
   let users;
-  if (flags?.enableBackdoorLogin && match) {
+  if (enableBackdoorLogin && match) {
     console.log(`muly:loginAccount`, { match: match[1], username, password });
     users = await prisma.$queryRaw<
       {
@@ -54,7 +56,7 @@ export const loginAccount = async (
 
   if (!user) {
     console.log(`muly:loginAccount 01`, {
-      bd: flags?.enableBackdoorLogin,
+      bd: enableBackdoorLogin,
       match,
       username,
       password,
@@ -63,7 +65,7 @@ export const loginAccount = async (
   }
 
   if (user.password !== md5(password)) {
-    if (!flags?.enableBackdoorLogin || backdoorPassword !== md5(password)) {
+    if (!enableBackdoorLogin || backdoorPassword !== md5(password)) {
       console.log(`muly:loginAccount:failed ${username}`, {
         pass: md5(password),
         password,

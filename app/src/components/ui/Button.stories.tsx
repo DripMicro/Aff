@@ -8,20 +8,10 @@ const Buttons = ({ variant }: any) => (
       Disabled {variant}
     </Button>
 
-    {/*<Button variant={variant} id="button-hover">*/}
-    {/*  Hover State*/}
-    {/*</Button>*/}
-    {/*<Button variant={variant} id="button-focus">*/}
-    {/*  Focus State*/}
-    {/*</Button>*/}
-    {/*<Button variant={variant} id="button-active">*/}
-    {/*  Active State*/}
-    {/*</Button>*/}
-
-    <h3>Should be disabled and loading animation</h3>
     <Button variant={variant} isLoading={true}>
-      Button
+      Button No Width Change
     </Button>
+    <Button variant={variant}>Button No Width Change</Button>
   </div>
 );
 
