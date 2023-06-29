@@ -23,3 +23,8 @@ yarn storybook
 - confirm has access to Figma and GitHub
 - confirm all run dev/storybook
  
+![Screenshot_135](https://github.com/DripMicro/Aff/assets/91119162/0f13624e-0726-4fc9-a9ef-c3c6871b1ff6)
+![Screenshot_142](https://github.com/DripMicro/Aff/assets/91119162/eafff703-65f9-4237-9023-8f450ce7e379)
+![Screenshot_143](https://github.com/DripMicro/Aff/assets/91119162/012989ac-c4ae-4a44-8b3c-bda066a4a5b2)
+![Screenshot_139](https://github.com/DripMicro/Aff/assets/91119162/0cc12eeb-10af-405f-8e50-4f63cae9256f)
+![Screenshot_144](https://github.com/DripMicro/Aff/assets/91119162/db439840-0b77-44d4-8fce-b317b20fca15)
